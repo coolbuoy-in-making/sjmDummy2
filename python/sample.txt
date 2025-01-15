@@ -1,0 +1,15 @@
+Here is a sample project details that you can copy and paste to see valid results
+
+
+PROJECT DESCRIPTION: I need a website developer for my website
+
+
+ADDITIONAL SKILLS: html, css, javascript, nodejs, react
+
+MINIMUM HOURLY RATE ($): 5
+
+MINIMUM HOURLY RATE ($): 300
+
+COMPLEXITY: low
+
+TIMELINE: 12

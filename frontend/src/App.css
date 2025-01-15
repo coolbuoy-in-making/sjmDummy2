@@ -1,0 +1,89 @@
+#root {
+  width: 100%;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 64px; /* Account for fixed navbar */
+}
+
+.main-content {
+  min-height: calc(100vh - 64px);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+/* Button styles */
+.primary-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 24px;
+  border-radius: 24px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+  background-color: #14a800dd;
+}
+
+.secondary-button {
+  background-color: transparent;
+  border: 1px solid var(--dark-color);
+  color: var(--dark-color);
+  padding: 8px 24px;
+  border-radius: 24px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.secondary-button:hover {
+  background-color: var(--dark-color);
+  color: white;
+}
+
+/* Layout utilities */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.gap-md {
+  gap: 16px;
+}

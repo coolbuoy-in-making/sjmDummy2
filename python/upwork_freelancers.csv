@@ -1,0 +1,101 @@
+freelancer_id,name,job_title,location,skills,hourly_rate,total_jobs,hours_worked,success_rate,top_rated,years_of_experience,portfolio_url
+a45381d8-4173-4c91-a8b5-9178f4fb3110,Mr. David Gray Jr.,Web Developer,Port Stacyhaven,"CSS, JavaScript",47.41,5,8231,77,False,6,http://www.munoz.com/
+4f9ac7a9-b80e-4f1d-bcb2-6f17698a06fd,Frederick Mason Jr.,Web Developer,Stoneberg,"HTML, Node.js, React, JavaScript",48.97,52,1764,81,True,4,https://hoffman-robinson.com/
+97c1d832-6fd1-4171-b852-b6c9885efbda,Matthew Mendoza,SEO Specialist,Millerville,"Link Building, Keyword Research",113.48,65,2045,64,False,18,http://brown.org/
+dc414c31-6148-4500-834d-77a445ce4f86,Anna Smith,UI/UX Designer,East Donnaside,"User Research, Wireframing, Prototyping",76.14,40,6531,80,True,16,http://www.pitts.biz/
+d90d6f56-72d2-463c-8045-546b1a32eff1,James Holt,Data Analyst,West Valerieton,"Excel, Python, SQL, Tableau",113.65,94,1667,62,False,11,https://www.gibson.com/
+5a506b4d-e90d-45e6-8ec5-a7a375f6ca2e,David Mcdaniel,Graphic Designer,West Matthew,"Photoshop, InDesign, Illustrator",28.34,81,8421,87,True,11,http://www.cooper.com/
+686c6653-1c77-4059-9a87-4fd51fbad2ca,Cody Campbell,Graphic Designer,Amberbury,"Illustrator, Figma, InDesign",78.71,26,5978,60,True,3,http://dillon-jones.com/
+83da55ec-1ef6-4833-b20e-25dffdd3e42d,Robert Sanders,Mobile App Developer,Port Shannon,"Java, Flutter",86.25,72,2637,80,True,18,https://smith-rhodes.com/
+6d4d745b-8f69-4fb8-84e0-95e604e7955d,Ryan Vargas,SEO Specialist,Millerfurt,"On-page SEO, Link Building, Keyword Research",75.18,40,6207,50,True,16,http://sandoval.org/
+c0adbc04-690a-4254-8b04-51afd2eb6aa9,Julie Hinton,Digital Marketer,Stevensonburgh,"Email Marketing, Google Ads, Facebook Ads, Analytics",26.67,57,5064,100,True,4,https://miller-cardenas.com/
+2bc685a6-bf1d-4b2c-b022-4f5c01e48112,Brandon Gross,Data Analyst,Port Amyshire,"Tableau, Python",23.34,79,9301,90,False,17,https://www.booth.com/
+214ffa1c-0329-4dd0-a8e3-b5b87edf3ef0,Ruben Jones,Graphic Designer,Powersside,"Photoshop, Illustrator",114.58,3,8112,99,False,10,http://www.bennett.com/
+a0d6b51e-6c19-4ff0-a0c7-c04b4246f8c1,Kimberly Spencer,Graphic Designer,East Elizabeth,"InDesign, Figma, Illustrator, Photoshop",142.79,12,930,57,False,6,http://www.casey-love.net/
+edf5f8df-790e-4569-8f6f-594f938ada8f,Nicole Crawford,Graphic Designer,East Thomasbury,"InDesign, Illustrator",129.43,29,4847,51,True,18,https://www.martinez-leach.com/
+21b99eaa-85b6-4298-baf7-be78ae99c13b,Yolanda Sanders DVM,Content Writer,Abigailburgh,"Editing, Copywriting, Blog Writing, SEO",122.92,49,538,69,True,14,https://www.diaz.com/
+cd1b9849-7f43-4b18-8d4c-470de1e14508,Andrea Gallegos,Data Analyst,East Stephanieport,"Python, Tableau, SQL",83.84,37,2683,68,False,16,https://marshall.com/
+a7b76571-6f3d-478b-8712-28947c52c25d,Tanya Murillo,Content Writer,Bowmanfort,"SEO, Copywriting, Editing, Blog Writing",122.7,65,846,69,False,2,http://bautista-mcbride.com/
+818fe9af-2b1c-4063-a5b5-76f0a3213535,Christopher Williams,Web Developer,Lauraport,"CSS, React",137.85,48,6343,91,True,7,http://mooney.com/
+7916634d-1d74-43d5-86a2-ce162cbd786f,Jeffrey Coleman,Digital Marketer,West Carol,"Google Ads, Analytics, Facebook Ads",61.72,12,1663,99,True,2,https://woods.com/
+ae8a7869-3dd7-4a6a-ad17-ba5602477605,Cassandra Rose,SEO Specialist,Goldentown,"Keyword Research, Link Building, On-page SEO",83.19,74,6576,77,True,12,https://washington.org/
+c94d23e8-b0c6-4c98-b242-1593377842ad,Deanna Jones,Web Developer,Port Darylview,"JavaScript, Node.js, React, CSS",83.36,69,9914,95,True,18,https://www.morris-garcia.com/
+b0d06453-8221-4bb7-8861-1d645c3efdd8,Heather Perez,Mobile App Developer,West Joshuaton,"Flutter, Kotlin, Swift",113.53,41,4020,68,False,20,http://marshall.biz/
+9e6c42ee-675e-4b4c-a37b-d4ea25e33204,Micheal House,Mobile App Developer,Matthewstad,"Flutter, Java, Swift",87.29,33,601,55,False,11,https://fletcher.com/
+09b83c57-5f69-4513-b1a5-1655be62343d,Christopher Knapp,UI/UX Designer,Shannonstad,"User Research, Wireframing, Prototyping",102.36,93,4379,58,False,8,http://www.snyder.net/
+4741b15b-f654-44b5-b17f-b0ba49d59a0e,Alec Mason,UI/UX Designer,Jonesmouth,"User Research, Prototyping",53.79,6,8934,98,False,10,http://www.garcia-williams.info/
+4ee182cc-2b9b-451c-88b0-9a314472fb23,Caitlin Butler,UI/UX Designer,East Larry,"Prototyping, User Research",111.45,78,652,83,True,9,http://mcguire.com/
+0450c729-100d-4658-8245-854ccc7e5d10,Adrian Duncan,Digital Marketer,Juarezview,"Google Ads, Analytics",148.04,79,7135,59,False,11,http://www.guzman.com/
+675c26ae-8275-465b-85bd-78b95a214168,Shane Williams,UI/UX Designer,Davidbury,"User Research, Wireframing, Prototyping",62.02,15,196,80,True,17,https://brown.org/
+9dce502f-7e83-473a-82b6-47950e22bc50,Joseph Castro,Data Analyst,South Ryan,"Excel, Python, Tableau",56.43,54,105,80,False,20,http://chase-clark.com/
+2cf79d1f-c05f-4752-bcc1-53d20da6a334,Michael Hernandez,SEO Specialist,Lake Mark,"Link Building, Keyword Research",131.24,20,2900,66,False,4,https://www.underwood-porter.org/
+29ac14cd-4952-468b-ba84-ef712e76b968,Renee Torres,Mobile App Developer,Michaelview,"Java, Swift, Kotlin, Flutter",19.46,1,7450,98,True,1,https://www.king.com/
+b6a3d5ef-139a-4046-8b4a-4882aae807ce,Joshua Hoffman,UI/UX Designer,Derekberg,"Wireframing, Prototyping, User Research",66.09,86,5411,76,True,2,http://www.williams.com/
+de08651b-fb54-446f-a76a-5e8ea497e742,Amy Ramos,Graphic Designer,Jordanland,"Figma, Photoshop",113.86,91,5087,91,True,6,http://www.santiago.com/
+986419a1-7344-4b56-9104-b523a84a6914,Sean Heath,UI/UX Designer,Joshuafort,"Prototyping, Wireframing",94.07,58,750,51,False,7,https://www.west-clarke.info/
+827a235b-0321-421f-9913-e257bd0c9df8,Carl Rush,UI/UX Designer,Port Jeremy,"Prototyping, Wireframing",55.21,88,8516,92,False,6,http://walker-perez.com/
+53ed6046-0f41-4a6e-a396-a51d0b565430,Adrian Strong,UI/UX Designer,Hendersontown,"Wireframing, Prototyping, User Research",126.73,76,3765,96,True,10,http://murray.com/
+98dafed0-e195-453f-a05d-fa3d1122746b,Anna Thornton,Web Developer,Port Mariaberg,"JavaScript, HTML",43.51,51,1561,66,True,19,https://macias.com/
+df478616-5223-40ba-a0b5-b238cb0ddde6,Shannon Roth,Web Developer,East Toni,"JavaScript, Node.js, CSS, HTML",40.19,54,576,90,True,3,http://orr-moreno.com/
+2524c51a-bf4b-4002-a3f5-86564dbffd66,Christy Jones,Graphic Designer,North Deborah,"InDesign, Photoshop",18.68,77,4175,55,True,8,http://www.smith.com/
+a8f9e7ef-5d20-43cc-9928-7d8f346d7cbc,Ray Brooks,Mobile App Developer,East Brian,"Flutter, Swift, Java",98.93,49,1621,79,True,4,https://www.fisher-conner.com/
+4003aa33-b789-4bd6-b1ad-078a14b1ea49,Alexander Medina,Graphic Designer,East Jeremyside,"Illustrator, Photoshop",74.23,96,3821,74,False,16,http://www.blankenship.com/
+b663632a-304f-4041-a3ba-29ed18cdad56,Karen Martin,Data Analyst,Davidburgh,"SQL, Excel",50.66,74,7634,55,True,17,http://lewis.org/
+43fcc84e-54ac-4fec-ac25-df5e52d5b391,Stuart Hoffman,SEO Specialist,East Timothy,"On-page SEO, Link Building, Keyword Research",66.7,37,8696,90,True,14,http://garcia.org/
+d64033d5-7560-4665-8c73-5500296784e4,James Mccoy,Content Writer,West Josephshire,"Editing, Blog Writing, SEO",125.87,42,1282,62,True,20,http://www.hernandez.com/
+6c5b289d-5c99-41e2-930c-0c2686cc4029,Rebecca Owens,Web Developer,Christinahaven,"Node.js, CSS, JavaScript, React",111.33,15,945,60,False,8,https://serrano.com/
+69bcf4ac-a90a-41d3-98a6-265cfa5fe9fa,Arthur Glenn,Graphic Designer,Nguyenhaven,"Figma, Photoshop",66.21,64,2289,58,False,2,http://www.lowe-dunn.info/
+8e63fa97-7063-46ea-bdb1-c2d4d6a3439a,Anthony Thompson,Digital Marketer,North Petershire,"Analytics, Facebook Ads",141.58,89,5324,94,False,3,http://gates.biz/
+4be6727f-ccc9-4e8f-af13-0afce7455187,Sharon Thomas,SEO Specialist,East Evanberg,"Link Building, On-page SEO, Keyword Research",105.3,91,3329,67,True,17,https://salazar.info/
+cd425e09-6e21-4431-a948-8b04ce037510,Mary Sanders,Data Analyst,Foxstad,"SQL, Python, Excel, Tableau",98.96,5,8845,87,True,3,https://thompson-scott.biz/
+fca99ca4-5d95-4ed6-889f-afc810c8d463,Anthony Brooks,Graphic Designer,Lake Joshua,"InDesign, Figma",89.42,20,1742,86,False,4,http://www.mcdowell.info/
+fb154ca7-1a14-44f4-be61-6edd74477894,John Mason,Digital Marketer,West Cindyborough,"Facebook Ads, Analytics, Email Marketing",45.89,7,7151,96,True,16,http://pearson.com/
+d64a278c-1bb7-4286-aa83-eb86352cae88,David Hutchinson,Web Developer,South Tonya,"React, Node.js, CSS",139.2,100,3041,65,False,12,https://www.young.com/
+5295b1f3-a315-4f5b-81a8-663911cafe73,Mary Rios,UI/UX Designer,East Christina,"User Research, Prototyping, Wireframing",38.79,45,7251,87,True,12,https://www.ramirez-walker.com/
+e1456645-29de-49d5-85a5-fad32efe1ee7,Mrs. Sandra Kelley MD,UI/UX Designer,South Stevenstad,"Wireframing, Prototyping",61.78,8,4661,71,True,7,http://garcia.com/
+d2e5340b-6cf4-45b9-8daa-db5f247bcd30,Jennifer Sandoval,Data Analyst,Gonzalezfort,"Excel, Tableau",28.04,6,2164,60,False,8,https://www.hansen.com/
+61693d94-1e60-46b0-ab78-3e6f8aa86d27,Gwendolyn Johnson,UI/UX Designer,Murphymouth,"User Research, Wireframing, Prototyping",39.85,8,7569,99,True,6,http://www.miller.com/
+f4419781-d766-4d56-9ff7-753d67f5ed6f,Heather Johnson,Mobile App Developer,Cynthiaburgh,"Java, Flutter, Swift, Kotlin",131.95,98,3485,96,True,10,https://www.hall.com/
+e53ad911-f1c8-4f75-9029-602b65cb4c09,Tracy Fleming,Data Analyst,Susanstad,"SQL, Tableau, Excel, Python",110.76,14,4571,66,False,3,https://www.williams.com/
+d3c82f37-51ee-4705-b54e-aa969fc19301,Aaron Vega,Data Analyst,New Christopherchester,"SQL, Tableau, Python, Excel",39.61,48,2992,50,False,7,http://www.burton-christensen.biz/
+6e1c91b5-86ff-4b26-8cef-65315c2a8966,Ronald Garcia,Content Writer,Lake Olivia,"Editing, Blog Writing, Copywriting",109.92,65,4908,58,True,9,http://patterson.com/
+f092a6ed-a7e6-48f8-8d91-5f486cc61a20,Debra Smith,UI/UX Designer,Lake Angelachester,"Wireframing, Prototyping, User Research",126.3,7,579,64,True,9,https://johnson.net/
+579964dc-af1b-4416-a0d2-5a301497f913,Jessica Allen,Data Analyst,Rileystad,"Excel, SQL, Tableau",34.99,85,2727,94,False,5,https://www.marks.com/
+621058ad-ca9f-43b8-ab69-51f44d13b364,Terry Lee,Graphic Designer,Jasminestad,"Illustrator, Figma, Photoshop",27.57,68,4655,50,False,2,https://www.vaughn.com/
+f212a473-9bca-41c8-a8e2-0c5e322c45e4,Steven Thomas,UI/UX Designer,South Karenburgh,"Wireframing, Prototyping",42.07,74,5823,86,False,11,http://gibbs.com/
+c7c46a44-180a-4150-9230-72059ed59bfa,Luke Greer,Data Analyst,East Anthonymouth,"SQL, Python, Tableau",48.43,79,4559,59,True,8,http://www.buckley-reed.biz/
+94c4cafc-1d49-48d9-825b-c07b1be7367b,Jeremy Smith,Digital Marketer,Victoriaburgh,"Email Marketing, Facebook Ads",100.31,13,155,91,True,13,http://evans.com/
+e3c60b2a-7ba9-49f2-87e8-0dee0d067fd3,Nicholas Key,UI/UX Designer,Melissashire,"User Research, Wireframing, Prototyping",42.18,39,9720,99,False,7,https://hale.org/
+b9bf62a1-a4a9-4cbc-bbfe-96f1c5fdf7ec,Michael Kent,Graphic Designer,Randallfort,"InDesign, Photoshop, Figma",23.48,99,9650,57,True,2,http://www.smith.com/
+c8cd0595-9fdc-4eb8-b090-75334c9d46b9,Levi Short,UI/UX Designer,Austinmouth,"Wireframing, Prototyping",113.15,92,2434,55,False,20,https://www.mccoy.info/
+fc723f3a-7ba6-4469-9275-a9158e66dcc8,Tonya Hammond,Digital Marketer,Cindytown,"Facebook Ads, Analytics",33.59,85,4532,69,False,20,http://www.webb.info/
+a5808e1b-d4ce-4119-8cdf-d014682de739,Kathryn Mason,Data Analyst,Vincentland,"SQL, Excel, Tableau, Python",109.45,29,6219,74,True,15,http://phillips.com/
+d510101c-3ee9-4eab-9aff-01731fface43,Derrick Jones,UI/UX Designer,Gonzalezhaven,"Prototyping, User Research",97.04,50,4428,63,False,7,http://www.hopkins-peters.com/
+7cd148e1-e806-479e-8960-ffcc3b7c9620,Sabrina Lopez,Data Analyst,Castilloville,"Excel, SQL, Tableau, Python",30.49,85,4793,80,True,11,https://www.steele.org/
+7151b68d-1046-4e90-912d-13a3b6167998,James Harris,Mobile App Developer,East Jacob,"Java, Flutter, Kotlin",57.61,29,910,84,False,14,http://www.gomez-thompson.com/
+ec0d2024-701f-4ff6-8286-30456092ded9,Matthew Gregory,Data Analyst,Nelsonmouth,"SQL, Tableau, Python",147.08,40,5188,60,False,5,http://calderon.com/
+085feebc-5f3f-45b8-97b8-d2d9541a8d43,Rhonda Ramirez,Digital Marketer,West Sabrina,"Email Marketing, Google Ads",104.35,51,5706,86,True,12,https://www.page.com/
+93879f55-846a-4a74-947a-172a9693ce7a,Christian Hall,UI/UX Designer,West Rebeccashire,"Prototyping, Wireframing, User Research",69.24,51,60,96,False,14,http://shannon.com/
+1aa23ce3-22ab-41cb-bb20-9ad4408c2783,Tina Wiley,UI/UX Designer,Lake Steven,"Wireframing, Prototyping, User Research",78.25,54,3819,75,False,13,https://www.shaffer-quinn.org/
+9a77ab52-b97e-44c6-9bbd-a7a2a49fc26c,Joseph Stokes,Mobile App Developer,Manuelburgh,"Flutter, Kotlin, Swift, Java",27.24,25,6762,64,True,9,http://www.holmes.com/
+52df60cd-d34c-4780-93f5-afefde6a511d,Natalie Johns,SEO Specialist,Danielburgh,"On-page SEO, Keyword Research",86.46,25,8979,94,True,12,http://www.smith.info/
+f9f92301-24d8-497c-9a42-4c4a3d2bff91,Danny Bates,Graphic Designer,Lake Davidville,"Illustrator, InDesign",76.15,34,2629,97,False,15,http://www.gardner.com/
+83567edc-3a78-4d50-b054-73fffff29e00,Jose Soto,SEO Specialist,Lake Heathermouth,"On-page SEO, Link Building, Keyword Research",99.12,76,3078,56,True,5,http://frye-todd.com/
+ce482126-0cd3-4baf-bc8c-8e7738bbab2f,Jacqueline Patterson,SEO Specialist,New Steven,"Link Building, Keyword Research",139.36,7,8970,92,False,11,https://vargas.org/
+8e849c32-15c8-4fd3-967f-7b4820a611e2,Sherry Walker,Graphic Designer,New Samuelhaven,"Figma, Photoshop, Illustrator, InDesign",31.41,29,6851,53,True,14,http://allen-hodge.com/
+d40a6c8c-3f0c-4f1a-8243-b71cea4ea3ec,Megan Wood,Digital Marketer,West Davidport,"Facebook Ads, Email Marketing",139.75,96,9339,54,True,5,https://little-wright.com/
+062b6604-cf75-4aeb-90ca-a2ef3b8f2aba,Kimberly Colon,Content Writer,Port Tammy,"Copywriting, Blog Writing",60.7,32,9753,81,True,4,https://sanders.com/
+16e82966-12f2-4471-9654-a57c6798bfd0,Margaret Burke,Graphic Designer,East Karen,"InDesign, Photoshop, Figma",149.48,14,8120,92,True,8,https://mckinney.net/
+63d3d6ef-cf1e-42cd-9a1f-e1e103d6c219,Richard Johnson,Web Developer,Williamchester,"Node.js, JavaScript, CSS",117.1,73,5594,92,False,9,http://www.jones-mayer.com/
+b0eda7ae-c69d-48c4-8d96-16bcea52d42d,Kyle Lee,Digital Marketer,East Gregorytown,"Google Ads, Email Marketing",51.56,33,9480,72,False,3,https://jackson.com/
+072df055-94cd-43de-ab0a-ed0956741878,Mandy Newman MD,Web Developer,Lake John,"JavaScript, HTML, CSS, Node.js",89.64,65,6519,61,True,11,https://www.brown.com/
+ccdd8349-f64a-4966-9730-2073b01072ff,Dr. Russell Rodgers MD,Mobile App Developer,New Markstad,"Java, Flutter",17.77,16,799,97,False,13,http://ali.org/
+561e86eb-2878-47e7-af4c-51c412553933,Steven Miller,Mobile App Developer,Stephanietown,"Java, Flutter, Swift, Kotlin",43.54,10,5335,52,True,15,http://www.christensen.com/
+cdbd579b-6096-4c62-a676-97eb012b24c6,Shari Sullivan,Content Writer,South William,"SEO, Blog Writing",26.72,13,5647,50,True,18,http://www.bradford-roman.com/
+72551fcc-811c-4047-a0da-e25e76de9e5a,Jessica Walker,Graphic Designer,Debrabury,"Illustrator, Photoshop, Figma, InDesign",25.39,67,5535,100,False,12,https://garcia.com/
+97bd92d4-cecd-4f68-85ed-69012b592c42,Nathaniel Thompson,Data Analyst,Kingview,"Excel, Python, Tableau",81.25,42,2897,51,True,14,https://matthews.biz/
+27095c0f-af0e-460c-a5bb-3be3149c4eac,Kyle Barker,Content Writer,Parkerville,"Copywriting, Blog Writing, SEO",60.53,42,1919,66,True,10,http://swanson.biz/
+dc06a898-052a-4bcc-8a7f-bbe529c9aad8,Raymond Knapp,SEO Specialist,Delgadofurt,"Keyword Research, On-page SEO, Link Building",141.94,28,6763,85,True,19,https://www.rubio.com/
+899f2639-5a07-4ed3-b388-c1b9bf319d09,Matthew Gordon,Mobile App Developer,New Melanie,"Swift, Flutter",143.46,11,256,89,False,2,http://tyler-walter.com/
+8c6705d9-edc0-4ca2-ae19-56448bfe6574,Jerry Ballard,Digital Marketer,Port Jennifershire,"Facebook Ads, Analytics",80.65,34,839,52,False,19,http://www.combs-allen.com/
+994b040b-0544-4123-84b9-02d9a884b6ca,Darren Lawson,Graphic Designer,New Kimberlyborough,"InDesign, Illustrator",96.49,71,3740,69,True,11,https://king.com/

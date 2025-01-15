@@ -1,0 +1,38 @@
+How to run!
+
+1. Unzip the file 
+
+2. Launch the 'upworkModel.py'
+
+3. It will ask you select a file, select the 'upwork_freelancers.csv' 
+
+4. Enter a project description
+
+5. Enter any additional needed skills
+
+6. Enter minimum hourly rate
+
+7. Enter maximum hourly rate
+
+8. Enter proposed timeline
+
+9. You will then be given a complete log of how filters are done, and if there are available freelancers based on the filtering, you will be presented the top matches profiles, one after the other
+
+10. You can choose to interview
+
+11. Interviewing will open another terminal (that will simulate the freelancer environment)
+
+12. You can decide to enter custom messages
+
+13. Regardless, questions will be generated in the freelancer terminal, and after answering each questions, you will see the result in the client (first terminal) terminal
+
+14. You can then decide to hire or look for another freelancer by selecting yes or no when prompt if you want to hire another freelancer
+
+15. Once you have hired a freelancer, the program will end
+
+
+YOU WILL BE PROMPT IF YOU WANT TO RUN THE PROGRAM AGAIN, the ball is in your court! 
+
+
+
+Check the sample project 'sample' for a sample project details you can run
