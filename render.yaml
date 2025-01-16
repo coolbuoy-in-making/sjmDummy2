@@ -1,0 +1,52 @@
+# render.yaml
+services:
+  # Frontend: React + Vite
+  - name: react-frontend
+    type: static
+    repo: https://github.com/coolbuoy-in-making/sjmDummy2.git
+    branch: main
+    staticPublishPath: frontend/dist
+    buildCommand: npm install && npm run build
+    env: static
+
+  # Backend: Node.js + Express
+  - name: node-backend
+    type: web
+    repo: https://github.com/coolbuoy-in-making/sjmDummy2.git
+    branch: main
+    buildCommand: npm install
+    startCommand: npm start
+    env: node
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_USER
+        value: root
+      - key: DB_PASSWORD
+        value:
+      - key: DB_NAME
+        value: upwork_clone
+      - key: DB_HOST
+        value: localhost
+      - key: JWT_SECRET
+        value: clone clone
+      - key: FRONTEND_URL
+        value: clone clone
+      - key: PORT
+        value: 5000  # Render automatically sets PORT; remove if not necessary
+
+  # Backend: Python Flask
+  - name: flask-backend
+    type: web
+    repo: https://github.com/coolbuoy-in-making/sjmDummy2.git
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    env: python
+    plan: free
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 3000  # Render sets this automatically; remove if unnecessary
