@@ -2,12 +2,18 @@
 services:
   # Frontend: React + Vite
   - name: react-frontend
-    type: static
+    type: web
     repo: https://github.com/coolbuoy-in-making/sjmDummy2.git
     branch: main
-    staticPublishPath: frontend/dist
     buildCommand: npm install && npm run build
-    env: static
+    startCommand: npx serve -s dist
+    env: node
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VITE_API_URL
+        value: production
 
   # Backend: Node.js + Express
   - name: node-backend
