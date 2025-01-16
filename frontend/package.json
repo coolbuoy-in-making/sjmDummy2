@@ -23,7 +23,6 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "prop-types": "^15.8.1",
-    "vite": "^5.0.0",  
     "@vitejs/plugin-react": "^4.3.4"
   },
   "devDependencies": {
