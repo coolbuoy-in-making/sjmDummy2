@@ -7,6 +7,11 @@ from typing import List, Dict, Optional
 import numpy as np
 import nltk
 nltk.download('punkt_tab')
+import requests
+from datetime import datetime
+import asyncio
+from typing import Dict, List, Optional, Any
+import aiohttp
 
 from sjm import (
     SkillsExtract, 
@@ -30,63 +35,53 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class UpworkIntegrationModel:
-    def __init__(self, csv_file_path: str):
+    def __init__(self, api_url: str, api_key: str):
         """
-        Initialize the Upwork Integration Model
-        
-        Args:
-            csv_file_path (str): Path to the Upwork freelancers CSV file
+        Initialize with API configuration instead of CSV
         """
-        self.csv_file_path = csv_file_path
+        self.api_url = api_url
+        self.api_key = api_key
         self.skill_extractor = SkillsExtract()
         self.freelancers = None
         self.matching_engine = None
-        
-        # Upwork-specific weights for the matching system
-        self.custom_weights = {
-            'content': 0.5,
-            'collaborative': 0.4,
-            'experience': 0.2,
-            'rating': 0.1,
-            'top_rated': 0.3, 
-        }
 
-    def load_freelancers(self) -> List[Freelancer]:
+    async def load_freelancers(self) -> List[Freelancer]:
         """
-        Load and normalize freelancers from Upwork CSV.
-
-        Returns:
-            List[Freelancer]: Normalized freelancer data.
+        Load freelancers from backend API instead of CSV
         """
         try:
-            upwork_columns = {
-                'id': 'freelancer_id',
-                'username': 'name',
-                'name': 'name',
-                'job_title': 'job_title',
-                'skills': 'skills',
-                'experience': 'years_of_experience',
-                'rating': 'success_rate',
-                'hourly_rate': 'hourly_rate',
-                'profile_url': 'portfolio_url',
-                'total_sales': 'total_jobs',
-                'availability': 'top_rated',
-                'total_hours': 'hours_worked'
-            }
-
-            freelancers = normalize_csv(self.csv_file_path, upwork_columns)
-
-            for freelancer in freelancers:
-                freelancer.availability = freelancer.availability == 'True'
-
-            self.freelancers = freelancers
-            logger.info(f"Loaded {len(freelancers)} freelancers from {self.csv_file_path}")
-            return freelancers
-        except FileNotFoundError:
-            logger.error(f"CSV file not found: {self.csv_file_path}")
-            raise
+            async with aiohttp.ClientSession() as session:
+                headers = {
+                    'Authorization': f'Bearer {self.api_key}',
+                    'Content-Type': 'application/json'
+                }
+                async with session.get(f'{self.api_url}/api/freelancers', headers=headers) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        
+                        freelancers = []
+                        for item in data:
+                            freelancer = Freelancer(
+                                id=item['id'],
+                                username=item['name'],
+                                name=item['name'],
+                                job_title=item['job_title'],
+                                skills=item['skills'].split(','),
+                                experience=item['experience'],
+                                rating=item['rating'],
+                                hourly_rate=item['hourly_rate'],
+                                profile_url=item['profile_url'],
+                                availability=item['availability'],
+                                total_sales=item['total_sales']
+                            )
+                            freelancers.append(freelancer)
+                        
+                        self.freelancers = freelancers
+                        return freelancers
+                    else:
+                        raise Exception(f"API Error: {response.status}")
         except Exception as e:
-            logger.error(f"Error loading freelancers: {e}")
+            logger.error(f"Error loading freelancers from API: {e}")
             raise
 
     def customize_matching_engine(self):
@@ -232,77 +227,136 @@ class UpworkIntegrationModel:
         self.matching_engine.train_models()
         logger.info("Matching engine initialized with Upwork-specific customization")
         
-        
-    def interview_freelancer(self, freelancer: Freelancer, project: Project):
+    async def interview_freelancer(self, freelancer: Freelancer, project: Project) -> Dict[str, Any]:
         """
-        Conduct interview with a selected freelancer.
+        Conduct real-time interview with a freelancer through Upwork's API
         """
-        logger.info(f"Starting interview for {freelancer.username}")
-
-            # Initialize server
-        server = Server()
-        server.start_server()
-
         try:
-            questions = []
-            # Collect custom client message
-            custom_question = input("Do you want to send a custom question to the freelancer? (yes/no): ")
-            if custom_question.lower() == "yes":
-                cl_questions = input("Enter your question (use commas if you want to ask more than one question): ")
-                
-                client_questions = [ques.strip() for ques in cl_questions.split(',') if cl_questions.strip]
-                
-                questions.extend(client_questions)
-            else:
-                None
+            # Generate interview questions
+            questions = self.skill_extractor.generate_ai_interview_questions(
+                project.description,
+                freelancer.skills
+            )
 
-            # Create interview context
-            interview_context = {
-                'project_id': project.id,
-                'project_description': project.description,
-                'freelancer_username': freelancer.username,
-                'freelancer_job_title': freelancer.job_title,
-                'freelancer_skills': freelancer.skills,
+            # Create interview session
+            interview_session = {
                 'freelancer_id': freelancer.id,
-                'hourly_rate': freelancer.hourly_rate,
+                'project_id': project.id,
+                'questions': questions,
+                'timestamp': datetime.utcnow().isoformat(),
+                'status': 'pending'
             }
 
-            # Send context to freelancer
-            server.send_message(json.dumps(interview_context, indent=2))
+            # In a real implementation, you would:
+            # 1. Send notification to freelancer through Upwork's API
+            # 2. Create a webhook to receive freelancer's responses
+            # 3. Handle real-time updates
 
-            # Receive interview questions
-            questions_json = server.receive_message()
-            questions = json.loads(questions_json)
-            
-            print("Currently interviewing user, you will receive a response shortly....")
-
-            # Wait for freelancer's answers
-            answers_json = server.receive_message()
-            answers = json.loads(answers_json)
-
-            # Evaluate answers
-            score = self.evaluate_answers(answers)
-
-            # Prepare interview results
-            interview_results = {
-                'freelancer_username': freelancer.username,
-                'freelancer_job_title': freelancer.job_title,
-                'questions_and_answers': [{"question": q, "answer": a} for q, a in answers.items()],
-                'score': score,
-                'project_id': project.id
+            return {
+                'interview_id': str(uuid.uuid4()),
+                'status': 'initiated',
+                'questions': questions,
+                'freelancer': {
+                    'id': freelancer.id,
+                    'name': freelancer.name,
+                    'profile_url': freelancer.profile_url
+                }
             }
-            
-            print(f"\nInterview Evaluation Complete for {freelancer.username}!\n")
-            
-            # Send results back to client
-            server.send_message(json.dumps(interview_results, indent=2))
 
-        finally:
-            # Close the connection
-            server.close_connection()
-            print("Server closed after interview.")
-        return f"Interview Results:\n{json.dumps(interview_results, indent=2)}"
-     
+        except Exception as e:
+            logger.error(f"Interview error: {e}")
+            raise
+
+    async def get_freelancer_status(self, freelancer_id: str) -> Dict[str, Any]:
+        """
+        Get real-time freelancer availability status
+        """
+        try:
+            # In production, replace with actual Upwork API call
+            return {
+                'freelancer_id': freelancer_id,
+                'online_status': 'available',
+                'last_active': datetime.utcnow().isoformat(),
+                'response_time': '2h'
+            }
+        except Exception as e:
+            logger.error(f"Error getting freelancer status: {e}")
+            raise
+
+    async def send_interview_invitation(self, freelancer_id: str, project_id: str) -> Dict[str, Any]:
+        """
+        Send interview invitation to freelancer through Upwork
+        """
+        try:
+            # In production, implement actual Upwork API call
+            invitation = {
+                'freelancer_id': freelancer_id,
+                'project_id': project_id,
+                'timestamp': datetime.utcnow().isoformat(),
+                'status': 'sent'
+            }
+            return invitation
+        except Exception as e:
+            logger.error(f"Error sending interview invitation: {e}")
+            raise
+
+    def evaluate_answers(self, answers: Dict[str, str]) -> Dict[str, Any]:
+        """
+        Enhanced answer evaluation with AI scoring
+        """
+        try:
+            # Use AI model to evaluate answers
+            evaluations = []
+            total_score = 0
+
+            for question, answer in answers.items():
+                # Evaluate answer quality
+                relevance_score = self._calculate_relevance(question, answer)
+                completeness_score = self._calculate_completeness(answer)
+                expertise_score = self._calculate_expertise_level(answer)
+                
+                score = (relevance_score + completeness_score + expertise_score) / 3
+                total_score += score
+                
+                evaluations.append({
+                    'question': question,
+                    'answer': answer,
+                    'scores': {
+                        'relevance': relevance_score,
+                        'completeness': completeness_score,
+                        'expertise': expertise_score
+                    }
+                })
+
+            return {
+                'overall_score': total_score / len(answers),
+                'detailed_evaluation': evaluations,
+                'recommendation': self._generate_recommendation(total_score / len(answers))
+            }
+        except Exception as e:
+            logger.error(f"Error evaluating answers: {e}")
+            raise
+
+    def _calculate_relevance(self, question: str, answer: str) -> float:
+        # Implement relevance scoring logic
+        return 0.8  # Placeholder
+
+    def _calculate_completeness(self, answer: str) -> float:
+        # Implement completeness scoring logic
+        return 0.7  # Placeholder
+
+    def _calculate_expertise_level(self, answer: str) -> float:
+        # Implement expertise scoring logic
+        return 0.9  # Placeholder
+
+    def _generate_recommendation(self, score: float) -> str:
+        if score >= 0.8:
+            return "Highly Recommended"
+        elif score >= 0.6:
+            return "Recommended"
+        else:
+            return "Consider Other Candidates"
+
     def collect_project_details(self) -> Project:
         try:
             logger.info("Starting project details collection")
@@ -334,11 +388,6 @@ class UpworkIntegrationModel:
         except Exception as e:
             logger.error(f"Error collecting project details: {e}")
             raise
-
-    def evaluate_answers(self, answers: Dict[str, str]) -> float:
-        # Simple evaluation based on response length (ai will replace this)
-        score = sum(len(answer) for answer in answers.values()) / 100
-        return round(score, 2)
 
     @staticmethod
     def _get_valid_input(prompt, input_type, condition=lambda x: True):

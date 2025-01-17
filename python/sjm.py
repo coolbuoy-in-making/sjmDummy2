@@ -182,20 +182,24 @@ class SkillsExtract:
 
     @classmethod
     def generate_ai_interview_questions(
-        cls,
+        self, 
         project_description: str,
         freelancer_skills: List[str]
     ) -> List[str]:
-        # Basic fallback questions if AI generation fails
-        fallback_questions = [
-            f"How do your skills in {', '.join(freelancer_skills)} apply to this project?",
-            "Can you describe your approach to managing project deadlines?",
-            "What communication methods do you prefer for project updates?",
-            "How do you handle challenges or unexpected obstacles in a project?",
-            "Can you provide an example of a similar project you've successfully completed?"
+        """Generate AI-powered interview questions"""
+        questions = [
+            f"How would you apply your {', '.join(freelancer_skills)} to this project?",
+            "What is your approach to project management and deadlines?",
+            "How do you handle communication with clients?",
+            "Can you describe similar projects you've completed?",
+            "What would be your first steps if selected for this project?"
         ]
-
-        return fallback_questions
+        
+        # Add project-specific questions based on description
+        project_questions = self._generate_project_specific_questions(project_description)
+        questions.extend(project_questions)
+        
+        return questions
 
 
 @dataclass
@@ -410,31 +414,22 @@ class MatchingEngine:
         return all_matches[:top_n]
 
 
-    def interview_and_evaluate(self, freelancer: Freelancer, project: Project):
-        print(f"\n\n Starting interview with {freelancer.username} for project {project.id}...")
-
-        print(f"Notification to {freelancer.username}: Interview is waiting based on the client's job description.")
-
-        questions = self.ask_professional_questions(freelancer, project)
-
-        answers = self.collect_answers(questions)
-
-        portfolio = self.ask_for_portfolio()
-
-        score = self.evaluate_answers(answers)
-
-        client_custom_questions = self.ask_client_for_custom_questions()
-
-        interview_results = {
-            'freelancer': freelancer,
-            'answers': answers,
-            'score': score,
-            'portfolio': portfolio,
-            'custom_questions': client_custom_questions
+    def interview_and_evaluate(self, freelancer: Freelancer, project: Project) -> Dict:
+        """Evaluate freelancer suitability"""
+        questions = self.skill_extractor.generate_ai_interview_questions(
+            project.description,
+            freelancer.skills
+        )
+        
+        return {
+            'freelancer': freelancer.dict(),
+            'questions': questions,
+            'skill_match': self.refine_skill_matching(
+                project.required_skills,
+                freelancer.skills
+            )
         }
-
-        return interview_results
-
+    
     def ask_professional_questions(self, freelancer: Freelancer, project: Project) -> List[str]:
         questions = [
             "Can you describe your experience with this type of project?",

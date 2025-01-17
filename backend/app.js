@@ -5,6 +5,7 @@ const db = require('./src/models');
 const authRoutes = require('./src/routes/auth');
 const jobsRoutes = require('./src/routes/jobs');
 const usersRoutes = require('./src/routes/users');
+const freelancersRoutes = require('./src/routes/freelancers');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobsRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/freelancers', freelancersRoutes);
 
 const PORT = process.env.PORT || 5000;
 
