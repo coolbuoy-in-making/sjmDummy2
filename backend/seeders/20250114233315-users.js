@@ -14,13 +14,13 @@ module.exports = {
         password,
         userType: 'client',
         title: faker.person.jobTitle(),
-        description: faker.company.catchPhrase(),
+        desc: faker.company.catchPhrase(),
         createdAt: new Date(),
         updatedAt: new Date()
       });
     }
 
-    // Create 20 freelancers
+    // Create 20 users
     for (let i = 0; i < 20; i++) {
       users.push({
         name: faker.person.fullName(),
@@ -34,7 +34,7 @@ module.exports = {
           faker.person.jobType()
         ]),
         hourlyRate: faker.number.int({ min: 15, max: 150 }),
-        description: faker.lorem.paragraph(),
+        desc: faker.lorem.paragraph(),
         createdAt: new Date(),
         updatedAt: new Date()
       });

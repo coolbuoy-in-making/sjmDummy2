@@ -29,14 +29,48 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      desc: {
+        type: Sequelize.TEXT
+      },
+      companySize: {
+        type: Sequelize.STRING
+      },
+      industry: {
+        type: Sequelize.STRING
+      },
       skills: {
         type: Sequelize.JSON
       },
       hourlyRate: {
         type: Sequelize.DECIMAL(10, 2)
       },
-      description: {
-        type: Sequelize.TEXT
+      profileUrl: {
+        type: Sequelize.STRING
+      },
+      totalJobs: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      successRate: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      totalEarnings: {
+        type: Sequelize.DECIMAL(10, 2),
+        defaultValue: 0
+      },
+      availability: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
+      yearsOfExperience: {
+        type: Sequelize.INTEGER
+      },
+      education: {
+        type: Sequelize.JSON
+      },
+      certifications: {
+        type: Sequelize.JSON
       },
       createdAt: {
         allowNull: false,

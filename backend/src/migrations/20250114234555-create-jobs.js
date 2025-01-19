@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
+      desc: {
         type: Sequelize.TEXT,
         allowNull: false
       },
@@ -28,6 +28,14 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('open', 'in_progress', 'completed'),
         defaultValue: 'open'
+      },
+      duration: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      complexity: {
+        type: Sequelize.ENUM('low', 'medium', 'high'),
+        defaultValue: 'medium'
       },
       clientId: {
         type: Sequelize.INTEGER,
@@ -47,8 +55,5 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-  },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Jobs');
   }
 };

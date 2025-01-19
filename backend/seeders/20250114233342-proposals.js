@@ -3,14 +3,14 @@ const { faker } = require('@faker-js/faker');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Get freelancer and job IDs
-    const freelancers = await queryInterface.sequelize.query(
+    const users = await queryInterface.sequelize.query(
       `SELECT id FROM Users WHERE userType = 'freelancer';`
     );
     const jobs = await queryInterface.sequelize.query(
       `SELECT id FROM Jobs WHERE status = 'open';`
     );
 
-    const freelancerIds = freelancers[0].map(f => f.id);
+    const freelancerIds = users[0].map(f => f.id);
     const jobIds = jobs[0].map(j => j.id);
 
     const proposals = [];

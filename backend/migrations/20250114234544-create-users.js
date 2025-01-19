@@ -35,7 +35,7 @@ module.exports = {
       hourlyRate: {
         type: Sequelize.DECIMAL(10, 2)
       },
-      description: {
+      desc: {
         type: Sequelize.TEXT
       },
       createdAt: {

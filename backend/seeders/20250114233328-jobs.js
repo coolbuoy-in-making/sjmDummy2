@@ -14,7 +14,7 @@ module.exports = {
     for (let i = 0; i < 50; i++) {
       jobs.push({
         title: faker.person.jobTitle(),
-        description: faker.lorem.paragraphs(3),
+        desc: faker.lorem.paragraphs(3),
         budget: faker.number.int({ min: 500, max: 10000 }),
         skills: JSON.stringify([
           faker.person.jobType(),

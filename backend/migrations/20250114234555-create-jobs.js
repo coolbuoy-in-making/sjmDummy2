@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
+      desc: {
         type: Sequelize.TEXT,
         allowNull: false
       },
