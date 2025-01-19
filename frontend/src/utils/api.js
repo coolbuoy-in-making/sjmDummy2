@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
 
-const api = axios.create({
+// Export the api instance
+export const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
@@ -17,6 +18,7 @@ api.interceptors.request.use(config => {
   return config;
 });
 
+// Export auth methods separately
 export const auth = {
   login: async (credentials) => {
     try {
@@ -24,7 +26,7 @@ export const auth = {
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      return { success: true, data: response.data };
+      return { success: true, data: { user, token } };
     } catch (error) {
       return { 
         success: false, 
@@ -39,17 +41,12 @@ export const auth = {
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      return { success: true, data: response.data };
+      return { success: true, data: { user, token } };
     } catch (error) {
       return { 
         success: false, 
         error: error.response?.data?.message || 'Registration failed' 
       };
     }
-  },
-
-  logout: () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
   }
 };

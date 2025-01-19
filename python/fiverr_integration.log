@@ -1,0 +1,818 @@
+2025-01-18 15:00:44,935 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8000
+2025-01-18 15:00:44,955 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-18 15:00:44,964 - INFO:  * Restarting with stat
+2025-01-18 15:01:32,475 - WARNING:  * Debugger is active!
+2025-01-18 15:01:32,475 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 15:01:32,507 - INFO: 127.0.0.1 - - [18/Jan/2025 15:01:32] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 15:01:32,820 - INFO: 127.0.0.1 - - [18/Jan/2025 15:01:32] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-18 15:02:13,388 - INFO: 127.0.0.1 - - [18/Jan/2025 15:02:13] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 15:02:13,637 - INFO: 127.0.0.1 - - [18/Jan/2025 15:02:13] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-18 15:02:53,729 - INFO: 127.0.0.1 - - [18/Jan/2025 15:02:53] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 15:02:53,982 - ERROR: Chat error: type object 'MatchingEngine' has no attribute 'skill_extractor'
+2025-01-18 15:02:53,982 - INFO: 127.0.0.1 - - [18/Jan/2025 15:02:53] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-18 17:03:18,479 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\ai.py', reloading
+2025-01-18 17:03:26,259 - INFO:  * Restarting with stat
+2025-01-18 17:16:31,700 - ERROR: Error loading users: API Error: 401
+2025-01-18 17:16:31,700 - ERROR: Error initializing model: API Error: 401
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 42, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 81, in load_users
+    raise Exception(f"API Error: {response.status}")
+Exception: API Error: 401
+2025-01-18 17:17:55,988 - ERROR: Error loading users: API Error: 401
+2025-01-18 17:17:55,988 - ERROR: Error initializing model: API Error: 401
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 42, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 81, in load_users
+    raise Exception(f"API Error: {response.status}")
+Exception: API Error: 401
+2025-01-18 17:49:09,718 - ERROR: Error loading users: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-18 17:49:09,718 - ERROR: Error initializing model: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 992, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1055, in create_connection
+    raise exceptions[0]
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1040, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 954, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 704, in sock_connect
+    return await self._proactor.connect(sock, address)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 812, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 599, in finish_connect
+    ov.getresult()
+ConnectionRefusedError: [WinError 1225] The remote computer refused the network connection
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 42, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 75, in load_users
+    async with session.get(f'{self.api_url}/api/users', headers=headers) as response:
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1187, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 574, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 911, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1235, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1204, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1000, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-18 17:49:09,775 - ERROR: Startup error: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-18 17:50:20,853 - ERROR: Error loading users: API Error: 401
+2025-01-18 17:50:20,856 - ERROR: Error initializing model: API Error: 401
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 42, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 99, in load_users
+    raise Exception(f"API Error: {response.status}")
+Exception: API Error: 401
+2025-01-18 17:50:20,856 - ERROR: Startup error: API Error: 401
+2025-01-18 17:56:21,815 - ERROR: Error loading users: Authentication failed. Please check your API key.
+2025-01-18 17:56:21,816 - ERROR: Error initializing model: Authentication failed. Please check your API key.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 94, in load_users
+    raise Exception("Authentication failed. Please check your API key.")
+Exception: Authentication failed. Please check your API key.
+2025-01-18 17:56:21,816 - ERROR: Startup error: Authentication failed. Please check your API key.
+2025-01-18 17:58:36,902 - ERROR: Error loading users: Authentication failed. Please check your API key.
+2025-01-18 17:58:36,918 - ERROR: Error initializing model: Authentication failed. Please check your API key.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 94, in load_users
+    raise Exception("Authentication failed. Please check your API key.")
+Exception: Authentication failed. Please check your API key.
+2025-01-18 17:58:36,951 - ERROR: Startup error: Authentication failed. Please check your API key.
+2025-01-18 18:07:12,438 - ERROR: Error loading users: Authentication failed. Please check your API key.
+2025-01-18 18:07:12,438 - ERROR: Error initializing model: Authentication failed. Please check your API key.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 95, in load_users
+    raise Exception("Authentication failed. Please check your API key.")
+Exception: Authentication failed. Please check your API key.
+2025-01-18 18:07:12,438 - ERROR: Startup error: Authentication failed. Please check your API key.
+2025-01-18 18:11:35,837 - ERROR: Error loading users: Authentication failed. Please check your API key.
+2025-01-18 18:11:35,838 - ERROR: Error initializing model: Authentication failed. Please check your API key.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 95, in load_users
+    raise Exception("Authentication failed. Please check your API key.")
+Exception: Authentication failed. Please check your API key.
+2025-01-18 18:11:35,843 - ERROR: Startup error: Authentication failed. Please check your API key.
+2025-01-18 18:38:41,586 - ERROR: Error loading users: API Connection Error: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-18 18:38:41,590 - ERROR: Error initializing model: API Connection Error: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 992, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1055, in create_connection
+    raise exceptions[0]
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1040, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 954, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 704, in sock_connect
+    return await self._proactor.connect(sock, address)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 812, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 599, in finish_connect
+    ov.getresult()
+ConnectionRefusedError: [WinError 1225] The remote computer refused the network connection
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 85, in load_users
+    async with session.get(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1187, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 574, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 911, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1235, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1204, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1000, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 128, in load_users
+    raise Exception(f"API Connection Error: {str(e)}")
+Exception: API Connection Error: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-18 18:38:41,720 - ERROR: Startup error: API Connection Error: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-18 18:43:09,434 - ERROR: Error loading users: Authentication failed. Please check your API key.
+2025-01-18 18:43:09,449 - ERROR: Error initializing model: Authentication failed. Please check your API key.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 95, in load_users
+    raise Exception("Authentication failed. Please check your API key.")
+Exception: Authentication failed. Please check your API key.
+2025-01-18 18:43:09,467 - ERROR: Startup error: Authentication failed. Please check your API key.
+2025-01-18 18:44:50,995 - ERROR: Error initializing model: users must be loaded before initializing matching engine
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    model.initialize_matching_engine()  # Remove await as this is not async
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 287, in initialize_matching_engine
+    raise Exception("users must be loaded before initializing matching engine")
+Exception: users must be loaded before initializing matching engine
+2025-01-18 18:44:51,011 - ERROR: Startup error: users must be loaded before initializing matching engine
+2025-01-18 18:52:10,131 - ERROR: Error loading users: Authentication failed. Please check your API key.
+2025-01-18 18:52:10,131 - ERROR: Error initializing model: Authentication failed. Please check your API key.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 95, in load_users
+    raise Exception("Authentication failed. Please check your API key.")
+Exception: Authentication failed. Please check your API key.
+2025-01-18 18:52:10,147 - ERROR: Startup error: Authentication failed. Please check your API key.
+2025-01-18 19:12:48,694 - WARNING: Authentication failed with status 401
+2025-01-18 19:12:48,694 - INFO: Using mock data in debug mode
+2025-01-18 19:12:48,694 - ERROR: Error loading users: Freelancer() takes no arguments
+2025-01-18 19:12:48,694 - ERROR: Error initializing model: Freelancer() takes no arguments
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 100, in load_users
+    self.users = self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 156, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer() takes no arguments
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 149, in load_users
+    self.users = self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 156, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer() takes no arguments
+2025-01-18 19:12:48,710 - ERROR: Startup error: Freelancer() takes no arguments
+2025-01-18 19:16:05,794 - ERROR: Error initializing matching engine: 'UpworkIntegrationModel' object has no attribute '_get_mock_users'
+2025-01-18 19:16:05,794 - ERROR: Error initializing model: 'UpworkIntegrationModel' object has no attribute '_get_mock_users'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 47, in initialize_model
+    model.initialize_matching_engine()  # Remove await as this is not async
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 315, in initialize_matching_engine
+    self.users = self._get_mock_users()
+AttributeError: 'UpworkIntegrationModel' object has no attribute '_get_mock_users'
+2025-01-18 19:16:05,824 - ERROR: Startup error: 'UpworkIntegrationModel' object has no attribute '_get_mock_users'
+2025-01-18 19:29:10,225 - WARNING: Authentication failed with status 401
+2025-01-18 19:29:10,225 - INFO: Using mock data in debug mode
+2025-01-18 19:29:10,225 - ERROR: Error loading users: Freelancer() takes no arguments
+2025-01-18 19:29:10,225 - ERROR: Error initializing model: Freelancer() takes no arguments
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 99, in load_users
+    self.users = self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 155, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer() takes no arguments
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 45, in initialize_model
+    await model.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 148, in load_users
+    self.users = self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 155, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer() takes no arguments
+2025-01-18 19:29:10,241 - ERROR: Startup error: Freelancer() takes no arguments
+2025-01-18 19:35:49,689 - WARNING: Authentication failed with status 401
+2025-01-18 19:35:49,689 - INFO: Using mock data in debug mode
+2025-01-18 19:35:49,705 - ERROR: Error initializing model: UpworkIntegrationModel.initialize_matching_engine() missing 1 required positional argument: 'users'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 47, in initialize_model
+    model.initialize_matching_engine()  # Remove await as this is not async
+TypeError: UpworkIntegrationModel.initialize_matching_engine() missing 1 required positional argument: 'users'
+2025-01-18 19:35:49,713 - ERROR: Startup error: UpworkIntegrationModel.initialize_matching_engine() missing 1 required positional argument: 'users'
+2025-01-18 19:46:48,326 - INFO: Model initialization completed successfully
+2025-01-18 19:46:48,421 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.124.233:8000
+2025-01-18 19:46:48,423 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-18 19:46:48,432 - INFO:  * Restarting with stat
+2025-01-18 19:47:04,710 - INFO: Model initialization completed successfully
+2025-01-18 19:47:04,734 - WARNING:  * Debugger is active!
+2025-01-18 19:47:04,750 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 19:47:18,825 - INFO: 127.0.0.1 - - [18/Jan/2025 19:47:18] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 19:47:19,082 - ERROR: Unhandled error: Install Flask with the 'async' extra in order to use async views.
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 926, in ensure_sync
+    return self.async_to_sync(func)
+  File "C:\Users\coolbuoy\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 947, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+2025-01-18 19:47:19,090 - INFO: 127.0.0.1 - - [18/Jan/2025 19:47:19] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-18 19:57:36,577 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\ai.py', reloading
+2025-01-18 19:57:42,116 - INFO:  * Restarting with stat
+2025-01-18 20:36:51,194 - ERROR: Error loading users: No freelancer data received
+2025-01-18 20:36:51,228 - ERROR: Error initializing model: No freelancer data received
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 44, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 126, in initialize_matching_engine
+    self.users = await self.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 82, in load_users
+    raise Exception("No freelancer data received")
+Exception: No freelancer data received
+2025-01-18 20:36:51,256 - ERROR: Startup error: No freelancer data received
+2025-01-18 20:37:25,674 - ERROR: Error loading users: No freelancer data received
+2025-01-18 20:37:25,684 - ERROR: Error initializing model: No freelancer data received
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 44, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 126, in initialize_matching_engine
+    self.users = await self.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 82, in load_users
+    raise Exception("No freelancer data received")
+Exception: No freelancer data received
+2025-01-18 20:37:25,701 - ERROR: Startup error: No freelancer data received
+2025-01-18 20:59:43,363 - ERROR: Error loading users: 'Freelancer' object is not subscriptable
+2025-01-18 20:59:43,377 - WARNING: Using mock data in debug mode
+2025-01-18 20:59:43,377 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'profile_text'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 47, in initialize_model
+    model.initialize_matching_engine()  # Remove await as this is not async
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 291, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 325, in __init__
+    [freelancer.profile_text() for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 325, in <listcomp>
+    [freelancer.profile_text() for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'profile_text'
+2025-01-18 20:59:43,385 - ERROR: Startup error: 'Freelancer' object has no attribute 'profile_text'
+2025-01-18 21:28:56,923 - ERROR: Error loading users: 'Freelancer' object is not subscriptable
+2025-01-18 21:28:56,924 - WARNING: Using mock data in debug mode
+2025-01-18 21:28:56,925 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'profile_text'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 47, in initialize_model
+    model.initialize_matching_engine()  # Remove await as this is not async
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 291, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 324, in __init__
+    [freelancer.profile_text() for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 324, in <listcomp>
+    [freelancer.profile_text() for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'profile_text'
+2025-01-18 21:28:56,940 - ERROR: Startup error: 'Freelancer' object has no attribute 'profile_text'
+2025-01-18 21:29:49,027 - ERROR: Error loading users: 'Freelancer' object is not subscriptable
+2025-01-18 21:29:49,029 - WARNING: Using mock data in debug mode
+2025-01-18 21:29:49,030 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'profile_text'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 47, in initialize_model
+    model.initialize_matching_engine()  # Remove await as this is not async
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 291, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 324, in __init__
+    [freelancer.profile_text() for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 324, in <listcomp>
+    [freelancer.profile_text() for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'profile_text'
+2025-01-18 21:29:49,041 - ERROR: Startup error: 'Freelancer' object has no attribute 'profile_text'
+2025-01-18 22:22:08,262 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 22:22:08,622 - WARNING: API returned empty data
+2025-01-18 22:22:08,622 - INFO: Using mock freelancer data
+2025-01-18 22:22:08,622 - INFO: Model initialization completed successfully
+2025-01-18 22:22:08,691 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.124.233:8000
+2025-01-18 22:22:08,707 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-18 22:22:08,712 - INFO:  * Restarting with stat
+2025-01-18 22:22:41,872 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 22:22:41,904 - WARNING: API returned empty data
+2025-01-18 22:22:41,904 - INFO: Using mock freelancer data
+2025-01-18 22:22:41,917 - INFO: Model initialization completed successfully
+2025-01-18 22:22:41,935 - WARNING:  * Debugger is active!
+2025-01-18 22:22:41,951 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 22:23:07,029 - INFO: 127.0.0.1 - - [18/Jan/2025 22:23:07] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:23:07,256 - INFO: 127.0.0.1 - - [18/Jan/2025 22:23:07] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:23:47,258 - INFO: 127.0.0.1 - - [18/Jan/2025 22:23:47] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:23:47,600 - ERROR: Error finding matches: 'NoneType' object has no attribute 'match_users'
+2025-01-18 22:23:47,600 - ERROR: Chat error: 'NoneType' object has no attribute 'match_users'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 204, in chat
+    matches = model.find_top_matches(project)
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 291, in find_top_matches
+    all_matches = self.matching_engine.match_users(project, weights=self.custom_weights)
+AttributeError: 'NoneType' object has no attribute 'match_users'
+2025-01-18 22:23:47,615 - INFO: 127.0.0.1 - - [18/Jan/2025 22:23:47] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-18 22:28:35,201 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\upworkModel.py', reloading
+2025-01-18 22:28:37,616 - INFO:  * Restarting with stat
+2025-01-18 22:29:25,669 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 22:29:25,705 - WARNING: API returned empty data
+2025-01-18 22:29:25,705 - INFO: Using mock freelancer data
+2025-01-18 22:29:25,713 - INFO: Model initialization completed successfully
+2025-01-18 22:29:25,745 - WARNING:  * Debugger is active!
+2025-01-18 22:29:25,776 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 22:29:50,797 - INFO: 127.0.0.1 - - [18/Jan/2025 22:29:50] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:29:51,123 - ERROR: Chat error: 'coroutine' object is not iterable
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 210, in chat
+    'users': [{
+TypeError: 'coroutine' object is not iterable
+2025-01-18 22:29:51,123 - INFO: 127.0.0.1 - - [18/Jan/2025 22:29:51] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-18 22:40:59,025 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\ai.py', reloading
+2025-01-18 22:41:03,430 - INFO:  * Restarting with stat
+2025-01-18 22:56:31,604 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 22:56:31,797 - WARNING: API returned empty data
+2025-01-18 22:56:31,797 - INFO: Using mock freelancer data
+2025-01-18 22:56:31,797 - INFO: Model initialization completed successfully
+2025-01-18 22:56:31,867 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.124.233:8000
+2025-01-18 22:56:31,883 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-18 22:56:31,886 - INFO:  * Restarting with stat
+2025-01-18 22:56:50,151 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 22:56:50,188 - WARNING: API returned empty data
+2025-01-18 22:56:50,189 - INFO: Using mock freelancer data
+2025-01-18 22:56:50,194 - INFO: Model initialization completed successfully
+2025-01-18 22:56:50,220 - WARNING:  * Debugger is active!
+2025-01-18 22:56:50,243 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 22:56:59,865 - INFO: 127.0.0.1 - - [18/Jan/2025 22:56:59] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:57:00,122 - INFO: 127.0.0.1 - - [18/Jan/2025 22:57:00] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:57:38,662 - INFO: 127.0.0.1 - - [18/Jan/2025 22:57:38] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-18 22:57:38,967 - ERROR: Error finding matches: 'NoneType' object has no attribute 'match_users'
+2025-01-18 22:57:38,967 - ERROR: Chat error: 'NoneType' object has no attribute 'match_users'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 219, in chat
+    matches = await model.find_top_matches(project)
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 290, in find_top_matches
+    all_matches = self.matching_engine.match_users(project, weights=self.custom_weights)
+AttributeError: 'NoneType' object has no attribute 'match_users'
+2025-01-18 22:57:38,967 - INFO: 127.0.0.1 - - [18/Jan/2025 22:57:38] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-18 23:32:28,948 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\upworkModel.py', reloading
+2025-01-18 23:32:33,273 - INFO:  * Restarting with stat
+2025-01-18 23:32:42,490 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:32:42,799 - WARNING: API returned empty data
+2025-01-18 23:32:42,799 - INFO: Using mock freelancer data
+2025-01-18 23:32:42,805 - INFO: Model initialization completed successfully
+2025-01-18 23:32:42,843 - WARNING:  * Debugger is active!
+2025-01-18 23:32:42,869 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 23:33:25,787 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\upworkModel.py', reloading
+2025-01-18 23:33:26,729 - INFO:  * Restarting with stat
+2025-01-18 23:34:02,431 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:34:02,470 - WARNING: API returned empty data
+2025-01-18 23:34:02,472 - INFO: Using mock freelancer data
+2025-01-18 23:34:02,480 - INFO: Model initialization completed successfully
+2025-01-18 23:34:02,509 - WARNING:  * Debugger is active!
+2025-01-18 23:34:02,519 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 23:34:42,305 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\ai.py', reloading
+2025-01-18 23:34:43,622 - INFO:  * Restarting with stat
+2025-01-18 23:34:51,601 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:34:51,644 - WARNING: API returned empty data
+2025-01-18 23:34:51,645 - INFO: Using mock freelancer data
+2025-01-18 23:34:51,659 - INFO: Model initialization completed successfully
+2025-01-18 23:34:51,686 - WARNING:  * Debugger is active!
+2025-01-18 23:34:51,697 - INFO:  * Debugger PIN: 673-983-490
+2025-01-18 23:36:00,046 - INFO:  * Detected change in 'C:\\Users\\coolbuoy\\Desktop\\SjmIntegral\\upwork_clonee\\python\\ai.py', reloading
+2025-01-18 23:36:00,744 - INFO:  * Restarting with stat
+2025-01-18 23:36:08,935 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:36:08,965 - WARNING: API returned empty data
+2025-01-18 23:36:08,966 - INFO: Using mock freelancer data
+2025-01-18 23:36:08,967 - ERROR: Error initializing matching engine: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:36:08,968 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 60, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 195, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 326, in __init__
+    [freelancer.description for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 326, in <listcomp>
+    [freelancer.description for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:36:08,974 - ERROR: Startup error: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:39:09,333 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:39:09,601 - WARNING: API returned empty data
+2025-01-18 23:39:09,601 - INFO: Using mock freelancer data
+2025-01-18 23:39:09,617 - ERROR: Error initializing matching engine: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:39:09,627 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 60, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 195, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 326, in __init__
+    [freelancer.description for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 326, in <listcomp>
+    [freelancer.description for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:39:09,634 - ERROR: Startup error: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:41:18,343 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:41:21,873 - WARNING: API returned empty data
+2025-01-18 23:41:21,873 - INFO: Using mock freelancer data
+2025-01-18 23:41:21,873 - ERROR: Error initializing matching engine: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:41:21,873 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 60, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 195, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 326, in __init__
+    [freelancer.description for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 326, in <listcomp>
+    [freelancer.description for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:41:22,007 - ERROR: Startup error: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:43:23,852 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:43:23,977 - WARNING: API returned empty data
+2025-01-18 23:43:23,977 - INFO: Using mock freelancer data
+2025-01-18 23:43:23,992 - ERROR: API request error: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:43:23,992 - INFO: Using mock freelancer data
+2025-01-18 23:43:23,992 - ERROR: Error in load_users: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:43:23,992 - INFO: Using mock freelancer data
+2025-01-18 23:43:23,992 - ERROR: Error initializing matching engine: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:43:23,992 - ERROR: Error initializing model: Freelancer.__init__() missing 1 required positional argument: 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 105, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 154, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'description'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 136, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 154, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'description'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 60, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 188, in initialize_matching_engine
+    self.users = await self.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 140, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 154, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:43:24,017 - ERROR: Startup error: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:55:07,623 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:55:08,199 - WARNING: API returned empty data
+2025-01-18 23:55:08,240 - INFO: Using mock freelancer data
+2025-01-18 23:55:08,345 - ERROR: API request error: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:55:08,487 - INFO: Using mock freelancer data
+2025-01-18 23:55:08,623 - ERROR: Error in load_users: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:55:08,757 - INFO: Using mock freelancer data
+2025-01-18 23:55:08,825 - ERROR: Error initializing matching engine: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:55:08,937 - ERROR: Error initializing model: Freelancer.__init__() missing 1 required positional argument: 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 105, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 154, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'description'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 136, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 154, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'description'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 60, in initialize_model
+    # Initialize the matching engine (which includes loading users)
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 188, in initialize_matching_engine
+    self.users = await self.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 140, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 154, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:55:09,048 - ERROR: Startup error: Freelancer.__init__() missing 1 required positional argument: 'description'
+2025-01-18 23:58:45,392 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-18 23:58:45,744 - WARNING: API returned empty data
+2025-01-18 23:58:45,744 - INFO: Using mock freelancer data
+2025-01-18 23:58:45,746 - ERROR: Error initializing matching engine: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:58:45,747 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 61, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 198, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 331, in __init__
+    [freelancer.description for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 331, in <listcomp>
+    [freelancer.description for freelancer in users]
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-18 23:58:45,754 - ERROR: Startup error: 'Freelancer' object has no attribute 'description'
+2025-01-19 00:00:16,955 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:00:17,089 - WARNING: API returned empty data
+2025-01-19 00:00:17,093 - INFO: Using mock freelancer data
+2025-01-19 00:00:17,123 - INFO: Matching engine initialized successfully
+2025-01-19 00:00:17,124 - INFO: Model initialization completed successfully
+2025-01-19 00:00:17,220 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.124.233:8000
+2025-01-19 00:00:17,221 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 00:00:33,155 - INFO: 127.0.0.1 - - [19/Jan/2025 00:00:33] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:00:33,424 - INFO: 127.0.0.1 - - [19/Jan/2025 00:00:33] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:00:49,476 - INFO: 127.0.0.1 - - [19/Jan/2025 00:00:49] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:00:49,767 - INFO: Found 0 top matches
+2025-01-19 00:00:49,767 - INFO: 127.0.0.1 - - [19/Jan/2025 00:00:49] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:08:27,925 - INFO: 127.0.0.1 - - [19/Jan/2025 00:08:27] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:08:28,192 - INFO: 127.0.0.1 - - [19/Jan/2025 00:08:28] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:08:48,227 - INFO: 127.0.0.1 - - [19/Jan/2025 00:08:48] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:08:48,743 - INFO: 127.0.0.1 - - [19/Jan/2025 00:08:48] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:09:17,178 - INFO: 127.0.0.1 - - [19/Jan/2025 00:09:17] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:09:17,432 - INFO: 127.0.0.1 - - [19/Jan/2025 00:09:17] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:09:36,343 - INFO: 127.0.0.1 - - [19/Jan/2025 00:09:36] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:09:36,666 - INFO: Found 0 top matches
+2025-01-19 00:09:36,666 - INFO: 127.0.0.1 - - [19/Jan/2025 00:09:36] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:10:32,213 - INFO: 127.0.0.1 - - [19/Jan/2025 00:10:32] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:10:32,485 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 00:10:32,507 - INFO: Found 1 top matches
+2025-01-19 00:10:32,508 - ERROR: Chat error: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 225, in chat
+    'users': [{
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 236, in <listcomp>
+    'description': match['freelancer'].description
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-19 00:10:32,541 - INFO: 127.0.0.1 - - [19/Jan/2025 00:10:32] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-19 00:11:13,683 - INFO: 127.0.0.1 - - [19/Jan/2025 00:11:13] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 00:11:14,134 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 00:11:14,191 - INFO: Found 1 top matches
+2025-01-19 00:11:14,192 - ERROR: Chat error: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 225, in chat
+    'users': [{
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 236, in <listcomp>
+    'user_description': match['freelancer'].user_description
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-19 00:11:14,235 - INFO: 127.0.0.1 - - [19/Jan/2025 00:11:14] "[35m[1mPOST /ai/chat HTTP/1.1[0m" 500 -
+2025-01-19 00:16:14,007 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:16:18,910 - WARNING: API returned empty data
+2025-01-19 00:16:18,910 - INFO: Using mock freelancer data
+2025-01-19 00:16:19,030 - INFO: Matching engine initialized successfully
+2025-01-19 00:16:19,030 - INFO: Model initialization completed successfully
+2025-01-19 00:16:19,709 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 00:16:19,740 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 00:18:34,250 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:18:34,497 - INFO: Successfully loaded 0 users
+2025-01-19 00:18:34,497 - WARNING: No valid users found in response
+2025-01-19 00:18:34,498 - INFO: Using mock freelancer data
+2025-01-19 00:18:34,517 - INFO: Matching engine initialized successfully
+2025-01-19 00:18:34,517 - INFO: Model initialization completed successfully
+2025-01-19 00:18:34,592 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 00:18:34,592 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 00:22:29,654 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:22:29,742 - INFO: Successfully loaded 0 users
+2025-01-19 00:22:29,742 - WARNING: No valid users found in response
+2025-01-19 00:22:29,742 - INFO: Using mock freelancer data
+2025-01-19 00:22:29,765 - INFO: Matching engine initialized successfully
+2025-01-19 00:22:29,766 - INFO: Model initialization completed successfully
+2025-01-19 00:22:29,820 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 00:22:29,820 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 00:26:50,413 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:26:54,537 - ERROR: API connection error: Cannot connect to host localhost:5000 ssl:default [The remote computer refused the network connection]
+2025-01-19 00:26:54,537 - INFO: Using mock freelancer data
+2025-01-19 00:26:54,693 - INFO: Matching engine initialized successfully
+2025-01-19 00:26:54,693 - INFO: Model initialization completed successfully
+2025-01-19 00:26:54,947 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 00:26:54,947 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 00:29:15,167 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:29:15,269 - ERROR: API returned unexpected status 500
+2025-01-19 00:29:15,270 - INFO: Using mock freelancer data
+2025-01-19 00:29:15,289 - INFO: Matching engine initialized successfully
+2025-01-19 00:29:15,289 - INFO: Model initialization completed successfully
+2025-01-19 00:29:15,367 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 00:29:15,369 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 00:55:29,726 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 00:55:29,893 - ERROR: API returned unexpected status 500
+2025-01-19 00:55:29,894 - INFO: Using mock freelancer data
+2025-01-19 00:55:29,913 - INFO: Matching engine initialized successfully
+2025-01-19 00:55:29,914 - INFO: Model initialization completed successfully
+2025-01-19 00:55:29,991 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 00:55:29,992 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 06:25:12,899 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 06:25:13,060 - ERROR: API returned unexpected status 500
+2025-01-19 06:25:13,060 - INFO: Using mock freelancer data
+2025-01-19 06:25:13,061 - ERROR: Error initializing matching engine: 'Freelancer' object has no attribute 'description'
+2025-01-19 06:25:13,062 - ERROR: Error initializing model: 'Freelancer' object has no attribute 'description'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 61, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 215, in initialize_matching_engine
+    self.matching_engine = MatchingEngine(
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 329, in __init__
+    [freelancer.profile_text() for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 329, in <listcomp>
+    [freelancer.profile_text() for freelancer in users]
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\sjm.py", line 221, in profile_text
+    return f"{self.name} - {self.job_title}. {self.description} Skills: {', '.join(self.skills)}"
+AttributeError: 'Freelancer' object has no attribute 'description'
+2025-01-19 06:25:13,072 - ERROR: Startup error: 'Freelancer' object has no attribute 'description'
+2025-01-19 06:28:03,554 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 06:28:03,914 - ERROR: API returned unexpected status 500
+2025-01-19 06:28:03,914 - INFO: Using mock freelancer data
+2025-01-19 06:28:03,915 - ERROR: Error in load_users: Freelancer.__init__() missing 1 required positional argument: 'desc'
+2025-01-19 06:28:03,916 - INFO: Using mock freelancer data
+2025-01-19 06:28:03,916 - ERROR: Error initializing matching engine: Freelancer.__init__() missing 1 required positional argument: 'desc'
+2025-01-19 06:28:03,917 - ERROR: Error initializing model: Freelancer.__init__() missing 1 required positional argument: 'desc'
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 108, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 174, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'desc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\ai.py", line 61, in initialize_model
+    await model.initialize_matching_engine()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 208, in initialize_matching_engine
+    self.users = await self.load_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 159, in load_users
+    return self._get_mock_users()
+  File "C:\Users\coolbuoy\Desktop\SjmIntegral\upwork_clonee\python\upworkModel.py", line 174, in _get_mock_users
+    Freelancer(
+TypeError: Freelancer.__init__() missing 1 required positional argument: 'desc'
+2025-01-19 06:28:03,924 - ERROR: Startup error: Freelancer.__init__() missing 1 required positional argument: 'desc'
+2025-01-19 06:48:37,652 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 06:48:37,758 - INFO: Successfully loaded 2 users
+2025-01-19 06:48:37,781 - INFO: Matching engine initialized successfully
+2025-01-19 06:48:37,782 - INFO: Model initialization completed successfully
+2025-01-19 06:48:37,855 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.0.101:8000
+2025-01-19 06:48:37,855 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 06:49:02,645 - INFO: 127.0.0.1 - - [19/Jan/2025 06:49:02] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:49:02,899 - INFO: 127.0.0.1 - - [19/Jan/2025 06:49:02] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:56:16,422 - INFO: 127.0.0.1 - - [19/Jan/2025 06:56:16] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:56:16,772 - INFO: Found 0 top matches
+2025-01-19 06:56:16,774 - INFO: 127.0.0.1 - - [19/Jan/2025 06:56:16] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:56:32,502 - INFO: 127.0.0.1 - - [19/Jan/2025 06:56:32] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:56:32,778 - INFO: Found 0 top matches
+2025-01-19 06:56:32,778 - INFO: 127.0.0.1 - - [19/Jan/2025 06:56:32] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:57:41,450 - INFO: 127.0.0.1 - - [19/Jan/2025 06:57:41] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 06:57:41,710 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 06:57:41,727 - INFO: Found 1 top matches
+2025-01-19 06:57:41,739 - INFO: 127.0.0.1 - - [19/Jan/2025 06:57:41] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 12:11:23,492 - INFO: 127.0.0.1 - - [19/Jan/2025 12:11:23] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 12:11:23,593 - INFO: 127.0.0.1 - - [19/Jan/2025 12:11:23] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:02:22,964 - INFO: Fetching users from http://localhost:5000/api/users
+2025-01-19 15:02:23,023 - INFO: Successfully loaded 0 users
+2025-01-19 15:02:23,023 - WARNING: No valid users found in response
+2025-01-19 15:02:23,024 - INFO: Using mock freelancer data
+2025-01-19 15:02:23,043 - INFO: Matching engine initialized successfully
+2025-01-19 15:02:23,043 - INFO: Model initialization completed successfully
+2025-01-19 15:02:23,104 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.124.233:8000
+2025-01-19 15:02:23,105 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-19 15:24:02,006 - INFO: 127.0.0.1 - - [19/Jan/2025 15:24:02] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:24:02,055 - INFO: 127.0.0.1 - - [19/Jan/2025 15:24:02] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:24:24,193 - INFO: 127.0.0.1 - - [19/Jan/2025 15:24:24] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:24:25,512 - INFO: Found 0 top matches
+2025-01-19 15:24:25,514 - INFO: 127.0.0.1 - - [19/Jan/2025 15:24:25] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:34:04,550 - INFO: 127.0.0.1 - - [19/Jan/2025 15:34:04] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:34:04,644 - INFO: 127.0.0.1 - - [19/Jan/2025 15:34:04] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:34:19,053 - INFO: 127.0.0.1 - - [19/Jan/2025 15:34:19] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:34:19,687 - INFO: Found 0 top matches
+2025-01-19 15:34:19,703 - INFO: 127.0.0.1 - - [19/Jan/2025 15:34:19] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:34:39,833 - INFO: 127.0.0.1 - - [19/Jan/2025 15:34:39] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 15:34:40,391 - INFO: Found 0 top matches
+2025-01-19 15:34:40,392 - INFO: 127.0.0.1 - - [19/Jan/2025 15:34:40] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:04:43,818 - INFO: 127.0.0.1 - - [19/Jan/2025 20:04:43] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:04:43,989 - INFO: 127.0.0.1 - - [19/Jan/2025 20:04:43] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:05:04,004 - INFO: 127.0.0.1 - - [19/Jan/2025 20:05:04] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:05:05,245 - INFO: Found 0 top matches
+2025-01-19 20:05:05,253 - INFO: 127.0.0.1 - - [19/Jan/2025 20:05:05] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:05:37,541 - INFO: 127.0.0.1 - - [19/Jan/2025 20:05:37] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:05:37,815 - INFO: Found 0 top matches
+2025-01-19 20:05:37,817 - INFO: 127.0.0.1 - - [19/Jan/2025 20:05:37] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:06:02,975 - INFO: 127.0.0.1 - - [19/Jan/2025 20:06:02] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:06:03,239 - INFO: 127.0.0.1 - - [19/Jan/2025 20:06:03] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:06:22,028 - INFO: 127.0.0.1 - - [19/Jan/2025 20:06:22] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:06:22,358 - INFO: 127.0.0.1 - - [19/Jan/2025 20:06:22] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:06:27,067 - INFO: 127.0.0.1 - - [19/Jan/2025 20:06:27] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:29:58,885 - INFO: 127.0.0.1 - - [19/Jan/2025 20:29:58] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:30:01,623 - INFO: 127.0.0.1 - - [19/Jan/2025 20:30:01] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:30:20,935 - INFO: 127.0.0.1 - - [19/Jan/2025 20:30:20] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:30:21,751 - INFO: Found 0 top matches
+2025-01-19 20:30:21,759 - INFO: 127.0.0.1 - - [19/Jan/2025 20:30:21] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:31:21,683 - INFO: 127.0.0.1 - - [19/Jan/2025 20:31:21] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:31:21,975 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 20:31:22,029 - INFO: Found 0 top matches
+2025-01-19 20:31:22,035 - INFO: 127.0.0.1 - - [19/Jan/2025 20:31:22] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:31:39,957 - INFO: 127.0.0.1 - - [19/Jan/2025 20:31:39] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:31:40,237 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 20:31:40,302 - INFO: Found 0 top matches
+2025-01-19 20:31:40,306 - INFO: 127.0.0.1 - - [19/Jan/2025 20:31:40] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:33:46,450 - INFO: 127.0.0.1 - - [19/Jan/2025 20:33:46] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:33:46,758 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 20:33:46,781 - INFO: Found 0 top matches
+2025-01-19 20:33:46,783 - INFO: 127.0.0.1 - - [19/Jan/2025 20:33:46] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:34:11,470 - INFO: 127.0.0.1 - - [19/Jan/2025 20:34:11] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:34:11,722 - INFO: 127.0.0.1 - - [19/Jan/2025 20:34:11] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:35:55,986 - INFO: 127.0.0.1 - - [19/Jan/2025 20:35:55] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:35:56,314 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 20:35:56,378 - INFO: Found 0 top matches
+2025-01-19 20:35:56,381 - INFO: 127.0.0.1 - - [19/Jan/2025 20:35:56] "POST /ai/chat HTTP/1.1" 200 -

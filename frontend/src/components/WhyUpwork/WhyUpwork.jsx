@@ -58,7 +58,7 @@ const WhyUpwork = () => {
           </Card>
           <Card>
             <h3>Protected payments</h3>
-            <p>Payment protection and dispute assistance for clients and freelancers.</p>
+            <p>Payment protection and dispute assistance for clients and users.</p>
           </Card>
         </Grid>
       </Section>

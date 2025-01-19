@@ -1,27 +1,43 @@
 import os
+from dotenv import load_dotenv
 import sys
 import uuid
 import json
 import logging
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any, Union
 import numpy as np
 import nltk
 nltk.download('punkt_tab')
 import requests
 from datetime import datetime
 import asyncio
-from typing import Dict, List, Optional, Any
 import aiohttp
 
 from sjm import (
     SkillsExtract, 
-    Freelancer, 
+    user, 
     Project, 
     Server, 
     normalize_csv, 
     MatchingEngine,
     CollaborativeModel
 )
+
+# Add missing dict method to user class in sjm.py
+def dict(self) -> Dict[str, Any]:
+    return {
+        'id': self.id,
+        'username': self.username,
+        'name': self.name,
+        'job_title': self.job_title,
+        'skills': self.skills,
+        'experience': self.experience,
+        'rating': self.rating,
+        'hourly_rate': self.hourly_rate,
+        'profile_url': self.profile_url,
+        'availability': self.availability,
+        'total_sales': self.total_sales
+    }
 
 # Configure logging
 logging.basicConfig(
@@ -34,75 +50,202 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+from config import Config
+
 class UpworkIntegrationModel:
     def __init__(self, api_url: str, api_key: str):
-        """
-        Initialize with API configuration instead of CSV
-        """
+        """Initialize with API configuration"""
         self.api_url = api_url
         self.api_key = api_key
         self.skill_extractor = SkillsExtract()
-        self.freelancers = None
+        self.users = None
         self.matching_engine = None
+        self.custom_weights = {
+            'content': 0.3,
+            'collaborative': 0.3,
+            'experience': 0.2,
+            'rating': 0.1,
+            'hourly_rate': 0.1,
+            'top_rated': 0.0
+        }
 
-    async def load_freelancers(self) -> List[Freelancer]:
-        """
-        Load freelancers from backend API instead of CSV
-        """
+    async def load_users(self) -> List[user]:
+        """Load users from backend API"""
         try:
             async with aiohttp.ClientSession() as session:
                 headers = {
                     'Authorization': f'Bearer {self.api_key}',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 }
-                async with session.get(f'{self.api_url}/api/freelancers', headers=headers) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        
-                        freelancers = []
+                
+                url = f'{self.api_url}/api/users'
+                logger.info(f"Fetching users from {url}")
+                logger.debug(f"Using headers: {headers}")
+                
+                try:
+                    async with session.get(
+                        url,
+                        headers=headers,
+                        timeout=30
+                    ) as response:
+                        response_text = await response.text()
+                        logger.debug(f"Response status: {response.status}")
+                        logger.debug(f"Response body: {response_text}")
+
+                        # Debug API key
+                        logger.debug(f"Using API key: {self.api_key}")
+
+                        if response.status == 401:
+                            logger.error(f"Authentication failed. API Key: {self.api_key}")
+                            if Config.DEBUG:
+                                return self._get_mock_users()
+                            raise Exception("Authentication failed. Please check your API key.")
+
+                        if response.status != 200:
+                            logger.error(f"API returned unexpected status {response.status}")
+                            if Config.DEBUG:
+                                return self._get_mock_users()
+                            raise Exception(f"API Error: Status {response.status}")
+
+                        try:
+                            data = json.loads(response_text)
+                            logger.info(f"Successfully loaded {len(data)} users")
+                        except json.JSONDecodeError as e:
+                            logger.error(f"Failed to parse JSON response: {e}")
+                            if Config.DEBUG:
+                                return self._get_mock_users()
+                            raise
+
+                        users = []
                         for item in data:
-                            freelancer = Freelancer(
-                                id=item['id'],
-                                username=item['name'],
-                                name=item['name'],
-                                job_title=item['job_title'],
-                                skills=item['skills'].split(','),
-                                experience=item['experience'],
-                                rating=item['rating'],
-                                hourly_rate=item['hourly_rate'],
-                                profile_url=item['profile_url'],
-                                availability=item['availability'],
-                                total_sales=item['total_sales']
-                            )
-                            freelancers.append(freelancer)
-                        
-                        self.freelancers = freelancers
-                        return freelancers
-                    else:
-                        raise Exception(f"API Error: {response.status}")
+                            try:
+                                user = user(
+                                    id=str(item.get('id', '')),
+                                    username=str(item.get('username', '')),
+                                    name=str(item.get('name', '')),
+                                    job_title=str(item.get('job_title', '')),
+                                    skills=item.get('skills', []),  # Already an array from backend
+                                    experience=int(float(item.get('experience', 0))),
+                                    rating=float(item.get('rating', 0)),
+                                    hourly_rate=float(item.get('hourly_rate', 0)),
+                                    profile_url=str(item.get('profile_url', '')),
+                                    availability=bool(item.get('availability', False)),
+                                    total_sales=int(float(item.get('total_sales', 0))),
+                                    desc=str(item.get('desc', '')),
+                                )
+                                users.append(user)
+                                logger.debug(f"Processed user: {user.name}")
+                            except Exception as e:
+                                logger.warning(f"Error processing user data: {e}")
+                                continue
+
+                        if not users:
+                            logger.warning("No valid users found in response")
+                            if Config.DEBUG:
+                                return self._get_mock_users()
+                            raise Exception("No valid users found")
+
+                        return users
+
+                except aiohttp.ClientError as e:
+                    logger.error(f"API connection error: {str(e)}")
+                    if Config.DEBUG:
+                        return self._get_mock_users()
+                    raise
+
         except Exception as e:
-            logger.error(f"Error loading freelancers from API: {e}")
+            logger.error(f"Error in load_users: {str(e)}")
+            if Config.DEBUG:
+                return self._get_mock_users()
             raise
 
+    def _parse_skills(self, skills: Union[str, List, None]) -> List[str]:
+        """Parse skills from various input formats"""
+        if isinstance(skills, str):
+            return [s.strip() for s in skills.split(',') if s.strip()]
+        elif isinstance(skills, list):
+            return [str(s).strip() for s in skills if str(s).strip()]
+        return []
+
+    def _get_mock_users(self) -> List[user]:
+        """Provide mock user data for testing/development"""
+        logger.info("Using mock user data")
+        mock_data = [
+            user(
+                id="1",
+                username="john_dev",
+                name="John Developer",
+                job_title="Full Stack Developer",
+                skills=["Python", "JavaScript", "React"],
+                experience=5,
+                rating=4.8,
+                hourly_rate=50.0,
+                profile_url="http://example.com/john",
+                availability=True,
+                total_sales=20,
+                desc="an experienced Full Stack Developer with over 5 years in the field. He specializes in Python, JavaScript, and React, enabling him to build robust, scalable, and interactive web applications. With a stellar rating of 4.8/5 and an hourly rate of $50, John has successfully completed 20 projects, demonstrating his reliability and expertise. His strong skill set makes him an ideal candidate for complex and dynamic web development projects."
+            ),
+            user(
+                id="2",
+                username="jane_designer",
+                name="Jane Designer",
+                job_title="UI/UX Designer",
+                skills=["UI Design", "UX Research", "Figma", "Adobe XD"],
+                experience=3,
+                rating=4.9,
+                hourly_rate=45.0,
+                profile_url="http://example.com/jane",
+                availability=True,
+                total_sales=15,
+                desc="a talented UI/UX Designer with 3 years of experience in creating intuitive and visually appealing designs. Jane excels in UI Design, UX Research, Figma, and Adobe XD, allowing her to deliver engaging user experiences. With a remarkable rating of 4.9/5 and an hourly rate of $45, Jane has successfully completed 15 projects, showcasing her creativity and attention to detail. Her expertise in UI/UX design makes her an excellent choice for innovative design projects."
+            )
+        ]
+        return mock_data
+
+    async def initialize_matching_engine(self):
+        """Initialize a Upwork-customized matching engine with loaded users"""
+        try:
+            # Load users if not already loaded
+            if not self.users:
+                self.users = await self.load_users()
+            
+            if not self.users:
+                logger.error("No users available for matching engine")
+                raise Exception("No users available")
+
+            collaborative_model = self.customize_matching_engine()
+            self.matching_engine = MatchingEngine(
+                users=self.users,
+                projects=[],
+                skill_extractor=self.skill_extractor,
+                collaborative_model=collaborative_model,
+            )
+            self.matching_engine.train_models()
+            logger.info("Matching engine initialized successfully")
+        except Exception as e:
+            logger.error(f"Error initializing matching engine: {e}")
+            raise
+        
     def customize_matching_engine(self):
         """
         Customizes the collaborative model for Upwork to include total_jobs and success_rate.
         """
         class UpworkCollaborativeModel(CollaborativeModel):
-            def train(self, project_data: List[Dict], freelancer_data: List[Freelancer]):
+            def train(self, project_data: List[Dict], user_data: List[user]):
                 """
                 Train the collaborative model using total_jobs and success_rate for Upwork.
                 """
-                self.freelancer_data = freelancer_data
+                self.user_data = user_data
                 self.project_data = project_data
 
-                num_freelancers = len(freelancer_data)
-                if num_freelancers == 0:
-                    self.interaction_matrix = np.zeros((num_freelancers, 2))
+                num_users = len(user_data)
+                if num_users == 0:
+                    self.interaction_matrix = np.zeros((num_users, 2))
                     return
 
-                total_jobs = np.array([freelancer.total_sales for freelancer in freelancer_data])
-                success_rates = np.array([freelancer.rating for freelancer in freelancer_data])
+                total_jobs = np.array([user.total_sales for user in user_data])
+                success_rates = np.array([user.rating for user in user_data])
 
                 total_jobs_norm = (total_jobs - total_jobs.min()) / (total_jobs.max() - total_jobs.min())
                 success_rates_norm = success_rates / 100.0
@@ -115,7 +258,7 @@ class UpworkIntegrationModel:
                 """
                 if self.interaction_matrix is None or self.interaction_matrix.size == 0:
                     logger.warning("Interaction matrix is empty. Returning zero scores.")
-                    return [0.0] * len(self.freelancer_data)
+                    return [0.0] * len(self.user_data)
 
                 scores = np.nanmean(self.interaction_matrix, axis=1)
                 return np.nan_to_num(scores).tolist()
@@ -135,43 +278,44 @@ class UpworkIntegrationModel:
             base_weights['hourly_rate'] = 0.2
         return base_weights
 
-    def filter_freelancers(self, project: Project, matches: List[Dict]) -> List[Dict]:
+    def filter_users(self, project: Project, matches: List[Dict]) -> List[Dict]:
         """
-        Filter freelancers based on Upwork-specific constraints.
+        Filter users based on Upwork-specific constraints.
         """
         filtered_matches = []
         for match in matches:
-            freelancer = match['freelancer']
+            user = match['user']
             
             # Upwork-specific hard constraints
-            if freelancer.hourly_rate < project.budget_range[0] or freelancer.hourly_rate > project.budget_range[1]:
-                logger.debug(f"Excluded {freelancer.username}: Hourly rate ${freelancer.hourly_rate} out of budget.")
+            if user.hourly_rate < project.budget_range[0] or user.hourly_rate > project.budget_range[1]:
+                logger.debug(f"Excluded {user.username}: Hourly rate ${user.hourly_rate} out of budget.")
                 continue
             
-            # Prioritize top-rated freelancers for critical projects
-            if project.complexity == 'high' and not freelancer.availability:
-                logger.debug(f"Excluded {freelancer.username}: Not top-rated for high-complexity project.")
+            # Prioritize top-rated users for critical projects
+            if project.complexity == 'high' and not user.availability:
+                logger.debug(f"Excluded {user.username}: Not top-rated for high-complexity project.")
                 continue
             
             # Refine skill matching and check overlap
-            overlap_count = self.matching_engine.refine_skill_matching(project.required_skills, freelancer.skills)
+            overlap_count = self.matching_engine.refine_skill_matching(project.required_skills, user.skills)
             if overlap_count < 2:  # Require at least 2 overlapping or similar skills
-                logger.debug(f"Excluded {freelancer.username}: Insufficient skill overlap ({overlap_count} matching skills).")
+                logger.debug(f"Excluded {user.username}: Insufficient skill overlap ({overlap_count} matching skills).")
                 continue
             
             # Passed all filters
             filtered_matches.append(match)
         return filtered_matches
 
-    def find_top_matches(self, project: Project, top_n: int = 5):
+    async def find_top_matches(self, project: Project, top_n: int = 5):
+        """Find top matching users for a project"""
         try:
+            # Ensure matching engine is initialized
             if not self.matching_engine:
-                self.initialize_matching_engine()
+                await self.initialize_matching_engine()
 
             self.custom_weights = self.adjust_weights_for_project(project)
-
-            all_matches = self.matching_engine.match_freelancers(project, weights=self.custom_weights)
-            filtered_matches = self.filter_freelancers(project, all_matches)
+            all_matches = self.matching_engine.match_users(project, weights=self.custom_weights)
+            filtered_matches = self.filter_users(project, all_matches)
 
             top_matches = filtered_matches[:top_n]
             logger.info(f"Found {len(top_matches)} top matches")
@@ -179,68 +323,49 @@ class UpworkIntegrationModel:
         except Exception as e:
             logger.error(f"Error finding matches: {e}")
             raise
-        
     def run_upwork_matching(self):
         """
-        Main workflow for Upwork freelancer matching.
+        Main workflow for Upwork user matching.
         """
         try:
-            self.load_freelancers()
+            self.load_users()
             project = self.collect_project_details()
             top_matches = self.find_top_matches(project)
 
             for match in top_matches:
-                freelancer = match['freelancer']
-                print(f"\nCandidate: {freelancer.name}")
+                user = match['user']
+                print(f"\nCandidate: {user.name}")
                 print(f"Match Score: {match['combined_score']:.2f}")
-                print(f"Job Title: {freelancer.job_title}")
-                print(f"Skills: {', '.join(freelancer.skills)}")
-                print(f"Hourly Rate: {freelancer.hourly_rate}")
-                print(f"Total Jobs: {freelancer.total_sales}")
-                print(f"Success Rate: {freelancer.rating}%")
+                print(f"Job Title: {user.job_title}")
+                print(f"Skills: {', '.join(user.skills)}")
+                print(f"Hourly Rate: {user.hourly_rate}")
+                print(f"Total Jobs: {user.total_sales}")
+                print(f"Success Rate: {user.rating}%")
 
-                if input("Interview this freelancer? (yes/no): ").strip().lower() == 'yes':
-                    interview_results = self.interview_freelancer(freelancer, project)
+                if input("Interview this user? (yes/no): ").strip().lower() == 'yes':
+                    interview_results = self.interview_user(user, project)
                     print(f"Interview Results: {interview_results}")
 
-                    if input("Hire this freelancer? (yes/no): ").strip().lower() == 'yes':
-                        logger.info(f"Hired freelancer: {freelancer.username}")
+                    if input("Hire this user? (yes/no): ").strip().lower() == 'yes':
+                        logger.info(f"Hired user: {user.username}")
                         break
         except Exception as e:
             logger.error(f"Upwork matching process error: {e}")
 
-    def initialize_matching_engine(self):
+    async def interview_user(self, user: user, project: Project) -> Dict[str, Any]:
         """
-        Initialize a Upwork-customized matching engine.
-        """
-        if not self.freelancers:
-            self.load_freelancers()
-
-        collaborative_model = self.customize_matching_engine()
-
-        self.matching_engine = MatchingEngine(
-            freelancers=self.freelancers,
-            projects=[],
-            skill_extractor=self.skill_extractor,
-            collaborative_model=collaborative_model,
-        )
-        self.matching_engine.train_models()
-        logger.info("Matching engine initialized with Upwork-specific customization")
-        
-    async def interview_freelancer(self, freelancer: Freelancer, project: Project) -> Dict[str, Any]:
-        """
-        Conduct real-time interview with a freelancer through Upwork's API
+        Conduct real-time interview with a user through Upwork's API
         """
         try:
             # Generate interview questions
             questions = self.skill_extractor.generate_ai_interview_questions(
                 project.description,
-                freelancer.skills
+                user.skills
             )
 
             # Create interview session
             interview_session = {
-                'freelancer_id': freelancer.id,
+                'user_id': user.id,
                 'project_id': project.id,
                 'questions': questions,
                 'timestamp': datetime.utcnow().isoformat(),
@@ -248,18 +373,18 @@ class UpworkIntegrationModel:
             }
 
             # In a real implementation, you would:
-            # 1. Send notification to freelancer through Upwork's API
-            # 2. Create a webhook to receive freelancer's responses
+            # 1. Send notification to user through Upwork's API
+            # 2. Create a webhook to receive user's responses
             # 3. Handle real-time updates
 
             return {
                 'interview_id': str(uuid.uuid4()),
                 'status': 'initiated',
                 'questions': questions,
-                'freelancer': {
-                    'id': freelancer.id,
-                    'name': freelancer.name,
-                    'profile_url': freelancer.profile_url
+                'user': {
+                    'id': user.id,
+                    'name': user.name,
+                    'profile_url': user.profile_url
                 }
             }
 
@@ -267,30 +392,30 @@ class UpworkIntegrationModel:
             logger.error(f"Interview error: {e}")
             raise
 
-    async def get_freelancer_status(self, freelancer_id: str) -> Dict[str, Any]:
+    async def get_user_status(self, user_id: str) -> Dict[str, Any]:
         """
-        Get real-time freelancer availability status
+        Get real-time user availability status
         """
         try:
             # In production, replace with actual Upwork API call
             return {
-                'freelancer_id': freelancer_id,
+                'user_id': user_id,
                 'online_status': 'available',
                 'last_active': datetime.utcnow().isoformat(),
                 'response_time': '2h'
             }
         except Exception as e:
-            logger.error(f"Error getting freelancer status: {e}")
+            logger.error(f"Error getting user status: {e}")
             raise
 
-    async def send_interview_invitation(self, freelancer_id: str, project_id: str) -> Dict[str, Any]:
+    async def send_interview_invitation(self, user_id: str, project_id: str) -> Dict[str, Any]:
         """
-        Send interview invitation to freelancer through Upwork
+        Send interview invitation to user through Upwork
         """
         try:
             # In production, implement actual Upwork API call
             invitation = {
-                'freelancer_id': freelancer_id,
+                'user_id': user_id,
                 'project_id': project_id,
                 'timestamp': datetime.utcnow().isoformat(),
                 'status': 'sent'
@@ -407,39 +532,3 @@ class UpworkIntegrationModel:
             if choice in choices:
                 return choice
             print(f"Invalid choice. Please select from {', '.join(choices)}.")
-
-def main():
-    while True: 
-        if len(sys.argv) > 1 and sys.argv[1] == "freelancer":
-            # Run the freelancer logic
-            from freelancer import main as freelancer_main
-            freelancer_main("127.0.0.1", "65432")  # Use appropriate host/port
-        else:
-            print("Starting Upwork Model....")
-                # Entering the CSV file path manually
-            csv_path = "upwork_freelancers.csv"
-            
-            if not csv_path:
-                print("No file selected. Exiting.")
-                return
-            
-            if not os.path.isfile(csv_path):
-                print(f"Error: The file '{csv_path}' does not exist. Please check and try again.")
-                return
-
-            try:
-                # Initialize the Upwork integration model
-                upwork_model = UpworkIntegrationModel(csv_path)
-                
-                # Run the Upwork matching process
-                upwork_model.run_upwork_matching()
-            except Exception as e:
-                logger.error(f"Upwork integration failed: {e}") 
-                  
-        should_continue = input("\nWould you like to run the Upwork Model process again? (yes/no): ").strip().lower()
-        if should_continue != 'yes':
-            print("Exiting program. Goodbye!")
-            break 
-
-if __name__ == "__main__":
-    main()

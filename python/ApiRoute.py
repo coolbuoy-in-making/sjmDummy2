@@ -4,6 +4,7 @@ from typing import Dict, Optional
 from pydantic import BaseModel
 from sjm import MatchingEngine, Project, SkillsExtract
 import json
+import uvicorn
 
 app = FastAPI()
 
@@ -30,7 +31,7 @@ class InterviewRequest(BaseModel):
     project_id: str
 
 @app.post("/api/match")
-async def match_freelancers(project: ProjectRequest):
+async def match_users(project: ProjectRequest):
     try:
         engine = MatchingEngine()
         project_obj = Project(
@@ -81,5 +82,4 @@ async def conduct_interview(request: InterviewRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

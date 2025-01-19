@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { UserContext } from '../../contexts/UserContext';
 
 const Nav = styled.nav`
   position: fixed;
@@ -88,8 +89,54 @@ const MenuButton = styled.button`
   }
 `;
 
+const UserMenu = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: ${props => props.theme.colors.background};
+  }
+
+  .user-type-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: ${props => props.theme.colors.lightGray};
+  }
+
+  button {
+    border: none;
+    background: none;
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const Avatar = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: ${props => props.theme.colors.primary};
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+`; 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout, isClient } = useContext(UserContext);
 
   return (
     <Nav>
@@ -112,13 +159,24 @@ const Navbar = () => {
           <NavLink to="/enterprise">Enterprise</NavLink>
         </NavGroup>
 
-        <NavGroup showOnMobile>
-          <SearchIcon style={{ cursor: 'pointer' }} />
-          <NavLink to="/login">Log In</NavLink>
-          <Link to="/signup" className="primary-button">
-            Sign Up
-          </Link>
-        </NavGroup>
+        {user ? (
+          <UserMenu>
+            <Avatar>{user.name[0]}</Avatar>
+            <span>{user.name}</span>
+            <div className="user-type-badge">
+              {isClient ? 'Client' : 'Freelancer'}
+            </div>
+            <button onClick={logout}>Logout</button>
+          </UserMenu>
+        ) : (
+          <NavGroup>
+            <SearchIcon style={{ cursor: 'pointer' }} />
+            <NavLink to="/login">Log In</NavLink>
+            <Link to="/signup" className="primary-button">
+              Sign Up
+            </Link>
+          </NavGroup>
+        )}
 
         <MobileMenu isOpen={isOpen}>
           <NavLink to="/find-work">Find Work</NavLink>

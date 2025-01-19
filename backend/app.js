@@ -74,8 +74,8 @@ db.sequelize.sync({ force: forceSync }).then(async () => {
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    if (isDevMode) {
-      console.log('Development mode: Database tables recreated');
-    }
+    // if (isDevMode) {
+    //   console.log('Development mode: Database tables recreated');
+    // }
   });
 });

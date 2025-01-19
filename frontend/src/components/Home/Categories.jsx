@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import developmentIcon from '../../../public/categories/development.svg';
-import designIcon from '../../../public/categories/design.svg';
-import writingIcon from '../../../public/categories/writing.svg';
-import adminIcon from '../../../public/categories/admin.svg';
-import marketingIcon from '../../../public/categories/marketing.svg';
+import developmentIcon from "/categories/development.svg";
+import designIcon from '/categories/design.svg';
+import writingIcon from '/categories/writing.svg';
+import adminIcon from '/categories/admin.svg';
+import marketingIcon from '/categories/marketing.svg';
 
 const Section = styled.section`
   padding: 80px 0;
