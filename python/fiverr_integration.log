@@ -816,3 +816,9 @@ TypeError: Freelancer.__init__() missing 1 required positional argument: 'desc'
 2025-01-19 20:35:56,314 - WARNING: Weights sum exceeds 1.0, normalizing weights.
 2025-01-19 20:35:56,378 - INFO: Found 0 top matches
 2025-01-19 20:35:56,381 - INFO: 127.0.0.1 - - [19/Jan/2025 20:35:56] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:46:26,651 - INFO: 127.0.0.1 - - [19/Jan/2025 20:46:26] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:46:26,805 - INFO: 127.0.0.1 - - [19/Jan/2025 20:46:26] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:46:54,136 - INFO: 127.0.0.1 - - [19/Jan/2025 20:46:54] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-19 20:46:54,957 - WARNING: Weights sum exceeds 1.0, normalizing weights.
+2025-01-19 20:46:55,073 - INFO: Found 0 top matches
+2025-01-19 20:46:55,079 - INFO: 127.0.0.1 - - [19/Jan/2025 20:46:55] "POST /ai/chat HTTP/1.1" 200 -
