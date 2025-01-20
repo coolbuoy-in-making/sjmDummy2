@@ -46,7 +46,7 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-const isDevMode = process.env.NODE_ENV !== 'development';
+const isDevMode = process.env.NODE_ENV !== 'production';
 const forceSync = process.env.FORCE_SYNC === 'true' || isDevMode;
 
 db.sequelize.sync({ force: forceSync }).then(async () => {

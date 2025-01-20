@@ -8,8 +8,8 @@ import { UserContext } from '../../contexts/UserContext';
 const Sidebar = styled.div`
   position: fixed;
   top: 0;
-  right: ${props => props.isOpen ? '0' : '-400px'};
-  width: 400px;
+  right: ${props => props.isOpen ? '0' : '-450px'};
+  width: 450px;
   height: 100vh;
   background: white;
   box-shadow: ${props => props.theme.shadows.large};
@@ -18,7 +18,7 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media (max-width: 768px) {
     width: 100%;
     right: ${props => props.isOpen ? '0' : '-100%'};
   }
@@ -36,8 +36,15 @@ const Header = styled.div`
 const InputContainer = styled.div`
   padding: 16px;
   border-top: 1px solid ${props => props.theme.colors.lightGray};
+  background: white;
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  position: sticky;
+  bottom: 0;
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 
 const Input = styled.input`
@@ -54,35 +61,73 @@ const Input = styled.input`
 `;
 
 const FreelancerCard = styled.div`
-  padding: 12px;
+  padding: 16px;
   border: 1px solid ${props => props.theme.colors.lightGray};
-  border-radius: 8px;
-  margin-bottom: 8px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ${props => props.theme.shadows.medium};
+  }
 
   h5 {
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     color: ${props => props.theme.colors.primary};
+    font-size: 1.1rem;
   }
 
   .skills {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    margin: 4px 0;
+    gap: 6px;
+    margin: 8px 0;
   }
 
   .skill-tag {
     background: ${props => props.theme.colors.background};
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 13px;
   }
 
   .stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
-    margin-top: 8px;
+    margin-top: 12px;
     font-size: 14px;
+  }
+
+  button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background: ${props => props.theme.colors.primary};
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      background: ${props => props.theme.colors.lightGray};
+      cursor: not-allowed;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px;
+    
+    .stats {
+      flex-direction: column;
+      gap: 8px;
+    }
   }
 `;
 
@@ -144,10 +189,28 @@ const CloseButton = styled.button`
 const MessagesContainer = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  scroll-behavior: smooth;
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${props => props.theme.colors.background};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.colors.lightGray};
+    border-radius: 3px;
+  }
 `;
 
 const MessageWrapper = styled.div`
@@ -189,18 +252,6 @@ const SuggestionButton = styled.button`
   }
 `;
 
-const MatchStats = styled.div`
-  background: ${props => props.theme.colors.background};
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  
-  .stat-item {
-    display: flex;
-    justify-content: space-between;
-    margin: 4px 0;
-  }
-`;
 
 const SkillTag = styled.span`
   background: ${props => props.matched ? props.theme.colors.primary : props.theme.colors.background};
@@ -254,16 +305,162 @@ const DebugPanel = styled(DebugInfo)`
   }
 `;
 
+const MatchingProcess = styled.div`
+  background: ${props => props.theme.colors.background};
+  border-left: 3px solid ${props => props.theme.colors.primary};
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 14px;
+
+  .step {
+    margin: 4px 0;
+    color: ${props => props.theme.colors.text};
+  }
+
+  .stats {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid ${props => props.theme.colors.lightGray};
+    
+    .stat-item {
+      color: ${props => props.theme.colors.primary};
+      font-weight: bold;
+    }
+  }
+`;
+
+const ProjectDetailsForm = styled.div`
+  padding: 20px;
+  background: ${props => props.theme.colors.background};
+  border-radius: 12px;
+  margin: 16px 0;
+  max-width: 100%;
+
+  .field {
+    margin-bottom: 20px;
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: ${props => props.theme.colors.primary};
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid ${props => props.theme.colors.lightGray};
+      border-radius: 8px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: ${props => props.theme.colors.primary};
+      }
+    }
+
+    .hint {
+      font-size: 12px;
+      color: ${props => props.theme.colors.gray};
+      margin-top: 6px;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    
+    .field {
+      margin-bottom: 16px;
+    }
+  }
+`;
+
+const ProjectSummary = styled.div`
+  background: ${props => props.theme.colors.background};
+  border: 1px solid ${props => props.theme.colors.primary};
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+
+  h4 {
+    color: ${props => props.theme.colors.primary};
+    margin: 0 0 12px 0;
+  }
+
+  .summary-item {
+    display: flex;
+    margin: 8px 0;
+    
+    .label {
+      font-weight: 500;
+      min-width: 120px;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    
+    &.confirm {
+      background: ${props => props.theme.colors.primary};
+      color: white;
+    }
+    
+    &.edit {
+      background: ${props => props.theme.colors.background};
+      border: 1px solid ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+`;
+
 const AIChatSidebar = ({ isOpen, onClose }) => {
   const { user } = useContext(UserContext);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{
+    text: "Hi! I'm your AI assistant. I can help you find freelancers or answer questions about your project.",
+    isUser: false,
+    type: 'text'
+  }]);
   const [loading, setLoading] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
-  const [debugInfo, setDebugInfo] = useState(null);
-  const [processingSteps, setProcessingSteps] = useState([]);
+
+  const removeSkill = (skillToRemove) => {
+    setSkills(prevSkills => prevSkills.filter(skill => skill !== skillToRemove));
+  };
+
+  const addSkill = (skill) => {
+    if (!skills.includes(skill)) {
+      setSkills(prevSkills => [...prevSkills, skill]);
+    }
+  };
+
+  const [debugInfo] = useState(null);
+  // Remove unused state since processing steps are handled directly in the message flow
+  const [processingSteps] = useState([]);
+  const [projectDetails, setProjectDetails] = useState(null);
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState('');
+  const [showSummary, setShowSummary] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -273,28 +470,19 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     scrollToBottom();
   }, [messages]);
 
-  const addProcessingStep = (step, type = 'info') => {
-    setProcessingSteps(prev => [...prev, { step, type, timestamp: new Date() }]);
-  };
 
-  const handleMessage = async (input) => {
-    if (!input.trim()) return;
+  const handleMessage = async (input, details = null) => {
+    if (!input.trim() && !details) return;
 
     setError(null);
     setLoading(true);
-    setMessages(prev => [...prev, { text: input, isUser: true }]);
-    setInput('');
-    setDebugInfo(null);
-    setProcessingSteps([]);
     
-    addProcessingStep('Starting request processing...');
-
+    // Add user message to chat
+    const userMessage = { text: input, isUser: true, type: 'text' };
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    
     try {
-      if (input.toLowerCase().includes('find') || input.toLowerCase().includes('need')) {
-        addProcessingStep('Detected search intent');
-        addProcessingStep('Extracting skills and requirements...');
-      }
-
       const response = await fetch(`${import.meta.env.VITE_PYTHON_URL || 'http://localhost:8000'}/ai/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -302,7 +490,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           message: input,
           userType: user?.userType || 'client',
           userId: user?.id,
-          conversationId: conversations.length > 0 ? conversations[0].id : null
+          projectDetails: details
         })
       });
 
@@ -314,40 +502,25 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       }
 
       if (data.success) {
-        // Add debug information if available
-        if (data.response.projectDetails) {
-          addProcessingStep('Project details extracted successfully', 'success');
-          setDebugInfo({
-            extractedSkills: data.response.projectDetails.required_skills,
-            budget: data.response.projectDetails.budget_range,
-            complexity: data.response.projectDetails.complexity,
-            timeline: data.response.projectDetails.timeline
-          });
-        }
-
-        if (data.response.type === 'freelancerList') {
-          addProcessingStep(`Found ${data.response.freelancers.length} matching freelancers`, 'success');
-        } else if (data.response.type === 'suggestions') {
-          addProcessingStep('No exact matches, generating suggestions', 'warning');
-        }
-
-        const newMessage = {
+        const aiMessage = {
           id: Date.now(),
           timestamp: new Date().toISOString(),
+          isUser: false,
           ...data.response
         };
 
-        setConversations(prev => [newMessage, ...prev]);
-        setMessages(prev => [...prev, newMessage]);
+        setMessages(prev => [...prev, aiMessage]);
+        setConversations(prev => [aiMessage, ...prev]);
       }
     } catch (error) {
-      const errorMessage = error.message || "Sorry, I'm having trouble connecting right now.";
-      addProcessingStep(`Error: ${errorMessage}`, 'error');
-      setError(errorMessage);
-      setMessages(prev => [...prev, {
-        text: errorMessage,
-        isUser: false
-      }]);
+      console.error('AI Chat Error:', error);
+      const errorMessage = {
+        text: error.message || "Sorry, I'm having trouble connecting right now.",
+        isUser: false,
+        type: 'error'
+      };
+      setError(errorMessage.text);
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
@@ -441,50 +614,205 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   };
 
   const renderFreelancerList = (message) => (
-    <>
-      {renderMessageDebugInfo(message)}
-      <FreelancerListContainer>
-        <MessageText>{message.text}</MessageText>
-        
-        {message.matchStats && (
-          <MatchStats>
+    <FreelancerListContainer>
+      <MessageText>{message.text}</MessageText>
+      
+      {message.matchingProcess && (
+        <MatchingProcess>
+          <div className="debug-title">Matching Process:</div>
+          {message.matchingProcess.steps.map((step, index) => (
+            <div key={index} className="step">{step}</div>
+          ))}
+          <div className="stats">
             <div className="stat-item">
-              <span>Total Matches:</span>
-              <span>{message.matchStats.total}</span>
+              Total Freelancers Searched: {message.matchingProcess.searchStats.totalFreelancers}
             </div>
             <div className="stat-item">
-              <span>Highly Matched:</span>
-              <span>{message.matchStats.highlyMatched}</span>
+              Matches Found: {message.matchingProcess.searchStats.matchesFound}
             </div>
             <div className="stat-item">
-              <span>Skills Matched:</span>
-              <span>{message.matchStats.skillsMatched}</span>
+              High Quality Matches: {message.matchingProcess.searchStats.highMatches}
             </div>
-          </MatchStats>
-        )}
-        
-        {message.freelancers?.length > 0 ? (
-          message.freelancers.map(freelancer => renderFreelancerCard(freelancer))
-        ) : (
-          <NoMatchMessage>
-            <p>No freelancers found matching your exact criteria.</p>
-            <p>Try broadening your search or consider different skill combinations.</p>
-          </NoMatchMessage>
-        )}
-      </FreelancerListContainer>
-    </>
+          </div>
+        </MatchingProcess>
+      )}
+      
+      {message.freelancers?.length > 0 ? (
+        message.freelancers.map(freelancer => renderFreelancerCard(freelancer))
+      ) : (
+        <NoMatchMessage>
+          <p>No freelancers found matching your exact criteria.</p>
+          <p>Try broadening your search or consider different skill combinations.</p>
+        </NoMatchMessage>
+      )}
+    </FreelancerListContainer>
   );
 
+  const handleProjectDetailsSubmit = (details) => {
+    const formattedDetails = {
+      ...details,
+      skills: skills.length > 0 ? skills : details.skills
+    };
+    
+    setShowSummary(true);
+    setMessages(prev => [...prev, {
+      type: 'project_summary',
+      projectDetails: formattedDetails,
+      isUser: false,
+      text: "Here's a summary of your project requirements:"
+    }]);
+  };
+
+  const renderProjectSummary = (message) => {
+    const details = message.projectDetails;
+    return (
+      <ProjectSummary>
+        <h4>Project Requirements</h4>
+        <div className="summary-item">
+          <span className="label">Skills:</span>
+          <span>{details.skills.join(', ')}</span>
+        </div>
+        <div className="summary-item">
+          <span className="label">Budget:</span>
+          <span>{details.budget}</span>
+        </div>
+        <div className="summary-item">
+          <span className="label">Complexity:</span>
+          <span>{details.complexity}</span>
+        </div>
+        <div className="summary-item">
+          <span className="label">Timeline:</span>
+          <span>{details.timeline} days</span>
+        </div>
+        <div className="action-buttons">
+          <button 
+            className="edit" 
+            onClick={() => {
+              setShowSummary(false);
+              setCurrentProjectDetails(null);
+            }}
+          >
+            Edit Requirements
+          </button>
+          <button 
+            className="confirm" 
+            onClick={() => handleMessage('confirm_project_details', details)}
+          >
+            Find Freelancers
+          </button>
+        </div>
+      </ProjectSummary>
+    );
+  };
+
+  const renderProjectDetailsForm = (message) => {
+    const { requiredInputs } = message;
+    
+    return (
+      <ProjectDetailsForm>
+        <div className="field">
+          <label>Required Skills:</label>
+          <div className="skill-tags">
+            {requiredInputs.skills.initial.map((skill, index) => (
+              <SkillTag key={index}>
+                {skill}
+                <button onClick={() => removeSkill(skill)}>×</button>
+              </SkillTag>
+            ))}
+          </div>
+          <Input
+            placeholder="Add more skills (press Enter)"
+            value={newSkill}
+            onChange={(e) => setNewSkill(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && newSkill.trim()) {
+                addSkill(newSkill.trim());
+                setNewSkill('');
+              }
+            }}
+          />
+          <div className="hint">Press Enter to add each skill</div>
+        </div>
+
+        <div className="field">
+          <label>Budget Range:</label>
+          <Input
+            id="budget"
+            placeholder="e.g., $30-100/hr"
+          />
+          <div className="hint">Format: $min-max/hr</div>
+        </div>
+
+        <div className="field">
+          <label>Project Complexity:</label>
+          <select id="complexity" defaultValue="medium">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <div className="hint">Select based on project requirements</div>
+        </div>
+
+        <div className="field">
+          <label>Timeline (days):</label>
+          <Input
+            id="timeline"
+            type="number"
+            min="1"
+            placeholder="e.g., 30"
+          />
+          <div className="hint">Estimated project duration in days</div>
+        </div>
+
+        <SendButton onClick={() => handleProjectDetailsSubmit({
+          skills: skills,
+          budget: document.getElementById('budget').value,
+          complexity: document.getElementById('complexity').value,
+          timeline: document.getElementById('timeline').value
+        })}>
+          Find Matching Freelancers
+        </SendButton>
+      </ProjectDetailsForm>
+    );
+  };
+
   const renderMessage = (message) => {
-    switch (message.type) {
+    // Add null check and type validation
+    if (!message) return null;
+
+    // Ensure message has required properties
+    const safeMessage = {
+      type: 'text',
+      text: '',
+      ...message
+    };
+
+    switch (safeMessage.type) {
+      case 'project_details_request': {
+        const extractedDetails = safeMessage.requiredInputs?.skills?.initial || [];
+        if (!projectDetails) {
+          setProjectDetails({ skills: extractedDetails });
+          setSkills(extractedDetails);
+        }
+        return (
+          <>
+            <MessageText isUser={false}>{safeMessage.text}</MessageText>
+            {!showSummary && renderProjectDetailsForm(safeMessage)}
+          </>
+        );
+      }
+
+      case 'project_summary':
+        return renderProjectSummary(safeMessage);
+        
       case 'freelancerList':
-        return renderFreelancerList(message);
+        return renderFreelancerList(safeMessage);
 
       case 'suggestions':
         return (
           <SuggestionsContainer>
-            <MessageText>{message.text}</MessageText>
-            {message.suggestions?.map((suggestion, index) => (
+            <MessageText>{safeMessage.text}</MessageText>
+            {safeMessage.suggestions?.map((suggestion, index) => (
               <SuggestionButton
                 key={index}
                 onClick={() => handleMessage(suggestion)}
@@ -492,11 +820,17 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
                 {suggestion}
               </SuggestionButton>
             ))}
+            {safeMessage.debugInfo && renderMessageDebugInfo(safeMessage)}
           </SuggestionsContainer>
         );
 
       default:
-        return <MessageText isUser={message.isUser}>{message.text}</MessageText>;
+        return (
+          <>
+            <MessageText isUser={safeMessage.isUser}>{safeMessage.text}</MessageText>
+            {safeMessage.debugInfo && renderMessageDebugInfo(safeMessage)}
+          </>
+        );
     }
   };
 

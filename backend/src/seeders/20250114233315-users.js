@@ -38,6 +38,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const password = await bcrypt.hash('password123', 10);
     const users = [];
+    const freelancers = [];
 
     // Create 400 clients
     for (let i = 0; i < 400; i++) {
@@ -114,7 +115,55 @@ module.exports = {
       });
     }
 
-    return queryInterface.bulkInsert('Users', users);
+    // Create 500 freelancer users and their freelancer profiles
+    for (let i = 0; i < 500; i++) {
+      const category = faker.helpers.arrayElement(Object.keys(skillSets));
+      const FullName = faker.person.fullName();
+      const username = faker.internet.username();
+      const experience = faker.number.int({ min: 1, max: 15 });
+
+      // Create corresponding freelancer profile
+      freelancers.push({
+        username,
+        name: FullName,
+        job_title: `${category} Specialist`,
+        skills: [
+          ...faker.helpers.arrayElements(skillSets[category], 4),
+          ...faker.helpers.arrayElements(
+            skillSets[faker.helpers.arrayElement(Object.keys(skillSets))], 
+            2
+          )
+        ].join(','),
+        experience,
+        rating: faker.number.float({ min: 4.0, max: 5.0, precision: 0.1 }),
+        hourly_rate: faker.number.int({ min: 25, max: 150 }),
+        profile_url: generateProfileUrl(username),
+        availability: faker.datatype.boolean(),
+        total_sales: faker.number.int({ min: 0, max: 100 }),
+        desc: `${faker.person.jobDescriptor()} ${category} professional with ${experience} years of experience.`,
+        createdAt: faker.date.past(),
+        updatedAt: new Date()
+      });
+    }
+
+
+
+    // Insert users first
+    await queryInterface.bulkInsert('Users', users);
+
+    // Get inserted users to map IDs
+    const insertedUsers = await queryInterface.sequelize.query(
+      `SELECT id FROM Users WHERE userType = 'freelancer' ORDER BY id ASC;`
+    );
+    const userIds = insertedUsers[0].map(u => u.id);
+
+    // Add userId to freelancers
+    freelancers.forEach((freelancer, index) => {
+      freelancer.userId = userIds[index];
+    });
+
+    // Insert freelancer profiles
+    return queryInterface.bulkInsert('Freelancers', freelancers);
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Users', null, {});

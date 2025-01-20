@@ -1,0 +1,2124 @@
+2025-01-20 10:06:26,495 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-20 10:06:27,403 - INFO: Successfully loaded 500 freelancers
+2025-01-20 10:06:27,537 - INFO: Matching engine initialized successfully
+2025-01-20 10:06:27,537 - INFO: 
+==================================================
+Loaded 500 users:
+2025-01-20 10:06:27,537 - INFO: 
+1. Joan Rice ()
+2025-01-20 10:06:27,545 - INFO:    Skills: React Native, Mobile Security, Kotlin, Unity, SEM, CRM
+2025-01-20 10:06:27,545 - INFO:    Rate: $0.0/hr, Rating: 4.70271%
+2025-01-20 10:06:27,545 - INFO: 
+2. Linda Vandervort ()
+2025-01-20 10:06:27,545 - INFO:    Skills: SEO, Social Media Marketing, Lead Generation, Marketing Automation, PyTorch, Big Data
+2025-01-20 10:06:27,548 - INFO:    Rate: $0.0/hr, Rating: 4.31008%
+2025-01-20 10:06:27,548 - INFO: 
+3. Rolando Franecki ()
+2025-01-20 10:06:27,552 - INFO:    Skills: CRM, SEO, Lead Generation, Analytics, Kotlin, Swift
+2025-01-20 10:06:27,552 - INFO:    Rate: $0.0/hr, Rating: 4.2211%
+2025-01-20 10:06:27,553 - INFO: 
+4. Valerie Rath ()
+2025-01-20 10:06:27,553 - INFO:    Skills: Docker, GraphQL, Git, MySQL, Analytics, Content Marketing
+2025-01-20 10:06:27,555 - INFO:    Rate: $0.0/hr, Rating: 4.80389%
+2025-01-20 10:06:27,555 - INFO: 
+5. Lance McCullough-Gislason ()
+2025-01-20 10:06:27,555 - INFO:    Skills: Django, Spring Boot, Git, GraphQL, InVision, Sketch
+2025-01-20 10:06:27,555 - INFO:    Rate: $0.0/hr, Rating: 4.77939%
+2025-01-20 10:06:27,555 - INFO: 
+6. Perry Stokes ()
+2025-01-20 10:06:27,555 - INFO:    Skills: iOS, React Native, Mobile Security, Kotlin, Flutter, App Store Optimization
+2025-01-20 10:06:27,555 - INFO:    Rate: $0.0/hr, Rating: 4.92387%
+2025-01-20 10:06:27,561 - INFO: 
+7. Cary Kerluke ()
+2025-01-20 10:06:27,561 - INFO:    Skills: PostgreSQL, Ruby on Rails, Node.js, Kubernetes, UI/UX Design, Accessibility
+2025-01-20 10:06:27,561 - INFO:    Rate: $0.0/hr, Rating: 4.86414%
+2025-01-20 10:06:27,561 - INFO: 
+8. Lorraine Conroy ()
+2025-01-20 10:06:27,561 - INFO:    Skills: Mobile Security, Unity, Cross-Platform Development, iOS, Power BI, Big Data
+2025-01-20 10:06:27,565 - INFO:    Rate: $0.0/hr, Rating: 4.82068%
+2025-01-20 10:06:27,565 - INFO: 
+9. Lance Greenfelder ()
+2025-01-20 10:06:27,567 - INFO:    Skills: React Native, Java, Push Notifications, Xamarin, Visual Design, Prototyping
+2025-01-20 10:06:27,568 - INFO:    Rate: $0.0/hr, Rating: 4.4699%
+2025-01-20 10:06:27,568 - INFO: 
+10. Candice Emard ()
+2025-01-20 10:06:27,576 - INFO:    Skills: User Research, Motion Design, Visual Design, Design Thinking, React Native, Xamarin
+2025-01-20 10:06:27,576 - INFO:    Rate: $0.0/hr, Rating: 4.61259%
+2025-01-20 10:06:27,576 - INFO: 
+... and 490 more users
+2025-01-20 10:06:27,576 - INFO: ==================================================
+
+2025-01-20 10:06:27,576 - INFO: Model initialization completed successfully
+2025-01-20 10:06:27,693 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.124.233:8000
+2025-01-20 10:06:27,698 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-20 10:06:36,792 - INFO: 127.0.0.1 - - [20/Jan/2025 10:06:36] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:06:37,060 - INFO: 
+==================================================
+Processing chat request:
+2025-01-20 10:06:37,060 - INFO: Message: hi
+2025-01-20 10:06:37,060 - INFO: Project details: None
+2025-01-20 10:06:37,060 - INFO: Processing chat request: hi
+2025-01-20 10:06:37,076 - INFO: 127.0.0.1 - - [20/Jan/2025 10:06:37] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:06:45,601 - INFO: 127.0.0.1 - - [20/Jan/2025 10:06:45] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:06:45,870 - INFO: 
+==================================================
+Processing chat request:
+2025-01-20 10:06:45,870 - INFO: Message: looking for a digital marketing expert with seo and content marketing skills
+2025-01-20 10:06:45,870 - INFO: Project details: None
+2025-01-20 10:06:45,870 - INFO: Processing chat request: looking for a digital marketing expert with seo and content marketing skills
+2025-01-20 10:06:45,885 - INFO: 127.0.0.1 - - [20/Jan/2025 10:06:45] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:06:54,510 - INFO: 127.0.0.1 - - [20/Jan/2025 10:06:54] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:06:54,760 - INFO: 
+==================================================
+Processing chat request:
+2025-01-20 10:06:54,760 - INFO: Message: looking for a digital marketing expert
+2025-01-20 10:06:54,760 - INFO: Project details: None
+2025-01-20 10:06:54,760 - INFO: Processing chat request: looking for a digital marketing expert
+2025-01-20 10:06:54,781 - INFO: 127.0.0.1 - - [20/Jan/2025 10:06:54] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:07:13,460 - INFO: 127.0.0.1 - - [20/Jan/2025 10:07:13] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:07:13,731 - INFO: 
+==================================================
+Processing chat request:
+2025-01-20 10:07:13,731 - INFO: Message: find me a digital marketing expert
+2025-01-20 10:07:13,731 - INFO: Project details: None
+2025-01-20 10:07:13,731 - INFO: Processing chat request: find me a digital marketing expert
+2025-01-20 10:07:13,778 - INFO: 127.0.0.1 - - [20/Jan/2025 10:07:13] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:09:07,495 - INFO: 127.0.0.1 - - [20/Jan/2025 10:09:07] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:09:07,765 - INFO: 
+==================================================
+Processing chat request:
+2025-01-20 10:09:07,765 - INFO: Message: confirm_project_details
+2025-01-20 10:09:07,765 - INFO: Project details: {'skills': ['digital marketing expert', 'marketing', 'expert', 'digital marketing', 'SEO', 'Content Marketing', 'Email Marketing'], 'budget': '$60-100/hr', 'complexity': 'medium', 'timeline': '30'}
+2025-01-20 10:09:07,765 - INFO: 
+Starting freelancer search with confirmed details:
+2025-01-20 10:09:07,780 - INFO: Skills required: ['digital marketing expert', 'marketing', 'expert', 'digital marketing', 'SEO', 'Content Marketing', 'Email Marketing']
+2025-01-20 10:09:07,786 - INFO: Budget range: $60-100/hr
+2025-01-20 10:09:07,786 - INFO: Complexity: medium
+2025-01-20 10:09:09,683 - INFO: 
+Filtering 500 potential matches:
+2025-01-20 10:09:09,683 - INFO: 
+Evaluating Luis Hahn:
+2025-01-20 10:09:09,751 - INFO: 
+Evaluating Charles Kulas:
+2025-01-20 10:09:09,783 - INFO: 
+Evaluating Gayle Fisher:
+2025-01-20 10:09:09,810 - INFO: 
+Evaluating Hugh Vandervort:
+2025-01-20 10:09:09,846 - INFO: 
+Evaluating Miss Claire Rowe:
+2025-01-20 10:09:09,886 - INFO: 
+Evaluating Ron Schuppe:
+2025-01-20 10:09:09,906 - INFO: 
+Evaluating Dr. Julius Conroy PhD:
+2025-01-20 10:09:09,929 - INFO: 
+Evaluating Hazel McKenzie:
+2025-01-20 10:09:09,955 - INFO: 
+Evaluating Maurice Herzog:
+2025-01-20 10:09:09,985 - INFO: 
+Evaluating Fredrick Mills:
+2025-01-20 10:09:10,006 - INFO: 
+Evaluating Maxine Borer:
+2025-01-20 10:09:10,030 - INFO: 
+Evaluating Lillian Wiza:
+2025-01-20 10:09:10,047 - INFO: 
+Evaluating Ms. Geneva Hilll:
+2025-01-20 10:09:10,073 - INFO: 
+Evaluating Dr. Stella MacGyver:
+2025-01-20 10:09:10,089 - INFO: 
+Evaluating Dr. Austin Tillman:
+2025-01-20 10:09:10,118 - INFO: 
+Evaluating Wendell Braun:
+2025-01-20 10:09:10,130 - INFO: 
+Evaluating Lula Lowe:
+2025-01-20 10:09:10,159 - INFO: 
+Evaluating Mr. Irvin Stark:
+2025-01-20 10:09:10,183 - INFO: 
+Evaluating Lana Mertz:
+2025-01-20 10:09:10,216 - INFO: 
+Evaluating Randolph Mitchell III:
+2025-01-20 10:09:10,237 - INFO: 
+Evaluating Gary Streich:
+2025-01-20 10:09:10,311 - INFO: 
+Evaluating Jackie Rutherford II:
+2025-01-20 10:09:10,495 - INFO: 
+Evaluating Guy Goyette:
+2025-01-20 10:09:10,561 - INFO: 
+Evaluating Rita Nader:
+2025-01-20 10:09:10,607 - INFO: 
+Evaluating Percy Fadel I:
+2025-01-20 10:09:10,637 - INFO: 
+Evaluating Doris Parisian:
+2025-01-20 10:09:10,656 - INFO: 
+Evaluating Maggie Herzog:
+2025-01-20 10:09:10,691 - INFO: 
+Evaluating Faye Lind:
+2025-01-20 10:09:10,717 - INFO: 
+Evaluating Oscar Osinski:
+2025-01-20 10:09:10,745 - INFO: 
+Evaluating Mr. Luke Weber:
+2025-01-20 10:09:10,772 - INFO: 
+Evaluating Rufus Hodkiewicz:
+2025-01-20 10:09:10,795 - INFO: 
+Evaluating Allison Raynor:
+2025-01-20 10:09:10,820 - INFO: 
+Evaluating Chad Leannon-Flatley:
+2025-01-20 10:09:10,845 - INFO: 
+Evaluating Randolph Funk:
+2025-01-20 10:09:10,870 - INFO: 
+Evaluating Marlene Kovacek:
+2025-01-20 10:09:10,901 - INFO: 
+Evaluating Rudolph Witting:
+2025-01-20 10:09:10,922 - INFO: 
+Evaluating Martha Schaefer:
+2025-01-20 10:09:10,954 - INFO: 
+Evaluating Evan Dickinson:
+2025-01-20 10:09:10,988 - INFO: 
+Evaluating Silvia Abshire:
+2025-01-20 10:09:11,018 - INFO: 
+Evaluating Shawna Rau:
+2025-01-20 10:09:11,041 - INFO: 
+Evaluating Kevin Gerlach:
+2025-01-20 10:09:11,067 - INFO: 
+Evaluating Ron Bednar I:
+2025-01-20 10:09:11,088 - INFO: 
+Evaluating Jesse Ullrich:
+2025-01-20 10:09:11,106 - INFO: 
+Evaluating Esther Prohaska-Homenick:
+2025-01-20 10:09:11,134 - INFO: 
+Evaluating Alvin Stiedemann IV:
+2025-01-20 10:09:11,155 - INFO: 
+Evaluating Joshua Miller:
+2025-01-20 10:09:11,186 - INFO: 
+Evaluating Jerald Smitham:
+2025-01-20 10:09:11,204 - INFO: 
+Evaluating Linda Vandervort:
+2025-01-20 10:09:11,224 - INFO: 
+Evaluating Frederick Berge:
+2025-01-20 10:09:11,250 - INFO: 
+Evaluating Rebecca Harber:
+2025-01-20 10:09:11,274 - INFO: 
+Evaluating Clifford Waters:
+2025-01-20 10:09:11,300 - INFO: 
+Evaluating Miss Gwendolyn Lesch:
+2025-01-20 10:09:11,319 - INFO: 
+Evaluating Kristina Will V:
+2025-01-20 10:09:11,337 - INFO: 
+Evaluating Winston Schuppe:
+2025-01-20 10:09:11,367 - INFO: 
+Evaluating Jeanne Toy:
+2025-01-20 10:09:11,384 - INFO: 
+Evaluating Gretchen Kiehn:
+2025-01-20 10:09:11,394 - INFO: 
+Evaluating Luis Krajcik:
+2025-01-20 10:09:11,433 - INFO: 
+Evaluating Erma Kertzmann:
+2025-01-20 10:09:11,454 - INFO: 
+Evaluating Kristopher Mante:
+2025-01-20 10:09:11,472 - INFO: 
+Evaluating Danny Streich:
+2025-01-20 10:09:11,499 - INFO: 
+Evaluating Kim Schumm V:
+2025-01-20 10:09:11,518 - INFO: 
+Evaluating Ann Erdman:
+2025-01-20 10:09:11,537 - INFO: 
+Evaluating Cedric Wuckert:
+2025-01-20 10:09:11,561 - INFO: 
+Evaluating Abraham Shanahan:
+2025-01-20 10:09:11,582 - INFO: 
+Evaluating Mark Goodwin V:
+2025-01-20 10:09:11,601 - INFO: 
+Evaluating Annette Gottlieb:
+2025-01-20 10:09:11,617 - INFO: 
+Evaluating Mr. Micheal Rolfson I:
+2025-01-20 10:09:11,635 - INFO: 
+Evaluating Ellis Casper:
+2025-01-20 10:09:11,670 - INFO: 
+Evaluating Neal Krajcik:
+2025-01-20 10:09:11,689 - INFO: 
+Evaluating Cameron Heaney III:
+2025-01-20 10:09:11,716 - INFO: 
+Evaluating Mack Grimes I:
+2025-01-20 10:09:11,740 - INFO: 
+Evaluating Victor Schumm:
+2025-01-20 10:09:11,767 - INFO: 
+Evaluating Lynn Hodkiewicz:
+2025-01-20 10:09:11,784 - INFO: 
+Evaluating Miss Natasha Effertz:
+2025-01-20 10:09:11,805 - INFO: 
+Evaluating Whitney Barrows-Schaden II:
+2025-01-20 10:09:11,832 - INFO: 
+Evaluating Nettie Upton:
+2025-01-20 10:09:11,849 - INFO: 
+Evaluating Tina Boyer:
+2025-01-20 10:09:11,871 - INFO: 
+Evaluating Jordan Roob:
+2025-01-20 10:09:11,888 - INFO: 
+Evaluating Dr. Joe Konopelski-Jerde:
+2025-01-20 10:09:11,903 - INFO: 
+Evaluating Glen Champlin:
+2025-01-20 10:09:11,919 - INFO: 
+Evaluating Debra Volkman:
+2025-01-20 10:09:11,944 - INFO: 
+Evaluating Leigh Ondricka:
+2025-01-20 10:09:11,966 - INFO: 
+Evaluating Debbie Mann:
+2025-01-20 10:09:12,000 - INFO: 
+Evaluating Natalie Mueller:
+2025-01-20 10:09:12,036 - INFO: 
+Evaluating Dr. Harold Farrell:
+2025-01-20 10:09:12,055 - INFO: 
+Evaluating Jim Crist-Collins:
+2025-01-20 10:09:12,083 - INFO: 
+Evaluating Phillip Zulauf:
+2025-01-20 10:09:12,101 - INFO: 
+Evaluating Maureen Bartell:
+2025-01-20 10:09:12,123 - INFO: 
+Evaluating Mr. Steve Bode:
+2025-01-20 10:09:12,151 - INFO: 
+Evaluating Tyler Walter:
+2025-01-20 10:09:12,177 - INFO: 
+Evaluating Shelia Hilpert:
+2025-01-20 10:09:12,200 - INFO: 
+Evaluating Amelia Beier:
+2025-01-20 10:09:12,220 - INFO: 
+Evaluating Vickie Marvin:
+2025-01-20 10:09:12,249 - INFO: 
+Evaluating Rolando Franecki:
+2025-01-20 10:09:12,268 - INFO: 
+Evaluating Mae Tremblay:
+2025-01-20 10:09:12,286 - INFO: 
+Evaluating Yvonne Wunsch V:
+2025-01-20 10:09:12,310 - INFO: 
+Evaluating Joanna Frami:
+2025-01-20 10:09:12,332 - INFO: 
+Evaluating Preston Sauer:
+2025-01-20 10:09:12,351 - INFO: 
+Evaluating Mr. Santos Veum:
+2025-01-20 10:09:12,367 - INFO: 
+Evaluating Elijah Glover:
+2025-01-20 10:09:12,386 - INFO: 
+Evaluating Marco Russel:
+2025-01-20 10:09:12,560 - INFO: 
+Evaluating Valerie Rath:
+2025-01-20 10:09:12,628 - INFO: 
+Evaluating Dr. Tyler Turner Sr.:
+2025-01-20 10:09:12,683 - INFO: 
+Evaluating Jessie Rice:
+2025-01-20 10:09:12,702 - INFO: 
+Evaluating Celia Legros:
+2025-01-20 10:09:12,726 - INFO: 
+Evaluating Desiree Hodkiewicz:
+2025-01-20 10:09:12,749 - INFO: 
+Evaluating Jared Herzog:
+2025-01-20 10:09:12,768 - INFO: 
+Evaluating Erik Rohan:
+2025-01-20 10:09:12,786 - INFO: 
+Evaluating Mr. Ryan Runolfsson:
+2025-01-20 10:09:12,802 - INFO: 
+Evaluating Arnold Mante V:
+2025-01-20 10:09:12,831 - INFO: 
+Evaluating Sophie Klocko:
+2025-01-20 10:09:12,848 - INFO: 
+Evaluating Ms. Angelica Volkman:
+2025-01-20 10:09:12,869 - INFO: 
+Evaluating Joey McGlynn PhD:
+2025-01-20 10:09:12,889 - INFO: 
+Evaluating Carmen Volkman:
+2025-01-20 10:09:12,910 - INFO: 
+Evaluating Constance Thompson:
+2025-01-20 10:09:12,931 - INFO: 
+Evaluating Casey Greenholt-Waters:
+2025-01-20 10:09:12,953 - INFO: 
+Evaluating Dale Bernhard V:
+2025-01-20 10:09:12,969 - INFO: 
+Evaluating Philip MacGyver:
+2025-01-20 10:09:12,993 - INFO: 
+Evaluating Rodolfo Schimmel DDS:
+2025-01-20 10:09:13,014 - INFO: 
+Evaluating Laurie Gutkowski:
+2025-01-20 10:09:13,031 - INFO: 
+Evaluating Cindy Medhurst:
+2025-01-20 10:09:13,048 - INFO: 
+Evaluating Cecilia Klocko:
+2025-01-20 10:09:13,066 - INFO: 
+Evaluating Denise Donnelly:
+2025-01-20 10:09:13,089 - INFO: 
+Evaluating Spencer Hamill:
+2025-01-20 10:09:13,114 - INFO: 
+Evaluating Jeremiah Auer:
+2025-01-20 10:09:13,132 - INFO: 
+Evaluating Alonzo Hansen:
+2025-01-20 10:09:13,156 - INFO: 
+Evaluating Gail Brekke:
+2025-01-20 10:09:13,182 - INFO: 
+Evaluating Jessie Bruen:
+2025-01-20 10:09:13,202 - INFO: 
+Evaluating Dr. Carole Funk DDS:
+2025-01-20 10:09:13,223 - INFO: 
+Evaluating Elena Bayer-Fahey:
+2025-01-20 10:09:13,251 - INFO: 
+Evaluating Randal Beer:
+2025-01-20 10:09:13,268 - INFO: 
+Evaluating Bobby Lakin:
+2025-01-20 10:09:13,285 - INFO: 
+Evaluating Andres Nikolaus:
+2025-01-20 10:09:13,315 - INFO: 
+Evaluating Elaine Durgan MD:
+2025-01-20 10:09:13,334 - INFO: 
+Evaluating Alexander Pfannerstill-Hagenes:
+2025-01-20 10:09:13,354 - INFO: 
+Evaluating April Bashirian:
+2025-01-20 10:09:13,373 - INFO: 
+Evaluating Gary Hane DVM:
+2025-01-20 10:09:13,398 - INFO: 
+Evaluating Denise Mosciski-Mitchell:
+2025-01-20 10:09:13,416 - INFO: 
+Evaluating Clarence Cassin:
+2025-01-20 10:09:13,433 - INFO: 
+Evaluating Damon Koepp MD:
+2025-01-20 10:09:13,452 - INFO: 
+Evaluating Lila Huel:
+2025-01-20 10:09:13,466 - INFO: 
+Evaluating Angie Bosco Sr.:
+2025-01-20 10:09:13,487 - INFO: 
+Evaluating Travis Schamberger:
+2025-01-20 10:09:13,515 - INFO: 
+Evaluating Angela Friesen Jr.:
+2025-01-20 10:09:13,534 - INFO: 
+Evaluating Bobby Yundt:
+2025-01-20 10:09:13,568 - INFO: 
+Evaluating Roberta Jacobi DDS:
+2025-01-20 10:09:13,587 - INFO: 
+Evaluating Gilbert Tremblay:
+2025-01-20 10:09:13,603 - INFO: 
+Evaluating Rosie Little:
+2025-01-20 10:09:13,630 - INFO: 
+Evaluating Gladys Bogisich:
+2025-01-20 10:09:13,648 - INFO: 
+Evaluating Leonard Toy:
+2025-01-20 10:09:13,665 - INFO: 
+Evaluating Samantha Considine:
+2025-01-20 10:09:13,685 - INFO: 
+Evaluating Kelly Barrows II:
+2025-01-20 10:09:13,709 - INFO: 
+Evaluating Clifford Haley II:
+2025-01-20 10:09:13,731 - INFO: 
+Evaluating Eileen Casper:
+2025-01-20 10:09:13,750 - INFO: 
+Evaluating Pauline Carter PhD:
+2025-01-20 10:09:13,768 - INFO: 
+Evaluating Kendra Hilpert:
+2025-01-20 10:09:13,792 - INFO: 
+Evaluating Mrs. Janie Buckridge:
+2025-01-20 10:09:13,818 - INFO: 
+Evaluating Linda Ziemann:
+2025-01-20 10:09:13,833 - INFO: 
+Evaluating Bridget Kreiger:
+2025-01-20 10:09:13,849 - INFO: 
+Evaluating Belinda Oberbrunner:
+2025-01-20 10:09:13,868 - INFO: 
+Evaluating Timmy Russel MD:
+2025-01-20 10:09:13,887 - INFO: 
+Evaluating Loren Tillman:
+2025-01-20 10:09:13,901 - INFO: 
+Evaluating Misty Muller:
+2025-01-20 10:09:13,920 - INFO: 
+Evaluating Isabel Keebler-Bartoletti III:
+2025-01-20 10:09:13,934 - INFO: 
+Evaluating Leah Yundt-Schamberger IV:
+2025-01-20 10:09:13,956 - INFO: 
+Evaluating Richard Kirlin:
+2025-01-20 10:09:13,979 - INFO: 
+Evaluating Van Dach:
+2025-01-20 10:09:13,992 - INFO: 
+Evaluating Brett Powlowski:
+2025-01-20 10:09:14,014 - INFO: 
+Evaluating Sonya Raynor:
+2025-01-20 10:09:14,032 - INFO: 
+Evaluating Alton Crooks:
+2025-01-20 10:09:14,048 - INFO: 
+Evaluating Antonio Heaney:
+2025-01-20 10:09:14,060 - INFO: 
+Evaluating Dan Willms-O'Kon:
+2025-01-20 10:09:14,080 - INFO: 
+Evaluating Miss Hannah Shanahan:
+2025-01-20 10:09:14,098 - INFO: 
+Evaluating Ron Lindgren:
+2025-01-20 10:09:14,114 - INFO: 
+Evaluating Perry Stokes:
+2025-01-20 10:09:14,131 - INFO: 
+Evaluating Theodore Huel:
+2025-01-20 10:09:14,151 - INFO: 
+Evaluating Rickey Nader:
+2025-01-20 10:09:14,176 - INFO: 
+Evaluating Lynda Friesen:
+2025-01-20 10:09:14,198 - INFO: 
+Evaluating Dr. Jody Bahringer:
+2025-01-20 10:09:14,214 - INFO: 
+Evaluating Violet Balistreri V:
+2025-01-20 10:09:14,233 - INFO: 
+Evaluating Janis Williamson:
+2025-01-20 10:09:14,243 - INFO: 
+Evaluating Ashley Schimmel:
+2025-01-20 10:09:14,258 - INFO: 
+Evaluating Kenny Yundt:
+2025-01-20 10:09:14,279 - INFO: 
+Evaluating Hubert Ferry:
+2025-01-20 10:09:14,296 - INFO: 
+Evaluating Mr. Pablo Witting-Russel:
+2025-01-20 10:09:14,307 - INFO: 
+Evaluating Darrin Schinner:
+2025-01-20 10:09:14,324 - INFO: 
+Evaluating Ms. Jeannie Hodkiewicz:
+2025-01-20 10:09:14,336 - INFO: 
+Evaluating Pearl Hills:
+2025-01-20 10:09:14,352 - INFO: 
+Evaluating Lance Hudson:
+2025-01-20 10:09:14,360 - INFO: 
+Evaluating Perry Stehr DDS:
+2025-01-20 10:09:14,377 - INFO: 
+Evaluating Mindy Senger:
+2025-01-20 10:09:14,393 - INFO: 
+Evaluating Dr. Cecil Gulgowski:
+2025-01-20 10:09:14,409 - INFO: 
+Evaluating Dr. Antonia Cummings:
+2025-01-20 10:09:14,426 - INFO: 
+Evaluating Louise Bergnaum I:
+2025-01-20 10:09:14,433 - INFO: 
+Evaluating Elbert Stark:
+2025-01-20 10:09:14,450 - INFO: 
+Evaluating Janice Tromp:
+2025-01-20 10:09:14,466 - INFO: 
+Evaluating Dr. Earnest Tremblay:
+2025-01-20 10:09:14,482 - INFO: 
+Evaluating Dr. Beatrice Durgan:
+2025-01-20 10:09:14,497 - INFO: 
+Evaluating Holly Metz:
+2025-01-20 10:09:14,514 - INFO: 
+Evaluating Cary Kerluke:
+2025-01-20 10:09:14,541 - INFO: 
+Evaluating Charlene Ferry:
+2025-01-20 10:09:14,556 - INFO: 
+Evaluating Sammy Wilderman:
+2025-01-20 10:09:14,576 - INFO: 
+Evaluating Lucas Oberbrunner:
+2025-01-20 10:09:14,736 - INFO: 
+Evaluating Rudolph Aufderhar:
+2025-01-20 10:09:14,826 - INFO: 
+Evaluating Terrell Watsica:
+2025-01-20 10:09:14,885 - INFO: 
+Evaluating Nicole Kozey IV:
+2025-01-20 10:09:14,906 - INFO: 
+Evaluating Dallas Bernhard V:
+2025-01-20 10:09:14,928 - INFO: 
+Evaluating Earl Tromp:
+2025-01-20 10:09:14,949 - INFO: 
+Evaluating Philip Stanton-Barrows:
+2025-01-20 10:09:14,966 - INFO: 
+Evaluating Maurice Rice:
+2025-01-20 10:09:14,983 - INFO: 
+Evaluating Jessie Strosin:
+2025-01-20 10:09:15,001 - INFO: 
+Evaluating Javier Quigley:
+2025-01-20 10:09:15,020 - INFO: 
+Evaluating Mathew Hudson:
+2025-01-20 10:09:15,037 - INFO: 
+Evaluating Georgia Rau:
+2025-01-20 10:09:15,053 - INFO: 
+Evaluating Lee Rutherford:
+2025-01-20 10:09:15,071 - INFO: 
+Evaluating Myron Lehner IV:
+2025-01-20 10:09:15,089 - INFO: 
+Evaluating Danny Reichel:
+2025-01-20 10:09:15,108 - INFO: 
+Evaluating Veronica Schimmel:
+2025-01-20 10:09:15,122 - INFO: 
+Evaluating Lorraine Conroy:
+2025-01-20 10:09:15,138 - INFO: 
+Evaluating Mrs. Erin Schaefer:
+2025-01-20 10:09:15,162 - INFO: 
+Evaluating Darla Kuvalis:
+2025-01-20 10:09:15,183 - INFO: 
+Evaluating Ms. Viola Bailey:
+2025-01-20 10:09:15,203 - INFO: 
+Evaluating Dr. Dwight Kessler IV:
+2025-01-20 10:09:15,221 - INFO: 
+Evaluating Alberto Champlin:
+2025-01-20 10:09:15,242 - INFO: 
+Evaluating Myron Bode:
+2025-01-20 10:09:15,261 - INFO: 
+Evaluating Wallace Bauch:
+2025-01-20 10:09:15,279 - INFO: 
+Evaluating Hugo Kreiger II:
+2025-01-20 10:09:15,297 - INFO: 
+Evaluating Kelly Beahan:
+2025-01-20 10:09:15,315 - INFO: 
+Evaluating Yvette Shanahan:
+2025-01-20 10:09:15,332 - INFO: 
+Evaluating Luz Huel:
+2025-01-20 10:09:15,348 - INFO: 
+Evaluating Kristin Lindgren:
+2025-01-20 10:09:15,365 - INFO: 
+Evaluating Lance McCullough-Gislason:
+2025-01-20 10:09:15,381 - INFO: 
+Evaluating Kristopher Lakin:
+2025-01-20 10:09:15,398 - INFO: 
+Evaluating Dr. Toni Lynch:
+2025-01-20 10:09:15,415 - INFO: 
+Evaluating Pamela Schulist PhD:
+2025-01-20 10:09:15,434 - INFO: 
+Evaluating Dr. Jake Beahan:
+2025-01-20 10:09:15,451 - INFO: 
+Evaluating Gregory Torphy:
+2025-01-20 10:09:15,471 - INFO: 
+Evaluating Mercedes Rice:
+2025-01-20 10:09:15,496 - INFO: 
+Evaluating Cornelius Goyette:
+2025-01-20 10:09:15,512 - INFO: 
+Evaluating Angelica Mohr:
+2025-01-20 10:09:15,531 - INFO: 
+Evaluating Lucille Hirthe:
+2025-01-20 10:09:15,548 - INFO: 
+Evaluating Ms. Candice Wisoky:
+2025-01-20 10:09:15,565 - INFO: 
+Evaluating Ernestine Howell:
+2025-01-20 10:09:15,584 - INFO: 
+Evaluating Mr. Dan Fisher:
+2025-01-20 10:09:15,597 - INFO: 
+Evaluating Tommie Mayer:
+2025-01-20 10:09:15,616 - INFO: 
+Evaluating Luis Emard-Welch:
+2025-01-20 10:09:15,630 - INFO: 
+Evaluating Dr. Desiree Ledner-Raynor:
+2025-01-20 10:09:15,647 - INFO: 
+Evaluating Grace Fisher:
+2025-01-20 10:09:15,673 - INFO: 
+Evaluating Sadie Simonis MD:
+2025-01-20 10:09:15,703 - INFO: 
+Evaluating Jodi Pfannerstill:
+2025-01-20 10:09:15,724 - INFO: 
+Evaluating Ted Pacocha:
+2025-01-20 10:09:15,763 - INFO: 
+Evaluating Jessie Feest:
+2025-01-20 10:09:15,778 - INFO: 
+Evaluating Dr. Della Becker:
+2025-01-20 10:09:15,797 - INFO: 
+Evaluating Colin Schultz:
+2025-01-20 10:09:15,818 - INFO: 
+Evaluating Sergio Goodwin DVM:
+2025-01-20 10:09:15,834 - INFO: 
+Evaluating Karla Johnson:
+2025-01-20 10:09:15,862 - INFO: 
+Evaluating Mr. Andre Streich:
+2025-01-20 10:09:15,880 - INFO: 
+Evaluating Kara Nienow:
+2025-01-20 10:09:15,899 - INFO: 
+Evaluating Catherine Schaden:
+2025-01-20 10:09:15,918 - INFO: 
+Evaluating Joan Rice:
+2025-01-20 10:09:15,932 - INFO: 
+Evaluating Sandy Hartmann:
+2025-01-20 10:09:15,950 - INFO: 
+Evaluating Ricky Koepp:
+2025-01-20 10:09:15,973 - INFO: 
+Evaluating Miss Joy Kulas:
+2025-01-20 10:09:15,990 - INFO: 
+Evaluating Miss Meghan Schamberger:
+2025-01-20 10:09:16,013 - INFO: 
+Evaluating Janet Hauck:
+2025-01-20 10:09:16,032 - INFO: 
+Evaluating Luke Ferry:
+2025-01-20 10:09:16,049 - INFO: 
+Evaluating Lamar Moore:
+2025-01-20 10:09:16,067 - INFO: 
+Evaluating Martin Wolf:
+2025-01-20 10:09:16,095 - INFO: 
+Evaluating Vicki Rutherford:
+2025-01-20 10:09:16,112 - INFO: 
+Evaluating Winifred Runte:
+2025-01-20 10:09:16,134 - INFO: 
+Evaluating Estelle Dickens:
+2025-01-20 10:09:16,157 - INFO: 
+Evaluating Clarence Goldner:
+2025-01-20 10:09:16,183 - INFO: 
+Evaluating Derek Rohan:
+2025-01-20 10:09:16,199 - INFO: 
+Evaluating Jeanne Leffler:
+2025-01-20 10:09:16,221 - INFO: 
+Evaluating Edmund Mills:
+2025-01-20 10:09:16,245 - INFO: 
+Evaluating Israel Hammes:
+2025-01-20 10:09:16,264 - INFO: 
+Evaluating Delbert Jast:
+2025-01-20 10:09:16,282 - INFO: 
+Evaluating Irvin Blanda:
+2025-01-20 10:09:16,300 - INFO: 
+Evaluating Lloyd Vandervort:
+2025-01-20 10:09:16,317 - INFO: 
+Evaluating Julio Dooley:
+2025-01-20 10:09:16,340 - INFO: 
+Evaluating Guy Blick:
+2025-01-20 10:09:16,556 - INFO: 
+Evaluating Perry Luettgen:
+2025-01-20 10:09:16,601 - INFO: 
+Evaluating Naomi Oberbrunner:
+2025-01-20 10:09:16,634 - INFO: 
+Evaluating Margarita Rodriguez:
+2025-01-20 10:09:16,652 - INFO: 
+Evaluating Mr. Kenneth Hilpert V:
+2025-01-20 10:09:16,669 - INFO: 
+Evaluating Lola Armstrong V:
+2025-01-20 10:09:16,686 - INFO: 
+Evaluating Mr. Luther Becker:
+2025-01-20 10:09:16,701 - INFO: 
+Evaluating Linda Medhurst:
+2025-01-20 10:09:16,723 - INFO: 
+Evaluating Cesar Cole:
+2025-01-20 10:09:16,744 - INFO: 
+Evaluating Dr. Eddie Grimes:
+2025-01-20 10:09:16,762 - INFO: 
+Evaluating Dr. Alice Kovacek:
+2025-01-20 10:09:16,778 - INFO: 
+Evaluating Mr. Mitchell Gleichner:
+2025-01-20 10:09:16,795 - INFO: 
+Evaluating Anita Upton:
+2025-01-20 10:09:16,812 - INFO: 
+Evaluating Candice Emard:
+2025-01-20 10:09:16,829 - INFO: 
+Evaluating Bill Boyle:
+2025-01-20 10:09:16,847 - INFO: 
+Evaluating Sue Ferry:
+2025-01-20 10:09:16,861 - INFO: 
+Evaluating Darrin Stark:
+2025-01-20 10:09:16,882 - INFO: 
+Evaluating Viola Schneider IV:
+2025-01-20 10:09:16,899 - INFO: 
+Evaluating Walter O'Kon:
+2025-01-20 10:09:16,915 - INFO: 
+Evaluating Javier Braun:
+2025-01-20 10:09:16,935 - INFO: 
+Evaluating Lillie Klocko DDS:
+2025-01-20 10:09:16,960 - INFO: 
+Evaluating Damon Champlin:
+2025-01-20 10:09:16,978 - INFO: 
+Evaluating Darnell Koch Sr.:
+2025-01-20 10:09:16,991 - INFO: 
+Evaluating Kristie Parker:
+2025-01-20 10:09:17,011 - INFO: 
+Evaluating Margarita Parker:
+2025-01-20 10:09:17,031 - INFO: 
+Evaluating Naomi Berge:
+2025-01-20 10:09:17,049 - INFO: 
+Evaluating Carlton Boyle:
+2025-01-20 10:09:17,066 - INFO: 
+Evaluating Ronald Kassulke PhD:
+2025-01-20 10:09:17,079 - INFO: 
+Evaluating Mr. Luis Pfeffer:
+2025-01-20 10:09:17,101 - INFO: 
+Evaluating Harriet Ryan:
+2025-01-20 10:09:17,115 - INFO: 
+Evaluating Mae Batz:
+2025-01-20 10:09:17,132 - INFO: 
+Evaluating Kenny Dickinson:
+2025-01-20 10:09:17,150 - INFO: 
+Evaluating Amanda Grimes:
+2025-01-20 10:09:17,178 - INFO: 
+Evaluating Nina Feest:
+2025-01-20 10:09:17,196 - INFO: 
+Evaluating Lee Funk:
+2025-01-20 10:09:17,211 - INFO: 
+Evaluating Jana Nitzsche:
+2025-01-20 10:09:17,231 - INFO: 
+Evaluating Clark King:
+2025-01-20 10:09:17,248 - INFO: 
+Evaluating Alma Runolfsdottir-Morissette:
+2025-01-20 10:09:17,265 - INFO: 
+Evaluating Lindsey Brakus:
+2025-01-20 10:09:17,283 - INFO: 
+Evaluating Claire Walker:
+2025-01-20 10:09:17,297 - INFO: 
+Evaluating Phyllis Littel:
+2025-01-20 10:09:17,329 - INFO: 
+Evaluating Claude Koch:
+2025-01-20 10:09:17,347 - INFO: 
+Evaluating Jesse Crona:
+2025-01-20 10:09:17,365 - INFO: 
+Evaluating Rose Collier-Cremin DVM:
+2025-01-20 10:09:17,383 - INFO: 
+Evaluating Della Beatty:
+2025-01-20 10:09:17,412 - INFO: 
+Evaluating Arlene Tremblay PhD:
+2025-01-20 10:09:17,435 - INFO: 
+Evaluating Pamela Kuphal-Barton:
+2025-01-20 10:09:17,445 - INFO: 
+Evaluating Vernon Keebler:
+2025-01-20 10:09:17,477 - INFO: 
+Evaluating Deanna Steuber:
+2025-01-20 10:09:17,501 - INFO: 
+Evaluating Phil Corkery:
+2025-01-20 10:09:17,539 - INFO: 
+Evaluating Dr. Nellie Collins:
+2025-01-20 10:09:17,563 - INFO: 
+Evaluating Travis Hand-Kirlin II:
+2025-01-20 10:09:17,580 - INFO: 
+Evaluating Ivan Hane:
+2025-01-20 10:09:17,599 - INFO: 
+Evaluating Dr. Garry Graham:
+2025-01-20 10:09:17,616 - INFO: 
+Evaluating Suzanne Schulist:
+2025-01-20 10:09:17,637 - INFO: 
+Evaluating Miss Carrie Aufderhar:
+2025-01-20 10:09:17,660 - INFO: 
+Evaluating Dean Paucek:
+2025-01-20 10:09:17,672 - INFO: 
+Evaluating Justin Klocko:
+2025-01-20 10:09:17,697 - INFO: 
+Evaluating Ollie Kuhlman:
+2025-01-20 10:09:17,715 - INFO: 
+Evaluating Leslie Stoltenberg:
+2025-01-20 10:09:17,732 - INFO: 
+Evaluating Dr. Joey Wuckert:
+2025-01-20 10:09:17,752 - INFO: 
+Evaluating Dave Hilll-Ledner:
+2025-01-20 10:09:17,779 - INFO: 
+Evaluating Lance Greenfelder:
+2025-01-20 10:09:17,800 - INFO: 
+Evaluating Raymond Haley:
+2025-01-20 10:09:17,828 - INFO: 
+Evaluating Pam Price:
+2025-01-20 10:09:17,845 - INFO: 
+Evaluating Madeline Ankunding:
+2025-01-20 10:09:17,866 - INFO: 
+Evaluating Mr. Juan Koelpin-Ratke:
+2025-01-20 10:09:17,884 - INFO: 
+Evaluating Marty Kuhlman:
+2025-01-20 10:09:17,905 - INFO: 
+Evaluating Linda McDermott:
+2025-01-20 10:09:17,928 - INFO: 
+Evaluating Cynthia Sawayn:
+2025-01-20 10:09:17,944 - INFO: 
+Evaluating Naomi Raynor:
+2025-01-20 10:09:17,964 - INFO: 
+Evaluating Kelley Dibbert:
+2025-01-20 10:09:17,995 - INFO: 
+Evaluating Gail Buckridge:
+2025-01-20 10:09:18,011 - INFO: 
+Evaluating Ruben VonRueden:
+2025-01-20 10:09:18,033 - INFO: 
+Evaluating Ida Lockman:
+2025-01-20 10:09:18,049 - INFO: 
+Evaluating Ricky Dooley III:
+2025-01-20 10:09:18,073 - INFO: 
+Evaluating Ryan Ferry:
+2025-01-20 10:09:18,097 - INFO: 
+Evaluating Christian Hermann Jr.:
+2025-01-20 10:09:18,117 - INFO: 
+Evaluating Shelley Dibbert PhD:
+2025-01-20 10:09:18,138 - INFO: 
+Evaluating Karen Pouros:
+2025-01-20 10:09:18,165 - INFO: 
+Evaluating Monica Roberts PhD:
+2025-01-20 10:09:18,189 - INFO: 
+Evaluating Dorothy Jerde:
+2025-01-20 10:09:18,211 - INFO: 
+Evaluating Caleb Sanford:
+2025-01-20 10:09:18,231 - INFO: 
+Evaluating Mrs. Edna Stracke Sr.:
+2025-01-20 10:09:18,248 - INFO: 
+Evaluating Whitney Mante:
+2025-01-20 10:09:18,272 - INFO: 
+Evaluating Erin Schowalter:
+2025-01-20 10:09:18,294 - INFO: 
+Evaluating George Roberts:
+2025-01-20 10:09:18,311 - INFO: 
+Evaluating Jeannie Tromp:
+2025-01-20 10:09:18,327 - INFO: 
+Evaluating Doug Ferry:
+2025-01-20 10:09:18,345 - INFO: 
+Evaluating Phil Rohan:
+2025-01-20 10:09:18,363 - INFO: 
+Evaluating Traci Denesik:
+2025-01-20 10:09:18,381 - INFO: 
+Evaluating Ms. Debra Gerhold:
+2025-01-20 10:09:18,411 - INFO: 
+Evaluating Jon Cummings:
+2025-01-20 10:09:18,432 - INFO: 
+Evaluating Robyn Schroeder:
+2025-01-20 10:09:18,450 - INFO: 
+Evaluating Frankie Torp:
+2025-01-20 10:09:18,476 - INFO: 
+Evaluating Emma Murazik:
+2025-01-20 10:09:18,494 - INFO: 
+Evaluating Jeanne Wyman:
+2025-01-20 10:09:18,513 - INFO: 
+Evaluating Bert Wilderman:
+2025-01-20 10:09:18,544 - INFO: 
+Evaluating Miss Opal Abernathy II:
+2025-01-20 10:09:18,564 - INFO: 
+Evaluating Henrietta Heidenreich:
+2025-01-20 10:09:18,589 - INFO: 
+Evaluating Trevor Hills:
+2025-01-20 10:09:18,611 - INFO: 
+Evaluating Billie Kuphal:
+2025-01-20 10:09:18,633 - INFO: 
+Evaluating Mrs. Sara Mills:
+2025-01-20 10:09:18,648 - INFO: 
+Evaluating Ryan Jacobs:
+2025-01-20 10:09:18,985 - INFO: 
+Evaluating Ramona Kertzmann DDS:
+2025-01-20 10:09:19,017 - INFO: 
+Evaluating Renee Yundt:
+2025-01-20 10:09:19,033 - INFO: 
+Evaluating Janet Heaney:
+2025-01-20 10:09:19,059 - INFO: 
+Evaluating Vincent Halvorson:
+2025-01-20 10:09:19,076 - INFO: 
+Evaluating Edmond Osinski V:
+2025-01-20 10:09:19,092 - INFO: 
+Evaluating Mr. Danny Dietrich:
+2025-01-20 10:09:19,109 - INFO: 
+Evaluating Roland Herzog:
+2025-01-20 10:09:19,126 - INFO: 
+Evaluating Melody Will V:
+2025-01-20 10:09:19,142 - INFO: 
+Evaluating Miss Janet Moen:
+2025-01-20 10:09:19,164 - INFO: 
+Evaluating Lee Legros-Conroy:
+2025-01-20 10:09:19,183 - INFO: 
+Evaluating Georgia Hodkiewicz:
+2025-01-20 10:09:19,201 - INFO: 
+Evaluating Mr. Frankie Schaefer-O'Connell:
+2025-01-20 10:09:19,217 - INFO: 
+Evaluating Tanya Dickens:
+2025-01-20 10:09:19,234 - INFO: 
+Evaluating Erin O'Hara:
+2025-01-20 10:09:19,251 - INFO: 
+Evaluating Doug Stoltenberg:
+2025-01-20 10:09:19,267 - INFO: 
+Evaluating Fernando Haley:
+2025-01-20 10:09:19,284 - INFO: 
+Evaluating Dr. Carroll Pacocha:
+2025-01-20 10:09:19,301 - INFO: 
+Evaluating Dr. Tommie Spinka:
+2025-01-20 10:09:19,316 - INFO: 
+Evaluating Clark Bernier:
+2025-01-20 10:09:19,334 - INFO: 
+Evaluating Domingo Terry:
+2025-01-20 10:09:19,349 - INFO: 
+Evaluating Mr. Lyle Wunsch:
+2025-01-20 10:09:19,367 - INFO: 
+Evaluating Trevor Crist:
+2025-01-20 10:09:19,383 - INFO: 
+Evaluating Gail Toy DDS:
+2025-01-20 10:09:19,400 - INFO: 
+Evaluating Mr. Tyler Lindgren:
+2025-01-20 10:09:19,417 - INFO: 
+Evaluating Claudia Zemlak:
+2025-01-20 10:09:19,434 - INFO: 
+Evaluating Bernice Windler DDS:
+2025-01-20 10:09:19,451 - INFO: 
+Evaluating Mrs. Mattie Frami:
+2025-01-20 10:09:19,477 - INFO: 
+Evaluating Dr. Jean Fahey:
+2025-01-20 10:09:19,497 - INFO: 
+Evaluating Gail Trantow:
+2025-01-20 10:09:19,529 - INFO: 
+Evaluating Ralph Dickinson:
+2025-01-20 10:09:19,550 - INFO: 
+Evaluating Ryan Kozey:
+2025-01-20 10:09:19,572 - INFO: 
+Evaluating Ms. Dixie Ortiz:
+2025-01-20 10:09:19,595 - INFO: 
+Evaluating Marcia Schowalter III:
+2025-01-20 10:09:19,625 - INFO: 
+Evaluating Elmer Little:
+2025-01-20 10:09:19,644 - INFO: 
+Evaluating Ellen Bosco:
+2025-01-20 10:09:19,661 - INFO: 
+Evaluating Kathy Cremin-Ullrich:
+2025-01-20 10:09:19,677 - INFO: 
+Evaluating Ms. Lori Hegmann:
+2025-01-20 10:09:19,700 - INFO: 
+Evaluating Dana Dickinson:
+2025-01-20 10:09:19,725 - INFO: 
+Evaluating Dr. Seth Wolff-Hackett:
+2025-01-20 10:09:19,745 - INFO: 
+Evaluating Hugh Kertzmann:
+2025-01-20 10:09:19,761 - INFO: 
+Evaluating Molly VonRueden:
+2025-01-20 10:09:19,791 - INFO: 
+Evaluating Winston Cormier:
+2025-01-20 10:09:19,811 - INFO: 
+Evaluating Katie Wuckert:
+2025-01-20 10:09:19,828 - INFO: 
+Evaluating Courtney Thompson:
+2025-01-20 10:09:19,845 - INFO: 
+Evaluating Ruby Toy PhD:
+2025-01-20 10:09:19,869 - INFO: 
+Evaluating Amanda Heathcote:
+2025-01-20 10:09:19,885 - INFO: 
+Evaluating Amelia Green:
+2025-01-20 10:09:19,911 - INFO: 
+Evaluating Walter Streich:
+2025-01-20 10:09:19,927 - INFO: 
+Evaluating Mr. Hugh Green:
+2025-01-20 10:09:19,945 - INFO: 
+Evaluating Dr. Lamar Kirlin:
+2025-01-20 10:09:19,961 - INFO: 
+Evaluating Jimmie Haag:
+2025-01-20 10:09:19,977 - INFO: 
+Evaluating Kelly Hirthe:
+2025-01-20 10:09:19,994 - INFO: 
+Evaluating Cristina Murphy:
+2025-01-20 10:09:20,010 - INFO: 
+Evaluating Lowell Welch Sr.:
+2025-01-20 10:09:20,027 - INFO: 
+Evaluating Craig Jacobi:
+2025-01-20 10:09:20,044 - INFO: 
+Evaluating Esther Casper I:
+2025-01-20 10:09:20,059 - INFO: 
+Evaluating Lucille Ernser:
+2025-01-20 10:09:20,077 - INFO: 
+Evaluating Terrence Green:
+2025-01-20 10:09:20,094 - INFO: 
+Evaluating Wm Lueilwitz:
+2025-01-20 10:09:20,110 - INFO: 
+Evaluating Elijah Davis:
+2025-01-20 10:09:20,127 - INFO: 
+Evaluating Oscar Schuster:
+2025-01-20 10:09:20,141 - INFO: 
+Evaluating Miss Amelia Crona:
+2025-01-20 10:09:20,162 - INFO: 
+Evaluating Mrs. Bonnie Dietrich:
+2025-01-20 10:09:20,181 - INFO: 
+Evaluating Dr. Cory Armstrong:
+2025-01-20 10:09:20,195 - INFO: 
+Evaluating Delia Hills:
+2025-01-20 10:09:20,214 - INFO: 
+Evaluating Mark Effertz:
+2025-01-20 10:09:20,228 - INFO: 
+Evaluating Jo Veum:
+2025-01-20 10:09:20,246 - INFO: 
+Evaluating Dr. Rhonda Schuppe:
+2025-01-20 10:09:20,262 - INFO: 
+Evaluating Ernest Runolfsson PhD:
+2025-01-20 10:09:20,279 - INFO: 
+Evaluating Jan Dare DDS:
+2025-01-20 10:09:20,295 - INFO: 
+Evaluating Shari Mertz:
+2025-01-20 10:09:20,311 - INFO: 
+Evaluating Tomas Stamm:
+2025-01-20 10:09:20,328 - INFO: 
+Evaluating Jacob Price:
+2025-01-20 10:09:20,344 - INFO: 
+Evaluating Ron Rutherford:
+2025-01-20 10:09:20,363 - INFO: 
+Evaluating Henry Reinger IV:
+2025-01-20 10:09:20,377 - INFO: 
+Evaluating Tami Frami:
+2025-01-20 10:09:20,393 - INFO: 
+Evaluating Carlos Conroy:
+2025-01-20 10:09:20,431 - INFO: 
+Evaluating Everett Hudson:
+2025-01-20 10:09:20,476 - INFO: 
+Evaluating Jessica Roob:
+2025-01-20 10:09:20,508 - INFO: 
+Evaluating Clifford Stroman:
+2025-01-20 10:09:20,528 - INFO: 
+Evaluating Dale Jacobson:
+2025-01-20 10:09:20,544 - INFO: 
+Evaluating Josephine Larson:
+2025-01-20 10:09:20,561 - INFO: 
+Evaluating Alfredo Schowalter Jr.:
+2025-01-20 10:09:20,577 - INFO: 
+Evaluating Randolph Herman:
+2025-01-20 10:09:20,593 - INFO: 
+Evaluating Muriel Lynch:
+2025-01-20 10:09:20,612 - INFO: 
+Evaluating Lucille Friesen:
+2025-01-20 10:09:20,630 - INFO: 
+Evaluating Ms. Kathleen Gulgowski:
+2025-01-20 10:09:20,646 - INFO: 
+Evaluating Leroy Leuschke:
+2025-01-20 10:09:20,661 - INFO: 
+Evaluating Dr. Alexandra Farrell II:
+2025-01-20 10:09:20,678 - INFO: 
+Evaluating Jamie McCullough IV:
+2025-01-20 10:09:20,694 - INFO: 
+Evaluating Misty Klein:
+2025-01-20 10:09:20,710 - INFO: 
+Evaluating Krystal Moore:
+2025-01-20 10:09:20,726 - INFO: 
+Evaluating Glenda Pagac:
+2025-01-20 10:09:20,744 - INFO: 
+Evaluating Marjorie Hagenes:
+2025-01-20 10:09:20,759 - INFO: 
+Evaluating Willis Zieme:
+2025-01-20 10:09:20,777 - INFO: 
+Evaluating Meredith Nolan:
+2025-01-20 10:09:20,802 - INFO: 
+Evaluating Mr. Ramiro Davis:
+2025-01-20 10:09:20,820 - INFO: 
+Evaluating Dorothy Christiansen III:
+2025-01-20 10:09:20,843 - INFO: 
+Evaluating Irene Ankunding:
+2025-01-20 10:09:20,861 - INFO: 
+Evaluating Lisa Cruickshank:
+2025-01-20 10:09:20,877 - INFO: 
+Evaluating Ebony Herzog:
+2025-01-20 10:09:20,900 - INFO: 
+Evaluating Matt Lynch:
+2025-01-20 10:09:20,920 - INFO: 
+Evaluating Lorenzo King:
+2025-01-20 10:09:20,943 - INFO: 
+Evaluating Ralph Larson PhD:
+2025-01-20 10:09:20,961 - INFO: 
+Evaluating Dr. Jerald Skiles:
+2025-01-20 10:09:20,978 - INFO: 
+Evaluating Henrietta Paucek:
+2025-01-20 10:09:21,204 - INFO: 
+Evaluating Ms. Brooke Hintz:
+2025-01-20 10:09:21,264 - INFO: 
+Evaluating Jaime Kiehn:
+2025-01-20 10:09:21,290 - INFO: 
+Evaluating Brendan Huel:
+2025-01-20 10:09:21,309 - INFO: 
+Evaluating Julio Beier:
+2025-01-20 10:09:21,327 - INFO: 
+Evaluating Hope Bayer:
+2025-01-20 10:09:21,347 - INFO: 
+Evaluating Todd Raynor:
+2025-01-20 10:09:21,362 - INFO: 
+Evaluating Muriel Rippin:
+2025-01-20 10:09:21,381 - INFO: 
+Evaluating Willie Corwin:
+2025-01-20 10:09:21,399 - INFO: 
+Evaluating Eddie Sawayn:
+2025-01-20 10:09:21,419 - INFO: 
+Evaluating Courtney Labadie:
+2025-01-20 10:09:21,437 - INFO: 
+Filtering complete: 0 matches passed all criteria
+2025-01-20 10:09:21,437 - INFO: Found 0 top matches
+2025-01-20 10:09:21,443 - INFO: No matches found
+2025-01-20 10:09:21,443 - INFO: 127.0.0.1 - - [20/Jan/2025 10:09:21] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:11:45,888 - INFO: 127.0.0.1 - - [20/Jan/2025 10:11:45] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-20 10:11:46,144 - INFO: 
+==================================================
+Processing chat request:
+2025-01-20 10:11:46,144 - INFO: Message: confirm_project_details
+2025-01-20 10:11:46,144 - INFO: Project details: {'skills': ['digital marketing expert', 'marketing', 'expert', 'digital marketing', 'SEO', 'Content Marketing', 'Email Marketing'], 'budget': '60-100', 'complexity': 'medium', 'timeline': '30'}
+2025-01-20 10:11:46,160 - INFO: 
+Starting freelancer search with confirmed details:
+2025-01-20 10:11:46,160 - INFO: Skills required: ['digital marketing expert', 'marketing', 'expert', 'digital marketing', 'SEO', 'Content Marketing', 'Email Marketing']
+2025-01-20 10:11:46,167 - INFO: Budget range: 60-100
+2025-01-20 10:11:46,168 - INFO: Complexity: medium
+2025-01-20 10:11:48,078 - INFO: 
+Filtering 500 potential matches:
+2025-01-20 10:11:48,078 - INFO: 
+Evaluating Luis Hahn:
+2025-01-20 10:11:48,097 - INFO: 
+Evaluating Charles Kulas:
+2025-01-20 10:11:48,112 - INFO: 
+Evaluating Gayle Fisher:
+2025-01-20 10:11:48,149 - INFO: 
+Evaluating Hugh Vandervort:
+2025-01-20 10:11:48,173 - INFO: 
+Evaluating Miss Claire Rowe:
+2025-01-20 10:11:48,198 - INFO: 
+Evaluating Ron Schuppe:
+2025-01-20 10:11:48,225 - INFO: 
+Evaluating Dr. Julius Conroy PhD:
+2025-01-20 10:11:48,250 - INFO: 
+Evaluating Hazel McKenzie:
+2025-01-20 10:11:48,270 - INFO: 
+Evaluating Maurice Herzog:
+2025-01-20 10:11:48,294 - INFO: 
+Evaluating Fredrick Mills:
+2025-01-20 10:11:48,310 - INFO: 
+Evaluating Maxine Borer:
+2025-01-20 10:11:48,336 - INFO: 
+Evaluating Lillian Wiza:
+2025-01-20 10:11:48,359 - INFO: 
+Evaluating Ms. Geneva Hilll:
+2025-01-20 10:11:48,388 - INFO: 
+Evaluating Dr. Stella MacGyver:
+2025-01-20 10:11:48,407 - INFO: 
+Evaluating Dr. Austin Tillman:
+2025-01-20 10:11:48,424 - INFO: 
+Evaluating Wendell Braun:
+2025-01-20 10:11:48,448 - INFO: 
+Evaluating Lula Lowe:
+2025-01-20 10:11:48,468 - INFO: 
+Evaluating Mr. Irvin Stark:
+2025-01-20 10:11:48,485 - INFO: 
+Evaluating Lana Mertz:
+2025-01-20 10:11:48,501 - INFO: 
+Evaluating Randolph Mitchell III:
+2025-01-20 10:11:48,518 - INFO: 
+Evaluating Gary Streich:
+2025-01-20 10:11:48,535 - INFO: 
+Evaluating Jackie Rutherford II:
+2025-01-20 10:11:48,551 - INFO: 
+Evaluating Guy Goyette:
+2025-01-20 10:11:48,570 - INFO: 
+Evaluating Rita Nader:
+2025-01-20 10:11:48,597 - INFO: 
+Evaluating Percy Fadel I:
+2025-01-20 10:11:48,615 - INFO: 
+Evaluating Doris Parisian:
+2025-01-20 10:11:48,635 - INFO: 
+Evaluating Maggie Herzog:
+2025-01-20 10:11:48,651 - INFO: 
+Evaluating Faye Lind:
+2025-01-20 10:11:48,668 - INFO: 
+Evaluating Oscar Osinski:
+2025-01-20 10:11:48,690 - INFO: 
+Evaluating Mr. Luke Weber:
+2025-01-20 10:11:48,714 - INFO: 
+Evaluating Rufus Hodkiewicz:
+2025-01-20 10:11:48,735 - INFO: 
+Evaluating Allison Raynor:
+2025-01-20 10:11:48,751 - INFO: 
+Evaluating Chad Leannon-Flatley:
+2025-01-20 10:11:48,768 - INFO: 
+Evaluating Randolph Funk:
+2025-01-20 10:11:48,791 - INFO: 
+Evaluating Marlene Kovacek:
+2025-01-20 10:11:48,813 - INFO: 
+Evaluating Rudolph Witting:
+2025-01-20 10:11:48,833 - INFO: 
+Evaluating Martha Schaefer:
+2025-01-20 10:11:48,851 - INFO: 
+Evaluating Evan Dickinson:
+2025-01-20 10:11:48,867 - INFO: 
+Evaluating Silvia Abshire:
+2025-01-20 10:11:48,891 - INFO: 
+Evaluating Shawna Rau:
+2025-01-20 10:11:48,907 - INFO: 
+Evaluating Kevin Gerlach:
+2025-01-20 10:11:48,932 - INFO: 
+Evaluating Ron Bednar I:
+2025-01-20 10:11:48,948 - INFO: 
+Evaluating Jesse Ullrich:
+2025-01-20 10:11:48,968 - INFO: 
+Evaluating Esther Prohaska-Homenick:
+2025-01-20 10:11:48,984 - INFO: 
+Evaluating Alvin Stiedemann IV:
+2025-01-20 10:11:49,000 - INFO: 
+Evaluating Joshua Miller:
+2025-01-20 10:11:49,022 - INFO: 
+Evaluating Jerald Smitham:
+2025-01-20 10:11:49,041 - INFO: 
+Evaluating Linda Vandervort:
+2025-01-20 10:11:49,060 - INFO: 
+Evaluating Frederick Berge:
+2025-01-20 10:11:49,081 - INFO: 
+Evaluating Rebecca Harber:
+2025-01-20 10:11:49,101 - INFO: 
+Evaluating Clifford Waters:
+2025-01-20 10:11:49,118 - INFO: 
+Evaluating Miss Gwendolyn Lesch:
+2025-01-20 10:11:49,138 - INFO: 
+Evaluating Kristina Will V:
+2025-01-20 10:11:49,151 - INFO: 
+Evaluating Winston Schuppe:
+2025-01-20 10:11:49,174 - INFO: 
+Evaluating Jeanne Toy:
+2025-01-20 10:11:49,198 - INFO: 
+Evaluating Gretchen Kiehn:
+2025-01-20 10:11:49,217 - INFO: 
+Evaluating Luis Krajcik:
+2025-01-20 10:11:49,235 - INFO: 
+Evaluating Erma Kertzmann:
+2025-01-20 10:11:49,250 - INFO: 
+Evaluating Kristopher Mante:
+2025-01-20 10:11:49,272 - INFO: 
+Evaluating Danny Streich:
+2025-01-20 10:11:49,290 - INFO: 
+Evaluating Kim Schumm V:
+2025-01-20 10:11:49,314 - INFO: 
+Evaluating Ann Erdman:
+2025-01-20 10:11:49,331 - INFO: 
+Evaluating Cedric Wuckert:
+2025-01-20 10:11:49,347 - INFO: 
+Evaluating Abraham Shanahan:
+2025-01-20 10:11:49,368 - INFO: 
+Evaluating Mark Goodwin V:
+2025-01-20 10:11:49,385 - INFO: 
+Evaluating Annette Gottlieb:
+2025-01-20 10:11:49,405 - INFO: 
+Evaluating Mr. Micheal Rolfson I:
+2025-01-20 10:11:49,427 - INFO: 
+Evaluating Ellis Casper:
+2025-01-20 10:11:49,448 - INFO: 
+Evaluating Neal Krajcik:
+2025-01-20 10:11:49,467 - INFO: 
+Evaluating Cameron Heaney III:
+2025-01-20 10:11:49,502 - INFO: 
+Evaluating Mack Grimes I:
+2025-01-20 10:11:49,534 - INFO: 
+Evaluating Victor Schumm:
+2025-01-20 10:11:49,551 - INFO: 
+Evaluating Lynn Hodkiewicz:
+2025-01-20 10:11:49,764 - INFO: 
+Evaluating Miss Natasha Effertz:
+2025-01-20 10:11:49,814 - INFO: 
+Evaluating Whitney Barrows-Schaden II:
+2025-01-20 10:11:49,867 - INFO: 
+Evaluating Nettie Upton:
+2025-01-20 10:11:49,885 - INFO: 
+Evaluating Tina Boyer:
+2025-01-20 10:11:49,901 - INFO: 
+Evaluating Jordan Roob:
+2025-01-20 10:11:49,921 - INFO: 
+Evaluating Dr. Joe Konopelski-Jerde:
+2025-01-20 10:11:49,940 - INFO: 
+Evaluating Glen Champlin:
+2025-01-20 10:11:49,962 - INFO: 
+Evaluating Debra Volkman:
+2025-01-20 10:11:49,983 - INFO: 
+Evaluating Leigh Ondricka:
+2025-01-20 10:11:49,996 - INFO: 
+Evaluating Debbie Mann:
+2025-01-20 10:11:50,018 - INFO: 
+Evaluating Natalie Mueller:
+2025-01-20 10:11:50,033 - INFO: 
+Evaluating Dr. Harold Farrell:
+2025-01-20 10:11:50,049 - INFO: 
+Evaluating Jim Crist-Collins:
+2025-01-20 10:11:50,071 - INFO: 
+Evaluating Phillip Zulauf:
+2025-01-20 10:11:50,086 - INFO: 
+Evaluating Maureen Bartell:
+2025-01-20 10:11:50,105 - INFO: 
+Evaluating Mr. Steve Bode:
+2025-01-20 10:11:50,129 - INFO: 
+Evaluating Tyler Walter:
+2025-01-20 10:11:50,150 - INFO: 
+Evaluating Shelia Hilpert:
+2025-01-20 10:11:50,167 - INFO: 
+Evaluating Amelia Beier:
+2025-01-20 10:11:50,187 - INFO: 
+Evaluating Vickie Marvin:
+2025-01-20 10:11:50,205 - INFO: 
+Evaluating Rolando Franecki:
+2025-01-20 10:11:50,229 - INFO: 
+Evaluating Mae Tremblay:
+2025-01-20 10:11:50,247 - INFO: 
+Evaluating Yvonne Wunsch V:
+2025-01-20 10:11:50,267 - INFO: 
+Evaluating Joanna Frami:
+2025-01-20 10:11:50,283 - INFO: 
+Evaluating Preston Sauer:
+2025-01-20 10:11:50,305 - INFO: 
+Evaluating Mr. Santos Veum:
+2025-01-20 10:11:50,322 - INFO: 
+Evaluating Elijah Glover:
+2025-01-20 10:11:50,346 - INFO: 
+Evaluating Marco Russel:
+2025-01-20 10:11:50,363 - INFO: 
+Evaluating Valerie Rath:
+2025-01-20 10:11:50,383 - INFO: 
+Evaluating Dr. Tyler Turner Sr.:
+2025-01-20 10:11:50,399 - INFO: 
+Evaluating Jessie Rice:
+2025-01-20 10:11:50,421 - INFO: 
+Evaluating Celia Legros:
+2025-01-20 10:11:50,439 - INFO: 
+Evaluating Desiree Hodkiewicz:
+2025-01-20 10:11:50,454 - INFO: 
+Evaluating Jared Herzog:
+2025-01-20 10:11:50,473 - INFO: 
+Evaluating Erik Rohan:
+2025-01-20 10:11:50,499 - INFO: 
+Evaluating Mr. Ryan Runolfsson:
+2025-01-20 10:11:50,518 - INFO: 
+Evaluating Arnold Mante V:
+2025-01-20 10:11:50,545 - INFO: 
+Evaluating Sophie Klocko:
+2025-01-20 10:11:50,567 - INFO: 
+Evaluating Ms. Angelica Volkman:
+2025-01-20 10:11:50,582 - INFO: 
+Evaluating Joey McGlynn PhD:
+2025-01-20 10:11:50,606 - INFO: 
+Evaluating Carmen Volkman:
+2025-01-20 10:11:50,630 - INFO: 
+Evaluating Constance Thompson:
+2025-01-20 10:11:50,649 - INFO: 
+Evaluating Casey Greenholt-Waters:
+2025-01-20 10:11:50,667 - INFO: 
+Evaluating Dale Bernhard V:
+2025-01-20 10:11:50,682 - INFO: 
+Evaluating Philip MacGyver:
+2025-01-20 10:11:50,700 - INFO: 
+Evaluating Rodolfo Schimmel DDS:
+2025-01-20 10:11:50,722 - INFO: 
+Evaluating Laurie Gutkowski:
+2025-01-20 10:11:50,746 - INFO: 
+Evaluating Cindy Medhurst:
+2025-01-20 10:11:50,767 - INFO: 
+Evaluating Cecilia Klocko:
+2025-01-20 10:11:50,784 - INFO: 
+Evaluating Denise Donnelly:
+2025-01-20 10:11:50,804 - INFO: 
+Evaluating Spencer Hamill:
+2025-01-20 10:11:50,822 - INFO: 
+Evaluating Jeremiah Auer:
+2025-01-20 10:11:50,845 - INFO: 
+Evaluating Alonzo Hansen:
+2025-01-20 10:11:50,863 - INFO: 
+Evaluating Gail Brekke:
+2025-01-20 10:11:50,880 - INFO: 
+Evaluating Jessie Bruen:
+2025-01-20 10:11:50,896 - INFO: 
+Evaluating Dr. Carole Funk DDS:
+2025-01-20 10:11:50,912 - INFO: 
+Evaluating Elena Bayer-Fahey:
+2025-01-20 10:11:50,929 - INFO: 
+Evaluating Randal Beer:
+2025-01-20 10:11:50,949 - INFO: 
+Evaluating Bobby Lakin:
+2025-01-20 10:11:50,965 - INFO: 
+Evaluating Andres Nikolaus:
+2025-01-20 10:11:50,982 - INFO: 
+Evaluating Elaine Durgan MD:
+2025-01-20 10:11:51,003 - INFO: 
+Evaluating Alexander Pfannerstill-Hagenes:
+2025-01-20 10:11:51,021 - INFO: 
+Evaluating April Bashirian:
+2025-01-20 10:11:51,045 - INFO: 
+Evaluating Gary Hane DVM:
+2025-01-20 10:11:51,063 - INFO: 
+Evaluating Denise Mosciski-Mitchell:
+2025-01-20 10:11:51,083 - INFO: 
+Evaluating Clarence Cassin:
+2025-01-20 10:11:51,099 - INFO: 
+Evaluating Damon Koepp MD:
+2025-01-20 10:11:51,115 - INFO: 
+Evaluating Lila Huel:
+2025-01-20 10:11:51,132 - INFO: 
+Evaluating Angie Bosco Sr.:
+2025-01-20 10:11:51,162 - INFO: 
+Evaluating Travis Schamberger:
+2025-01-20 10:11:51,182 - INFO: 
+Evaluating Angela Friesen Jr.:
+2025-01-20 10:11:51,198 - INFO: 
+Evaluating Bobby Yundt:
+2025-01-20 10:11:51,215 - INFO: 
+Evaluating Roberta Jacobi DDS:
+2025-01-20 10:11:51,237 - INFO: 
+Evaluating Gilbert Tremblay:
+2025-01-20 10:11:51,255 - INFO: 
+Evaluating Rosie Little:
+2025-01-20 10:11:51,278 - INFO: 
+Evaluating Gladys Bogisich:
+2025-01-20 10:11:51,297 - INFO: 
+Evaluating Leonard Toy:
+2025-01-20 10:11:51,312 - INFO: 
+Evaluating Samantha Considine:
+2025-01-20 10:11:51,329 - INFO: 
+Evaluating Kelly Barrows II:
+2025-01-20 10:11:51,346 - INFO: 
+Evaluating Clifford Haley II:
+2025-01-20 10:11:51,362 - INFO: 
+Evaluating Eileen Casper:
+2025-01-20 10:11:51,378 - INFO: 
+Evaluating Pauline Carter PhD:
+2025-01-20 10:11:51,395 - INFO: 
+Evaluating Kendra Hilpert:
+2025-01-20 10:11:51,404 - INFO: 
+Evaluating Mrs. Janie Buckridge:
+2025-01-20 10:11:51,428 - INFO: 
+Evaluating Linda Ziemann:
+2025-01-20 10:11:51,444 - INFO: 
+Evaluating Bridget Kreiger:
+2025-01-20 10:11:51,459 - INFO: 
+Evaluating Belinda Oberbrunner:
+2025-01-20 10:11:51,472 - INFO: 
+Evaluating Timmy Russel MD:
+2025-01-20 10:11:51,489 - INFO: 
+Evaluating Loren Tillman:
+2025-01-20 10:11:51,506 - INFO: 
+Evaluating Misty Muller:
+2025-01-20 10:11:51,563 - INFO: 
+Evaluating Isabel Keebler-Bartoletti III:
+2025-01-20 10:11:51,728 - INFO: 
+Evaluating Leah Yundt-Schamberger IV:
+2025-01-20 10:11:51,784 - INFO: 
+Evaluating Richard Kirlin:
+2025-01-20 10:11:51,803 - INFO: 
+Evaluating Van Dach:
+2025-01-20 10:11:51,820 - INFO: 
+Evaluating Brett Powlowski:
+2025-01-20 10:11:51,835 - INFO: 
+Evaluating Sonya Raynor:
+2025-01-20 10:11:51,850 - INFO: 
+Evaluating Alton Crooks:
+2025-01-20 10:11:51,867 - INFO: 
+Evaluating Antonio Heaney:
+2025-01-20 10:11:51,884 - INFO: 
+Evaluating Dan Willms-O'Kon:
+2025-01-20 10:11:51,900 - INFO: 
+Evaluating Miss Hannah Shanahan:
+2025-01-20 10:11:51,924 - INFO: 
+Evaluating Ron Lindgren:
+2025-01-20 10:11:51,948 - INFO: 
+Evaluating Perry Stokes:
+2025-01-20 10:11:51,965 - INFO: 
+Evaluating Theodore Huel:
+2025-01-20 10:11:51,982 - INFO: 
+Evaluating Rickey Nader:
+2025-01-20 10:11:51,995 - INFO: 
+Evaluating Lynda Friesen:
+2025-01-20 10:11:52,012 - INFO: 
+Evaluating Dr. Jody Bahringer:
+2025-01-20 10:11:52,028 - INFO: 
+Evaluating Violet Balistreri V:
+2025-01-20 10:11:52,045 - INFO: 
+Evaluating Janis Williamson:
+2025-01-20 10:11:52,062 - INFO: 
+Evaluating Ashley Schimmel:
+2025-01-20 10:11:52,078 - INFO: 
+Evaluating Kenny Yundt:
+2025-01-20 10:11:52,097 - INFO: 
+Evaluating Hubert Ferry:
+2025-01-20 10:11:52,110 - INFO: 
+Evaluating Mr. Pablo Witting-Russel:
+2025-01-20 10:11:52,128 - INFO: 
+Evaluating Darrin Schinner:
+2025-01-20 10:11:52,142 - INFO: 
+Evaluating Ms. Jeannie Hodkiewicz:
+2025-01-20 10:11:52,155 - INFO: 
+Evaluating Pearl Hills:
+2025-01-20 10:11:52,171 - INFO: 
+Evaluating Lance Hudson:
+2025-01-20 10:11:52,188 - INFO: 
+Evaluating Perry Stehr DDS:
+2025-01-20 10:11:52,205 - INFO: 
+Evaluating Mindy Senger:
+2025-01-20 10:11:52,222 - INFO: 
+Evaluating Dr. Cecil Gulgowski:
+2025-01-20 10:11:52,244 - INFO: 
+Evaluating Dr. Antonia Cummings:
+2025-01-20 10:11:52,257 - INFO: 
+Evaluating Louise Bergnaum I:
+2025-01-20 10:11:52,270 - INFO: 
+Evaluating Elbert Stark:
+2025-01-20 10:11:52,287 - INFO: 
+Evaluating Janice Tromp:
+2025-01-20 10:11:52,310 - INFO: 
+Evaluating Dr. Earnest Tremblay:
+2025-01-20 10:11:52,320 - INFO: 
+Evaluating Dr. Beatrice Durgan:
+2025-01-20 10:11:52,344 - INFO: 
+Evaluating Holly Metz:
+2025-01-20 10:11:52,361 - INFO: 
+Evaluating Cary Kerluke:
+2025-01-20 10:11:52,378 - INFO: 
+Evaluating Charlene Ferry:
+2025-01-20 10:11:52,397 - INFO: 
+Evaluating Sammy Wilderman:
+2025-01-20 10:11:52,411 - INFO: 
+Evaluating Lucas Oberbrunner:
+2025-01-20 10:11:52,431 - INFO: 
+Evaluating Rudolph Aufderhar:
+2025-01-20 10:11:52,448 - INFO: 
+Evaluating Terrell Watsica:
+2025-01-20 10:11:52,465 - INFO: 
+Evaluating Nicole Kozey IV:
+2025-01-20 10:11:52,478 - INFO: 
+Evaluating Dallas Bernhard V:
+2025-01-20 10:11:52,495 - INFO: 
+Evaluating Earl Tromp:
+2025-01-20 10:11:52,512 - INFO: 
+Evaluating Philip Stanton-Barrows:
+2025-01-20 10:11:52,531 - INFO: 
+Evaluating Maurice Rice:
+2025-01-20 10:11:52,548 - INFO: 
+Evaluating Jessie Strosin:
+2025-01-20 10:11:52,565 - INFO: 
+Evaluating Javier Quigley:
+2025-01-20 10:11:52,583 - INFO: 
+Evaluating Mathew Hudson:
+2025-01-20 10:11:52,597 - INFO: 
+Evaluating Georgia Rau:
+2025-01-20 10:11:52,614 - INFO: 
+Evaluating Lee Rutherford:
+2025-01-20 10:11:52,632 - INFO: 
+Evaluating Myron Lehner IV:
+2025-01-20 10:11:52,647 - INFO: 
+Evaluating Danny Reichel:
+2025-01-20 10:11:52,664 - INFO: 
+Evaluating Veronica Schimmel:
+2025-01-20 10:11:52,682 - INFO: 
+Evaluating Lorraine Conroy:
+2025-01-20 10:11:52,698 - INFO: 
+Evaluating Mrs. Erin Schaefer:
+2025-01-20 10:11:52,715 - INFO: 
+Evaluating Darla Kuvalis:
+2025-01-20 10:11:52,733 - INFO: 
+Evaluating Ms. Viola Bailey:
+2025-01-20 10:11:52,749 - INFO: 
+Evaluating Dr. Dwight Kessler IV:
+2025-01-20 10:11:52,765 - INFO: 
+Evaluating Alberto Champlin:
+2025-01-20 10:11:52,776 - INFO: 
+Evaluating Myron Bode:
+2025-01-20 10:11:52,798 - INFO: 
+Evaluating Wallace Bauch:
+2025-01-20 10:11:52,814 - INFO: 
+Evaluating Hugo Kreiger II:
+2025-01-20 10:11:52,830 - INFO: 
+Evaluating Kelly Beahan:
+2025-01-20 10:11:52,847 - INFO: 
+Evaluating Yvette Shanahan:
+2025-01-20 10:11:52,860 - INFO: 
+Evaluating Luz Huel:
+2025-01-20 10:11:52,880 - INFO: 
+Evaluating Kristin Lindgren:
+2025-01-20 10:11:52,894 - INFO: 
+Evaluating Lance McCullough-Gislason:
+2025-01-20 10:11:52,910 - INFO: 
+Evaluating Kristopher Lakin:
+2025-01-20 10:11:52,927 - INFO: 
+Evaluating Dr. Toni Lynch:
+2025-01-20 10:11:52,944 - INFO: 
+Evaluating Pamela Schulist PhD:
+2025-01-20 10:11:52,960 - INFO: 
+Evaluating Dr. Jake Beahan:
+2025-01-20 10:11:52,977 - INFO: 
+Evaluating Gregory Torphy:
+2025-01-20 10:11:52,994 - INFO: 
+Evaluating Mercedes Rice:
+2025-01-20 10:11:53,011 - INFO: 
+Evaluating Cornelius Goyette:
+2025-01-20 10:11:53,030 - INFO: 
+Evaluating Angelica Mohr:
+2025-01-20 10:11:53,047 - INFO: 
+Evaluating Lucille Hirthe:
+2025-01-20 10:11:53,064 - INFO: 
+Evaluating Ms. Candice Wisoky:
+2025-01-20 10:11:53,080 - INFO: 
+Evaluating Ernestine Howell:
+2025-01-20 10:11:53,097 - INFO: 
+Evaluating Mr. Dan Fisher:
+2025-01-20 10:11:53,115 - INFO: 
+Evaluating Tommie Mayer:
+2025-01-20 10:11:53,137 - INFO: 
+Evaluating Luis Emard-Welch:
+2025-01-20 10:11:53,160 - INFO: 
+Evaluating Dr. Desiree Ledner-Raynor:
+2025-01-20 10:11:53,180 - INFO: 
+Evaluating Grace Fisher:
+2025-01-20 10:11:53,197 - INFO: 
+Evaluating Sadie Simonis MD:
+2025-01-20 10:11:53,214 - INFO: 
+Evaluating Jodi Pfannerstill:
+2025-01-20 10:11:53,230 - INFO: 
+Evaluating Ted Pacocha:
+2025-01-20 10:11:53,248 - INFO: 
+Evaluating Jessie Feest:
+2025-01-20 10:11:53,269 - INFO: 
+Evaluating Dr. Della Becker:
+2025-01-20 10:11:53,293 - INFO: 
+Evaluating Colin Schultz:
+2025-01-20 10:11:53,313 - INFO: 
+Evaluating Sergio Goodwin DVM:
+2025-01-20 10:11:53,330 - INFO: 
+Evaluating Karla Johnson:
+2025-01-20 10:11:53,347 - INFO: 
+Evaluating Mr. Andre Streich:
+2025-01-20 10:11:53,363 - INFO: 
+Evaluating Kara Nienow:
+2025-01-20 10:11:53,380 - INFO: 
+Evaluating Catherine Schaden:
+2025-01-20 10:11:53,398 - INFO: 
+Evaluating Joan Rice:
+2025-01-20 10:11:53,413 - INFO: 
+Evaluating Sandy Hartmann:
+2025-01-20 10:11:53,435 - INFO: 
+Evaluating Ricky Koepp:
+2025-01-20 10:11:53,450 - INFO: 
+Evaluating Miss Joy Kulas:
+2025-01-20 10:11:53,469 - INFO: 
+Evaluating Miss Meghan Schamberger:
+2025-01-20 10:11:53,494 - INFO: 
+Evaluating Janet Hauck:
+2025-01-20 10:11:53,513 - INFO: 
+Evaluating Luke Ferry:
+2025-01-20 10:11:53,530 - INFO: 
+Evaluating Lamar Moore:
+2025-01-20 10:11:53,548 - INFO: 
+Evaluating Martin Wolf:
+2025-01-20 10:11:53,569 - INFO: 
+Evaluating Vicki Rutherford:
+2025-01-20 10:11:53,587 - INFO: 
+Evaluating Winifred Runte:
+2025-01-20 10:11:53,695 - INFO: 
+Evaluating Estelle Dickens:
+2025-01-20 10:11:53,811 - INFO: 
+Evaluating Clarence Goldner:
+2025-01-20 10:11:53,863 - INFO: 
+Evaluating Derek Rohan:
+2025-01-20 10:11:53,886 - INFO: 
+Evaluating Jeanne Leffler:
+2025-01-20 10:11:53,912 - INFO: 
+Evaluating Edmund Mills:
+2025-01-20 10:11:53,929 - INFO: 
+Evaluating Israel Hammes:
+2025-01-20 10:11:53,947 - INFO: 
+Evaluating Delbert Jast:
+2025-01-20 10:11:53,964 - INFO: 
+Evaluating Irvin Blanda:
+2025-01-20 10:11:53,980 - INFO: 
+Evaluating Lloyd Vandervort:
+2025-01-20 10:11:54,000 - INFO: 
+Evaluating Julio Dooley:
+2025-01-20 10:11:54,018 - INFO: 
+Evaluating Guy Blick:
+2025-01-20 10:11:54,035 - INFO: 
+Evaluating Perry Luettgen:
+2025-01-20 10:11:54,052 - INFO: 
+Evaluating Naomi Oberbrunner:
+2025-01-20 10:11:54,068 - INFO: 
+Evaluating Margarita Rodriguez:
+2025-01-20 10:11:54,084 - INFO: 
+Evaluating Mr. Kenneth Hilpert V:
+2025-01-20 10:11:54,098 - INFO: 
+Evaluating Lola Armstrong V:
+2025-01-20 10:11:54,114 - INFO: 
+Evaluating Mr. Luther Becker:
+2025-01-20 10:11:54,131 - INFO: 
+Evaluating Linda Medhurst:
+2025-01-20 10:11:54,147 - INFO: 
+Evaluating Cesar Cole:
+2025-01-20 10:11:54,162 - INFO: 
+Evaluating Dr. Eddie Grimes:
+2025-01-20 10:11:54,179 - INFO: 
+Evaluating Dr. Alice Kovacek:
+2025-01-20 10:11:54,196 - INFO: 
+Evaluating Mr. Mitchell Gleichner:
+2025-01-20 10:11:54,213 - INFO: 
+Evaluating Anita Upton:
+2025-01-20 10:11:54,229 - INFO: 
+Evaluating Candice Emard:
+2025-01-20 10:11:54,246 - INFO: 
+Evaluating Bill Boyle:
+2025-01-20 10:11:54,263 - INFO: 
+Evaluating Sue Ferry:
+2025-01-20 10:11:54,279 - INFO: 
+Evaluating Darrin Stark:
+2025-01-20 10:11:54,296 - INFO: 
+Evaluating Viola Schneider IV:
+2025-01-20 10:11:54,314 - INFO: 
+Evaluating Walter O'Kon:
+2025-01-20 10:11:54,331 - INFO: 
+Evaluating Javier Braun:
+2025-01-20 10:11:54,348 - INFO: 
+Evaluating Lillie Klocko DDS:
+2025-01-20 10:11:54,365 - INFO: 
+Evaluating Damon Champlin:
+2025-01-20 10:11:54,380 - INFO: 
+Evaluating Darnell Koch Sr.:
+2025-01-20 10:11:54,397 - INFO: 
+Evaluating Kristie Parker:
+2025-01-20 10:11:54,413 - INFO: 
+Evaluating Margarita Parker:
+2025-01-20 10:11:54,430 - INFO: 
+Evaluating Naomi Berge:
+2025-01-20 10:11:54,446 - INFO: 
+Evaluating Carlton Boyle:
+2025-01-20 10:11:54,459 - INFO: 
+Evaluating Ronald Kassulke PhD:
+2025-01-20 10:11:54,481 - INFO: 
+Evaluating Mr. Luis Pfeffer:
+2025-01-20 10:11:54,510 - INFO: 
+Evaluating Harriet Ryan:
+2025-01-20 10:11:54,530 - INFO: 
+Evaluating Mae Batz:
+2025-01-20 10:11:54,551 - INFO: 
+Evaluating Kenny Dickinson:
+2025-01-20 10:11:54,569 - INFO: 
+Evaluating Amanda Grimes:
+2025-01-20 10:11:54,596 - INFO: 
+Evaluating Nina Feest:
+2025-01-20 10:11:54,613 - INFO: 
+Evaluating Lee Funk:
+2025-01-20 10:11:54,630 - INFO: 
+Evaluating Jana Nitzsche:
+2025-01-20 10:11:54,646 - INFO: 
+Evaluating Clark King:
+2025-01-20 10:11:54,662 - INFO: 
+Evaluating Alma Runolfsdottir-Morissette:
+2025-01-20 10:11:54,679 - INFO: 
+Evaluating Lindsey Brakus:
+2025-01-20 10:11:54,696 - INFO: 
+Evaluating Claire Walker:
+2025-01-20 10:11:54,712 - INFO: 
+Evaluating Phyllis Littel:
+2025-01-20 10:11:54,729 - INFO: 
+Evaluating Claude Koch:
+2025-01-20 10:11:54,745 - INFO: 
+Evaluating Jesse Crona:
+2025-01-20 10:11:54,762 - INFO: 
+Evaluating Rose Collier-Cremin DVM:
+2025-01-20 10:11:54,779 - INFO: 
+Evaluating Della Beatty:
+2025-01-20 10:11:54,796 - INFO: 
+Evaluating Arlene Tremblay PhD:
+2025-01-20 10:11:54,812 - INFO: 
+Evaluating Pamela Kuphal-Barton:
+2025-01-20 10:11:54,829 - INFO: 
+Evaluating Vernon Keebler:
+2025-01-20 10:11:54,845 - INFO: 
+Evaluating Deanna Steuber:
+2025-01-20 10:11:54,868 - INFO: 
+Evaluating Phil Corkery:
+2025-01-20 10:11:54,892 - INFO: 
+Evaluating Dr. Nellie Collins:
+2025-01-20 10:11:54,912 - INFO: 
+Evaluating Travis Hand-Kirlin II:
+2025-01-20 10:11:54,929 - INFO: 
+Evaluating Ivan Hane:
+2025-01-20 10:11:54,945 - INFO: 
+Evaluating Dr. Garry Graham:
+2025-01-20 10:11:54,966 - INFO: 
+Evaluating Suzanne Schulist:
+2025-01-20 10:11:54,979 - INFO: 
+Evaluating Miss Carrie Aufderhar:
+2025-01-20 10:11:55,001 - INFO: 
+Evaluating Dean Paucek:
+2025-01-20 10:11:55,026 - INFO: 
+Evaluating Justin Klocko:
+2025-01-20 10:11:55,045 - INFO: 
+Evaluating Ollie Kuhlman:
+2025-01-20 10:11:55,062 - INFO: 
+Evaluating Leslie Stoltenberg:
+2025-01-20 10:11:55,083 - INFO: 
+Evaluating Dr. Joey Wuckert:
+2025-01-20 10:11:55,100 - INFO: 
+Evaluating Dave Hilll-Ledner:
+2025-01-20 10:11:55,126 - INFO: 
+Evaluating Lance Greenfelder:
+2025-01-20 10:11:55,143 - INFO: 
+Evaluating Raymond Haley:
+2025-01-20 10:11:55,161 - INFO: 
+Evaluating Pam Price:
+2025-01-20 10:11:55,178 - INFO: 
+Evaluating Madeline Ankunding:
+2025-01-20 10:11:55,195 - INFO: 
+Evaluating Mr. Juan Koelpin-Ratke:
+2025-01-20 10:11:55,212 - INFO: 
+Evaluating Marty Kuhlman:
+2025-01-20 10:11:55,229 - INFO: 
+Evaluating Linda McDermott:
+2025-01-20 10:11:55,246 - INFO: 
+Evaluating Cynthia Sawayn:
+2025-01-20 10:11:55,267 - INFO: 
+Evaluating Naomi Raynor:
+2025-01-20 10:11:55,284 - INFO: 
+Evaluating Kelley Dibbert:
+2025-01-20 10:11:55,301 - INFO: 
+Evaluating Gail Buckridge:
+2025-01-20 10:11:55,326 - INFO: 
+Evaluating Ruben VonRueden:
+2025-01-20 10:11:55,345 - INFO: 
+Evaluating Ida Lockman:
+2025-01-20 10:11:55,362 - INFO: 
+Evaluating Ricky Dooley III:
+2025-01-20 10:11:55,379 - INFO: 
+Evaluating Ryan Ferry:
+2025-01-20 10:11:55,399 - INFO: 
+Evaluating Christian Hermann Jr.:
+2025-01-20 10:11:55,414 - INFO: 
+Evaluating Shelley Dibbert PhD:
+2025-01-20 10:11:55,437 - INFO: 
+Evaluating Karen Pouros:
+2025-01-20 10:11:55,633 - INFO: 
+Evaluating Monica Roberts PhD:
+2025-01-20 10:11:55,692 - INFO: 
+Evaluating Dorothy Jerde:
+2025-01-20 10:11:55,711 - INFO: 
+Evaluating Caleb Sanford:
+2025-01-20 10:11:55,728 - INFO: 
+Evaluating Mrs. Edna Stracke Sr.:
+2025-01-20 10:11:55,751 - INFO: 
+Evaluating Whitney Mante:
+2025-01-20 10:11:55,769 - INFO: 
+Evaluating Erin Schowalter:
+2025-01-20 10:11:55,791 - INFO: 
+Evaluating George Roberts:
+2025-01-20 10:11:55,808 - INFO: 
+Evaluating Jeannie Tromp:
+2025-01-20 10:11:55,824 - INFO: 
+Evaluating Doug Ferry:
+2025-01-20 10:11:55,841 - INFO: 
+Evaluating Phil Rohan:
+2025-01-20 10:11:55,861 - INFO: 
+Evaluating Traci Denesik:
+2025-01-20 10:11:55,878 - INFO: 
+Evaluating Ms. Debra Gerhold:
+2025-01-20 10:11:55,896 - INFO: 
+Evaluating Jon Cummings:
+2025-01-20 10:11:55,912 - INFO: 
+Evaluating Robyn Schroeder:
+2025-01-20 10:11:55,928 - INFO: 
+Evaluating Frankie Torp:
+2025-01-20 10:11:55,949 - INFO: 
+Evaluating Emma Murazik:
+2025-01-20 10:11:55,968 - INFO: 
+Evaluating Jeanne Wyman:
+2025-01-20 10:11:55,991 - INFO: 
+Evaluating Bert Wilderman:
+2025-01-20 10:11:56,011 - INFO: 
+Evaluating Miss Opal Abernathy II:
+2025-01-20 10:11:56,030 - INFO: 
+Evaluating Henrietta Heidenreich:
+2025-01-20 10:11:56,046 - INFO: 
+Evaluating Trevor Hills:
+2025-01-20 10:11:56,062 - INFO: 
+Evaluating Billie Kuphal:
+2025-01-20 10:11:56,084 - INFO: 
+Evaluating Mrs. Sara Mills:
+2025-01-20 10:11:56,100 - INFO: 
+Evaluating Ryan Jacobs:
+2025-01-20 10:11:56,127 - INFO: 
+Evaluating Ramona Kertzmann DDS:
+2025-01-20 10:11:56,145 - INFO: 
+Evaluating Renee Yundt:
+2025-01-20 10:11:56,161 - INFO: 
+Evaluating Janet Heaney:
+2025-01-20 10:11:56,178 - INFO: 
+Evaluating Vincent Halvorson:
+2025-01-20 10:11:56,195 - INFO: 
+Evaluating Edmond Osinski V:
+2025-01-20 10:11:56,211 - INFO: 
+Evaluating Mr. Danny Dietrich:
+2025-01-20 10:11:56,227 - INFO: 
+Evaluating Roland Herzog:
+2025-01-20 10:11:56,244 - INFO: 
+Evaluating Melody Will V:
+2025-01-20 10:11:56,261 - INFO: 
+Evaluating Miss Janet Moen:
+2025-01-20 10:11:56,282 - INFO: 
+Evaluating Lee Legros-Conroy:
+2025-01-20 10:11:56,300 - INFO: 
+Evaluating Georgia Hodkiewicz:
+2025-01-20 10:11:56,317 - INFO: 
+Evaluating Mr. Frankie Schaefer-O'Connell:
+2025-01-20 10:11:56,343 - INFO: 
+Evaluating Tanya Dickens:
+2025-01-20 10:11:56,360 - INFO: 
+Evaluating Erin O'Hara:
+2025-01-20 10:11:56,379 - INFO: 
+Evaluating Doug Stoltenberg:
+2025-01-20 10:11:56,398 - INFO: 
+Evaluating Fernando Haley:
+2025-01-20 10:11:56,412 - INFO: 
+Evaluating Dr. Carroll Pacocha:
+2025-01-20 10:11:56,436 - INFO: 
+Evaluating Dr. Tommie Spinka:
+2025-01-20 10:11:56,457 - INFO: 
+Evaluating Clark Bernier:
+2025-01-20 10:11:56,474 - INFO: 
+Evaluating Domingo Terry:
+2025-01-20 10:11:56,493 - INFO: 
+Evaluating Mr. Lyle Wunsch:
+2025-01-20 10:11:56,511 - INFO: 
+Evaluating Trevor Crist:
+2025-01-20 10:11:56,534 - INFO: 
+Evaluating Gail Toy DDS:
+2025-01-20 10:11:56,555 - INFO: 
+Evaluating Mr. Tyler Lindgren:
+2025-01-20 10:11:56,575 - INFO: 
+Evaluating Claudia Zemlak:
+2025-01-20 10:11:56,594 - INFO: 
+Evaluating Bernice Windler DDS:
+2025-01-20 10:11:56,611 - INFO: 
+Evaluating Mrs. Mattie Frami:
+2025-01-20 10:11:56,628 - INFO: 
+Evaluating Dr. Jean Fahey:
+2025-01-20 10:11:56,644 - INFO: 
+Evaluating Gail Trantow:
+2025-01-20 10:11:56,662 - INFO: 
+Evaluating Ralph Dickinson:
+2025-01-20 10:11:56,679 - INFO: 
+Evaluating Ryan Kozey:
+2025-01-20 10:11:56,696 - INFO: 
+Evaluating Ms. Dixie Ortiz:
+2025-01-20 10:11:56,710 - INFO: 
+Evaluating Marcia Schowalter III:
+2025-01-20 10:11:56,728 - INFO: 
+Evaluating Elmer Little:
+2025-01-20 10:11:56,749 - INFO: 
+Evaluating Ellen Bosco:
+2025-01-20 10:11:56,767 - INFO: 
+Evaluating Kathy Cremin-Ullrich:
+2025-01-20 10:11:56,793 - INFO: 
+Evaluating Ms. Lori Hegmann:
+2025-01-20 10:11:56,810 - INFO: 
+Evaluating Dana Dickinson:
+2025-01-20 10:11:56,827 - INFO: 
+Evaluating Dr. Seth Wolff-Hackett:
+2025-01-20 10:11:56,844 - INFO: 
+Evaluating Hugh Kertzmann:
+2025-01-20 10:11:56,862 - INFO: 
+Evaluating Molly VonRueden:
+2025-01-20 10:11:56,886 - INFO: 
+Evaluating Winston Cormier:
+2025-01-20 10:11:56,907 - INFO: 
+Evaluating Katie Wuckert:
+2025-01-20 10:11:56,929 - INFO: 
+Evaluating Courtney Thompson:
+2025-01-20 10:11:56,956 - INFO: 
+Evaluating Ruby Toy PhD:
+2025-01-20 10:11:56,974 - INFO: 
+Evaluating Amanda Heathcote:
+2025-01-20 10:11:56,993 - INFO: 
+Evaluating Amelia Green:
+2025-01-20 10:11:57,011 - INFO: 
+Evaluating Walter Streich:
+2025-01-20 10:11:57,027 - INFO: 
+Evaluating Mr. Hugh Green:
+2025-01-20 10:11:57,044 - INFO: 
+Evaluating Dr. Lamar Kirlin:
+2025-01-20 10:11:57,061 - INFO: 
+Evaluating Jimmie Haag:
+2025-01-20 10:11:57,077 - INFO: 
+Evaluating Kelly Hirthe:
+2025-01-20 10:11:57,099 - INFO: 
+Evaluating Cristina Murphy:
+2025-01-20 10:11:57,125 - INFO: 
+Evaluating Lowell Welch Sr.:
+2025-01-20 10:11:57,145 - INFO: 
+Evaluating Craig Jacobi:
+2025-01-20 10:11:57,162 - INFO: 
+Evaluating Esther Casper I:
+2025-01-20 10:11:57,193 - INFO: 
+Evaluating Lucille Ernser:
+2025-01-20 10:11:57,214 - INFO: 
+Evaluating Terrence Green:
+2025-01-20 10:11:57,234 - INFO: 
+Evaluating Wm Lueilwitz:
+2025-01-20 10:11:57,257 - INFO: 
+Evaluating Elijah Davis:
+2025-01-20 10:11:57,277 - INFO: 
+Evaluating Oscar Schuster:
+2025-01-20 10:11:57,295 - INFO: 
+Evaluating Miss Amelia Crona:
+2025-01-20 10:11:57,312 - INFO: 
+Evaluating Mrs. Bonnie Dietrich:
+2025-01-20 10:11:57,340 - INFO: 
+Evaluating Dr. Cory Armstrong:
+2025-01-20 10:11:57,366 - INFO: 
+Evaluating Delia Hills:
+2025-01-20 10:11:57,394 - INFO: 
+Evaluating Mark Effertz:
+2025-01-20 10:11:57,409 - INFO: 
+Evaluating Jo Veum:
+2025-01-20 10:11:57,433 - INFO: 
+Evaluating Dr. Rhonda Schuppe:
+2025-01-20 10:11:57,451 - INFO: 
+Evaluating Ernest Runolfsson PhD:
+2025-01-20 10:11:57,466 - INFO: 
+Evaluating Jan Dare DDS:
+2025-01-20 10:11:57,483 - INFO: 
+Evaluating Shari Mertz:
+2025-01-20 10:11:57,499 - INFO: 
+Evaluating Tomas Stamm:
+2025-01-20 10:11:57,523 - INFO: 
+Evaluating Jacob Price:
+2025-01-20 10:11:57,540 - INFO: 
+Evaluating Ron Rutherford:
+2025-01-20 10:11:57,560 - INFO: 
+Evaluating Henry Reinger IV:
+2025-01-20 10:11:57,578 - INFO: 
+Evaluating Tami Frami:
+2025-01-20 10:11:57,789 - INFO: 
+Evaluating Carlos Conroy:
+2025-01-20 10:11:57,845 - INFO: 
+Evaluating Everett Hudson:
+2025-01-20 10:11:57,861 - INFO: 
+Evaluating Jessica Roob:
+2025-01-20 10:11:57,880 - INFO: 
+Evaluating Clifford Stroman:
+2025-01-20 10:11:57,904 - INFO: 
+Evaluating Dale Jacobson:
+2025-01-20 10:11:57,923 - INFO: 
+Evaluating Josephine Larson:
+2025-01-20 10:11:57,943 - INFO: 
+Evaluating Alfredo Schowalter Jr.:
+2025-01-20 10:11:57,961 - INFO: 
+Evaluating Randolph Herman:
+2025-01-20 10:11:57,978 - INFO: 
+Evaluating Muriel Lynch:
+2025-01-20 10:11:57,993 - INFO: 
+Evaluating Lucille Friesen:
+2025-01-20 10:11:58,016 - INFO: 
+Evaluating Ms. Kathleen Gulgowski:
+2025-01-20 10:11:58,040 - INFO: 
+Evaluating Leroy Leuschke:
+2025-01-20 10:11:58,060 - INFO: 
+Evaluating Dr. Alexandra Farrell II:
+2025-01-20 10:11:58,076 - INFO: 
+Evaluating Jamie McCullough IV:
+2025-01-20 10:11:58,094 - INFO: 
+Evaluating Misty Klein:
+2025-01-20 10:11:58,110 - INFO: 
+Evaluating Krystal Moore:
+2025-01-20 10:11:58,125 - INFO: 
+Evaluating Glenda Pagac:
+2025-01-20 10:11:58,139 - INFO: 
+Evaluating Marjorie Hagenes:
+2025-01-20 10:11:58,161 - INFO: 
+Evaluating Willis Zieme:
+2025-01-20 10:11:58,178 - INFO: 
+Evaluating Meredith Nolan:
+2025-01-20 10:11:58,196 - INFO: 
+Evaluating Mr. Ramiro Davis:
+2025-01-20 10:11:58,211 - INFO: 
+Evaluating Dorothy Christiansen III:
+2025-01-20 10:11:58,233 - INFO: 
+Evaluating Irene Ankunding:
+2025-01-20 10:11:58,256 - INFO: 
+Evaluating Lisa Cruickshank:
+2025-01-20 10:11:58,276 - INFO: 
+Evaluating Ebony Herzog:
+2025-01-20 10:11:58,293 - INFO: 
+Evaluating Matt Lynch:
+2025-01-20 10:11:58,309 - INFO: 
+Evaluating Lorenzo King:
+2025-01-20 10:11:58,326 - INFO: 
+Evaluating Ralph Larson PhD:
+2025-01-20 10:11:58,343 - INFO: 
+Evaluating Dr. Jerald Skiles:
+2025-01-20 10:11:58,365 - INFO: 
+Evaluating Henrietta Paucek:
+2025-01-20 10:11:58,389 - INFO: 
+Evaluating Ms. Brooke Hintz:
+2025-01-20 10:11:58,408 - INFO: 
+Evaluating Jaime Kiehn:
+2025-01-20 10:11:58,427 - INFO: 
+Evaluating Brendan Huel:
+2025-01-20 10:11:58,444 - INFO: 
+Evaluating Julio Beier:
+2025-01-20 10:11:58,459 - INFO: 
+Evaluating Hope Bayer:
+2025-01-20 10:11:58,476 - INFO: 
+Evaluating Todd Raynor:
+2025-01-20 10:11:58,493 - INFO: 
+Evaluating Muriel Rippin:
+2025-01-20 10:11:58,508 - INFO: 
+Evaluating Willie Corwin:
+2025-01-20 10:11:58,525 - INFO: 
+Evaluating Eddie Sawayn:
+2025-01-20 10:11:58,547 - INFO: 
+Evaluating Courtney Labadie:
+2025-01-20 10:11:58,565 - INFO: 
+Filtering complete: 0 matches passed all criteria
+2025-01-20 10:11:58,565 - INFO: Found 0 top matches
+2025-01-20 10:11:58,565 - INFO: No matches found
+2025-01-20 10:11:58,573 - INFO: 127.0.0.1 - - [20/Jan/2025 10:11:58] "POST /ai/chat HTTP/1.1" 200 -

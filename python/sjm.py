@@ -31,7 +31,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s: %(message)s',
     handlers=[
-        logging.FileHandler('fiverr_integration.log'),
+        logging.FileHandler('upwork_integration.log'),
         logging.StreamHandler(sys.stdout)
     ]
 )

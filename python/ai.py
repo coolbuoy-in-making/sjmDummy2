@@ -78,6 +78,9 @@ async def initialize_model():
 
 def extract_project_details(message: str) -> Dict:
     """Extract project details from message using regex and NLP"""
+    # Generate unique project ID
+    project_id = str(uuid.uuid4())
+    
     # Extract budget using regex
     budget_pattern = r'\$(\d+(?:,\d{3})*(?:\.\d{2})?)\s*(?:[-–]\s*\$?(\d+(?:,\d{3})*(?:\.\d{2})?))?' 
     budget_match = re.search(budget_pattern, message)
@@ -109,6 +112,7 @@ def extract_project_details(message: str) -> Dict:
     logger.info(f"Budget range: ${budget_min}-${budget_max}")
     
     return {
+        "id": project_id,  # Include ID in returned dictionary
         "description": message,
         "required_skills": expanded_skills,
         "budget_range": (budget_min, budget_max),
@@ -219,125 +223,165 @@ async def chat() -> Union[Dict, tuple]:
     try:
         data = request.json
         message = data.get('message', '').lower()
-        user_type = data.get('userType', 'client')
-        user_id = data.get('userId')
+        project_details = data.get('projectDetails')
 
-        logger.info(f"Processing chat request: {message}")
+        logger.info(f"\n{'='*50}\nProcessing chat request:")
+        logger.info(f"Message: {message}")
+        logger.info(f"Project details: {project_details}")
 
-        if not message:
-            return jsonify({
-                'success': False,
-                'error': 'Message cannot be empty'
-            }), 400
-
-        # Update conversation context
-        context = conversation_context.get_context(user_id)
-        
-        # Enhanced message analysis
-        intent = analyze_intent(message)
-        logger.info(f"Detected intent: {intent}")
-        
-        if intent == 'find_users':
-            # Extract and validate project details
-            project_details = extract_project_details(message)
-            logger.info(f"\n{'='*50}\nProcessing search request:")
-            logger.info(f"Project Details:")
-            logger.info(f"- Description: {project_details['description']}")
-            logger.info(f"- Skills: {project_details['required_skills']}")
-            logger.info(f"- Budget: ${project_details['budget_range'][0]}-${project_details['budget_range'][1]}")
-            logger.info(f"- Complexity: {project_details['complexity']}")
+        if message == 'confirm_project_details' and project_details:
+            logger.info("\nStarting freelancer search with confirmed details:")
+            logger.info(f"Skills required: {project_details['skills']}")
+            logger.info(f"Budget range: {project_details['budget']}")
+            logger.info(f"Complexity: {project_details['complexity']}")
             
-            try:
-                # Create project instance
-                project = Project(**project_details)
-                logger.info("\nMatching Process Started...")
+            # Create project from confirmed details
+            project = Project(
+                id=str(uuid.uuid4()),
+                description=f"Project requiring skills in: {', '.join(project_details['skills'])}",
+                required_skills=project_details['skills'],
+                budget_range=parse_budget_range(project_details['budget']),
+                complexity=project_details['complexity'],
+                timeline=int(project_details['timeline'])
+            )
 
-                # Find matches with detailed logging
-                matches = await model.find_top_matches(project)
-                
-                if matches:
-                    logger.info(f"\nFound {len(matches)} matches:")
-                    for i, match in enumerate(matches, 1):
-                        user = match['user']
-                        logger.info(f"\n{i}. {user.name}")
-                        logger.info(f"   Match Score: {match['combined_score']:.2f}")
-                        logger.info(f"   Skill Overlap: {match['skill_overlap']} skills")
-                        logger.info(f"   Skills: {', '.join(user.skills)}")
-                        logger.info(f"   Rate: ${user.hourly_rate}/hr")
-                else:
-                    logger.info("\nNo direct matches found, trying expanded search...")
-                    # ... rest of matching logic ...
-
-                response_data = {
+            # Find matches with detailed logging
+            matches = await model.find_top_matches(project)
+            
+            if not matches:
+                logger.info("No matches found")
+                return jsonify({
                     'success': True,
                     'response': {
-                        'type': 'userList',
-                        'text': f"Found {len(matches)} matching users:",
-                        'users': format_user_matches(matches),
-                        'projectDetails': project_details,
-                        'matchStats': {
-                            'total': len(matches),
-                            'highlyMatched': sum(1 for m in matches if m['combined_score'] > 0.8),
-                            'skillsMatched': len(project_details['required_skills'])
-                        },
-                        'debugInfo': {
-                            'searchCriteria': project_details,
-                            'matchingProcess': {
-                                'totalusers': len(model.users),
-                                'matchesFound': len(matches),
-                                'skillMatchThreshold': 0.7,
-                                'searchExpanded': len(matches) == 0
-                            }
+                        'type': 'text',
+                        'text': "I couldn't find any matches for your criteria. Try adjusting your requirements."
+                    }
+                })
+
+            logger.info(f"\nFound {len(matches)} potential matches:")
+            for i, match in enumerate(matches, 1):
+                user = match['user']
+                logger.info(f"\n{i}. {user.name} ({user.job_title})")
+                logger.info(f"   Skills: {', '.join(user.skills)}")
+                logger.info(f"   Match score: {match['combined_score']:.2f}")
+                logger.info(f"   Skill overlap: {match.get('skill_overlap', 0)}")
+
+            return jsonify({
+                'success': True,
+                'response': {
+                    'type': 'freelancerList',
+                    'text': f"I found {len(matches)} matching freelancers:",
+                    'freelancers': format_user_matches(matches),
+                    'matchingProcess': {
+                        'steps': [
+                            f"Analyzing {len(model.users)} available freelancers",
+                            f"Found {len(matches)} potential matches",
+                            f"Applied budget filter: ${project_details['budget']}",
+                            f"Required skills: {', '.join(project_details['skills'])}"
+                        ],
+                        'searchStats': {
+                            'totalFreelancers': len(model.users),
+                            'matchesFound': len(matches),
+                            'highMatches': sum(1 for m in matches if m['combined_score'] > 0.8)
                         }
                     }
                 }
-                
-                logger.info(f"\nSearch completed. Returning {len(matches)} matches.")
-                logger.info(f"{'='*50}\n")
-                return jsonify(response_data)
+            })
 
-            except Exception as e:
-                logger.error(f"Error in matching process: {str(e)}", exc_info=True)
-                return jsonify({
-                    'success': False,
-                    'error': f"Error finding matching users: {str(e)}",
-                    'debugInfo': {
-                        'error': str(e),
-                        'searchCriteria': project_details
+        logger.info(f"Processing chat request: {message}")
+
+        if not message and not project_details:
+            return jsonify({
+                'success': False,
+                'error': 'Message or project details required'
+            }), 400
+
+        # Initial request for finding freelancers
+        if 'find' in message.lower() or 'need' in message.lower():
+            # Extract initial skills from message
+            extracted_skills = model.skill_extractor.extract_skills(message)
+            
+            return jsonify({
+                'success': True,
+                'response': {
+                    'type': 'project_details_request',
+                    'text': "I'll help you find the perfect freelancer. Please provide the following details:",
+                    'requiredInputs': {
+                        'skills': {
+                            'type': 'skill_list',
+                            'message': "What skills are you looking for? (comma-separated)",
+                            'initial': extracted_skills
+                        },
+                        'budget': {
+                            'type': 'budget_range',
+                            'message': "What's your budget range? (e.g., $30-100/hr)"
+                        },
+                        'complexity': {
+                            'type': 'select',
+                            'message': "How complex is your project?",
+                            'options': ['low', 'medium', 'high']
+                        },
+                        'timeline': {
+                            'type': 'number',
+                            'message': "What's your project timeline in days?"
+                        }
                     }
-                }), 500
+                }
+            })
 
-        elif intent == 'get_help':
-            help_response = {
-                'type': 'help',
-                'text': """I can help you find the perfect user! Try:
-1. Describe the project you need help with
-2. Mention specific skills you're looking for
-3. Include your budget (e.g., $500-1000)
-4. Mention timeline if relevant
+        # Handle submitted project details
+        if project_details:
+            # Create project from details
+            project = Project(
+                id=str(uuid.uuid4()),
+                description=message,
+                required_skills=project_details.get('skills', []),
+                budget_range=parse_budget_range(project_details.get('budget', '')),
+                complexity=project_details.get('complexity', 'medium'),
+                timeline=int(project_details.get('timeline', 30))
+            )
 
-Example: "Find me a React developer with experience in Node.js for a 3-month project, budget $2000-3000" """,
-                'suggestions': [
-                    "Find web developer with React experience",
-                    "Need a UI/UX designer for mobile app",
-                    "Looking for Python developer with ML experience"
-                ]
+            # Find matches
+            matches = await model.find_top_matches(project)
+            
+            if not matches:
+                return jsonify({
+                    'success': True,
+                    'response': {
+                        'type': 'text',
+                        'text': "I couldn't find any matches for your criteria. Try adjusting your requirements."
+                    }
+                })
+
+            return jsonify({
+                'success': True,
+                'response': {
+                    'type': 'freelancerList',
+                    'text': f"I found {len(matches)} matching freelancers:",
+                    'freelancers': matches
+                }
+            })
+
+        # Default response
+        return jsonify({
+            'success': True,
+            'response': {
+                'type': 'text',
+                'text': "I can help you find freelancers. Just tell me what kind of project you need help with."
             }
-            return jsonify({'success': True, 'response': help_response})
+        })
 
-        # ... rest of the existing code ...
-        
     except Exception as e:
         logger.error(f"Chat error: {str(e)}", exc_info=True)
         return jsonify({
             'success': False,
-            'error': "An unexpected error occurred. Please try again."
+            'error': str(e)
         }), 500
 
 def analyze_intent(message: str) -> str:
     """Analyze user message intent"""
     intents = {
-        'find_users': ['find', 'need', 'looking', 'search', 'hire'],
+        'find_freelancers': ['find', 'need', 'looking', 'looking for' 'search', 'hire', 'Find me', 'find me'],
         'get_help': ['help', 'guide', 'explain'],
         'interview': ['interview', 'meet', 'talk'],
     }
@@ -466,6 +510,20 @@ def format_availability(user) -> Dict[str, Any]:
         'immediateStart': user.availability,
         'hourlyRate': user.hourly_rate
     }
+
+def parse_budget_range(budget_str: str) -> tuple:
+    """Parse budget range from string input"""
+    try:
+        # Remove $ and /hr, split on hyphen or dash
+        parts = budget_str.replace('$', '').replace('/hr', '').split('-')
+        if len(parts) == 2:
+            return (float(parts[0].strip()), float(parts[1].strip()))
+        elif len(parts) == 1:
+            value = float(parts[0].strip())
+            return (value, value * 1.5)
+        return (30, 100)  # reasonable default range
+    except:
+        return (30, 100)  # reasonable default range
 
 # Modify the initialization part
 if __name__ == '__main__':

@@ -68,94 +68,48 @@ class UpworkIntegrationModel:
             'hourly_rate': 0.1,
             'top_rated': 0.0
         }
+        self.api_headers = {
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json'
+        }
 
     async def load_users(self) -> List[user]:
         """Load users from backend API"""
         try:
             async with aiohttp.ClientSession() as session:
-                headers = {
-                    'Authorization': f'Bearer {self.api_key}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
+                url = f'{self.api_url}/api/freelancers'  # Use freelancers endpoint
+                logger.info(f"Fetching freelancers from {url}")
                 
-                url = f'{self.api_url}/api/users'
-                logger.info(f"Fetching users from {url}")
-                logger.debug(f"Using headers: {headers}")
-                
-                try:
-                    async with session.get(
-                        url,
-                        headers=headers,
-                        timeout=30
-                    ) as response:
-                        response_text = await response.text()
-                        logger.debug(f"Response status: {response.status}")
-                        logger.debug(f"Response body: {response_text}")
-
-                        # Debug API key
-                        logger.debug(f"Using API key: {self.api_key}")
-
-                        if response.status == 401:
-                            logger.error(f"Authentication failed. API Key: {self.api_key}")
-                            if Config.DEBUG:
-                                return self._get_mock_users()
-                            raise Exception("Authentication failed. Please check your API key.")
-
-                        if response.status != 200:
-                            logger.error(f"API returned unexpected status {response.status}")
-                            if Config.DEBUG:
-                                return self._get_mock_users()
-                            raise Exception(f"API Error: Status {response.status}")
-
-                        try:
-                            data = json.loads(response_text)
-                            logger.info(f"Successfully loaded {len(data)} users")
-                        except json.JSONDecodeError as e:
-                            logger.error(f"Failed to parse JSON response: {e}")
-                            if Config.DEBUG:
-                                return self._get_mock_users()
-                            raise
-
-                        users = []
-                        for item in data:
-                            try:
-                                user = user(
-                                    id=str(item.get('id', '')),
-                                    username=str(item.get('username', '')),
-                                    name=str(item.get('name', '')),
-                                    job_title=str(item.get('job_title', '')),
-                                    skills=item.get('skills', []),  # Already an array from backend
-                                    experience=int(float(item.get('experience', 0))),
-                                    rating=float(item.get('rating', 0)),
-                                    hourly_rate=float(item.get('hourly_rate', 0)),
-                                    profile_url=str(item.get('profile_url', '')),
-                                    availability=bool(item.get('availability', False)),
-                                    total_sales=int(float(item.get('total_sales', 0))),
-                                    desc=str(item.get('desc', '')),
-                                )
-                                users.append(user)
-                                logger.debug(f"Processed user: {user.name}")
-                            except Exception as e:
-                                logger.warning(f"Error processing user data: {e}")
-                                continue
-
-                        if not users:
-                            logger.warning("No valid users found in response")
-                            if Config.DEBUG:
-                                return self._get_mock_users()
-                            raise Exception("No valid users found")
-
-                        return users
-
-                except aiohttp.ClientError as e:
-                    logger.error(f"API connection error: {str(e)}")
-                    if Config.DEBUG:
-                        return self._get_mock_users()
-                    raise
-
+                async with session.get(
+                    url,
+                    headers=self.api_headers,
+                    timeout=30
+                ) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        logger.info(f"Successfully loaded {len(data)} freelancers")
+                        
+                        return [
+                            user(
+                                id=str(item['id']),
+                                username=item.get('username', ''),
+                                name=item['name'],
+                                job_title=item.get('jobTitle', ''),
+                                skills=item.get('skills', []),
+                                experience=int(item.get('yearsOfExperience', 0)),
+                                rating=float(item.get('rating', 0)),
+                                hourly_rate=float(item.get('hourlyRate', 0)),
+                                profile_url=item.get('profileUrl', ''),
+                                availability=bool(item.get('availability', False)),
+                                total_sales=int(item.get('totalJobs', 0)),
+                                desc=item.get('desc', '')
+                            )
+                            for item in data
+                        ]
+                    else:
+                        raise Exception(f"API Error: {response.status}")
         except Exception as e:
-            logger.error(f"Error in load_users: {str(e)}")
+            logger.error(f"Error loading users: {e}")
             if Config.DEBUG:
                 return self._get_mock_users()
             raise
@@ -283,27 +237,40 @@ class UpworkIntegrationModel:
         Filter users based on Upwork-specific constraints.
         """
         filtered_matches = []
+        logger.info(f"\nFiltering {len(matches)} potential matches:")
+        
         for match in matches:
             user = match['user']
+            logger.info(f"\nEvaluating {user.name}:")
             
-            # Upwork-specific hard constraints
+            # Budget filter
             if user.hourly_rate < project.budget_range[0] or user.hourly_rate > project.budget_range[1]:
-                logger.debug(f"Excluded {user.username}: Hourly rate ${user.hourly_rate} out of budget.")
+                logger.info(f"✘ Excluded: Hourly rate ${user.hourly_rate} outside budget range ${project.budget_range[0]}-${project.budget_range[1]}")
                 continue
+            logger.info(f"✓ Budget check passed: ${user.hourly_rate}/hr")
             
-            # Prioritize top-rated users for critical projects
+            # Availability check for high complexity
             if project.complexity == 'high' and not user.availability:
-                logger.debug(f"Excluded {user.username}: Not top-rated for high-complexity project.")
+                logger.info("✘ Excluded: Not available for high-complexity project")
                 continue
+            logger.info(f"✓ Availability check passed: {user.availability}")
             
-            # Refine skill matching and check overlap
+            # Skill matching
             overlap_count = self.matching_engine.refine_skill_matching(project.required_skills, user.skills)
-            if overlap_count < 2:  # Require at least 2 overlapping or similar skills
-                logger.debug(f"Excluded {user.username}: Insufficient skill overlap ({overlap_count} matching skills).")
+            if overlap_count < 2:
+                logger.info(f"✘ Excluded: Only {overlap_count} matching skills")
                 continue
+            logger.info(f"✓ Skill match: {overlap_count} overlapping skills")
             
-            # Passed all filters
+            # Add match score details
+            match['skill_overlap'] = overlap_count
+            match['experience_score'] = user.experience / 10
+            match['rating_score'] = user.rating / 5
+            
             filtered_matches.append(match)
+            logger.info(f"→ Added to matches with score: {match['combined_score']:.2f}")
+        
+        logger.info(f"\nFiltering complete: {len(filtered_matches)} matches passed all criteria")
         return filtered_matches
 
     async def find_top_matches(self, project: Project, top_n: int = 5):
