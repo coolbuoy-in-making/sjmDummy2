@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 // Update CORS configuration
 app.use(cors({
   origin: [
-    process.env.FRONTEND_URL || 'http://localhost:5173',  // Frontend
-    process.env.FLASK_URL || 'http://localhost:8000'   // AI service
+    'http://localhost:5173',  // Frontend
+    'http://localhost:8000'   // AI service
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -74,25 +74,29 @@ const forceSync = process.env.FORCE_SYNC === 'true' || isDevMode;
 
 db.sequelize.sync({ force: forceSync }).then(async () => {
   if (forceSync) {
-    try {
-      await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-      await db.sequelize.query('TRUNCATE TABLE Users');
-      await db.sequelize.query('TRUNCATE TABLE Jobs');
-      await db.sequelize.query('TRUNCATE TABLE Proposals');
-      await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-      
-      // Run seeders
-      const { exec } = require('child_process');
-      exec('npx sequelize-cli db:seed:all', (error, stdout, stderr) => {
-        if (error) {
-          console.error('Error seeding data:', error);
-          return;
-        }
-        console.log('Database seeded successfully with 500 freelancers and 400 clients');
-      });
-    } catch (error) {
-      console.error('Error resetting database:', error);
-    }
+      try {
+        await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+        await db.sequelize.query('TRUNCATE TABLE Users');
+        await db.sequelize.query('TRUNCATE TABLE Jobs');
+        await db.sequelize.query('TRUNCATE TABLE Proposals');
+        await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+        
+        // Run seeders
+        const { exec } = require('child_process');
+        const maxBuffer = 1024 * 1024 * 10; // 10MB buffer
+        
+        const seedCommand = 'npx sequelize-cli db:seed:all';
+        exec(seedCommand, { maxBuffer }, (error, stdout, stderr) => {
+          if (error) {
+            console.error('Error seeding data:', error);
+            return;
+          }
+          console.log('Database seeded successfully');
+          console.log(stdout);
+        });
+      } catch (error) {
+        console.error('Error in sync/seed process:', error);
+      }
   }
 
   app.listen(PORT, () => {

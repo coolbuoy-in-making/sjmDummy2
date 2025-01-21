@@ -129,6 +129,14 @@ const SendButton = styled.button`
   }
 `;
 
+const LoadingMessage = styled.div`
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 8px;
+color: ${props => props.theme.colors.primary};
+font-style: italic;
+`;
 
 const Spinner = styled.div`
 width: 20px;
@@ -513,81 +521,6 @@ const SkillPill = styled.span`
     }
   }
 `;
-
-const WelcomeMessage = styled.div`
-  padding: 20px;
-  background: ${props => `${props.theme.colors.primary}10`};
-  border-radius: 12px;
-  margin-bottom: 16px;
-
-  h4 {
-    color: ${props => props.theme.colors.primary};
-    margin: 0 0 8px 0;
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    color: ${props => props.theme.colors.text};
-  }
-`;
-
-const QuickActions = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 0 20px;
-  margin-bottom: 20px;
-`;
-
-const QuickActionButton = styled.button`
-  background: white;
-  border: 1px solid ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.primary};
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 13px;
-
-  &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-  }
-`;
-
-const MessageTypingIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 12px;
-  
-  span {
-    width: 4px;
-    height: 4px;
-    background: ${props => props.theme.colors.primary};
-    border-radius: 50%;
-    animation: typing 1s infinite;
-    
-    &:nth-child(2) { animation-delay: 0.2s; }
-    &:nth-child(3) { animation-delay: 0.4s; }
-  }
-
-  @keyframes typing {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-  }
-`;
-
-const ErrorBoundary = styled.div`
-  padding: 16px;
-  margin: 16px;
-  background: #fff3f3;
-  border: 1px solid #ffcdd2;
-  border-radius: 8px;
-  color: #d32f2f;
-`;
-
 const AIChatSidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
@@ -619,13 +552,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const [skills, setSkills] = useState([]);
   const [newSkill, setNewSkill] = useState('');
   const [showSummary, setShowSummary] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-  const [suggestedActions, setSuggestedActions] = useState([
-    'Find freelance developers',
-    'Post a new project',
-    'Get project cost estimate',
-    'Review talent profiles'
-  ]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -635,148 +561,74 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    if (isOpen) {
-      // Track sidebar open event
-      try {
-        // Your analytics code here
-        console.log('AI Sidebar opened');
-      } catch (error) {
-        console.error('Analytics error:', error);
-      }
-    }
-  }, [isOpen]);
 
   const handleMessage = async (input, details = null) => {
     if (!input.trim() && !details) return;
 
-    // Add user message immediately
-    setMessages(prev => [...prev, {
-      text: input,
-      isUser: true,
-      timestamp: new Date().toISOString()
-    }]);
-
-    setIsTyping(true);
-    setInput('');
     setError(null);
+    setLoading(true);
+    
+    // Debug logging
+    console.log('Sending request:', { input, details });
 
     try {
-      // Show typing indicator for at least 1 second
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // ... existing API call logic ...
-      setError(null);
-      setLoading(true);
-      
-      // Debug logging
-      console.log('Sending request:', { input, details });
+      const url = `${import.meta.env.VITE_PYTHON_URL || 'http://localhost:8000'}/ai/chat`;
+      console.log('Request URL:', url);
 
-      try {
-        const url = `${import.meta.env.VITE_PYTHON_URL || 'http://localhost:8000'}/ai/chat`;
-        console.log('Request URL:', url);
+      const requestBody = {
+        message: input,
+        userType: user?.userType || 'client',
+        userId: user?.id,
+        projectDetails: details
+      };
+      console.log('Request body:', requestBody);
 
-        const requestBody = {
-          message: input,
-          userType: user?.userType || 'client',
-          userId: user?.id,
-          projectDetails: details
-        };
-        console.log('Request body:', requestBody);
-
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody)
-        });
-
-        const data = await response.json();
-        console.log('Raw AI Response:', data);
-
-        if (!response.ok) {
-          throw new Error(data.error || 'An error occurred');
-        }
-
-        if (data.success && data.response) {
-          // Transform freelancers data if present
-          if (data.response.type === 'freelancerList' && data.response.freelancers) {
-            data.response.freelancers = data.response.freelancers.map(f => ({
-              ...f,
-              skills: Array.isArray(f.skills) ? f.skills : [],
-              matchDetails: {
-                skillMatch: f.matchDetails?.skillMatch || { skills: [], count: 0 },
-                matchPercentage: f.matchDetails?.matchPercentage || 0
-              }
-            }));
-          }
-
-          const aiMessage = {
-            id: Date.now(),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            ...data.response
-          };
-
-          console.log('Processed message:', aiMessage);
-          setMessages(prev => [...prev, aiMessage]);
-          setConversations(prev => [aiMessage, ...prev]);
-        }
-      } catch (error) {
-        console.error('AI Chat Error:', error);
-        setError(error.message || "Sorry, I'm having trouble connecting right now.");
-      } finally {
-        setLoading(false);
-      }
-      // Update suggested actions based on context
-      updateSuggestedActions(input);
-      
-    } catch (error) {
-      setError({
-        message: error.message,
-        retry: () => handleMessage(input, details)
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
       });
+
+      const data = await response.json();
+      console.log('Raw AI Response:', data);
+
+      if (!response.ok) {
+        throw new Error(data.error || 'An error occurred');
+      }
+
+      if (data.success && data.response) {
+        // Transform freelancers data if present
+        if (data.response.type === 'freelancerList' && data.response.freelancers) {
+          data.response.freelancers = data.response.freelancers.map(f => ({
+            ...f,
+            skills: Array.isArray(f.skills) ? f.skills : [],
+            matchDetails: {
+              skillMatch: f.matchDetails?.skillMatch || { skills: [], count: 0 },
+              matchPercentage: f.matchDetails?.matchPercentage || 0
+            }
+          }));
+        }
+
+        const aiMessage = {
+          id: Date.now(),
+          timestamp: new Date().toISOString(),
+          isUser: false,
+          ...data.response
+        };
+
+        console.log('Processed message:', aiMessage);
+        setMessages(prev => [...prev, aiMessage]);
+        setConversations(prev => [aiMessage, ...prev]);
+      }
+    } catch (error) {
+      console.error('AI Chat Error:', error);
+      setError(error.message || "Sorry, I'm having trouble connecting right now.");
     } finally {
-      setIsTyping(false);
+      setLoading(false);
     }
   };
-
-  const updateSuggestedActions = (lastMessage) => {
-    const newSuggestions = [];
-    
-    if (lastMessage.toLowerCase().includes('developer')) {
-      newSuggestions.push(
-        'View top developers',
-        'Compare developer rates',
-        'Schedule interviews'
-      );
-    } else if (lastMessage.toLowerCase().includes('project')) {
-      newSuggestions.push(
-        'Define project scope',
-        'Get cost estimate',
-        'See similar projects'
-      );
-    }
-
-    if (newSuggestions.length > 0) {
-      setSuggestedActions(newSuggestions);
-    }
-  };
-
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-      if (e.ctrlKey && e.key === '/') {
-        document.querySelector('input')?.focus();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isOpen, onClose]);
 
   // Update the handleInterviewRequest function
   const handleInterviewRequest = async (freelancer) => {
@@ -912,7 +764,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           <ActionButton 
             className="secondary"
             onClick={() => {
-              window.open(`/profile/${safeFreelancer.id}`, '_blank');
+              navigate(`/profile/${safeFreelancer.id}`);
               onClose();
             }}
           >
@@ -920,8 +772,8 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           </ActionButton>
           <ActionButton 
             className="primary"
-            disabled={!safeFreelancer.availability}
             onClick={() => handleInterviewRequest(safeFreelancer)}
+            disabled={!safeFreelancer.availability}
           >
             Request Interview
           </ActionButton>
@@ -1220,22 +1072,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       </Header>
 
       <MessagesContainer>
-        <WelcomeMessage>
-          <h4>Welcome to Your AI Assistant!</h4>
-          <p>I can help you find freelancers, estimate projects, and answer your questions. What would you like to do?</p>
-        </WelcomeMessage>
-
-        <QuickActions>
-          {suggestedActions.map((action, index) => (
-            <QuickActionButton
-              key={index}
-              onClick={() => handleMessage(action)}
-            >
-              {action}
-            </QuickActionButton>
-          ))}
-        </QuickActions>
-
         {error && (
           <MessageText isUser={false} style={{ color: 'red' }}>
             {error}
@@ -1260,41 +1096,14 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
             {renderMessage(msg)}
           </MessageWrapper>
         ))}
-
-        {isTyping && (
-          <MessageWrapper isUser={false}>
-            <MessageTypingIndicator>
-              <span></span>
-              <span></span>
-              <span></span>
-            </MessageTypingIndicator>
-          </MessageWrapper>
-        )}
-
-        {error && (
-          <ErrorBoundary>
-            <p>{error.message}</p>
-            <ActionButton className="secondary" onClick={error.retry}>
-              Retry
-            </ActionButton>
-          </ErrorBoundary>
-        )}
-
-        <div ref={messagesEndRef} />
-      </MessagesContainer>
-
-      <InputContainer>
-        <Input
-          placeholder="Type a message (Ctrl + / to focus)"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && !loading && handleMessage(input)}
+        
+        {loading && (          <LoadingMessage>            <Spinner />            Processing...          </LoadingMessage>        )}        <div ref={messagesEndRef} />      </MessagesContainer>      <InputContainer>        <Input          placeholder="Ask me to find freelancers or help with your project..."          value={input}          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && !loading && handleMessage(e.target.value)}
           disabled={loading}
         />
-        <SendButton
-          onClick={() => !loading && handleMessage(input)}
+        <SendButton 
+          onClick={() => !loading && handleMessage(input)} 
           disabled={loading || !input.trim()}
-          title={loading ? "Processing..." : "Send message (Enter)"}
         >
           <SendIcon />
         </SendButton>
