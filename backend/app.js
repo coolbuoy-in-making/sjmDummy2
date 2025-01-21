@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 // Update CORS configuration
 app.use(cors({
   origin: [
-    'http://localhost:5173',  // Frontend
-    'http://localhost:8000'   // AI service
+    process.env.FRONTEND_URL || 'http://localhost:5173',  // Frontend
+    process.env.FLASK_URL || 'http://localhost:8000'   // AI service
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
