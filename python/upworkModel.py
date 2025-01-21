@@ -233,9 +233,7 @@ class UpworkIntegrationModel:
         return base_weights
 
     def filter_users(self, project: Project, matches: List[Dict]) -> List[Dict]:
-        """
-        Filter users based on Upwork-specific constraints.
-        """
+        """Filter users based on Upwork-specific constraints."""
         filtered_matches = []
         logger.info(f"\nFiltering {len(matches)} potential matches:")
         
@@ -245,22 +243,22 @@ class UpworkIntegrationModel:
             
             # Budget filter
             if user.hourly_rate < project.budget_range[0] or user.hourly_rate > project.budget_range[1]:
-                logger.info(f"✘ Excluded: Hourly rate ${user.hourly_rate} outside budget range ${project.budget_range[0]}-${project.budget_range[1]}")
+                logger.info(f"[X] Excluded: Hourly rate ${user.hourly_rate} outside budget range ${project.budget_range[0]}-${project.budget_range[1]}")
                 continue
-            logger.info(f"✓ Budget check passed: ${user.hourly_rate}/hr")
+            logger.info(f"[✓] Budget check passed: ${user.hourly_rate}/hr")
             
             # Availability check for high complexity
             if project.complexity == 'high' and not user.availability:
-                logger.info("✘ Excluded: Not available for high-complexity project")
+                logger.info("[X] Excluded: Not available for high-complexity project")
                 continue
-            logger.info(f"✓ Availability check passed: {user.availability}")
+            logger.info(f"[✓] Availability check passed")
             
             # Skill matching
             overlap_count = self.matching_engine.refine_skill_matching(project.required_skills, user.skills)
             if overlap_count < 2:
-                logger.info(f"✘ Excluded: Only {overlap_count} matching skills")
+                logger.info(f"[X] Excluded: Only {overlap_count} matching skills")
                 continue
-            logger.info(f"✓ Skill match: {overlap_count} overlapping skills")
+            logger.info(f"[✓] Skill match: {overlap_count} overlapping skills")
             
             # Add match score details
             match['skill_overlap'] = overlap_count
@@ -268,10 +266,75 @@ class UpworkIntegrationModel:
             match['rating_score'] = user.rating / 5
             
             filtered_matches.append(match)
-            logger.info(f"→ Added to matches with score: {match['combined_score']:.2f}")
+            logger.info(f"-> Added to matches with score: {match['combined_score']:.2f}")
         
-        logger.info(f"\nFiltering complete: {len(filtered_matches)} matches passed all criteria")
+        if not filtered_matches:
+            suggestions = self.generate_search_suggestions(project)
+            logger.info("\nNo matches found. Generated suggestions:")
+            for suggestion in suggestions:
+                logger.info(f"- {suggestion}")
+            
         return filtered_matches
+
+    def generate_search_suggestions(self, project: Project) -> List[Dict]:
+        """Generate helpful suggestions when no matches are found"""
+        suggestions = []
+        
+        # Budget suggestions
+        if project.budget_range[1] < 50:
+            suggestions.append({
+                'type': 'budget',
+                'message': "Consider increasing your budget range. Quality freelancers typically charge higher rates.",
+                'action': f"Try budget range: ${project.budget_range[1]}-${project.budget_range[1] * 2}/hr"
+            })
+        
+        # Skills suggestions
+        if len(project.required_skills) > 4:
+            core_skills = project.required_skills[:3]
+            suggestions.append({
+                'type': 'skills',
+                'message': "Try focusing on core skills first",
+                'action': f"Search with main skills: {', '.join(core_skills)}"
+            })
+        
+        # Experience level suggestions
+        if project.complexity == 'high':
+            suggestions.append({
+                'type': 'experience',
+                'message': "For complex projects, consider being more flexible with availability",
+                'action': "Include freelancers who are currently busy but highly qualified"
+            })
+        
+        # Similar skills suggestions
+        similar_skills = self.find_similar_skills(project.required_skills)
+        if similar_skills:
+            suggestions.append({
+                'type': 'alternative_skills',
+                'message': "Consider these related skills",
+                'action': f"Try including: {', '.join(similar_skills)}"
+            })
+        
+        return suggestions
+
+    def find_similar_skills(self, skills: List[str]) -> List[str]:
+        """Find similar or related skills"""
+        skill_map = {
+            'react': ['reactjs', 'react.js', 'react native'],
+            'nodejs': ['node.js', 'node', 'express.js'],
+            'python': ['django', 'flask', 'fastapi'],
+            'ui': ['user interface', 'ux design', 'web design'],
+            'aws': ['cloud computing', 'devops', 'azure'],
+            # Add more mappings as needed
+        }
+        
+        similar = set()
+        for skill in skills:
+            skill_lower = skill.lower()
+            for key, values in skill_map.items():
+                if skill_lower in [key] + values:
+                    similar.update(values)
+        
+        return list(similar - set(skills))
 
     async def find_top_matches(self, project: Project, top_n: int = 5):
         """Find top matching users for a project"""

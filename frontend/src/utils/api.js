@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
-
-// Export the api instance
-export const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json'
-  }
+// Create api instance
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 });
-// Add token to requests if available
+
+// Add token to requests
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -18,8 +14,35 @@ api.interceptors.request.use(config => {
   return config;
 });
 
-// Export auth methods separately
-export const auth = {
+// Add response interceptor for token refresh
+api.interceptors.response.use(
+  response => response,
+  async error => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && error.response?.data?.code === 'TOKEN_EXPIRED') {
+      try {
+        const { data } = await api.post('/auth/refresh', {
+          token: localStorage.getItem('token')
+        });
+        
+        localStorage.setItem('token', data.token);
+        originalRequest.headers.Authorization = `Bearer ${data.token}`;
+        
+        return api(originalRequest);
+      } catch (refreshError) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+// Auth methods
+const auth = {
   login: async (credentials) => {
     try {
       const response = await api.post('/auth/login', credentials);
@@ -50,3 +73,7 @@ export const auth = {
     }
   }
 };
+
+// Export both the api instance and auth methods
+export { auth };
+export default api;

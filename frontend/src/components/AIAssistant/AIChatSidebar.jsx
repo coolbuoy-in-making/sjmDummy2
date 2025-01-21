@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from '../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
+import api from '../../utils/api';
 
 const Sidebar = styled.div`
   position: fixed;
@@ -431,7 +433,96 @@ const ProjectSummary = styled.div`
   }
 `;
 
+// Add new styled components
+const CardActions = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+`;
+
+const ActionButton = styled.button`
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &.primary {
+    background: ${props => props.theme.colors.primary};
+    color: white;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  
+  &.secondary {
+    background: white;
+    color: ${props => props.theme.colors.primary};
+    border: 1px solid ${props => props.theme.colors.primary};
+    
+    &:hover {
+      background: ${props => props.theme.colors.background};
+    }
+  }
+
+  &:disabled {
+    background: ${props => props.theme.colors.lightGray};
+    border-color: transparent;
+    cursor: not-allowed;
+  }
+`;
+
+const StatusIndicator = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: ${props => props.online ? 'green' : props.theme.colors.gray};
+  font-size: 12px;
+  
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: ${props => props.online ? 'green' : props.theme.colors.lightGray};
+  }
+`;
+
+const SkillList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+`;
+
+const SkillPill = styled.span`
+  background: ${props => props.theme.colors.background};
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  button {
+    background: none;
+    border: none;
+    color: ${props => props.theme.colors.gray};
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    
+    &:hover {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+`;
 const AIChatSidebar = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([{
@@ -477,11 +568,13 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     setError(null);
     setLoading(true);
     
-    // Add user message to chat
-    const userMessage = { text: input, isUser: true, type: 'text' };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    
+    console.log('Sending request:', {
+      input,
+      details,
+      userType: user?.userType || 'client',
+      userId: user?.id
+    });
+
     try {
       const response = await fetch(`${import.meta.env.VITE_PYTHON_URL || 'http://localhost:8000'}/ai/chat`, {
         method: 'POST',
@@ -495,7 +588,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       });
 
       const data = await response.json();
-      console.log('AI Response:', data); // Debug log
+      console.log('AI Response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'An error occurred');
@@ -509,87 +602,137 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           ...data.response
         };
 
+        console.log('Processing AI message:', aiMessage);
+
+        if (aiMessage.type === 'freelancerList') {
+          console.log('Freelancers found:', aiMessage.freelancers?.length || 0);
+        }
+
         setMessages(prev => [...prev, aiMessage]);
         setConversations(prev => [aiMessage, ...prev]);
       }
     } catch (error) {
       console.error('AI Chat Error:', error);
-      const errorMessage = {
-        text: error.message || "Sorry, I'm having trouble connecting right now.",
-        isUser: false,
-        type: 'error'
-      };
-      setError(errorMessage.text);
-      setMessages(prev => [...prev, errorMessage]);
+      setError(error.message || "Sorry, I'm having trouble connecting right now.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleInterviewRequest = async (freelancerId) => {
+  // Update the handleInterviewRequest function
+  const handleInterviewRequest = async (freelancer) => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/ai/interview', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          freelancerId,
-          userId: user?.id
-        })
+      if (!user) {
+        navigate('/login', { 
+          state: { 
+            returnTo: window.location.pathname,
+            message: 'Please log in to request interviews' 
+          }
+        });
+        return;
+      }
+  
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Please log in to continue');
+      }
+  
+      const response = await api.post('/freelancers/interview', {
+        freelancerId: freelancer.id,
+        projectId: projectDetails?.id,
+        message: `Interview request for ${projectDetails?.skills?.join(', ')} project`
       });
-
-      const data = await response.json();
-      
-      if (data.success) {
+  
+      if (response.data.success) {
         setMessages(prev => [...prev, {
-          text: `Interview invitation sent to freelancer! I've prepared some relevant questions based on your project needs.`,
+          text: `Interview request sent to ${freelancer.name}! They will be notified and can respond to your request.`,
           isUser: false,
-          type: 'interview',
-          questions: data.questions
+          type: 'success'
         }]);
       }
     } catch (error) {
-      setMessages(prev => [...prev, {
-        text: `Error: ${error.message || "Sorry, I couldn't send the interview invitation. Please try again."}`,
-        isUser: false
-      }]);
+      if (error.response?.status === 401) {
+        // Handle unauthorized - likely token expired
+        setMessages(prev => [...prev, {
+          text: "Your session has expired. Please log in again.",
+          isUser: false,
+          type: 'error'
+        }]);
+        
+        // Delay navigation to show the message
+        setTimeout(() => {
+          navigate('/login', { 
+            state: { 
+              returnTo: window.location.pathname,
+              message: 'Please log in again to continue' 
+            }
+          });
+        }, 2000);
+      } else {
+        setMessages(prev => [...prev, {
+          text: error.response?.data?.message || "Failed to send interview request. Please try again.",
+          isUser: false,
+          type: 'error'
+        }]);
+      }
     } finally {
       setLoading(false);
     }
   };
+  
 
-  const renderFreelancerCard = (freelancer) => (
-    <FreelancerCard key={freelancer.id}>
-      <h5>{freelancer.name}</h5>
-      <div>{freelancer.jobTitle}</div>
-      <div className="skills">
-        {freelancer.skills.map((skill, j) => (
-          <SkillTag 
-            key={j} 
-            matched={freelancer.matchDetails?.skillMatch?.skills?.includes(skill)}
+  // Update the renderFreelancerCard function
+  const renderFreelancerCard = (freelancer) => {
+    if (!freelancer || !Array.isArray(freelancer.skills)) {
+      console.log('Invalid freelancer data:', freelancer);
+      return null;
+    }
+  
+    return (
+      <FreelancerCard key={freelancer.id}>
+        <h5>{freelancer.name}</h5>
+        <div>{freelancer.jobTitle}</div>
+        <StatusIndicator online={freelancer.availability}>
+          {freelancer.availability ? 'Online' : 'Offline'}
+        </StatusIndicator>
+        <div className="skills">
+          {freelancer.skills.map((skill, j) => (
+            <SkillTag 
+              key={j} 
+              matched={freelancer.matchDetails?.skillMatch?.skills?.includes(skill)}
+            >
+              {skill}
+            </SkillTag>
+          ))}
+        </div>
+        <div className="stats">
+          <span>${freelancer.hourlyRate}/hr</span>
+          <span>{freelancer.rating}% success</span>
+          <span>{freelancer.matchDetails?.matchPercentage || 0}% match</span>
+        </div>
+        <CardActions>
+          <ActionButton 
+            className="secondary"
+            onClick={() => {
+              navigate(`/profile/${freelancer.id}`);
+              onClose();
+            }}
           >
-            {skill}
-          </SkillTag>
-        ))}
-      </div>
-      <div className="stats">
-        <span>${freelancer.hourlyRate}/hr</span>
-        <span>{freelancer.rating}% success</span>
-        <span>{freelancer.matchDetails.matchPercentage}% match</span>
-      </div>
-      {freelancer.matchDetails?.availability?.immediateStart && (
-        <div className="availability">Available for immediate start</div>
-      )}
-      <button 
-        onClick={() => handleInterviewRequest(freelancer.id)}
-        disabled={!freelancer.matchDetails?.availability?.immediateStart}
-      >
-        Request Interview
-      </button>
-    </FreelancerCard>
-  );
+            View Profile
+          </ActionButton>
+          <ActionButton 
+            className="primary"
+            onClick={() => handleInterviewRequest(freelancer)}
+            disabled={!freelancer.availability}
+          >
+            Request Interview
+          </ActionButton>
+        </CardActions>
+      </FreelancerCard>
+    );
+  };
+  
 
   const renderMessageDebugInfo = (message) => {
     if (!message.debugInfo) return null;
@@ -616,7 +759,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const renderFreelancerList = (message) => (
     <FreelancerListContainer>
       <MessageText>{message.text}</MessageText>
-      
       {message.matchingProcess && (
         <MatchingProcess>
           <div className="debug-title">Matching Process:</div>
@@ -642,7 +784,14 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       ) : (
         <NoMatchMessage>
           <p>No freelancers found matching your exact criteria.</p>
-          <p>Try broadening your search or consider different skill combinations.</p>
+          {message.suggestions?.map((suggestion, index) => (
+            <div key={index} style={{ marginTop: '12px' }}>
+              <p><strong>{suggestion.message}</strong></p>
+              <SuggestionButton onClick={() => handleMessage('refine_search', suggestion.action)}>
+                {suggestion.action}
+              </SuggestionButton>
+            </div>
+          ))}
         </NoMatchMessage>
       )}
     </FreelancerListContainer>
@@ -689,14 +838,14 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
             className="edit" 
             onClick={() => {
               setShowSummary(false);
-              setCurrentProjectDetails(null);
+              setProjectDetails(null);
             }}
           >
             Edit Requirements
           </button>
           <button 
             className="confirm" 
-            onClick={() => handleMessage('confirm_project_details', details)}
+            onClick={() => handleMessage('confirm project details', details)}
           >
             Find Freelancers
           </button>
@@ -705,21 +854,19 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     );
   };
 
-  const renderProjectDetailsForm = (message) => {
-    const { requiredInputs } = message;
-    
+  const renderProjectDetailsForm = () => {    
     return (
       <ProjectDetailsForm>
         <div className="field">
           <label>Required Skills:</label>
-          <div className="skill-tags">
-            {requiredInputs.skills.initial.map((skill, index) => (
-              <SkillTag key={index}>
+          <SkillList>
+            {skills.map((skill, index) => (
+              <SkillPill key={index}>
                 {skill}
-                <button onClick={() => removeSkill(skill)}>×</button>
-              </SkillTag>
+                <button onClick={() => removeSkill(skill)}>&times;</button>
+              </SkillPill>
             ))}
-          </div>
+          </SkillList>
           <Input
             placeholder="Add more skills (press Enter)"
             value={newSkill}
@@ -896,20 +1043,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           </MessageWrapper>
         ))}
         
-        {loading && (
-          <LoadingMessage>
-            <Spinner />
-            Processing...
-          </LoadingMessage>
-        )}
-        <div ref={messagesEndRef} />
-      </MessagesContainer>
-
-      <InputContainer>
-        <Input
-          placeholder="Ask me to find freelancers or help with your project..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+        {loading && (          <LoadingMessage>            <Spinner />            Processing...          </LoadingMessage>        )}        <div ref={messagesEndRef} />      </MessagesContainer>      <InputContainer>        <Input          placeholder="Ask me to find freelancers or help with your project..."          value={input}          onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && !loading && handleMessage(e.target.value)}
           disabled={loading}
         />

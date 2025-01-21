@@ -19,7 +19,7 @@ app.use(cors({
     'http://localhost:5173',  // Frontend
     'http://localhost:8000'   // AI service
   ],
-  methods: ['GET', 'POST', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
@@ -33,11 +33,34 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
+// Add before your routes
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`, {
+    params: req.params,
+    query: req.query,
+    body: req.body,
+    path: req.path,
+    originalUrl: req.originalUrl
+  });
+  next();
+});
+
+// Mount routes with /api prefix
 app.use('/api/auth', authRoutes);
-app.use('/api/jobs', jobsRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/jobs', jobsRoutes);
 app.use('/api/freelancers', freelancersRoutes);
+
+// Add catch-all route for debugging
+app.use((req, res) => {
+  console.log('404 - Route not found:', {
+    method: req.method,
+    url: req.url,
+    params: req.params,
+    query: req.query
+  });
+  res.status(404).json({ message: 'Route not found' });
+});
 
 // Add error handling middleware
 app.use((err, req, res, next) => {
