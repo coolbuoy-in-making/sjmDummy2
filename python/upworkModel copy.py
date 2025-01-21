@@ -61,25 +61,16 @@ class UpworkIntegrationModel:
         self.freelancers = None
         self.matching_engine = None
         self.custom_weights = {
-            'content': 0.25,
-            'collaborative': 0.25,
+            'content': 0.3,
+            'collaborative': 0.3,
             'experience': 0.2,
             'rating': 0.1,
             'hourly_rate': 0.1,
-            'top_rated': 0.0,
-            'job_title': 0.1  # Add job title weight
+            'top_rated': 0.0
         }
         self.api_headers = {
             'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json'
-        }
-        self.job_title_keywords = {
-            'developer': ['developer', 'programmer', 'software engineer', 'coder', 'full stack'],
-            'designer': ['designer', 'ui/ux', 'graphic designer', 'web designer'],
-            'writer': ['writer', 'content creator', 'copywriter', 'editor'],
-            'marketing': ['marketer', 'digital marketer', 'seo specialist', 'growth hacker'],
-            'data': ['data scientist', 'data analyst', 'ml engineer', 'ai developer'],
-            'project manager': ['project manager', 'product manager', 'scrum master', 'agile coach']
         }
 
     async def load_freelancers(self) -> List[freelancer]:
@@ -237,10 +228,8 @@ class UpworkIntegrationModel:
             base_weights['content'] += 0.1
             base_weights['collaborative'] += 0.1
             base_weights['top_rated'] += 0.1
-            base_weights['job_title'] += 0.1  # Increase job title importance for complex projects
         elif project.complexity == 'low':
             base_weights['hourly_rate'] = 0.2
-            base_weights['job_title'] = 0.15  # Adjust for low complexity
         return base_weights
 
     def filter_freelancers(self, project: Project, matches: List[Dict]) -> List[Dict]:
@@ -266,12 +255,10 @@ class UpworkIntegrationModel:
             
             # Skill matching
             overlap_count = self.matching_engine.refine_skill_matching(project.required_skills, freelancer.skills)
-            
-            if project.complexity == 'high' and not freelancer.availability:
-                if overlap_count < 2:
-                    logger.info(f"[X] Excluded: Only {overlap_count} matching skills")
-                    continue
-                logger.info(f"[✓] Skill match: {overlap_count} overlapping skills")
+            if overlap_count < 2:
+                logger.info(f"[X] Excluded: Only {overlap_count} matching skills")
+                continue
+            logger.info(f"[✓] Skill match: {overlap_count} overlapping skills")
             
             # Add match score details
             match['skill_overlap'] = overlap_count
@@ -352,18 +339,15 @@ class UpworkIntegrationModel:
     async def find_top_matches(self, project: Project, top_n: int = 5):
         """Find top matching freelancers for a project"""
         try:
+            # Ensure matching engine is initialized
             if not self.matching_engine:
                 await self.initialize_matching_engine()
 
             self.custom_weights = self.adjust_weights_for_project(project)
-            all_matches = self.matching_engine.match_freelancers(
-                project, 
-                weights=self.custom_weights,
-                job_title_matcher=self._calculate_job_title_match
-            )
+            all_matches = self.matching_engine.match_freelancers(project, weights=self.custom_weights)
             filtered_matches = self.filter_freelancers(project, all_matches)
 
-            # Format matches for frontend with enhanced job title relevance
+            # Format matches for frontend
             formatted_matches = [{
                 'id': str(match['freelancer'].id),
                 'name': match['freelancer'].name,
@@ -379,12 +363,6 @@ class UpworkIntegrationModel:
                         'skills': project.required_skills,
                         'count': match.get('skill_overlap', 0)
                     },
-                    'jobTitleMatch': {
-                        'score': match.get('job_title_score', 0),
-                        'relevance': 'High' if match.get('job_title_score', 0) > 0.8 
-                                    else 'Medium' if match.get('job_title_score', 0) > 0.5 
-                                    else 'Low'
-                    },
                     'matchPercentage': round(float(match['combined_score'] * 100), 1),
                     'experienceScore': match.get('experience_score', 0),
                     'contentScore': match.get('content_score', 0),
@@ -394,7 +372,6 @@ class UpworkIntegrationModel:
 
             logger.info(f"Found {len(formatted_matches)} top matches")
             return formatted_matches
-
         except Exception as e:
             logger.error(f"Error finding matches: {e}")
             raise
@@ -608,35 +585,3 @@ class UpworkIntegrationModel:
             if choice in choices:
                 return choice
             print(f"Invalid choice. Please select from {', '.join(choices)}.")
-
-    def _calculate_job_title_match(self, project_description: str, freelancer_title: str) -> float:
-        """Calculate job title relevance score"""
-        try:
-            # Normalize text
-            description_lower = project_description.lower()
-            title_lower = freelancer_title.lower()
-
-            # Direct match bonus
-            if any(keyword in title_lower for keyword in description_lower.split()):
-                return 1.0
-
-            # Category match
-            for category_keywords in self.job_title_keywords.values():
-                category_in_description = any(kw in description_lower for kw in category_keywords)
-                category_in_title = any(kw in title_lower for kw in category_keywords)
-                
-                if category_in_description and category_in_title:
-                    return 0.8
-
-            # Partial match using word overlap
-            desc_words = set(description_lower.split())
-            title_words = set(title_lower.split())
-            overlap = len(desc_words.intersection(title_words))
-            
-            if overlap > 0:
-                return 0.5 + (0.1 * overlap)  # Bonus for each matching word
-
-            return 0.0
-        except Exception as e:
-            logger.error(f"Error in job title matching: {e}")
-            return 0.0

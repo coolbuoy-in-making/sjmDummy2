@@ -184,11 +184,11 @@ class SkillsExtract:
     def generate_ai_interview_questions(
         self, 
         project_description: str,
-        user_skills: List[str]
+        freelancer_skills: List[str]
     ) -> List[str]:
         """Generate AI-powered interview questions"""
         questions = [
-            f"How would you apply your {', '.join(user_skills)} to this project?",
+            f"How would you apply your {', '.join(freelancer_skills)} to this project?",
             "What is your approach to project management and deadlines?",
             "How do you handle communication with clients?",
             "Can you describe similar projects you've completed?",
@@ -203,9 +203,9 @@ class SkillsExtract:
 
 
 @dataclass
-class user:
+class freelancer:
     id: str
-    username: str
+    freelancername: str
     name: str
     job_title: str
     skills: List[str]
@@ -224,7 +224,7 @@ class user:
     def dict(self) -> Dict[str, any]:
         return {
             'id': self.id,
-            'username': self.username,
+            'freelancername': self.freelancername,
             'name': self.name,
             'job_title': self.job_title,
             'skills': self.skills,
@@ -249,74 +249,109 @@ class Project:
 class ContentBasedModel:
     def __init__(self):
         self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
-        self.user_tfidf = None
+        self.freelancer_tfidf = None
 
-    def train(self, user_data):
-        all_texts = [user.profile_text() for user in user_data]
-        self.user_tfidf = self.tfidf_vectorizer.fit_transform(all_texts)
+    def train(self, freelancer_data):
+        all_texts = [freelancer.profile_text() for freelancer in freelancer_data]
+        self.freelancer_tfidf = self.tfidf_vectorizer.fit_transform(all_texts)
 
     def predict(self, project_tfidf):
-        similarities = cosine_similarity(project_tfidf, self.user_tfidf).flatten()
+        similarities = cosine_similarity(project_tfidf, self.freelancer_tfidf).flatten()
         return similarities
 
 class CollaborativeModel:
     def __init__(self):
-        self.user_data = None
+        self.freelancer_data = None
         self.project_data = None
         self.interaction_matrix = None
+        self.skill_similarity_matrix = None
 
-    def train(self, project_data: List[Dict], user_data: List[user]):
-        self.user_data = user_data
+    def train(self, project_data: List[Dict], freelancer_data: List[freelancer]):
+        self.freelancer_data = freelancer_data
         self.project_data = project_data
 
-        num_users = len(user_data)
-        num_projects = len(project_data)
-
-        if num_projects == 0 or num_users == 0:
-            logger.warning("No users or projects available for training.")
-            self.interaction_matrix = np.zeros((num_users, 2))
+        num_freelancers = len(freelancer_data)
+        if num_freelancers == 0:
+            logger.warning("No freelancers available for training.")
+            self.interaction_matrix = np.zeros((num_freelancers, 2))
             return
 
         try:
-            total_sales = np.array([f.total_sales for f in user_data])
-            ratings = np.array([f.rating for f in user_data])
+            # Create skill similarity matrix
+            all_skills = set()
+            for f in freelancer_data:
+                all_skills.update(set(f.skills))
+            
+            skill_matrix = np.zeros((num_freelancers, len(all_skills)))
+            skill_to_idx = {skill: idx for idx, skill in enumerate(all_skills)}
+            
+            for i, f in enumerate(freelancer_data):
+                for skill in f.skills:
+                    if skill in skill_to_idx:
+                        skill_matrix[i, skill_to_idx[skill]] = 1
 
-            # Handle cases where min == max to avoid division by zero
-            if total_sales.max() > total_sales.min():
-                total_sales_norm = (total_sales - total_sales.min()) / (total_sales.max() - total_sales.min())
-            else:
-                total_sales_norm = np.zeros_like(total_sales)
+            # Calculate skill similarity between freelancers
+            self.skill_similarity_matrix = cosine_similarity(skill_matrix)
 
+            # Combine with traditional metrics
+            total_sales = np.array([f.total_sales for f in freelancer_data])
+            ratings = np.array([f.rating for f in freelancer_data])
+
+            # Normalize metrics
+            total_sales_norm = self._normalize_array(total_sales)
             ratings_norm = ratings / 5.0  # Assuming rating is out of 5
 
-            self.interaction_matrix = np.column_stack((total_sales_norm, ratings_norm))
+            self.interaction_matrix = np.column_stack((
+                total_sales_norm,
+                ratings_norm,
+                np.mean(self.skill_similarity_matrix, axis=1)
+            ))
+
         except Exception as e:
             logger.error(f"Error training collaborative model: {e}")
-            self.interaction_matrix = np.zeros((num_users, 2))
+            self.interaction_matrix = np.zeros((num_freelancers, 2))
+
+    def _normalize_array(self, arr):
+        if arr.max() > arr.min():
+            return (arr - arr.min()) / (arr.max() - arr.min())
+        return np.zeros_like(arr)
 
     def predict(self, project_description: str, project_skills: List[str]) -> List[float]:
-        """
-        Predict match scores using collaborative filtering.
-        """
         if self.interaction_matrix is None or self.interaction_matrix.size == 0:
             logger.warning("Interaction matrix is empty. Returning zero scores.")
-            return [0.0] * len(self.user_data)
+            return [0.0] * len(self.freelancer_data)
 
-        # Compute average scores while handling potential NaN values
-        scores = np.nanmean(self.interaction_matrix, axis=1)  # Avoid NaN propagation
-        return np.nan_to_num(scores).tolist()
+        try:
+            # Calculate skill match scores
+            skill_scores = np.zeros(len(self.freelancer_data))
+            for i, freelancer in enumerate(self.freelancer_data):
+                matched_skills = set(project_skills) & set(freelancer.skills)
+                skill_scores[i] = len(matched_skills) / max(len(project_skills), 1)
+
+            # Combine with interaction matrix
+            final_scores = (
+                0.5 * skill_scores +  # 50% weight to skill matching
+                0.3 * self.interaction_matrix[:, 0] +  # 30% to experience/sales
+                0.2 * self.interaction_matrix[:, 1]    # 20% to ratings
+            )
+
+            return final_scores.tolist()
+
+        except Exception as e:
+            logger.error(f"Error in collaborative prediction: {e}")
+            return [0.0] * len(self.freelancer_data)
 
 class MatchingEngine:
-    def __init__(self, users: List[user], projects: List[Project], skill_extractor: SkillsExtract, collaborative_model=None):
+    def __init__(self, freelancers: List[freelancer], projects: List[Project], skill_extractor: SkillsExtract, collaborative_model=None):
         """
-        Initialize the matching engine with users, projects, and skill extraction tools.
+        Initialize the matching engine with freelancers, projects, and skill extraction tools.
 
         Args:
-            users (List[user]): List of user objects.
+            freelancers (List[freelancer]): List of freelancer objects.
             projects (List[Project]): List of project objects.
             skill_extractor (SkillsExtract): A skill extraction tool for analyzing project descriptions.
         """
-        self.users = users
+        self.freelancers = freelancers
         self.projects = projects
         self.skill_extractor = skill_extractor
 
@@ -324,10 +359,10 @@ class MatchingEngine:
         self.content_model = ContentBasedModel()
         self.collaborative_model = collaborative_model
 
-        # Precompute TF-IDF vectors for users
+        # Precompute TF-IDF vectors for freelancers
         self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(
-            [user.profile_text() for user in users]
+            [freelancer.profile_text() for freelancer in freelancers]
         )
 
     @staticmethod
@@ -337,15 +372,15 @@ class MatchingEngine:
         """
         return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
-    def refine_skill_matching(self, required_skills: List[str], user_skills: List[str]) -> int:
+    def refine_skill_matching(self, required_skills: List[str], freelancer_skills: List[str]) -> int:
         """
         Refine skill matching to account for partial matches.
         Returns the number of overlapping or similar skills.
         """
         overlap_count = sum(
             1 for req_skill in required_skills
-            for user_skill in user_skills
-            if self.similar(req_skill, user_skill) > 0.7
+            for freelancer_skill in freelancer_skills
+            if self.similar(req_skill, freelancer_skill) > 0.7
         )
         return overlap_count
 
@@ -354,7 +389,7 @@ class MatchingEngine:
         Train both content-based and collaborative models.
         """
         # Train Content-Based Model
-        self.content_model.train(self.users)
+        self.content_model.train(self.freelancers)
 
         # Simulate historical project data for Collaborative Filtering
         simulated_project_data = [
@@ -367,87 +402,105 @@ class MatchingEngine:
             }
             for project in self.projects
         ]
-        self.collaborative_model.train(simulated_project_data, self.users)
+        self.collaborative_model.train(simulated_project_data, self.freelancers)
 
-    def match_users(self, project: Project, weights: Dict[str, float] = None) -> List[Dict]:
+    def match_freelancers(self, project: Project, weights: Dict[str, float] = None, job_title_matcher=None) -> List[Dict]:
         """
-        Match users to a given project using a hybrid approach.
+        Enhanced matching algorithm with skill prioritization and job title fallback.
         """
-        weights = weights or {'content': 0.3, 'collaborative': 0.4, 'experience': 0.2, 'rating': 0.1}
-        weight_sum = sum(weights.values())
-        if weight_sum > 1.0:
-            logger.warning("Weights sum exceeds 1.0, normalizing weights.")
-            weights = {k: v / weight_sum for k, v in weights.items()}
+        weights = weights or {
+            'skills': 0.45,       # Increased weight for skills
+            'experience': 0.20,
+            'rating': 0.15,
+            'job_title': 0.10,    # Reduced but still significant
+            'availability': 0.10
+        }
 
-        # Extract required skills
-        project_skills = self.skill_extractor.extract_skills(project.description)
+        try:
+            project_skills = set(s.lower() for s in project.required_skills)
+            results = []
 
-        # Calculate TF-IDF vector for the project description
-        project_tfidf = self.tfidf_vectorizer.transform([project.description])
+            for freelancer in self.freelancers:
+                # Calculate primary skill match
+                freelancer_skills = set(s.lower() for s in freelancer.skills)
+                skill_overlap = project_skills & freelancer_skills
+                skill_match_score = len(skill_overlap) / max(len(project_skills), 1)
 
-        # Compute Content-Based Scores
-        content_scores = self.content_model.predict(project_tfidf)
+                # Calculate experience score
+                exp_score = min(freelancer.experience / 10.0, 1.0)  # Cap at 10 years
 
-        # Compute Collaborative Scores
-        collaborative_scores = self.collaborative_model.predict(project.description, project_skills)
+                # Calculate rating score
+                rating_score = freelancer.rating / 5.0  # Assuming rating is out of 5
 
-        # Combine Scores with boosted weight for skill overlap
-        final_scores = []
-        for idx, user in enumerate(self.users):
-            # Use refined skill matching logic
-            skill_overlap_count = self.refine_skill_matching(project_skills, user.skills)
-            skill_match_score = skill_overlap_count / len(project_skills) if project_skills else 0
+                # Job title relevance (fallback)
+                job_title_score = 0.0
+                if skill_match_score < 0.5 and job_title_matcher:  # Only use as fallback
+                    job_title_score = job_title_matcher(project.description, freelancer.job_title)
 
-            combined_score = (
-                weights['content'] * content_scores[idx]
-                + weights['collaborative'] * collaborative_scores[idx]
-                + weights['experience'] * (user.experience / 10)
-                + weights['rating'] * (user.rating / 5)
-                + 0.2 * skill_match_score  # Boost for skill overlap
-            )
-            final_scores.append({
-                'user': user,
-                'combined_score': combined_score,
-                'content_score': content_scores[idx],
-                'collaborative_score': collaborative_scores[idx],
-                'skill_overlap': skill_overlap_count,
-            })
+                # Availability score
+                availability_score = 1.0 if freelancer.availability else 0.5
 
-        # Sort and return top matches
-        return sorted(final_scores, key=lambda x: x['combined_score'], reverse=True)
+                # Calculate weighted score
+                total_score = (
+                    weights['skills'] * skill_match_score +
+                    weights['experience'] * exp_score +
+                    weights['rating'] * rating_score +
+                    weights['job_title'] * job_title_score +
+                    weights['availability'] * availability_score
+                )
+
+                results.append({
+                    'freelancer': freelancer,
+                    'combined_score': total_score,
+                    'skill_overlap': len(skill_overlap),
+                    'matched_skills': list(skill_overlap),
+                    'skill_score': skill_match_score,
+                    'experience_score': exp_score,
+                    'rating_score': rating_score,
+                    'job_title_score': job_title_score,
+                    'availability_score': availability_score
+                })
+
+            # Sort by combined score and skill match as secondary criteria
+            results.sort(key=lambda x: (x['combined_score'], x['skill_overlap']), reverse=True)
+            return results
+
+        except Exception as e:
+            logger.error(f"Error in matching freelancers: {e}")
+            return []
 
     def get_top_matches(self, project: Project, top_n: int = 5) -> List[Dict]:
         """
-        Get the top N user matches for a project.
+        Get the top N freelancer matches for a project.
 
         Args:
             project (Project): The project for which to find matches.
             top_n (int, optional): Number of top matches to return. Defaults to 5.
 
         Returns:
-            List[Dict]: A list of top N users.
+            List[Dict]: A list of top N freelancers.
         """
-        all_matches = self.match_users(project)
+        all_matches = self.match_freelancers(project)
         return all_matches[:top_n]
 
 
-    def interview_and_evaluate(self, user: user, project: Project) -> Dict:
-        """Evaluate user suitability"""
+    def interview_and_evaluate(self, freelancer: freelancer, project: Project) -> Dict:
+        """Evaluate freelancer suitability"""
         questions = self.skill_extractor.generate_ai_interview_questions(
             project.description,
-            user.skills
+            freelancer.skills
         )
         
         return {
-            'user': user.dict(),
+            'freelancer': freelancer.dict(),
             'questions': questions,
             'skill_match': self.refine_skill_matching(
                 project.required_skills,
-                user.skills
+                freelancer.skills
             )
         }
     
-    def ask_professional_questions(self, user: user, project: Project) -> List[str]:
+    def ask_professional_questions(self, freelancer: freelancer, project: Project) -> List[str]:
         questions = [
             "Can you describe your experience with this type of project?",
             "How do you handle tight deadlines in your work?",
@@ -457,7 +510,7 @@ class MatchingEngine:
         return questions
 
     def collect_answers(self, questions: List[str]) -> Dict[str, str]:
-        return {q: "user's response to " + q for q in questions}
+        return {q: "freelancer's response to " + q for q in questions}
 
     def ask_for_portfolio(self) -> Optional[str]:
         return "Portfolio link or file submission URL"
@@ -468,25 +521,25 @@ class MatchingEngine:
 
     def ask_client_for_custom_questions(self) -> Optional[Dict[str, str]]:
         custom_questions = {
-            "What is your preferred communication tool?": "user's response"
+            "What is your preferred communication tool?": "freelancer's response"
         }
         return custom_questions
 
-    def accept_or_reject_user(self, user: user, project: Project):
-        client_decision = input(f"Do you want to accept {user.username} for project {project.id}? (yes/no): ")
+    def accept_or_reject_freelancer(self, freelancer: freelancer, project: Project):
+        client_decision = input(f"Do you want to accept {freelancer.freelancername} for project {project.id}? (yes/no): ")
         if client_decision.lower() == 'yes':
             return True
         return False
 
-    def hire_user(self, user: user):
-        print(f"Notification: {user.username} has been hired!")
+    def hire_freelancer(self, freelancer: freelancer):
+        print(f"Notification: {freelancer.freelancername} has been hired!")
 
-def normalize_csv(file_path: str, csv_columns: Optional[Dict[str, str]] = None) -> List[user]:
+def normalize_csv(file_path: str, csv_columns: Optional[Dict[str, str]] = None) -> List[freelancer]:
     import pandas as pd
     df = pd.read_csv(file_path)
     csv_columns = csv_columns or {
         'id': 'id',
-        'username': 'username',
+        'freelancername': 'freelancername',
         'name': 'name',
         'job_title': 'job_title',
         'skills': 'skills',
@@ -498,12 +551,12 @@ def normalize_csv(file_path: str, csv_columns: Optional[Dict[str, str]] = None) 
         'total_sales': 'total_sales'
     }
 
-    users = []
+    freelancers = []
     for _, row in df.iterrows():
         try:
-            user = user(
+            freelancer = freelancer(
                 id=row[csv_columns['id']],
-                username=row[csv_columns['username']],
+                freelancername=row[csv_columns['freelancername']],
                 name=row[csv_columns['name']],
                 job_title=row[csv_columns['job_title']],
                 skills=row[csv_columns['skills']].split(','),
@@ -514,10 +567,10 @@ def normalize_csv(file_path: str, csv_columns: Optional[Dict[str, str]] = None) 
                 availability=row[csv_columns['availability']],
                 total_sales=int(row.get(csv_columns['total_sales'], 0))
             )
-            users.append(user)
+            freelancers.append(freelancer)
         except Exception as e:
             logger.warning(f"Skipping row due to error: {e}")
-    return users
+    return freelancers
 
 class Server:
     def __init__(self, host='127.0.0.1', port=65432):
@@ -561,7 +614,7 @@ class Server:
 
     def start_client_in_new_terminal(self):
         try:
-            client_command = [sys.executable, "user.py", self.host, str(self.port)]
+            client_command = [sys.executable, "freelancer.py", self.host, str(self.port)]
 
             # Automatically open a new terminal with the argument
             if os.name == 'nt':  # Windows
