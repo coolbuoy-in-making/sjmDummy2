@@ -3,7 +3,7 @@ import os
 import sys
 import socket
 import subprocess
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 import logging
 
 # models
@@ -62,123 +62,133 @@ class SkillsExtract:
         except LookupError:
             nltk.download('stopwords', quiet=True)
 
-        # Initialize vectorization tools
-        self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
-        self.rake = Rake()
-
-        # Manual keywords for initial skill extraction
-        self.manual_keywords = [
-            # Web Development
-    "web development", "frontend development", "backend development", "full-stack development", "HTML", "CSS",
-    "JavaScript", "React", "Angular", "Vue.js", "Node.js", "Django", "Flask", "PHP", "Ruby on Rails", "ASP.NET",
-    "Laravel", "WordPress", "Shopify", "eCommerce", "Web design", "UI/UX design", "Responsive design",
-
-    # Programming Languages
-    "Python", "JavaScript", "Java", "C++", "C#", "Ruby", "PHP", "Go", "Swift", "Kotlin", "R", "MATLAB", "Perl",
-    "TypeScript", "Rust", "Scala", "Haskell", "Shell scripting", "Bash", "SQL", "NoSQL", "GraphQL",
-
-    # Data Science & Machine Learning
-    "data science", "machine learning", "deep learning", "artificial intelligence", "AI", "data analysis", "data engineering",
-    "Big Data", "Hadoop", "Spark", "TensorFlow", "PyTorch", "scikit-learn", "Keras", "Pandas", "NumPy", "Matplotlib",
-    "Seaborn", "data visualization", "statistics", "natural language processing", "NLP", "computer vision",
-
-    # Cloud Computing
-    "cloud computing", "AWS", "Amazon Web Services", "Google Cloud Platform", "GCP", "Microsoft Azure", "cloud architecture",
-    "DevOps", "CI/CD", "Docker", "Kubernetes", "Terraform", "Ansible", "cloud security", "serverless architecture",
-
-    # Cybersecurity
-    "cybersecurity", "ethical hacking", "penetration testing", "network security", "cryptography", "incident response",
-    "firewall management", "security operations", "SIEM", "SOC", "threat analysis", "vulnerability assessment",
-
-    # Marketing & Content Creation
-    "marketing", "digital marketing", "SEO", "search engine optimization", "content marketing", "social media marketing",
-    "email marketing", "influencer marketing", "Google Ads", "Facebook Ads", "copywriting", "content writing", "video editing",
-    "graphic design", "branding", "market research", "affiliate marketing",
-
-    # Design
-    "graphic design", "UI design", "UX design", "Figma", "Adobe Photoshop", "Adobe Illustrator", "Adobe XD", "Canva",
-    "motion graphics", "3D design", "Blender", "AutoCAD", "Sketch", "prototyping", "interaction design",
-
-    # Writing & Communication
-    "writing", "content writing", "technical writing", "creative writing", "editing", "proofreading", "copywriting",
-    "blogging", "academic writing", "speechwriting", "transcription", "translation", "grant writing", "business communication",
-
-    # Project Management & Business
-    "project management", "Agile", "Scrum", "Kanban", "Jira", "Trello", "Asana", "business analysis", "product management",
-    "business strategy", "Lean", "Six Sigma", "change management", "operations management", "supply chain management",
-
-    # Other Skills
-    "game development", "Unity", "Unreal Engine", "VR", "AR", "IoT", "robotics", "blockchain", "smart contracts",
-    "solidity", "data entry", "virtual assistant", "technical support", "customer support", "sales", "financial analysis",
-    "stock trading", "investment analysis", "legal writing", "paralegal", "video production", "podcasting", "music production",
-    "audio editing"
-        ]
-
-    def extract_skills(self, project_description: str) -> List[str]:
-        """
-        Advanced skill extraction with multiple strategies:
-        1. Manual keyword matching
-        2. NLTK RAKE keyword extraction
-        3. NLTK-based text processing
-        4. TF-IDF based extraction
-
-        Args:
-            project_description (str): Textual description of the project
-
-        Returns:
-            List[str]: Extracted and cleaned skills
-        """
-        # Normalize project description
-        project_description = project_description.lower()
-
-        # Step 1: Manual Keyword Matching
-        manual_matched_skills = [
-            keyword for keyword in self.manual_keywords
-            if keyword.lower() in project_description
-        ]
-
-        # Step 2: NLTK RAKE Keyword Extraction
-        self.rake.extract_keywords_from_text(project_description)
-        rake_keywords = self.rake.get_ranked_phrases()
-
-        # Step 3: NLTK-based text processing
-        # Tokenize and remove stopwords
+        # Initialize stop words (excluding important words)
         stop_words = set(stopwords.words('english'))
-        tokens = word_tokenize(project_description)
-        nltk_keywords = [
-            word for word in tokens
-            if word.lower() not in stop_words
-            and len(word) > 2
-        ]
+        self.stop_words = stop_words - {
+            'need', 'needed', 'want', 'looking', 'developer', 'designer', 
+            'manager', 'expert', 'senior', 'junior', 'level'
+        }
 
-        # Step 4: TF-IDF Skill Extraction
-        try:
-            tfidf_matrix = self.tfidf_vectorizer.fit_transform([project_description])
-            feature_names = self.tfidf_vectorizer.get_feature_names_out()
-            tfidf_scores = tfidf_matrix.toarray()[0]
+        # Initialize other attributes
+        self.tfidf_vectorizer = TfidfVectorizer(stop_words=self.stop_words)
+        self.rake = Rake()
+        self.manual_keywords = []
+        self.job_titles = set()
+        self.known_skills = set()
 
-            # Get top keywords by TF-IDF score
-            top_indices = tfidf_scores.argsort()[-10:][::-1]
-            tfidf_keywords = [feature_names[i] for i in top_indices]
-        except Exception as e:
-            tfidf_keywords = []
+        logger.info("SkillsExtract initialized with custom stop words")
 
-        # Combine all extraction methods
-        all_skills = manual_matched_skills + rake_keywords + nltk_keywords + tfidf_keywords
+    def load_keywords_from_database(self, freelancers: List['freelancer']) -> None:
+        """Load skills and job titles from actual database entries"""
+        for f in freelancers:
+            # Add job titles
+            if f.job_title:
+                self.job_titles.add(f.job_title.lower())
+                # Also add individual words from job titles
+                self.job_titles.update(word.lower() for word in f.job_title.split())
+            
+            # Add skills
+            if f.skills:
+                self.known_skills.update(skill.lower() for skill in f.skills)
+        
+        # Update manual keywords to include all known terms
+        self.manual_keywords = list(self.known_skills | self.job_titles)
+        
+        logger.info(f"Loaded {len(self.job_titles)} job titles and {len(self.known_skills)} skills from database")
 
-        # Advanced filtering and cleaning
-        filtered_skills = []
-        for skill in all_skills:
-            skill = skill.lower().strip()
-            # Check if skill is in our manual keywords or derives from them
-            if len(skill) > 2 and any(
-                category.lower() in skill
-                for category in self.manual_keywords
-            ):
-                filtered_skills.append(skill)
+    def extract_skills(self, text: str) -> List[str]:
+        """Enhanced word-by-word skill extraction"""
+        matched_skills = set()
+        words = word_tokenize(text.lower())
+        
+        # Create word combinations for checking
+        combinations = []
+        for i in range(len(words)):
+            # Skip stopwords except for important terms
+            if words[i] not in self.stop_words:
+                # Single word
+                combinations.append(words[i])
+                
+                # Two-word combinations
+                if i < len(words) - 1:
+                    combinations.append(f"{words[i]} {words[i+1]}")
+                
+                # Three-word combinations
+                if i < len(words) - 2:
+                    combinations.append(f"{words[i]} {words[i+1]} {words[i+2]}")
 
-        # Remove duplicates and return
-        return list(set(filtered_skills))
+        # Check each combination against known skills and job titles
+        for combo in combinations:
+            if combo in self.known_skills:
+                matched_skills.add(combo)
+            if combo in self.job_titles:
+                matched_skills.add(combo)
+
+        logger.debug(f"Extracted skills from '{text}': {matched_skills}")
+        return list(matched_skills)
+
+    def verify_keyword(self, keyword: str) -> Dict[str, Any]:
+        """Enhanced keyword verification with word-by-word analysis"""
+        words = word_tokenize(keyword.lower())
+        matches = []
+        
+        # Check each word combination against skills and job titles
+        for i in range(len(words)):
+            if words[i] not in self.stop_words:
+                # Single word
+                current_word = words[i]
+                if current_word in self.known_skills:
+                    matches.append(('skill', current_word))
+                if current_word in self.job_titles:
+                    matches.append(('job_title', current_word))
+
+                # Two-word combinations if possible
+                if i < len(words) - 1:
+                    two_words = f"{words[i]} {words[i+1]}"
+                    if two_words in self.known_skills:
+                        matches.append(('skill', two_words))
+                    if two_words in self.job_titles:
+                        matches.append(('job_title', two_words))
+        
+        if matches:
+            # Group matches by type
+            skill_matches = [m[1] for m in matches if m[0] == 'skill']
+            job_matches = [m[1] for m in matches if m[0] == 'job_title']
+            
+            return {
+                'exists': True,
+                'matches': list(set(skill_matches + job_matches)),
+                'skills': list(set(skill_matches)),
+                'job_titles': list(set(job_matches)),
+                'type': 'skill' if skill_matches else 'job_title'
+            }
+        
+        # No matches found - find similar terms
+        similar_terms = self._find_similar_terms(keyword)
+        return {
+            'exists': False,
+            'similar_terms': similar_terms,
+            'type': None,
+            'matches': [],
+            'skills': [],
+            'job_titles': []
+        }
+
+    def _find_similar_terms(self, keyword: str) -> List[str]:
+        """Find similar terms from known skills and job titles"""
+        similar = []
+        
+        for term in self.manual_keywords:
+            if (keyword in term or term in keyword or
+                SequenceMatcher(None, keyword, term).ratio() > 0.8):
+                similar.append(term)
+        
+        return similar[:5]  # Return top 5 similar terms
+
+    def _find_related_skills(self, keyword: str) -> List[str]:
+        """Find related skills based on co-occurrence in profiles"""
+        # This would be implemented in the specific platform integration
+        return []
 
     @classmethod
     def generate_ai_interview_questions(
@@ -364,6 +374,8 @@ class MatchingEngine:
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(
             [freelancer.profile_text() for freelancer in freelancers]
         )
+        self.current_matches = []  # Store all matches for pagination
+        self.page_size = 5  # Number of freelancers per page
 
     @staticmethod
     def similar(a: str, b: str) -> float:
@@ -404,70 +416,128 @@ class MatchingEngine:
         ]
         self.collaborative_model.train(simulated_project_data, self.freelancers)
 
-    def match_freelancers(self, project: Project, weights: Dict[str, float] = None, job_title_matcher=None) -> List[Dict]:
+    def match_freelancers(self, project: Project, weights: Dict[str, float] = None, job_title_matcher=None, page: int = 1) -> Dict[str, Any]:
         """
-        Enhanced matching algorithm with skill prioritization and job title fallback.
+        Enhanced matching with pagination support
+        Returns dict with matches and pagination info
         """
-        weights = weights or {
-            'skills': 0.45,       # Increased weight for skills
-            'experience': 0.20,
-            'rating': 0.15,
-            'job_title': 0.10,    # Reduced but still significant
-            'availability': 0.10
-        }
-
         try:
-            project_skills = set(s.lower() for s in project.required_skills)
-            results = []
+            weights = weights or {
+                'skills': 0.45,
+                'experience': 0.20,
+                'rating': 0.15,
+                'job_title': 0.10,
+                'availability': 0.10
+            }
 
-            for freelancer in self.freelancers:
-                # Calculate primary skill match
-                freelancer_skills = set(s.lower() for s in freelancer.skills)
-                skill_overlap = project_skills & freelancer_skills
-                skill_match_score = len(skill_overlap) / max(len(project_skills), 1)
+            # Only compute matches if this is first page or matches aren't stored
+            if page == 1 or not self.current_matches:
+                all_matches = []
+                project_skills = set(s.lower() for s in project.required_skills)
 
-                # Calculate experience score
-                exp_score = min(freelancer.experience / 10.0, 1.0)  # Cap at 10 years
+                for freelancer in self.freelancers:
+                    # ...existing matching logic...
+                    matched_skills = project_skills & set(s.lower() for s in freelancer.skills)
+                    skill_match_score = len(matched_skills) / max(len(project_skills), 1)
+                    
+                    # Get scores
+                    exp_score = min(freelancer.experience / 10.0, 1.0)
+                    rating_score = freelancer.rating / 5.0
+                    availability_score = 1.0 if freelancer.availability else 0.5
+                    
+                    # Calculate job title score if provided
+                    job_title_score = 0.0
+                    if job_title_matcher and skill_match_score < 0.5:
+                        job_title_score = job_title_matcher(project.description, freelancer.job_title)
 
-                # Calculate rating score
-                rating_score = freelancer.rating / 5.0  # Assuming rating is out of 5
+                    # Calculate weighted score
+                    total_score = (
+                        weights['skills'] * skill_match_score +
+                        weights['experience'] * exp_score +
+                        weights['rating'] * rating_score +
+                        weights['job_title'] * job_title_score +
+                        weights['availability'] * availability_score
+                    )
 
-                # Job title relevance (fallback)
-                job_title_score = 0.0
-                if skill_match_score < 0.5 and job_title_matcher:  # Only use as fallback
-                    job_title_score = job_title_matcher(project.description, freelancer.job_title)
+                    # Store match details
+                    match = {
+                        'freelancer': freelancer,
+                        'combined_score': total_score,
+                        'skill_overlap': len(matched_skills),
+                        'matched_skills': list(matched_skills),
+                        'skill_score': skill_match_score,
+                        'experience_score': exp_score,
+                        'rating_score': rating_score,
+                        'job_title_score': job_title_score,
+                        'availability_score': availability_score
+                    }
+                    all_matches.append(match)
 
-                # Availability score
-                availability_score = 1.0 if freelancer.availability else 0.5
+                # Sort matches by score
+                all_matches.sort(key=lambda x: (x['combined_score'], x['skill_overlap']), reverse=True)
+                self.current_matches = all_matches
 
-                # Calculate weighted score
-                total_score = (
-                    weights['skills'] * skill_match_score +
-                    weights['experience'] * exp_score +
-                    weights['rating'] * rating_score +
-                    weights['job_title'] * job_title_score +
-                    weights['availability'] * availability_score
-                )
+            # Calculate pagination
+            start_idx = (page - 1) * self.page_size
+            end_idx = start_idx + self.page_size
+            page_matches = self.current_matches[start_idx:end_idx]
+            total_matches = len(self.current_matches)
+            total_pages = (total_matches + self.page_size - 1) // self.page_size
 
-                results.append({
-                    'freelancer': freelancer,
-                    'combined_score': total_score,
-                    'skill_overlap': len(skill_overlap),
-                    'matched_skills': list(skill_overlap),
-                    'skill_score': skill_match_score,
-                    'experience_score': exp_score,
-                    'rating_score': rating_score,
-                    'job_title_score': job_title_score,
-                    'availability_score': availability_score
-                })
-
-            # Sort by combined score and skill match as secondary criteria
-            results.sort(key=lambda x: (x['combined_score'], x['skill_overlap']), reverse=True)
-            return results
+            return {
+                'matches': page_matches,
+                'pagination': {
+                    'current_page': page,
+                    'total_pages': total_pages,
+                    'total_matches': total_matches,
+                    'has_next': page < total_pages,
+                    'has_previous': page > 1
+                }
+            }
 
         except Exception as e:
             logger.error(f"Error in matching freelancers: {e}")
-            return []
+            return {
+                'matches': [],
+                'pagination': {
+                    'current_page': 1,
+                    'total_pages': 1,
+                    'total_matches': 0,
+                    'has_next': False,
+                    'has_previous': False
+                }
+            }
+
+    def get_next_matches(self, page: int = 1) -> Dict[str, Any]:
+        """Get next page of matches from current results"""
+        if not self.current_matches:
+            return {
+                'matches': [],
+                'pagination': {
+                    'current_page': 1,
+                    'total_pages': 1,
+                    'total_matches': 0,
+                    'has_next': False,
+                    'has_previous': False
+                }
+            }
+
+        start_idx = (page - 1) * self.page_size
+        end_idx = start_idx + self.page_size
+        page_matches = self.current_matches[start_idx:end_idx]
+        total_matches = len(self.current_matches)
+        total_pages = (total_matches + self.page_size - 1) // self.page_size
+
+        return {
+            'matches': page_matches,
+            'pagination': {
+                'current_page': page,
+                'total_pages': total_pages,
+                'total_matches': total_matches,
+                'has_next': page < total_pages,
+                'has_previous': page > 1
+            }
+        }
 
     def get_top_matches(self, project: Project, top_n: int = 5) -> List[Dict]:
         """
@@ -672,3 +742,4 @@ class Server:
             self.is_connected = False
         except Exception as e:
             print(f"Error closing connection: {e}")
+

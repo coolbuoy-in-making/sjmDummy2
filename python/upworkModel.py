@@ -81,6 +81,13 @@ class UpworkIntegrationModel:
             'data': ['data scientist', 'data analyst', 'ml engineer', 'ai developer'],
             'project manager': ['project manager', 'product manager', 'scrum master', 'agile coach']
         }
+        # Add greetings to ignore
+        self.greetings = {'hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'}
+        
+        # Initialize collections for database-driven keyword matching
+        self.skill_frequencies = {}
+        self.job_title_frequencies = {}
+        self.skill_cooccurrence = {}
 
     async def load_freelancers(self) -> List[freelancer]:
         """Load freelancers from backend API"""
@@ -177,6 +184,13 @@ class UpworkIntegrationModel:
                 logger.error("No freelancers available for matching engine")
                 raise Exception("No freelancers available")
 
+            # Initialize skill extractor with database terms
+            self.skill_extractor.load_keywords_from_database(self.freelancers)
+            
+            # Build frequency and co-occurrence data
+            self._build_skill_statistics()
+            
+            # Initialize matching engine
             collaborative_model = self.customize_matching_engine()
             self.matching_engine = MatchingEngine(
                 freelancers=self.freelancers,
@@ -189,7 +203,27 @@ class UpworkIntegrationModel:
         except Exception as e:
             logger.error(f"Error initializing matching engine: {e}")
             raise
-        
+
+    def _build_skill_statistics(self):
+        """Build statistics about skills and job titles from actual data"""
+        for freelancer in self.freelancers:
+            # Count job title frequencies
+            title = freelancer.job_title.lower()
+            self.job_title_frequencies[title] = self.job_title_frequencies.get(title, 0) + 1
+            
+            # Count skill frequencies
+            for skill in freelancer.skills:
+                skill_lower = skill.lower()
+                self.skill_frequencies[skill_lower] = self.skill_frequencies.get(skill_lower, 0) + 1
+                
+                # Build skill co-occurrence matrix
+                for other_skill in freelancer.skills:
+                    if skill_lower != other_skill.lower():
+                        if skill_lower not in self.skill_cooccurrence:
+                            self.skill_cooccurrence[skill_lower] = {}
+                        self.skill_cooccurrence[skill_lower][other_skill.lower()] = \
+                            self.skill_cooccurrence[skill_lower].get(other_skill.lower(), 0) + 1
+
     def customize_matching_engine(self):
         """
         Customizes the collaborative model for Upwork to include total_jobs and success_rate.
@@ -640,3 +674,291 @@ class UpworkIntegrationModel:
         except Exception as e:
             logger.error(f"Error in job title matching: {e}")
             return 0.0
+
+    async def analyze_job_title(self, title: str) -> Dict[str, Any]:
+        """Enhanced job title analysis with accurate skill mapping"""
+        try:
+            # Check for greeting
+            if title.lower().strip() in self.greetings:
+                return {
+                    'type': 'greeting',
+                    'message': "Hi! I can help you find freelancers. What kind of skills or expertise are you looking for?"
+                }
+
+            # Split and analyze each word
+            verification = self.skill_extractor.verify_keyword(title)
+            
+            # Log the verification results
+            logger.debug(f"Keyword verification results: {verification}")
+            
+            if not verification['exists']:
+                similar_terms = verification['similar_terms']
+                popular_cats = self._get_popular_categories()
+                
+                return {
+                    'type': 'no_match',
+                    'message': f"I couldn't find any exact matches for '{title}'. Here are some related options:",
+                    'suggestions': similar_terms,
+                    'popular_categories': popular_cats,
+                    'suggested_skills': self._get_related_skills(title.lower())
+                }
+
+            # Find matching freelancers based on verified skills and job titles
+            matching_freelancers = []
+            
+            # Search by skills
+            for skill in verification['skills']:
+                skill_matches = [
+                    f for f in self.freelancers 
+                    if any(skill.lower() in s.lower() for s in f.skills)
+                ]
+                matching_freelancers.extend(skill_matches)
+                
+            # Search by job titles
+            for job_title in verification['job_titles']:
+                title_matches = [
+                    f for f in self.freelancers 
+                    if job_title.lower() in f.job_title.lower()
+                ]
+                matching_freelancers.extend(title_matches)
+
+            # Remove duplicates while preserving order
+            seen = set()
+            matching_freelancers = [
+                f for f in matching_freelancers 
+                if not (f.id in seen or seen.add(f.id))
+            ]
+
+            if not matching_freelancers:
+                return self._generate_no_matches_response(title)
+
+            # Get skills from matching freelancers
+            related_skills = set()
+            skill_frequency = {}
+            for f in matching_freelancers:
+                for skill in f.skills:
+                    if skill.lower() not in [k.lower() for k in verification['matches']]:
+                        skill_frequency[skill] = skill_frequency.get(skill, 0) + 1
+                        related_skills.add(skill)
+
+            # Calculate profile statistics
+            stats = self._calculate_profile_statistics(matching_freelancers)
+
+            return {
+                'type': 'success',
+                'keyword_type': verification['type'],
+                'suggested_skills': list(related_skills)[:5],
+                'avg_hourly_range': stats['hourly_range'],
+                'sample_profiles': stats['sample_profiles'],
+                'total_matches': len(matching_freelancers),
+                'skill_requirements': stats['common_requirements']
+            }
+
+        except Exception as e:
+            logger.error(f"Error analyzing job title: {e}", exc_info=True)
+            return {
+                'type': 'error',
+                'message': f"Error analyzing request: {str(e)}",
+                'error': str(e)
+            }
+
+    def _matches_keyword(self, freelancer: freelancer, keyword: str) -> bool:
+        """Check if freelancer matches keyword in either title or skills"""
+        keyword_lower = keyword.lower()
+        return (
+            keyword_lower in freelancer.job_title.lower() or
+            any(keyword_lower in skill.lower() for skill in freelancer.skills)
+        )
+
+    def _get_related_skills(self, keyword: str) -> List[str]:
+        """Get truly related skills from freelancers who have the input skill or job title"""
+        try:
+            related_skills = {}
+            matching_freelancers = []
+            keyword_lower = keyword.lower()
+
+            # Find freelancers who have this skill or job title
+            for freelancer in self.freelancers:
+                # Check skills
+                if any(keyword_lower in skill.lower() for skill in freelancer.skills):
+                    matching_freelancers.append(freelancer)
+                # Check job title
+                elif keyword_lower in freelancer.job_title.lower():
+                    matching_freelancers.append(freelancer)
+
+            # Collect other skills from matching freelancers
+            for freelancer in matching_freelancers:
+                for skill in freelancer.skills:
+                    skill_lower = skill.lower()
+                    if skill_lower != keyword_lower:  # Don't include the search keyword
+                        if skill_lower not in related_skills:
+                            related_skills[skill_lower] = {
+                                'name': skill,
+                                'count': 1,
+                                'freelancers': [freelancer.id]
+                            }
+                        else:
+                            if freelancer.id not in related_skills[skill_lower]['freelancers']:
+                                related_skills[skill_lower]['count'] += 1
+                                related_skills[skill_lower]['freelancers'].append(freelancer.id)
+
+            # Sort by frequency and get top skills
+            sorted_skills = sorted(
+                related_skills.values(),
+                key=lambda x: x['count'],
+                reverse=True
+            )
+
+            return [skill['name'] for skill in sorted_skills[:5]]
+
+        except Exception as e:
+            logger.error(f"Error getting related skills: {e}")
+            return []
+
+    def _get_similar_titles(self, query: str) -> List[str]:
+        """Find similar job titles based on partial matches"""
+        all_titles = set()
+        all_skills = set()
+        
+        for f in self.freelancers:
+            all_titles.add(f.job_title.lower())
+            all_skills.update(s.lower() for s in f.skills)
+
+        # Find partial matches
+        similar_titles = [
+            title for title in all_titles
+            if any(word in title for word in query.split())
+        ]
+
+        similar_skills = [
+            skill for skill in all_skills
+            if any(word in skill for word in query.split())
+        ]
+
+        return list(set(similar_titles + similar_skills))[:5]
+
+    def _get_popular_categories(self) -> List[str]:
+        """Get popular job categories from database"""
+        categories = {}
+        
+        for f in self.freelancers:
+            category = f.job_title.split()[0]  # Use first word as category
+            categories[category] = categories.get(category, 0) + 1
+            
+        return [k for k, v in sorted(categories.items(), 
+                                   key=lambda x: x[1], 
+                                   reverse=True)][:5]
+
+    async def get_related_skills(self, skills: List[str]) -> List[str]:
+        """Get truly related skills from freelancers with matching skills"""
+        try:
+            if not self.freelancers:
+                return []
+
+            # Convert input skills to lowercase for matching
+            input_skills_lower = [s.lower() for s in skills]
+            
+            # Find freelancers with matching skills
+            matching_freelancers = []
+            for freelancer in self.freelancers:
+                freelancer_skills_lower = [s.lower() for s in freelancer.skills]
+                # Check for any matching skills
+                if any(skill in freelancer_skills_lower for skill in input_skills_lower):
+                    matching_freelancers.append(freelancer)
+
+            if not matching_freelancers:
+                # Try matching by job title keywords
+                for freelancer in self.freelancers:
+                    if any(skill in freelancer.job_title.lower() for skill in input_skills_lower):
+                        matching_freelancers.append(freelancer)
+
+            # Get related skills with frequency count
+            related_skills = {}
+            for freelancer in matching_freelancers:
+                for skill in freelancer.skills:
+                    skill_lower = skill.lower()
+                    if skill_lower not in input_skills_lower:
+                        if skill_lower not in related_skills:
+                            related_skills[skill_lower] = {
+                                'skill': skill,
+                                'count': 1,
+                                'freelancers': [freelancer.id]
+                            }
+                        else:
+                            if freelancer.id not in related_skills[skill_lower]['freelancers']:
+                                related_skills[skill_lower]['count'] += 1
+                                related_skills[skill_lower]['freelancers'].append(freelancer.id)
+
+            # Sort by frequency and return top related skills
+            sorted_skills = sorted(
+                related_skills.values(),
+                key=lambda x: (x['count'], len(x['freelancers'])),
+                reverse=True
+            )
+
+            return [item['skill'] for item in sorted_skills[:5]]
+
+        except Exception as e:
+            logger.error(f"Error getting related skills: {e}")
+            return []
+
+    def _calculate_profile_statistics(self, matching_freelancers: List[freelancer]) -> Dict[str, Any]:
+        """Calculate statistics from matching freelancer profiles"""
+        try:
+            if not matching_freelancers:
+                return {
+                    'hourly_range': (0, 0),
+                    'sample_profiles': [],
+                    'common_requirements': []
+                }
+
+            # Calculate hourly range
+            rates = [f.hourly_rate for f in matching_freelancers]
+            hourly_range = (min(rates), max(rates))
+
+            # Get common skills across profiles
+            skill_freq = {}
+            for f in matching_freelancers:
+                for skill in f.skills:
+                    skill_freq[skill] = skill_freq.get(skill, 0) + 1
+
+            common_requirements = sorted(
+                [(skill, count) for skill, count in skill_freq.items()],
+                key=lambda x: x[1],
+                reverse=True
+            )[:5]
+
+            # Format sample profiles
+            sample_profiles = [{
+                'id': f.id,
+                'name': f.name,
+                'skills': f.skills[:5],  # Top 5 skills
+                'hourly_rate': f.hourly_rate,
+                'job_title': f.job_title,
+                'rating': f.rating,
+                'total_sales': f.total_sales
+            } for f in matching_freelancers[:3]]  # Top 3 profiles
+
+            return {
+                'hourly_range': hourly_range,
+                'sample_profiles': sample_profiles,
+                'common_requirements': [skill for skill, _ in common_requirements]
+            }
+
+        except Exception as e:
+            logger.error(f"Error calculating profile statistics: {e}")
+            return {
+                'hourly_range': (0, 0),
+                'sample_profiles': [],
+                'common_requirements': []
+            }
+
+    def _generate_no_matches_response(self, title: str) -> Dict[str, Any]:
+        """Generate response when no matches are found"""
+        return {
+            'type': 'no_match',
+            'message': f"I couldn't find any exact matches for '{title}', but here are some similar options:",
+            'suggestions': self._get_similar_titles(title),
+            'popular_categories': self._get_popular_categories(),
+            'suggested_skills': self._get_related_skills(title)
+        }
