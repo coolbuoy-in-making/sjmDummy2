@@ -1,169 +1,200 @@
 const { faker } = require('@faker-js/faker');
 const bcrypt = require('bcryptjs');
+const axios = require('axios');
 
+// Enhanced skill sets with comprehensive categories
 const skillSets = {
-  'Web Development': [
-    'React', 'Angular', 'Vue.js', 'Node.js', 'Express.js', 'Django', 'Ruby on Rails',
-    'PHP', 'Laravel', 'ASP.NET', 'Spring Boot', 'GraphQL', 'REST API', 'MongoDB',
-    'PostgreSQL', 'MySQL', 'Redis', 'AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Git',
-    'TypeScript', 'Next.js', 'Gatsby', 'Svelte', 'WebSocket', 'Redux', 'MobX',
-    'Webpack', 'Sass/SCSS', 'TailwindCSS', 'Bootstrap', 'Material UI', 'Three.js',
-    'WebGL', 'Progressive Web Apps', 'Web Security', 'Performance Optimization'
-  ],
-  'Mobile Development': [
-    'React Native', 'Flutter', 'iOS', 'Swift', 'Android', 'Kotlin', 'Java',
-    'Xamarin', 'Unity', 'Mobile UI/UX', 'App Store Optimization', 'Push Notifications',
-    'Mobile Security', 'Cross-Platform Development', 'SwiftUI', 'Objective-C',
-    'Ionic', 'PhoneGap', 'Mobile Analytics', 'ARKit', 'CoreML', 'Firebase',
-    'Mobile Game Development', 'Augmented Reality', 'Virtual Reality'
-  ],
-  'Data Science': [
-    'Python', 'R', 'SQL', 'Machine Learning', 'Deep Learning', 'TensorFlow',
-    'PyTorch', 'NLP', 'Computer Vision', 'Data Visualization', 'Tableau',
-    'Power BI', 'Statistics', 'A/B Testing', 'Big Data', 'Hadoop', 'Spark',
-    'SAS', 'SPSS', 'Data Mining', 'Predictive Analytics', 'Time Series Analysis',
-    'Quantum Computing', 'Neural Networks', 'Reinforcement Learning', 'MLOps'
-  ],
-  'Digital Marketing': [
-    'SEO', 'SEM', 'Content Marketing', 'Social Media Marketing',
-    'Email Marketing', 'Google Ads', 'Facebook Ads', 'Analytics',
-    'Marketing Automation', 'CRM', 'Lead Generation', 'Conversion Optimization',
-    'TikTok Marketing', 'Instagram Marketing', 'LinkedIn Marketing',
-    'Marketing Strategy', 'Brand Management', 'Influencer Marketing',
-    'Video Marketing', 'Affiliate Marketing', 'Growth Hacking'
-  ],
-  'Data Analytics': [
-    'Python', 'R', 'SQL', 'Machine Learning', 'Deep Learning', 'TensorFlow',
-    'PyTorch', 'NLP', 'Computer Vision', 'Data Visualization', 'Tableau',
-    'Power BI', 'Statistics', 'A/B Testing', 'Big Data', 'Hadoop', 'Spark',
-    'SAS', 'SPSS', 'Data Mining', 'Predictive Analytics', 'Time Series Analysis',
-    'Quantum Computing', 'Neural Networks', 'Reinforcement Learning', 'MLOps'
-  ],
-  'Graphics Design': [
-    'UI/UX Design', 'Figma', 'Adobe XD', 'Sketch', 'InVision', 'Prototyping',
-    'Wireframing', 'User Research', 'Design Systems', 'Visual Design',
-    'Motion Design', 'Design Thinking', 'Accessibility', 'Photoshop',
-    'Illustrator', 'After Effects', 'Premier Pro', 'Brand Identity',
-    'Logo Design', '3D Modeling', 'Blender', 'Maya', 'ZBrush', 'Animation'
-  ],
-  'Digital Marketing': [
-    'SEO', 'SEM', 'Content Marketing', 'Social Media Marketing',
-    'Email Marketing', 'Google Ads', 'Facebook Ads', 'Analytics',
-    'Marketing Automation', 'CRM', 'Lead Generation', 'Conversion Optimization',
-    'TikTok Marketing', 'Instagram Marketing', 'LinkedIn Marketing',
-    'Marketing Strategy', 'Brand Management', 'Influencer Marketing'
-  ],
-  'Writing & Translation': [
-    'Content Writing', 'Copywriting', 'Technical Writing', 'Creative Writing',
-    'Blog Writing', 'Article Writing', 'Research Writing', 'Academic Writing',
-    'Grant Writing', 'Editing', 'Proofreading', 'Translation', 'Localization',
-    'Transcription', 'Ghostwriting', 'SEO Writing', 'Medical Writing'
-  ],
-  'AI & Machine Learning': [
-    'Deep Learning', 'Natural Language Processing', 'Computer Vision',
-    'Reinforcement Learning', 'Neural Networks', 'Machine Learning Engineering',
-    'AI Ethics', 'ChatGPT', 'LangChain', 'Prompt Engineering', 'GPT Integration',
-    'AI Model Training', 'ML Ops', 'AI Application Development'
-  ],
-  'Blockchain & Cryptocurrency': [
-    'Smart Contracts', 'Solidity', 'Ethereum', 'Web3.js', 'DeFi Development',
-    'NFT Development', 'Cryptocurrency', 'Blockchain Architecture',
-    'Smart Contract Auditing', 'Tokenomics', 'Crypto Trading Bots'
-  ],
-  'Business & Finance': [
-    'Financial Analysis', 'Business Planning', 'Market Research',
-    'Business Strategy', 'Investment Analysis', 'Risk Management',
-    'Financial Modeling', 'Valuation', 'Business Intelligence',
-    'Accounting', 'Bookkeeping', 'Tax Preparation', 'Business Consulting'
-  ],
-  'IT & Networking': [
-    'Network Security', 'System Administration', 'Cloud Computing',
-    'DevOps', 'AWS', 'Azure', 'Google Cloud', 'Linux Administration',
-    'Cybersecurity', 'Virtualization', 'IT Support', 'Database Administration'
-  ],
-  'Engineering & Architecture': [
-    'Mechanical Engineering', 'Electrical Engineering', 'Civil Engineering',
-    'Chemical Engineering', 'AutoCAD', 'SolidWorks', 'MATLAB',
-    'Circuit Design', 'PCB Design', 'IoT Development', '3D Printing'
-  ],
-  'Admin Support': [
-    'Virtual Assistance', 'Data Entry', 'Customer Service',
-    'Project Management', 'Office Administration', 'Transcription',
-    'Calendar Management', 'Email Management', 'CRM Administration'
-  ],
-  'Legal Services': [
-    'Contract Law', 'Intellectual Property', 'Corporate Law',
-    'Legal Writing', 'Patent Law', 'Trademark Law', 'Legal Research',
-    'Compliance', 'Legal Consultation', 'Document Review'
-  ],
-  'Video & Animation': [
-    'Video Editing', 'Motion Graphics', '3D Animation',
-    'Visual Effects', 'Video Production', 'Whiteboard Animation',
-    'Character Animation', 'Explainer Videos', 'Commercial Production'
-  ],
-  'Music & Audio': [
-    'Music Production', 'Sound Design', 'Voice Over',
-    'Audio Editing', 'Podcast Production', 'Mixing & Mastering',
-    'Composition', 'Sound Engineering', 'Audio Books'
-  ],
-  'Quality Assurance': [
-    'Manual Testing', 'Automated Testing', 'Performance Testing',
-    'Security Testing', 'Mobile Testing', 'API Testing',
-    'Test Planning', 'Bug Tracking', 'Test Automation', 'QA Management'
-  ],
-  'Sales & Business Development': [
-    'Sales Strategy', 'Lead Generation', 'Business Development',
-    'Account Management', 'Sales Automation', 'CRM Management',
-    'Sales Funnel Optimization', 'Partnership Development'
-  ],
-  'Education & Training': [
-    'Online Teaching', 'Course Creation', 'Instructional Design',
-    'Educational Content', 'Training Development', 'E-learning',
-    'Curriculum Development', 'Learning Management Systems'
-  ]
+  'Engineering & Development': {
+    'Software Development': [
+      // Core Programming
+      'JavaScript', 'Python', 'Java', 'C++', 'C#', 'Ruby', 'PHP', 'Swift', 'Go', 'Rust', 'Kotlin', 'TypeScript',
+      // Web Frontend
+      'React', 'Angular', 'Vue.js', 'Next.js', 'Svelte', 'HTML5', 'CSS3', 'SASS/SCSS', 'WebGL', 'Three.js',
+      // Web Backend
+      'Node.js', 'Django', 'Ruby on Rails', 'Laravel', 'ASP.NET Core', 'Spring Boot', 'Express.js', 'FastAPI',
+      // Mobile
+      'React Native', 'Flutter', 'iOS Development', 'Android Development', 'Xamarin', 'SwiftUI', 'Kotlin Multiplatform',
+      // Database
+      'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'DynamoDB', 'Cassandra', 'Oracle', 'SQL Server',
+      // Cloud & DevOps
+      'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Jenkins', 'GitLab CI', 'Terraform', 'Ansible'
+    ],
+    'Game Development': [
+      'Unity', 'Unreal Engine', 'GameMaker Studio', 'Godot', 'C++ Game Dev', 'DirectX', 'OpenGL',
+      'Game Design', 'Level Design', '3D Modeling for Games', 'Game AI', 'Game Physics', 'Multiplayer Networking'
+    ],
+    'Embedded Systems': [
+      'Arduino', 'Raspberry Pi', 'Embedded C', 'RTOS', 'IoT Development', 'Microcontroller Programming',
+      'FPGA', 'PCB Design', 'Electronics Design', 'Firmware Development'
+    ]
+  },
+
+  'Data Science & AI': {
+    'Machine Learning': [
+      'TensorFlow', 'PyTorch', 'Scikit-learn', 'Deep Learning', 'Neural Networks', 'Computer Vision',
+      'NLP', 'Reinforcement Learning', 'MLOps', 'Auto ML', 'Feature Engineering'
+    ],
+    'Data Engineering': [
+      'Apache Spark', 'Hadoop', 'Airflow', 'Kafka', 'ETL', 'Data Warehousing', 'Data Modeling',
+      'Big Data', 'Data Pipeline', 'Stream Processing'
+    ],
+    'Analytics': [
+      'Data Analysis', 'Statistical Analysis', 'R Programming', 'Power BI', 'Tableau', 'Excel',
+      'Google Analytics', 'A/B Testing', 'Business Intelligence', 'Predictive Analytics'
+    ]
+  },
+
+  'Design & Creative': {
+    'UI/UX Design': [
+      'Figma', 'Adobe XD', 'Sketch', 'InVision', 'User Research', 'Wireframing', 'Prototyping',
+      'Design Systems', 'Interaction Design', 'Mobile Design', 'Web Design', 'Responsive Design'
+    ],
+    'Graphic Design': [
+      'Adobe Photoshop', 'Illustrator', 'InDesign', 'After Effects', 'Typography', 'Logo Design',
+      'Brand Identity', 'Print Design', 'Packaging Design', 'Motion Graphics'
+    ],
+    '3D & Animation': [
+      'Blender', 'Maya', 'Cinema 4D', '3D Modeling', 'Character Animation', 'Motion Capture',
+      'VFX', 'Rigging', 'Texturing', 'Rendering'
+    ]
+  },
+
+  'Business & Management': {
+    'Project Management': [
+      'Agile', 'Scrum', 'Kanban', 'PRINCE2', 'PMP', 'Program Management', 'Risk Management',
+      'Stakeholder Management', 'Resource Planning', 'Project Planning', 'Jira', 'Trello'
+    ],
+    'Business Analysis': [
+      'Requirements Analysis', 'Process Modeling', 'BPMN', 'UML', 'User Stories', 'Use Cases',
+      'Gap Analysis', 'Business Process Improvement', 'Data Analysis', 'SQL'
+    ],
+    'Product Management': [
+      'Product Strategy', 'Product Roadmap', 'User Stories', 'Market Research', 'Competitive Analysis',
+      'Product Analytics', 'Growth Hacking', 'A/B Testing', 'User Feedback', 'Product Launch'
+    ]
+  },
+
+  'Marketing & Content': {
+    'Digital Marketing': [
+      'SEO', 'SEM', 'Social Media Marketing', 'Content Marketing', 'Email Marketing', 'PPC',
+      'Google Ads', 'Facebook Ads', 'Marketing Analytics', 'Marketing Automation'
+    ],
+    'Content Creation': [
+      'Content Writing', 'Copywriting', 'Technical Writing', 'Blog Writing', 'Article Writing',
+      'Editing', 'Proofreading', 'Content Strategy', 'SEO Writing'
+    ],
+    'Video & Audio': [
+      'Video Editing', 'Video Production', 'Sound Design', 'Podcast Production', 'Voice Over',
+      'Audio Editing', 'Motion Graphics', 'Color Grading', 'Screenwriting'
+    ]
+  },
 };
 
+// Function to enrich skill sets using GitHub Topics API
+async function enrichSkillSetsFromGitHub() {
+  try {
+    const response = await axios.get('https://api.github.com/search/topics', {
+      params: { q: 'topic:programming language framework library' },
+      headers: { Accept: 'application/vnd.github.mercy-preview+json' }
+    });
+
+    const topics = response.data.items.map(item => item.name);
+    skillSets['Engineering & Development']['Software Development'].push(...topics);
+  } catch (error) {
+    console.error('Failed to fetch GitHub topics:', error);
+  }
+}
+
+// Function to enrich skill sets using Stack Exchange Tags API
+async function enrichSkillSetsFromStackOverflow() {
+  try {
+    const response = await axios.get(
+      'https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&site=stackoverflow'
+    );
+
+    const tags = response.data.items.map(item => item.name);
+    skillSets['Engineering & Development']['Software Development'].push(...tags);
+  } catch (error) {
+    console.error('Failed to fetch Stack Overflow tags:', error);
+  }
+}
+
+// Initialize skill sets with external data
+async function initializeSkillSets() {
+  await Promise.all([
+    enrichSkillSetsFromGitHub(),
+    enrichSkillSetsFromStackOverflow()
+  ]);
+
+  // Remove duplicates and normalize skills
+  Object.keys(skillSets).forEach(category => {
+    Object.keys(skillSets[category]).forEach(subcategory => {
+      skillSets[category][subcategory] = [...new Set(
+        skillSets[category][subcategory].map(skill => skill.trim())
+      )];
+    });
+  });
+}
+
+// Helper function to get all skills for a category
+const getAllSkillsForCategory = (category) => {
+  const skills = [];
+  Object.values(skillSets[category]).forEach(subcategorySkills => {
+    skills.push(...subcategorySkills);
+  });
+  return skills;
+};
+
+// Helper function to get profile URL
 const generateProfileUrl = (id) => {
   return `${process.env.FRONTEND_URL || 'http://localhost:5173'}/profile/${id}`;
 };
-const generateUniqueId = (startId, i) => startId + i;
+
+// Helper function to combine skills
+const getRandomSkills = (category, count = 6) => {
+  const primarySkills = faker.helpers.arrayElements(getAllSkillsForCategory(category), Math.min(4, count));
+  const otherCategory = faker.helpers.arrayElement(Object.keys(skillSets));
+  const secondarySkills = faker.helpers.arrayElements(getAllSkillsForCategory(otherCategory), Math.min(2, count - primarySkills.length));
+  return [...new Set([...primarySkills, ...secondarySkills])];
+};
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await initializeSkillSets();
     const password = await bcrypt.hash('password123', 10);
     const users = [];
     const freelancers = [];
 
-    // Create clients first (IDs 1-400)
-        for (let i = 0; i < 400; i++) {
-          const userId = generateUniqueId(1, i);
-          const companyName = faker.company.name();
-          
-          users.push({
-            id: userId,
-            name: companyName,
-            email: faker.internet.email(),
-            password,
-            userType: 'client',
-            title: `${faker.person.jobTitle()} at ${companyName}`,
-            desc: faker.company.catchPhrase(),
-            companySize: faker.helpers.arrayElement([
-              '1-10', '11-50', '51-200', '201-500', '501-1000', '1000+'
-            ]),
-            industry: faker.helpers.arrayElement([
-              'Software Development', 'Digital Marketing', 'E-commerce',
-              'Healthcare', 'Education', 'Financial Services'
-            ]),
-            totalJobs: faker.number.int({ min: 0, max: 50 }),
-            totalEarnings: faker.number.float({ min: 0, max: 100000, precision: 2 }),
-            createdAt: new Date(),
-            updatedAt: new Date()
-          });
-        }
+    // Create clients (IDs 1-400)
+    for (let i = 0; i < 400; i++) {
+      const userId = 1 + i;
+      const companyName = faker.company.name();
+      
+      users.push({
+        id: userId,
+        name: companyName,
+        email: faker.internet.email(),
+        password,
+        userType: 'client',
+        title: `${faker.person.jobTitle()} at ${companyName}`,
+        desc: faker.company.catchPhrase(),
+        companySize: faker.helpers.arrayElement([
+          '1-10', '11-50', '51-200', '201-500', '501-1000', '1000+'
+        ]),
+        industry: faker.helpers.arrayElement([
+          'Software Development', 'Digital Marketing', 'E-commerce',
+          'Healthcare', 'Education', 'Financial Services'
+        ]),
+        totalJobs: faker.number.int({ min: 0, max: 50 }),
+        totalEarnings: faker.number.float({ min: 0, max: 100000, precision: 2 }),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+    }
 
-    // Create 500 users
+    // Create freelancer users (IDs 401-900)
     for (let i = 0; i < 500; i++) {
-      const userId = generateUniqueId(401, i);
+      const userId = 401 + i;
       const category = faker.helpers.arrayElement(Object.keys(skillSets));
       const fullName = faker.person.fullName();
       const experience = faker.number.int({ min: 1, max: 15 });
@@ -175,14 +206,8 @@ module.exports = {
         password,
         userType: 'freelancer',
         title: `${category} Specialist`,
-        skills: JSON.stringify([
-          ...faker.helpers.arrayElements(skillSets[category], 4),
-          ...faker.helpers.arrayElements(
-            skillSets[faker.helpers.arrayElement(Object.keys(skillSets))], 
-            2
-          )
-        ]),
-        hourlyRate: faker.number.int({ min: 15, max: 150 }),
+        skills: JSON.stringify(getRandomSkills(category)),
+        hourlyRate: faker.number.int({ min: 25, max: 150 }),
         desc: `${faker.person.jobDescriptor()} ${category} professional with ${experience} years of experience. ${faker.lorem.paragraph()}`,
         profileUrl: generateProfileUrl(userId),
         totalJobs: faker.number.int({ min: 0, max: 100 }),
@@ -212,59 +237,37 @@ module.exports = {
       });
     }
 
-    // Create 500 freelancer users and their freelancer profiles
+    // Create freelancer profiles
     for (let i = 0; i < 500; i++) {
-      const userId = generateUniqueId(501, i);
+      const userId = 401 + i;
       const category = faker.helpers.arrayElement(Object.keys(skillSets));
-      const FullName = faker.person.fullName();
-      const username = faker.internet.username();
-      const experience = faker.number.int({ min: 1, max: 15 });
-
-      // Create corresponding freelancer profile
+      const skills = getRandomSkills(category);
+      
       freelancers.push({
-        userId: userId,
-        username,
-        name: FullName,
+        userId,
+        username: faker.internet.userName(),
+        name: users.find(u => u.id === userId).name,
         job_title: `${category} Specialist`,
-        skills: [
-          ...faker.helpers.arrayElements(skillSets[category], 4),
-          ...faker.helpers.arrayElements(
-            skillSets[faker.helpers.arrayElement(Object.keys(skillSets))], 
-            2
-          )
-        ].join(','),
-        experience,
+        skills: skills.join(','),
+        experience: faker.number.int({ min: 1, max: 15 }),
         rating: faker.number.float({ min: 4.0, max: 5.0, precision: 0.1 }),
         hourly_rate: faker.number.int({ min: 25, max: 150 }),
         availability: faker.datatype.boolean(),
         profile_url: generateProfileUrl(userId),
         total_sales: faker.number.int({ min: 0, max: 100 }),
-        desc: `${faker.person.jobDescriptor()} ${category} professional with ${experience} years of experience.`,
+        desc: `Expert ${category} professional. ${faker.lorem.paragraph()}`,
         createdAt: faker.date.past(),
         updatedAt: new Date()
       });
     }
 
-
-
-    // Insert users first
+    // Insert users and freelancers
     await queryInterface.bulkInsert('Users', users);
-
-    // Get inserted users to map IDs
-    const insertedUsers = await queryInterface.sequelize.query(
-      `SELECT id FROM Users WHERE userType = 'freelancer' ORDER BY id ASC;`
-    );
-    const userIds = insertedUsers[0].map(u => u.id);
-
-    // Add userId to freelancers
-    freelancers.forEach((freelancer, index) => {
-      freelancer.userId = userIds[index];
-    });
-
-    // Insert freelancer profiles
     return queryInterface.bulkInsert('Freelancers', freelancers);
   },
-  down: (queryInterface, Sequelize) => {
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('Freelancers', null, {});
     return queryInterface.bulkDelete('Users', null, {});
   }
 };

@@ -106,4 +106,46 @@ router.post('/interview', auth, async (req, res) => {
   }
 });
 
+router.post('/interview-request', auth, async (req, res) => {
+  try {
+    const { freelancerId, projectId, message } = req.body;
+    
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    // Validate input
+    if (!freelancerId || !projectId) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const freelancer = await Freelancer.findByPk(freelancerId);
+    if (!freelancer) {
+      return res.status(404).json({ error: 'Freelancer not found' });
+    }
+
+    const interview = await InterviewRequest.create({
+      freelancerId,
+      projectId,
+      userId: req.user.id,
+      message,
+      status: 'pending',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    res.json({ 
+      success: true, 
+      interview: {
+        id: interview.id,
+        status: 'pending',
+        message: 'Interview request sent successfully'
+      }
+    });
+  } catch (error) {
+    console.error('Error creating interview request:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
