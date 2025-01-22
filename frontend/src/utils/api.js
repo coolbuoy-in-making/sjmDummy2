@@ -74,6 +74,45 @@ const auth = {
   }
 };
 
+// Interview methods
+const interviews = {
+  request: async (data) => {
+    try {
+      const response = await api.post('/freelancers/interview-request', data);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Interview request failed' 
+      };
+    }
+  },
+  
+  getStatus: async (interviewId) => {
+    try {
+      const response = await api.get(`/freelancers/interview-status/${interviewId}`);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Failed to get interview status' 
+      };
+    }
+  },
+
+  complete: async (data) => {
+    try {
+      const response = await api.post('/freelancers/interview-complete', data);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Failed to complete interview' 
+      };
+    }
+  }
+};
+
 // Export both the api instance and auth methods
-export { auth };
+export { auth, interviews };
 export default api;

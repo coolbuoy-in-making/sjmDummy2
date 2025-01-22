@@ -6,6 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
+import InterviewCard from './InterviewCard';
 
 const Sidebar = styled.div`
   position: fixed;
@@ -233,6 +234,8 @@ const SuggestionButton = styled.button`
   border-radius: 16px;
   padding: 8px 16px;
   cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+
   
   &:hover {
     background: ${props => props.theme.colors.primary};
@@ -532,29 +535,29 @@ const WelcomeMessage = styled.div`
   }
 `;
 
-const QuickActions = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 0 20px;
-  margin-bottom: 20px;
-`;
+// const QuickActions = styled.div`
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   gap: 8px;
+//   padding: 0 20px;
+//   margin-bottom: 20px;
+// `;
 
-const QuickActionButton = styled.button`
-  background: white;
-  border: 1px solid ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.primary};
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 13px;
+// const QuickActionButton = styled.button`
+//   background: white;
+//   border: 1px solid ${props => props.theme.colors.primary};
+//   color: ${props => props.theme.colors.primary};
+//   padding: 12px;
+//   border-radius: 8px;
+//   cursor: pointer;
+//   transition: all 0.2s;
+//   font-size: 13px;
 
-  &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-  }
-`;
+//   &:hover {
+//     background: ${props => props.theme.colors.primary};
+//     color: white;
+//   }
+// `;
 
 const MessageTypingIndicator = styled.div`
   display: flex;
@@ -586,6 +589,69 @@ const ErrorBoundary = styled.div`
   border: 1px solid #ffcdd2;
   border-radius: 8px;
   color: #d32f2f;
+`;
+
+const SuggestionsPanel = styled.div`
+  margin: 12px 0;
+  padding: 12px;
+  background: ${props => props.theme.colors.background};
+  border-radius: 8px;
+  border-left: 3px solid ${props => props.theme.colors.primary};
+
+  .suggestion-title {
+    font-weight: 500;
+    color: ${props => props.theme.colors.primary};
+    margin-bottom: 8px;
+  }
+
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    color: ${props => props.theme.colors.text};
+  }
+`;
+
+const InterviewIndicator = styled.button`
+  position: fixed;
+  bottom: 80px;
+  right: ${props => props.isOpen ? '460px' : '20px'};
+  background: ${props => props.status === 'accepted' ? '#4CAF50' : props.theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: ${props => props.theme.shadows.medium};
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    right: ${props => props.isOpen ? '20px' : '20px'};
+    bottom: 20px;
+  }
+`;
+
+const InterviewOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 `;
 
 const AIChatSidebar = ({ isOpen, onClose }) => {
@@ -620,13 +686,14 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const [newSkill, setNewSkill] = useState('');
   const [showSummary, setShowSummary] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [suggestedActions, setSuggestedActions] = useState([
-    'Find freelance developers',
-    'Post a new project',
-    'Get project cost estimate',
-    'Review talent profiles'
-  ]);
-
+  // const [suggestedActions] = useState([
+  //   'Find freelance developers',
+  //   'Post a new project',
+  //   'Get project cost estimate',
+  //   'Review talent profiles'
+  // ]);
+  const [activeInterview, setActiveInterview] = useState(null);
+  const [showInterview, setShowInterview] = useState(false);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -730,7 +797,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
         setLoading(false);
       }
       // Update suggested actions based on context
-      updateSuggestedActions(input);
+      // Removed updateSuggestedActions call since the function is not being used
       
     } catch (error) {
       setError({
@@ -742,27 +809,27 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     }
   };
 
-  const updateSuggestedActions = (lastMessage) => {
-    const newSuggestions = [];
+  // const updateSuggestedActions = (lastMessage) => {
+  //   const newSuggestions = [];
     
-    if (lastMessage.toLowerCase().includes('developer')) {
-      newSuggestions.push(
-        'View top developers',
-        'Compare developer rates',
-        'Schedule interviews'
-      );
-    } else if (lastMessage.toLowerCase().includes('project')) {
-      newSuggestions.push(
-        'Define project scope',
-        'Get cost estimate',
-        'See similar projects'
-      );
-    }
+  //   if (lastMessage.toLowerCase().includes('developer')) {
+  //     newSuggestions.push(
+  //       'View top developers',
+  //       'Compare developer rates',
+  //       'Schedule interviews'
+  //     );
+  //   } else if (lastMessage.toLowerCase().includes('project')) {
+  //     newSuggestions.push(
+  //       'Define project scope',
+  //       'Get cost estimate',
+  //       'See similar projects'
+  //     );
+  //   }
 
-    if (newSuggestions.length > 0) {
-      setSuggestedActions(newSuggestions);
-    }
-  };
+  //   if (newSuggestions.length > 0) {
+  //     setSuggestedActions(newSuggestions);
+  //   }
+  // };
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -778,7 +845,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [isOpen, onClose]);
 
-  // Update the handleInterviewRequest function
   const handleInterviewRequest = async (freelancer) => {
     setLoading(true);
     try {
@@ -791,19 +857,23 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
         });
         return;
       }
-  
+
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('Please log in to continue');
       }
-  
-      const response = await api.post('/freelancers/interview', {
+
+      // Create a project ID if none exists
+      const projectId = projectDetails?.id || `temp-${Date.now()}`;
+
+      const response = await api.post('/freelancers/interview-request', {
         freelancerId: freelancer.id,
-        projectId: projectDetails?.id,
-        message: `Interview request for ${projectDetails?.skills?.join(', ')} project`
+        projectId: projectId,
+        message: `Interview request for ${projectDetails?.skills?.join(', ') || 'project'}`
       });
-  
+
       if (response.data.success) {
+        setActiveInterview(response.data.interview);
         setMessages(prev => [...prev, {
           text: `Interview request sent to ${freelancer.name}! They will be notified and can respond to your request.`,
           isUser: false,
@@ -811,37 +881,37 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
         }]);
       }
     } catch (error) {
-      if (error.response?.status === 401) {
-        // Handle unauthorized - likely token expired
-        setMessages(prev => [...prev, {
-          text: "Your session has expired. Please log in again.",
-          isUser: false,
-          type: 'error'
-        }]);
-        
-        // Delay navigation to show the message
-        setTimeout(() => {
-          navigate('/login', { 
-            state: { 
-              returnTo: window.location.pathname,
-              message: 'Please log in again to continue' 
-            }
-          });
-        }, 2000);
-      } else {
-        setMessages(prev => [...prev, {
-          text: error.response?.data?.message || "Failed to send interview request. Please try again.",
-          isUser: false,
-          type: 'error'
-        }]);
-      }
+      handleInterviewError(error);
     } finally {
       setLoading(false);
     }
   };
-  
 
-  // Update the renderFreelancerCard function
+  const handleInterviewError = (error) => {
+    if (error.response?.status === 401) {
+      setMessages(prev => [...prev, {
+        text: "Your session has expired. Please log in again.",
+        isUser: false,
+        type: 'error'
+      }]);
+      
+      setTimeout(() => {
+        navigate('/login', { 
+          state: { 
+            returnTo: window.location.pathname,
+            message: 'Please log in again to continue' 
+          }
+        });
+      }, 2000);
+    } else {
+      setMessages(prev => [...prev, {
+        text: error.response?.data?.message || "Failed to send interview request. Please try again.",
+        isUser: false,
+        type: 'error'
+      }]);
+    }
+  };
+
   const renderFreelancerCard = (freelancer) => {
     if (!freelancer?.id) {
       console.log('Invalid freelancer data:', freelancer);
@@ -929,7 +999,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       </FreelancerCard>
     );
   };
-  
 
   const renderMessageDebugInfo = (message) => {
     if (!message.debugInfo) return null;
@@ -953,9 +1022,32 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     );
   };
 
+  const renderSuggestions = (suggestions) => {
+    if (!suggestions || suggestions.length === 0) return null;
+
+    return (
+      <SuggestionsPanel>
+        <div className="suggestion-title">AI Suggestions:</div>
+        {suggestions.map((suggestion, index) => (
+          <div key={index} className="suggestion-item">
+            <span>{suggestion.message}</span>
+            {suggestion.action && (
+              <SuggestionButton 
+                onClick={() => handleMessage('refine_search', suggestion.action)}
+              >
+                Try This
+              </SuggestionButton>
+            )}
+          </div>
+        ))}
+      </SuggestionsPanel>
+    );
+  };
+
   const renderFreelancerList = (message) => (
     <FreelancerListContainer>
       <MessageText>{message.text}</MessageText>
+      {message.suggestions && renderSuggestions(message.suggestions)}
       {message.matchingProcess && (
         <MatchingProcess>
           <div className="debug-title">Matching Process:</div>
@@ -981,14 +1073,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       ) : (
         <NoMatchMessage>
           <p>No freelancers found matching your exact criteria.</p>
-          {message.suggestions?.map((suggestion, index) => (
-            <div key={index} style={{ marginTop: '12px' }}>
-              <p><strong>{suggestion.message}</strong></p>
-              <SuggestionButton onClick={() => handleMessage('refine_search', suggestion.action)}>
-                {suggestion.action}
-              </SuggestionButton>
-            </div>
-          ))}
+          {message.suggestions && renderSuggestions(message.suggestions)}
         </NoMatchMessage>
       )}
     </FreelancerListContainer>
@@ -1120,6 +1205,106 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     );
   };
 
+  const renderJobAnalysis = (message) => {
+    const { detectedSkills, suggestedSkills, hourlyRange } = message.data;
+    
+    // Auto-populate detected skills immediately
+    if (detectedSkills?.length && !skills.length) {
+      setSkills(detectedSkills);
+    }
+  
+    return (
+      <div>
+        <MessageText isUser={false}>{message.text}</MessageText>
+        
+        <ProjectDetailsForm>
+          <div className="field">
+            <label>Skills:</label>
+            <SkillList>
+              {skills.map((skill, index) => (
+                <SkillPill key={index}>
+                  {skill}
+                  <button onClick={() => removeSkill(skill)}>&times;</button>
+                </SkillPill>
+              ))}
+            </SkillList>
+            
+            <div className="suggested-skills">
+              <label>Suggested Additional Skills:</label>
+              <SkillList>
+                {suggestedSkills
+                  .filter(skill => !skills.includes(skill))
+                  .map((skill, index) => (
+                    <SkillPill key={index} suggested>
+                      {skill}
+                      <button onClick={() => addSkill(skill)}>+</button>
+                    </SkillPill>
+                  ))}
+              </SkillList>
+            </div>
+  
+            <Input
+              placeholder="Add custom skill (press Enter)"
+              value={newSkill}
+              onChange={(e) => setNewSkill(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && newSkill.trim()) {
+                  addSkill(newSkill.trim());
+                  setNewSkill('');
+                }
+              }}
+            />
+          </div>
+  
+          <div className="field">
+            <label>Typical Hourly Range:</label>
+            <div>${hourlyRange[0]}-${hourlyRange[1]}/hr</div>
+          </div>
+  
+          <div className="field">
+            <label>Budget Range:</label>
+            <Input
+              id="budget"
+              placeholder="e.g., $30-100/hr"
+              defaultValue={`$${hourlyRange[0]}-${hourlyRange[1]}/hr`}
+            />
+          </div>
+  
+          <div className="field">
+            <label>Project Complexity:</label>
+            <select id="complexity" defaultValue="medium">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+  
+          <div className="field">
+            <label>Timeline (days):</label>
+            <Input
+              id="timeline"
+              type="number"
+              min="1"
+              placeholder="e.g., 30"
+            />
+          </div>
+  
+          <ActionButton
+            className="primary"
+            onClick={() => handleMessage('confirm project details', {
+              skills: skills,
+              budget: document.getElementById('budget').value,
+              complexity: document.getElementById('complexity').value,
+              timeline: document.getElementById('timeline').value
+            })}
+          >
+            Find Matching Freelancers
+          </ActionButton>
+        </ProjectDetailsForm>
+      </div>
+    );
+  };
+
   const renderMessage = (message) => {
     // Add null check and type validation
     if (!message) return null;
@@ -1168,6 +1353,9 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           </SuggestionsContainer>
         );
 
+      case 'job_analysis':
+        return renderJobAnalysis(safeMessage);
+
       default:
         return (
           <>
@@ -1207,99 +1395,141 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     }
   }, [conversations, user?.id]);
 
+  const handleInterviewComplete = async (interviewData) => {
+    try {
+      const response = await api.post('/freelancers/interview-complete', interviewData);
+      
+      if (response.data.success) {
+        setActiveInterview(null);
+        setShowInterview(false);
+        setMessages(prev => [...prev, {
+          text: "Interview completed successfully! We'll notify you when the freelancer responds.",
+          isUser: false,
+          type: 'success'
+        }]);
+      }
+    } catch (error) {
+      console.error('Error completing interview:', error);
+    }
+  };
+
   return (
-    <Sidebar isOpen={isOpen}>
-      {loading && (
-        <LoadingOverlay>
-          <Spinner />
-        </LoadingOverlay>
-      )}
-      <Header>
-        <Title>AI Assistant</Title>
-        <CloseButton onClick={onClose}><CloseIcon /></CloseButton>
-      </Header>
+    <>
+      <Sidebar isOpen={isOpen}>
+        {loading && (
+          <LoadingOverlay>
+            <Spinner />
+          </LoadingOverlay>
+        )}
+        <Header>
+          <Title>AI Assistant</Title>
+          <CloseButton onClick={onClose}><CloseIcon /></CloseButton>
+        </Header>
 
-      <MessagesContainer>
-        <WelcomeMessage>
-          <h4>Welcome to Your AI Assistant!</h4>
-          <p>I can help you find freelancers, estimate projects, and answer your questions. What would you like to do?</p>
-        </WelcomeMessage>
+        <MessagesContainer>
+          <WelcomeMessage>
+            <h4>Welcome to Your AI Assistant!</h4>
+            <p>I can help you find freelancers, just tell me the skills or the job title you are looking for</p>
+          </WelcomeMessage>
 
-        <QuickActions>
-          {suggestedActions.map((action, index) => (
-            <QuickActionButton
+          {/* <QuickActions>
+            {suggestedActions.map((action, index) => (
+              <QuickActionButton
+                key={index}
+                onClick={() => handleMessage(action)}
+              >
+                {action}
+              </QuickActionButton>
+            ))}
+          </QuickActions> */}
+
+          {error && (
+            <MessageText isUser={false} style={{ color: 'red' }}>
+              {error}
+            </MessageText>
+          )}
+          
+          {processingSteps.map((step, index) => (
+            <ProcessStep 
               key={index}
-              onClick={() => handleMessage(action)}
+              success={step.type === 'success'}
+              error={step.type === 'error'}
+              warning={step.type === 'warning'}
             >
-              {action}
-            </QuickActionButton>
+              {step.step}
+            </ProcessStep>
           ))}
-        </QuickActions>
 
-        {error && (
-          <MessageText isUser={false} style={{ color: 'red' }}>
-            {error}
-          </MessageText>
-        )}
-        
-        {processingSteps.map((step, index) => (
-          <ProcessStep 
-            key={index}
-            success={step.type === 'success'}
-            error={step.type === 'error'}
-            warning={step.type === 'warning'}
+          {debugInfo && renderDebugInfo()}
+
+          {messages.map((msg, idx) => (
+            <MessageWrapper key={idx} isUser={msg.isUser}>
+              {renderMessage(msg)}
+            </MessageWrapper>
+          ))}
+
+          {isTyping && (
+            <MessageWrapper isUser={false}>
+              <MessageTypingIndicator>
+                <span></span>
+                <span></span>
+                <span></span>
+              </MessageTypingIndicator>
+            </MessageWrapper>
+          )}
+
+          {error && (
+            <ErrorBoundary>
+              <p>{error.message}</p>
+              <ActionButton className="secondary" onClick={error.retry}>
+                Retry
+              </ActionButton>
+            </ErrorBoundary>
+          )}
+
+          <div ref={messagesEndRef} />
+        </MessagesContainer>
+
+        <InputContainer>
+          <Input
+            placeholder="Type a message (Ctrl + / to focus)"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && !loading && handleMessage(input)}
+            disabled={loading}
+          />
+          <SendButton
+            onClick={() => !loading && handleMessage(input)}
+            disabled={loading || !input.trim()}
+            title={loading ? "Processing..." : "Send message (Enter)"}
           >
-            {step.step}
-          </ProcessStep>
-        ))}
+            <SendIcon />
+          </SendButton>
+        </InputContainer>
+      </Sidebar>
 
-        {debugInfo && renderDebugInfo()}
-
-        {messages.map((msg, idx) => (
-          <MessageWrapper key={idx} isUser={msg.isUser}>
-            {renderMessage(msg)}
-          </MessageWrapper>
-        ))}
-
-        {isTyping && (
-          <MessageWrapper isUser={false}>
-            <MessageTypingIndicator>
-              <span></span>
-              <span></span>
-              <span></span>
-            </MessageTypingIndicator>
-          </MessageWrapper>
-        )}
-
-        {error && (
-          <ErrorBoundary>
-            <p>{error.message}</p>
-            <ActionButton className="secondary" onClick={error.retry}>
-              Retry
-            </ActionButton>
-          </ErrorBoundary>
-        )}
-
-        <div ref={messagesEndRef} />
-      </MessagesContainer>
-
-      <InputContainer>
-        <Input
-          placeholder="Type a message (Ctrl + / to focus)"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && !loading && handleMessage(input)}
-          disabled={loading}
-        />
-        <SendButton
-          onClick={() => !loading && handleMessage(input)}
-          disabled={loading || !input.trim()}
-          title={loading ? "Processing..." : "Send message (Enter)"}
+      {activeInterview && (
+        <InterviewIndicator 
+          isOpen={isOpen}
+          status={activeInterview.status}
+          onClick={() => activeInterview.status === 'accepted' && setShowInterview(true)}
         >
-          <SendIcon />
-        </SendButton>
-      </InputContainer>
-    </Sidebar>
+          {activeInterview.status === 'accepted' ? '✓ Start Interview' : 'Interview Pending'}
+        </InterviewIndicator>
+      )}
+
+      {showInterview && (
+        <InterviewOverlay onClick={() => setShowInterview(false)}>
+          <div onClick={e => e.stopPropagation()}>
+            <InterviewCard
+              interview={activeInterview}
+              onComplete={handleInterviewComplete}
+              onClose={() => setShowInterview(false)}
+            />
+          </div>
+        </InterviewOverlay>
+      )}
+    </>
   );
 };
 
