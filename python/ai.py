@@ -229,25 +229,31 @@ async def handle_project_confirmation(message: str, project_details: Dict, page:
         
         logger.info(f"\nBudget Range: ${budget_range[0]}-${budget_range[1]}/hr")
 
-        # Validate and extract skills
+        # Clean skills data
         input_skills = project_details.get('skills', [])
         if isinstance(input_skills, str):
-            input_skills = [s.strip() for s in input_skills.split(',')]
-        elif not isinstance(input_skills, list):
+            # Remove brackets, quotes and × characters
+            cleaned_skills = re.sub(r'[\[\]\"×]', '', input_skills)
+            input_skills = [s.strip() for s in cleaned_skills.split(',')]
+        elif isinstance(input_skills, list):
+            input_skills = [re.sub(r'[\[\]\"×]', '', s).strip() for s in input_skills]
+        else:
             input_skills = []
 
-        logger.info(f"Input Skills: {input_skills}")
+        logger.info(f"Cleaned Input Skills: {input_skills}")
 
         # Use NLP to validate and expand skills
         validated_skills = []
         expanded_skills = set()
         
         for skill in input_skills:
-            # Check against known skills and variations
+            skill = skill.strip()
+            if not skill:  # Skip empty skills
+                continue
+                
             verification = model.skill_extractor.verify_keyword(skill)
             if verification['exists']:
                 validated_skills.extend(verification['skills'])
-                # Add related skills to expanded set
                 related = await model.get_related_skills([skill])
                 expanded_skills.update(related)
 
@@ -270,6 +276,11 @@ async def handle_project_confirmation(message: str, project_details: Dict, page:
 
         logger.info("\nSearching for matching freelancers...")
         
+        # Calculate pagination
+        items_per_page = 5
+        start_idx = (page - 1) * items_per_page
+        end_idx = start_idx + items_per_page
+
         # Find matches with detailed evaluation logging
         matches = []
         total_evaluated = 0
@@ -365,29 +376,30 @@ async def handle_project_confirmation(message: str, project_details: Dict, page:
                 ]
             }
 
-        # Sort matches by score
+        # Sort matches by score and paginate
         matches.sort(key=lambda x: x['matchDetails']['matchPercentage'], reverse=True)
+        paginated_matches = matches[start_idx:end_idx]
+        total_pages = (len(matches) + items_per_page - 1) // items_per_page
+
+        # Get related skills suggestions
+        suggested_skills = set()
+        for match in matches[:3]:  # Use top 3 matches for suggestions
+            suggested_skills.update(match.get('skills', []))
+        suggested_skills = suggested_skills - set(validated_skills)
 
         return {
             'type': 'freelancerList',
             'text': f"Found {len(matches)} freelancers matching your requirements:",
-            'freelancers': matches,
-            'matchingProcess': {
-                'steps': [
-                    f"Analyzed {total_evaluated} available freelancers",
-                    f"Found {len(matches)} qualified matches",
-                    f"Applied budget filter: ${budget_range[0]}-${budget_range[1]}/hr",
-                    f"Required skills: {', '.join(validated_skills)}"
-                ],
-                'searchStats': {
-                    'totalFreelancers': total_evaluated,
-                    'matchesFound': len(matches),
-                    'highMatches': sum(1 for m in matches if m['matchDetails']['matchPercentage'] > 80),
-                    'skillMatchBreakdown': {
-                        skill: len([m for m in matches if skill in m['matchDetails']['skillMatch']['matched']]) 
-                        for skill in validated_skills
-                    }
-                }
+            'freelancers': paginated_matches,
+            'pagination': {
+                'currentPage': page,
+                'totalPages': total_pages,
+                'totalMatches': len(matches),
+                'hasMore': page < total_pages
+            },
+            'suggestions': {
+                'skills': list(suggested_skills)[:5],
+                'actions': generate_alternative_suggestions(project_details)
             }
         }
 
@@ -525,6 +537,7 @@ async def chat() -> Union[Dict, tuple]:
         # If requesting next page of results
         if message.lower() == 'load_more' and project_details:
             next_page = page + 1
+            # Ensure matches includes pagination info
             matches = model.matching_engine.get_next_matches(page=next_page)
             
             if matches['matches']:
@@ -533,22 +546,29 @@ async def chat() -> Union[Dict, tuple]:
                     'response': {
                         'type': 'freelancerList',
                         'text': f"Here are more matching freelancers (page {next_page}):",
-                        'freelancers': format_freelancer_matches(matches['matches']),
-                        'pagination': matches['pagination']
-                    }
-                })
-            else:
-                return jsonify({
-                    'success': True,
-                    'response': {
-                        'type': 'text',
-                        'text': "No more matching freelancers found."
+                        'freelancers': matches['matches'],
+                        'pagination': {
+                            'currentPage': next_page,
+                            'totalPages': matches['pagination']['total_pages'],
+                            'hasMore': matches['pagination']['has_next']
+                        },
+                        'suggestions': {
+                            'skills': model.skill_extractor.get_suggested_skills(project_details),
+                            'actions': generate_alternative_suggestions(project_details)
+                        }
                     }
                 })
 
         # Handle project details confirmation with pagination
         if message.lower() == 'confirm project details' and project_details:
             response = await handle_project_confirmation(message, project_details, page)
+            # Ensure pagination info is included
+            if response.get('type') == 'freelancerList':
+                response['pagination'] = {
+                    'currentPage': page,
+                    'totalPages': response.get('totalPages', 1),
+                    'hasMore': page < response.get('totalPages', 1)
+                }
             return jsonify({
                 'success': True,
                 'response': response
@@ -603,7 +623,7 @@ async def chat() -> Union[Dict, tuple]:
                     'success': True,
                     'response': {
                         'type': 'job_analysis',
-                        'text': f"I found {analysis['total_matches']} matching freelancers for '{message}':",
+                        'text': f"Based on '{message}':",
                         'data': {
                             'detectedSkills': analysis['suggested_skills'],
                             'suggestedSkills': analysis['suggested_skills'],
@@ -706,7 +726,7 @@ async def analyze_job():
             'success': True,
             'response': {
                 'type': 'job_analysis',
-                'text': f"I found {analysis['total_matches']} freelancers matching '{job_title}'. Here are some details to help refine your search:",
+                'text': f"Based on '{job_title}'. Here are some details to help refine your search:",
                 'data': {
                     'suggestedSkills': analysis['suggested_skills'],
                     'hourlyRange': analysis['avg_hourly_range'],
@@ -726,3 +746,39 @@ async def analyze_job():
 
 
 # ... rest of existing code ...
+
+def extract_skills(self, text: str) -> List[str]:
+    """Enhanced word-by-word skill extraction"""
+    matched_skills = set()
+    words = word_tokenize(text.lower())
+    
+    # Clean incoming text by removing brackets and special characters
+    text = re.sub(r'[\[\]\"×]', '', text)
+    
+    # Create word combinations for checking
+    combinations = []
+    for i in range(len(words)):
+        if words[i] not in self.stop_words:
+            # Clean each word
+            clean_word = words[i].strip('[]"×')
+            combinations.append(clean_word)
+            
+            # Two-word combinations
+            if i < len(words) - 1:
+                clean_next = words[i+1].strip('[]"×')
+                combinations.append(f"{clean_word} {clean_next}")
+            
+            # Three-word combinations
+            if i < len(words) - 2:
+                clean_next = words[i+1].strip('[]"×')
+                clean_next2 = words[i+2].strip('[]"×')
+                combinations.append(f"{clean_word} {clean_next} {clean_next2}")
+
+    # Check each combination against known skills and job titles
+    for combo in combinations:
+        if combo in self.known_skills:
+            matched_skills.add(combo)
+        if combo in self.job_titles:
+            matched_skills.add(combo)
+
+    return list(matched_skills)
