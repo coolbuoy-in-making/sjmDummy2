@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../contexts/userContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 import InterviewCard from './InterviewCard';
@@ -791,6 +791,12 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     }
   };
 
+  const cleanSkill = (skill) => {
+    if (!skill) return '';
+    // Remove unwanted characters and clean up the skill string
+    return skill.replace(/[[\]"×+]/g, '').trim();
+  };
+
   const renderFreelancerCard = (freelancer) => {
     if (!freelancer?.id) {
       console.log('Invalid freelancer data:', freelancer);
@@ -835,9 +841,9 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           {safeFreelancer.skills.map((skill, j) => (
             <SkillTag 
               key={j} 
-              matched={safeFreelancer.matchDetails.skillMatch.skills.includes(skill)}
+              matched={safeFreelancer.matchDetails.skillMatch.skills.includes(cleanSkill(skill))}
             >
-              {skill}
+              {cleanSkill(skill)}
             </SkillTag>
           ))}
         </div>
@@ -1096,9 +1102,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     // Clean skills data
     const cleanSkills = (skills) => {
       if (!Array.isArray(skills)) return [];
-      return skills.map(skill => 
-        typeof skill === 'string' ? skill.replace(/[[\]"×]/g, '').trim() : ''
-      ).filter(Boolean);
+      return skills.map(skill => cleanSkill(skill)).filter(Boolean);
     };
   
     // Auto-populate detected skills immediately

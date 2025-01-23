@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { UserContext } from './userContext';
+import { UserContext } from './userContext'; // lowercase filename
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -41,7 +41,7 @@ const UserProvider = ({ children }) => {
 };
 
 UserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
+    children: PropTypes.node.isRequired,
+  };
+  
 export default UserProvider;

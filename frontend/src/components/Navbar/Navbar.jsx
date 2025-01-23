@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../contexts/userContext'; // lowercase filename
 
 const Nav = styled.nav`
   position: fixed;
