@@ -1,12 +1,11 @@
-import { createContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { UserContext } from '../contexts/userContext';
-import UserProvider from '../contexts/UserProvider';
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     // Check for stored user data on mount
