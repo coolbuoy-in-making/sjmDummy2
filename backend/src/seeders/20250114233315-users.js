@@ -1,94 +1,228 @@
+'use strict';
+
 const { faker } = require('@faker-js/faker');
 const bcrypt = require('bcryptjs');
 const axios = require('axios');
 
-// Enhanced skill sets with comprehensive categories
+// Comprehensive job titles organized by industry
+const jobTitles = {
+  'Technology & Software': [
+    // Software Development
+    'Senior Software Engineer', 'Full Stack Developer', 'Frontend Developer', 'Backend Developer',
+    'Mobile App Developer', 'DevOps Engineer', 'Site Reliability Engineer', 'Cloud Solutions Architect',
+    'Systems Architect', 'API Developer', 'Software Development Manager', 'Technical Lead',
+    'QA Engineer', 'Test Automation Engineer', 'Security Engineer', 'Database Administrator',
+    'Machine Learning Engineer', 'Blockchain Developer', 'iOS Developer', 'Android Developer',
+    'Enterprise Architect', 'Solutions Engineer', 'Platform Engineer', 'Release Engineer',
+
+    // Data Science & Analytics
+    'Data Scientist', 'Data Engineer', 'Business Intelligence Analyst', 'Data Architect',
+    'Analytics Engineer', 'Big Data Engineer', 'MLOps Engineer', 'AI Research Scientist',
+    'Quantitative Analyst', 'Data Analytics Manager', 'Statistical Programmer',
+    'NLP Engineer', 'Computer Vision Engineer', 'Deep Learning Specialist',
+
+    // Infrastructure & Security
+    'Network Engineer', 'Systems Administrator', 'Information Security Analyst',
+    'Cloud Infrastructure Engineer', 'Network Security Engineer', 'IT Support Specialist',
+    'Infrastructure Manager', 'Security Operations Engineer', 'Penetration Tester',
+    'Cloud Security Engineer', 'Identity Access Manager', 'IT Project Manager'
+  ],
+
+  'Design & Creative': [
+    // UX/UI Design
+    'UX Designer', 'UI Designer', 'Product Designer', 'Senior Product Designer',
+    'Design Systems Engineer', 'Interaction Designer', 'Visual Designer', 'UX Researcher',
+    'Design Manager', 'Creative Director', 'Art Director', 'Design Lead',
+    'Service Designer', 'Experience Designer', 'Digital Product Designer',
+
+    // Graphics & Multimedia
+    'Graphic Designer', 'Motion Designer', 'Brand Designer', '3D Artist',
+    'Character Artist', 'Environment Artist', 'Technical Artist', 'VFX Artist',
+    'Animation Director', 'Creative Technologist', 'Multimedia Designer',
+    'Package Designer', 'Production Artist', 'Digital Illustrator',
+
+    // Game Design
+    'Game Designer', 'Level Designer', 'Game Artist', 'Character Designer',
+    'Environment Designer', 'Narrative Designer', 'Game UI Designer', 'Concept Artist',
+    'Technical Game Designer', 'Game Economy Designer', 'Game Systems Designer'
+  ],
+
+  'Marketing & Communications': [
+    // Digital Marketing
+    'Digital Marketing Manager', 'SEO Specialist', 'Content Marketing Manager',
+    'Social Media Manager', 'Growth Marketing Manager', 'Email Marketing Specialist',
+    'Marketing Analytics Manager', 'Paid Search Manager', 'Performance Marketing Manager',
+    'Brand Marketing Manager', 'Product Marketing Manager', 'Campaign Manager',
+
+    // Content & Communications
+    'Content Strategist', 'Technical Writer', 'Copywriter', 'Content Designer',
+    'Communications Manager', 'PR Manager', 'Brand Strategist', 'Editorial Director',
+    'Content Operations Manager', 'Documentation Manager', 'Knowledge Manager',
+
+    // Market Research
+    'Market Research Analyst', 'Consumer Insights Manager', 'Market Intelligence Analyst',
+    'Competitive Intelligence Analyst', 'Marketing Data Analyst', 'Survey Researcher'
+  ],
+
+  'Business & Management': [
+    // Product Management
+    'Product Manager', 'Senior Product Manager', 'Technical Product Manager',
+    'Product Owner', 'Program Manager', 'Project Manager', 'Scrum Master',
+    'Agile Coach', 'Product Operations Manager', 'Chief Product Officer',
+
+    // Business Operations
+    'Business Analyst', 'Management Consultant', 'Operations Manager',
+    'Process Improvement Manager', 'Strategy Analyst', 'Business Development Manager',
+    'Sales Operations Manager', 'Revenue Operations Manager', 'Customer Success Manager',
+
+    // Finance & Strategy
+    'Financial Analyst', 'Business Intelligence Manager', 'Strategic Planning Manager',
+    'Operations Analyst', 'Risk Manager', 'Portfolio Manager', 'Investment Analyst'
+  ],
+
+  'Sales & Customer Service': [
+    // Sales
+    'Account Executive', 'Sales Manager', 'Business Development Representative',
+    'Sales Development Representative', 'Enterprise Account Manager', 'Solutions Consultant',
+    'Sales Engineer', 'Channel Partner Manager', 'Regional Sales Director',
+
+    // Customer Service
+    'Customer Success Manager', 'Account Manager', 'Customer Support Engineer',
+    'Technical Support Specialist', 'Client Services Manager', 'Customer Experience Manager',
+    'Implementation Specialist', 'Customer Onboarding Specialist'
+  ],
+
+  'Healthcare & Sciences': [
+    // Healthcare Technology
+    'Healthcare Systems Analyst', 'Clinical Data Manager', 'Health Informatics Specialist',
+    'Medical Software Developer', 'Healthcare Project Manager', 'Clinical Systems Analyst',
+    
+    // Research & Development
+    'Research Scientist', 'Clinical Research Coordinator', 'Biostatistician',
+    'Laboratory Manager', 'Research Engineer', 'Clinical Data Analyst',
+    'Regulatory Affairs Specialist', 'Quality Assurance Manager'
+  ],
+};
+
+// Enhanced comprehensive skill sets
 const skillSets = {
-  'Engineering & Development': {
-    'Software Development': [
-      // Core Programming
-      'JavaScript', 'Python', 'Java', 'C++', 'C#', 'Ruby', 'PHP', 'Swift', 'Go', 'Rust', 'Kotlin', 'TypeScript',
-      // Web Frontend
-      'React', 'Angular', 'Vue.js', 'Next.js', 'Svelte', 'HTML5', 'CSS3', 'SASS/SCSS', 'WebGL', 'Three.js',
-      // Web Backend
-      'Node.js', 'Django', 'Ruby on Rails', 'Laravel', 'ASP.NET Core', 'Spring Boot', 'Express.js', 'FastAPI',
-      // Mobile
-      'React Native', 'Flutter', 'iOS Development', 'Android Development', 'Xamarin', 'SwiftUI', 'Kotlin Multiplatform',
-      // Database
-      'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'DynamoDB', 'Cassandra', 'Oracle', 'SQL Server',
-      // Cloud & DevOps
-      'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Jenkins', 'GitLab CI', 'Terraform', 'Ansible'
+  'Software Development': {
+    'Programming Languages': [
+      'JavaScript', 'Python', 'Java', 'C++', 'C#', 'Ruby', 'PHP', 'Swift', 'Go', 'Rust',
+      'Kotlin', 'TypeScript', 'Scala', 'R', 'MATLAB', 'Perl', 'Haskell', 'Dart',
+      'Objective-C', 'Shell Scripting', 'PowerShell', 'VBA', 'Groovy', 'Lua'
     ],
-    'Game Development': [
-      'Unity', 'Unreal Engine', 'GameMaker Studio', 'Godot', 'C++ Game Dev', 'DirectX', 'OpenGL',
-      'Game Design', 'Level Design', '3D Modeling for Games', 'Game AI', 'Game Physics', 'Multiplayer Networking'
+    'Web Technologies': [
+      'HTML5', 'CSS3', 'SASS/SCSS', 'WebAssembly', 'WebGL', 'WebRTC', 'PWAs',
+      'Service Workers', 'Web Components', 'Web Security', 'OAuth', 'JWT',
+      'RESTful APIs', 'GraphQL', 'WebSockets', 'Server-Sent Events'
     ],
-    'Embedded Systems': [
-      'Arduino', 'Raspberry Pi', 'Embedded C', 'RTOS', 'IoT Development', 'Microcontroller Programming',
-      'FPGA', 'PCB Design', 'Electronics Design', 'Firmware Development'
+    'Frontend Development': [
+      'React', 'Angular', 'Vue.js', 'Next.js', 'Nuxt.js', 'Svelte', 'Redux',
+      'MobX', 'Zustand', 'Tailwind CSS', 'Material-UI', 'Bootstrap',
+      'Webpack', 'Vite', 'Babel', 'ESLint', 'Jest', 'Testing Library',
+      'Storybook', 'Cypress', 'Playwright'
+    ],
+    'Backend Development': [
+      'Node.js', 'Django', 'Ruby on Rails', 'Spring Boot', 'ASP.NET Core',
+      'Laravel', 'Express.js', 'FastAPI', 'NestJS', 'Flask', 'Phoenix',
+      'Gin', 'gRPC', 'Microservices', 'Message Queues', 'Caching',
+      'API Gateway', 'Service Mesh'
+    ],
+    'Database & Storage': [
+      'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Elasticsearch',
+      'Cassandra', 'DynamoDB', 'Neo4j', 'InfluxDB', 'TimescaleDB',
+      'SQL', 'NoSQL', 'GraphQL', 'Data Modeling', 'Database Design',
+      'Database Optimization', 'Database Administration'
+    ],
+    'DevOps & Cloud': [
+      'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Terraform',
+      'Ansible', 'Jenkins', 'GitLab CI', 'GitHub Actions', 'CircleCI',
+      'Prometheus', 'Grafana', 'ELK Stack', 'Datadog', 'New Relic',
+      'Cloud Architecture', 'Infrastructure as Code', 'Site Reliability Engineering'
     ]
   },
 
   'Data Science & AI': {
     'Machine Learning': [
-      'TensorFlow', 'PyTorch', 'Scikit-learn', 'Deep Learning', 'Neural Networks', 'Computer Vision',
-      'NLP', 'Reinforcement Learning', 'MLOps', 'Auto ML', 'Feature Engineering'
+      'TensorFlow', 'PyTorch', 'Scikit-learn', 'XGBoost', 'LightGBM',
+      'Neural Networks', 'Deep Learning', 'Computer Vision', 'NLP',
+      'Reinforcement Learning', 'Time Series Analysis', 'Anomaly Detection',
+      'Feature Engineering', 'Model Deployment', 'MLOps', 'AutoML'
     ],
     'Data Engineering': [
-      'Apache Spark', 'Hadoop', 'Airflow', 'Kafka', 'ETL', 'Data Warehousing', 'Data Modeling',
-      'Big Data', 'Data Pipeline', 'Stream Processing'
+      'Apache Spark', 'Hadoop', 'Airflow', 'Kafka', 'Snowflake', 'dbt',
+      'ETL/ELT', 'Data Warehousing', 'Data Lakes', 'Data Modeling',
+      'Data Pipeline', 'Stream Processing', 'Batch Processing',
+      'Data Quality', 'Data Governance', 'Data Catalog'
     ],
-    'Analytics': [
-      'Data Analysis', 'Statistical Analysis', 'R Programming', 'Power BI', 'Tableau', 'Excel',
-      'Google Analytics', 'A/B Testing', 'Business Intelligence', 'Predictive Analytics'
+    'Analytics & Visualization': [
+      'Tableau', 'Power BI', 'Looker', 'D3.js', 'Python Visualization',
+      'R Visualization', 'Dashboard Design', 'Statistical Analysis',
+      'A/B Testing', 'Experimentation', 'Business Intelligence',
+      'Data Storytelling', 'Metric Definition'
     ]
   },
 
   'Design & Creative': {
-    'UI/UX Design': [
-      'Figma', 'Adobe XD', 'Sketch', 'InVision', 'User Research', 'Wireframing', 'Prototyping',
-      'Design Systems', 'Interaction Design', 'Mobile Design', 'Web Design', 'Responsive Design'
+    'Design Tools': [
+      'Figma', 'Adobe XD', 'Sketch', 'InVision', 'Photoshop',
+      'Illustrator', 'After Effects', 'Premiere Pro', 'Blender',
+      'Maya', 'Cinema 4D', 'Unity', 'Unreal Engine', 'ZBrush'
     ],
-    'Graphic Design': [
-      'Adobe Photoshop', 'Illustrator', 'InDesign', 'After Effects', 'Typography', 'Logo Design',
-      'Brand Identity', 'Print Design', 'Packaging Design', 'Motion Graphics'
+    'Design Skills': [
+      'UI Design', 'UX Design', 'Interaction Design', 'Visual Design',
+      'Typography', 'Color Theory', 'Layout Design', 'Icon Design',
+      'Design Systems', 'Wireframing', 'Prototyping', 'User Research',
+      'Usability Testing', 'Information Architecture', 'Service Design'
     ],
-    '3D & Animation': [
-      'Blender', 'Maya', 'Cinema 4D', '3D Modeling', 'Character Animation', 'Motion Capture',
-      'VFX', 'Rigging', 'Texturing', 'Rendering'
+    'Motion & 3D': [
+      'Motion Graphics', 'Character Animation', '3D Modeling',
+      'Texturing', 'Rigging', 'VFX', 'Compositing',
+      'Particle Systems', 'Lighting', 'Rendering'
     ]
   },
 
-  'Business & Management': {
+  'Business & Product': {
+    'Product Management': [
+      'Product Strategy', 'Product Roadmap', 'User Stories',
+      'Product Requirements', 'Market Research', 'Competitive Analysis',
+      'Product Analytics', 'Growth Strategy', 'Product Marketing',
+      'Launch Planning', 'Pricing Strategy', 'Product Operations'
+    ],
     'Project Management': [
-      'Agile', 'Scrum', 'Kanban', 'PRINCE2', 'PMP', 'Program Management', 'Risk Management',
-      'Stakeholder Management', 'Resource Planning', 'Project Planning', 'Jira', 'Trello'
+      'Agile', 'Scrum', 'Kanban', 'Waterfall', 'PRINCE2', 'PMP',
+      'Risk Management', 'Stakeholder Management', 'Resource Planning',
+      'Budget Management', 'Change Management', 'Program Management'
     ],
     'Business Analysis': [
-      'Requirements Analysis', 'Process Modeling', 'BPMN', 'UML', 'User Stories', 'Use Cases',
-      'Gap Analysis', 'Business Process Improvement', 'Data Analysis', 'SQL'
-    ],
-    'Product Management': [
-      'Product Strategy', 'Product Roadmap', 'User Stories', 'Market Research', 'Competitive Analysis',
-      'Product Analytics', 'Growth Hacking', 'A/B Testing', 'User Feedback', 'Product Launch'
+      'Requirements Analysis', 'Process Modeling', 'BPMN', 'UML',
+      'Business Process Improvement', 'Gap Analysis', 'Cost-Benefit Analysis',
+      'Process Documentation', 'Quality Assurance', 'Compliance'
     ]
   },
 
   'Marketing & Content': {
     'Digital Marketing': [
-      'SEO', 'SEM', 'Social Media Marketing', 'Content Marketing', 'Email Marketing', 'PPC',
-      'Google Ads', 'Facebook Ads', 'Marketing Analytics', 'Marketing Automation'
+      'SEO', 'SEM', 'Google Ads', 'Facebook Ads', 'LinkedIn Ads',
+      'Content Marketing', 'Email Marketing', 'Marketing Automation',
+      'Growth Marketing', 'Conversion Optimization', 'Attribution Modeling',
+      'Marketing Analytics', 'Customer Segmentation'
     ],
     'Content Creation': [
-      'Content Writing', 'Copywriting', 'Technical Writing', 'Blog Writing', 'Article Writing',
-      'Editing', 'Proofreading', 'Content Strategy', 'SEO Writing'
+      'Content Strategy', 'Copywriting', 'Technical Writing',
+      'Blog Writing', 'White Papers', 'Case Studies',
+      'Social Media Content', 'Video Scripts', 'Email Campaigns',
+      'Content Operations', 'Editorial Planning'
     ],
-    'Video & Audio': [
-      'Video Editing', 'Video Production', 'Sound Design', 'Podcast Production', 'Voice Over',
-      'Audio Editing', 'Motion Graphics', 'Color Grading', 'Screenwriting'
+    'Analytics & Tools': [
+      'Google Analytics', 'Google Tag Manager', 'Adobe Analytics',
+      'Mixpanel', 'Amplitude', 'HubSpot', 'Marketo', 'Salesforce',
+      'SEMrush', 'Ahrefs', 'Mailchimp', 'Customer.io'
     ]
-  },
+  }
 };
+
 
 // Function to enrich skill sets using GitHub Topics API
 async function enrichSkillSetsFromGitHub() {
@@ -160,114 +294,160 @@ const getRandomSkills = (category, count = 6) => {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await initializeSkillSets();
-    const password = await bcrypt.hash('password123', 10);
-    const users = [];
-    const freelancers = [];
+    try {
+      const password = await bcrypt.hash('password123', 10);
+      const users = [];
+      const freelancers = [];
 
-    // Create clients (IDs 1-400)
-    for (let i = 0; i < 400; i++) {
-      const userId = 1 + i;
-      const companyName = faker.company.name();
-      
-      users.push({
-        id: userId,
-        name: companyName,
-        email: faker.internet.email(),
-        password,
-        userType: 'client',
-        title: `${faker.person.jobTitle()} at ${companyName}`,
-        desc: faker.company.catchPhrase(),
-        companySize: faker.helpers.arrayElement([
-          '1-10', '11-50', '51-200', '201-500', '501-1000', '1000+'
-        ]),
-        industry: faker.helpers.arrayElement([
-          'Software Development', 'Digital Marketing', 'E-commerce',
-          'Healthcare', 'Education', 'Financial Services'
-        ]),
-        totalJobs: faker.number.int({ min: 0, max: 50 }),
-        totalEarnings: faker.number.float({ min: 0, max: 100000, precision: 2 }),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      });
-    }
+      // Get all available categories from our defined skillSets
+      const availableCategories = Object.keys(skillSets);
+      const availableIndustries = Object.keys(jobTitles);
 
-    // Create freelancer users (IDs 401-900)
-    for (let i = 0; i < 500; i++) {
-      const userId = 401 + i;
-      const category = faker.helpers.arrayElement(Object.keys(skillSets));
-      const fullName = faker.person.fullName();
-      const experience = faker.number.int({ min: 1, max: 15 });
-      
-      users.push({
-        id: userId,
-        name: fullName,
-        email: faker.internet.email(),
-        password,
-        userType: 'freelancer',
-        title: `${category} Specialist`,
-        skills: JSON.stringify(getRandomSkills(category)),
-        hourlyRate: faker.number.int({ min: 25, max: 150 }),
-        desc: `${faker.person.jobDescriptor()} ${category} professional with ${experience} years of experience. ${faker.lorem.paragraph()}`,
-        profileUrl: generateProfileUrl(userId),
-        totalJobs: faker.number.int({ min: 0, max: 100 }),
-        successRate: faker.number.int({ min: 70, max: 100 }),
-        totalEarnings: faker.number.float({ min: 1000, max: 200000, precision: 2 }),
-        availability: faker.datatype.boolean(),
-        yearsOfExperience: experience,
-        education: JSON.stringify([{
-          degree: faker.helpers.arrayElement([
-            'Bachelor of Science', 'Master of Science', 'Bachelor of Arts'
+      // Create clients (IDs 1-400)
+      for (let i = 0; i < 400; i++) {
+        const userId = i + 1;
+        const industry = faker.helpers.arrayElement(availableIndustries);
+        const jobTitlesForIndustry = jobTitles[industry];
+        const companyName = faker.company.name();
+        
+        users.push({
+          id: userId,
+          name: companyName,
+          email: faker.internet.email(),
+          password,
+          userType: 'client',
+          title: faker.helpers.arrayElement(jobTitlesForIndustry), // Use defined job titles
+          companySize: faker.helpers.arrayElement([
+            '1-10', '11-50', '51-200', '201-500', '501-1000', '1000+'
           ]),
-          field: faker.helpers.arrayElement([
-            'Computer Science', 'Information Technology', 'Design',
-            'Marketing', 'Business Administration'
+          industry,
+          desc: faker.company.catchPhrase(),
+          skills: JSON.stringify([]),
+          hourlyRate: null,
+          profileUrl: null,
+          totalJobs: faker.number.int({ min: 0, max: 50 }),
+          successRate: null,
+          totalEarnings: faker.number.float({ min: 0, max: 100000, precision: 2 }),
+          availability: true,
+          yearsOfExperience: null,
+          education: null,
+          certifications: null,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        });
+      }
+
+      // Create freelancer users (IDs 401-900)
+      for (let i = 0; i < 500; i++) {
+        const userId = 401 + i;
+        // Select a random category from our defined skillSets
+        const category = faker.helpers.arrayElement(availableCategories);
+        
+        // Get all skills for this category
+        const categorySkills = getAllSkillsForCategory(category);
+        
+        // Select random skills from the category
+        const selectedSkills = faker.helpers.arrayElements(
+          categorySkills,
+          faker.number.int({ min: 3, max: 6 })
+        );
+
+        // Get matching job titles for the category
+        const matchingIndustry = availableIndustries.find(ind => 
+          ind.toLowerCase().includes(category.toLowerCase()) ||
+          category.toLowerCase().includes(ind.toLowerCase())
+        ) || availableIndustries[0];
+
+        const fullName = faker.person.fullName();
+        const experience = faker.number.int({ min: 1, max: 15 });
+        const username = faker.internet.userName();
+        const hourlyRate = faker.number.int({ min: 25, max: 150 });
+
+        const user = {
+          id: userId,
+          name: fullName,
+          email: faker.internet.email(),
+          password,
+          userType: 'freelancer',
+          // Use job titles that match the skills category
+          title: faker.helpers.arrayElement(jobTitles[matchingIndustry]),
+          desc: `Professional ${category} specialist with ${experience} years of experience. ${faker.lorem.paragraph()}`,
+          skills: JSON.stringify(selectedSkills),
+          hourlyRate,
+          profileUrl: `/profile/${userId}`,
+          totalJobs: faker.number.int({ min: 0, max: 100 }),
+          successRate: faker.number.int({ min: 70, max: 100 }),
+          totalEarnings: faker.number.float({ min: 1000, max: 200000, precision: 2 }),
+          availability: faker.datatype.boolean(),
+          yearsOfExperience: experience,
+          education: JSON.stringify([{
+            degree: faker.helpers.arrayElement([
+              'Bachelor of Science', 'Master of Science', 'Bachelor of Arts'
+            ]),
+            field: category,
+            school: `${faker.company.name()} University`,
+            year: 2024 - experience - faker.number.int({ min: 0, max: 5 })
+          }]),
+          certifications: JSON.stringify([
+            'AWS Certified Developer',
+            'Professional Certification',
+            'Industry Certification'
           ]),
-          school: faker.company.name() + ' University',
-          year: 2024 - experience - faker.number.int({ min: 0, max: 5 })
-        }]),
-        certifications: JSON.stringify(
-          faker.helpers.arrayElements([
-            'AWS Certified Developer', 'Google Analytics', 'Scrum Master',
-            'PMP', 'CISSP', 'CompTIA A+', 'Microsoft Azure'
-          ], faker.number.int({ min: 1, max: 3 }))
-        ),
-        createdAt: faker.date.past(),
-        updatedAt: new Date()
-      });
-    }
+          createdAt: faker.date.past(),
+          updatedAt: new Date()
+        };
 
-    // Create freelancer profiles
-    for (let i = 0; i < 500; i++) {
-      const userId = 401 + i;
-      const category = faker.helpers.arrayElement(Object.keys(skillSets));
-      const skills = getRandomSkills(category);
-      
-      freelancers.push({
-        userId,
-        username: faker.internet.userName(),
-        name: users.find(u => u.id === userId).name,
-        job_title: `${category} Specialist`,
-        skills: skills.join(','),
-        experience: faker.number.int({ min: 1, max: 15 }),
-        rating: faker.number.float({ min: 4.0, max: 5.0, precision: 0.1 }),
-        hourly_rate: faker.number.int({ min: 25, max: 150 }),
-        availability: faker.datatype.boolean(),
-        profile_url: generateProfileUrl(userId),
-        total_sales: faker.number.int({ min: 0, max: 100 }),
-        desc: `Expert ${category} professional. ${faker.lorem.paragraph()}`,
-        createdAt: faker.date.past(),
-        updatedAt: new Date()
-      });
-    }
+        const freelancer = {
+          userId,
+          username,
+          name: fullName,
+          job_title: user.title,
+          skills: JSON.stringify(selectedSkills),
+          experience,
+          rating: faker.number.float({ min: 4.0, max: 5.0, precision: 0.1 }),
+          hourly_rate: hourlyRate,
+          availability: user.availability,
+          profile_url: user.profileUrl,
+          total_sales: user.totalJobs,
+          desc: user.desc,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt
+        };
 
-    // Insert users and freelancers
-    await queryInterface.bulkInsert('Users', users);
-    return queryInterface.bulkInsert('Freelancers', freelancers);
+        users.push(user);
+        freelancers.push(freelancer);
+      }
+
+      // Insert data with transaction
+      const transaction = await queryInterface.sequelize.transaction();
+      try {
+        await queryInterface.bulkInsert('Users', users, { transaction });
+        await queryInterface.bulkInsert('Freelancers', freelancers, { transaction });
+        await transaction.commit();
+        console.log('Successfully seeded Users and Freelancers');
+      } catch (err) {
+        await transaction.rollback();
+        throw err;
+      }
+
+      return Promise.resolve();
+    } catch (error) {
+      console.error('Error in seeding:', error);
+      return Promise.reject(error);
+    }
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Freelancers', null, {});
-    return queryInterface.bulkDelete('Users', null, {});
+  down: async (queryInterface) => {
+    const transaction = await queryInterface.sequelize.transaction();
+    try {
+      await queryInterface.bulkDelete('Freelancers', null, { transaction });
+      await queryInterface.bulkDelete('Users', null, { transaction });
+      await transaction.commit();
+      return Promise.resolve();
+    } catch (error) {
+      await transaction.rollback();
+      console.error('Error in reverting seed:', error);
+      return Promise.reject(error);
+    }
   }
 };
