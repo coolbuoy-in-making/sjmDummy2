@@ -45661,3 +45661,2776 @@ Evaluating Freelancer 264: Warren Emmerich
 Processing chat request:
 2025-01-23 08:31:54,353 - INFO: Message: We are seeking an experienced Project Management Professional to lead and coordinate a multifaceted organizational transformation initiative. The ideal candidate will possess exceptional leadership skills, advanced strategic planning abilities, and proven experience managing cross-functional teams. Responsibilities include developing comprehensive project plans, establishing clear milestones and deliverables, managing stakeholder communications, tracking budget and resource allocation, mitigating risks, and ensuring timely project completion. The successful candidate must demonstrate proficiency in project management methodologies (PMP/Agile), utilize advanced software tools like Microsoft Project and Jira, and have a track record of successfully delivering complex projects within scope, budget, and timeline. Strong analytical skills, exceptional communication abilities, and the capacity to drive organizational change are critical for this high-impact role.
 2025-01-23 08:31:54,378 - INFO: 127.0.0.1 - - [23/Jan/2025 08:31:54] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 18:35:07,591 - INFO: SkillsExtract initialized with custom stop words
+2025-01-23 18:35:07,593 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-23 18:35:08,356 - INFO: Successfully loaded 240 freelancers
+2025-01-23 18:35:08,363 - INFO: Loaded 175 job titles and 530 skills from database
+2025-01-23 18:35:08,864 - INFO: Matching engine initialized successfully
+2025-01-23 18:35:08,865 - INFO: 
+==================================================
+Loaded 240 freelancers:
+2025-01-23 18:35:08,866 - INFO: 
+1. Raymond Borer (Technical Artist)
+2025-01-23 18:35:08,867 - INFO:    Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 18:35:08,868 - INFO:    Rate: $26.0/hr, Rating: 4.28663%
+2025-01-23 18:35:08,868 - INFO: 
+2. Gayle Bradtke (Backend Developer)
+2025-01-23 18:35:08,871 - INFO:    Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 18:35:08,874 - INFO:    Rate: $77.0/hr, Rating: 4.71936%
+2025-01-23 18:35:08,876 - INFO: 
+3. Tommy Mann (Infrastructure Manager)
+2025-01-23 18:35:08,877 - INFO:    Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 18:35:08,879 - INFO:    Rate: $27.0/hr, Rating: 4.74074%
+2025-01-23 18:35:08,881 - INFO: 
+4. Dr. Cody Renner-Halvorson (Multimedia Designer)
+2025-01-23 18:35:08,884 - INFO:    Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 18:35:08,886 - INFO:    Rate: $35.0/hr, Rating: 4.96156%
+2025-01-23 18:35:08,902 - INFO: 
+5. Jeannette Medhurst (Level Designer)
+2025-01-23 18:35:08,915 - INFO:    Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 18:35:08,916 - INFO:    Rate: $137.0/hr, Rating: 4.93055%
+2025-01-23 18:35:08,916 - INFO: 
+6. Joel Okuneva (Production Artist)
+2025-01-23 18:35:08,917 - INFO:    Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 18:35:08,919 - INFO:    Rate: $44.0/hr, Rating: 4.51352%
+2025-01-23 18:35:08,921 - INFO: 
+7. Lydia Mayert (Graphic Designer)
+2025-01-23 18:35:08,931 - INFO:    Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 18:35:08,947 - INFO:    Rate: $68.0/hr, Rating: 4.04297%
+2025-01-23 18:35:08,962 - INFO: 
+8. Katherine Brown (Frontend Developer)
+2025-01-23 18:35:08,964 - INFO:    Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 18:35:08,969 - INFO:    Rate: $79.0/hr, Rating: 4.34857%
+2025-01-23 18:35:08,977 - INFO: 
+9. Jane Walter (Systems Architect)
+2025-01-23 18:35:08,977 - INFO:    Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 18:35:08,980 - INFO:    Rate: $82.0/hr, Rating: 4.60934%
+2025-01-23 18:35:08,981 - INFO: 
+10. Lana Von (Database Administrator)
+2025-01-23 18:35:08,984 - INFO:    Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 18:35:08,986 - INFO:    Rate: $71.0/hr, Rating: 4.96011%
+2025-01-23 18:35:08,992 - INFO: 
+... and 230 more freelancers
+2025-01-23 18:35:08,994 - INFO: ==================================================
+
+2025-01-23 18:35:08,997 - INFO: Model initialization completed successfully
+2025-01-23 18:35:09,134 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.170.233:8000
+2025-01-23 18:35:09,135 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-23 18:56:21,923 - INFO: 127.0.0.1 - - [23/Jan/2025 18:56:21] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 18:56:21,974 - INFO: 
+Processing chat request:
+2025-01-23 18:56:21,975 - INFO: Message: hi
+2025-01-23 18:56:21,979 - INFO: 127.0.0.1 - - [23/Jan/2025 18:56:21] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 18:56:32,821 - INFO: 127.0.0.1 - - [23/Jan/2025 18:56:32] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 18:56:33,091 - INFO: 
+Processing chat request:
+2025-01-23 18:56:33,091 - INFO: Message: react
+2025-01-23 18:56:33,212 - INFO: 127.0.0.1 - - [23/Jan/2025 18:56:33] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:13:31,855 - INFO: SkillsExtract initialized with custom stop words
+2025-01-23 19:13:31,857 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-23 19:13:34,538 - INFO: Successfully loaded 240 freelancers
+2025-01-23 19:13:34,541 - INFO: Loaded 175 job titles and 530 skills from database
+2025-01-23 19:13:34,607 - INFO: Matching engine initialized successfully
+2025-01-23 19:13:34,608 - INFO: 
+==================================================
+Loaded 240 freelancers:
+2025-01-23 19:13:34,608 - INFO: 
+1. Raymond Borer (Technical Artist)
+2025-01-23 19:13:34,609 - INFO:    Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 19:13:34,610 - INFO:    Rate: $26.0/hr, Rating: 4.28663%
+2025-01-23 19:13:34,610 - INFO: 
+2. Gayle Bradtke (Backend Developer)
+2025-01-23 19:13:34,611 - INFO:    Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 19:13:34,612 - INFO:    Rate: $77.0/hr, Rating: 4.71936%
+2025-01-23 19:13:34,612 - INFO: 
+3. Tommy Mann (Infrastructure Manager)
+2025-01-23 19:13:34,613 - INFO:    Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 19:13:34,613 - INFO:    Rate: $27.0/hr, Rating: 4.74074%
+2025-01-23 19:13:34,614 - INFO: 
+4. Dr. Cody Renner-Halvorson (Multimedia Designer)
+2025-01-23 19:13:34,614 - INFO:    Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 19:13:34,615 - INFO:    Rate: $35.0/hr, Rating: 4.96156%
+2025-01-23 19:13:34,615 - INFO: 
+5. Jeannette Medhurst (Level Designer)
+2025-01-23 19:13:34,616 - INFO:    Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 19:13:34,616 - INFO:    Rate: $137.0/hr, Rating: 4.93055%
+2025-01-23 19:13:34,616 - INFO: 
+6. Joel Okuneva (Production Artist)
+2025-01-23 19:13:34,617 - INFO:    Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 19:13:34,618 - INFO:    Rate: $44.0/hr, Rating: 4.51352%
+2025-01-23 19:13:34,618 - INFO: 
+7. Lydia Mayert (Graphic Designer)
+2025-01-23 19:13:34,619 - INFO:    Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 19:13:34,620 - INFO:    Rate: $68.0/hr, Rating: 4.04297%
+2025-01-23 19:13:34,620 - INFO: 
+8. Katherine Brown (Frontend Developer)
+2025-01-23 19:13:34,621 - INFO:    Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 19:13:34,621 - INFO:    Rate: $79.0/hr, Rating: 4.34857%
+2025-01-23 19:13:34,622 - INFO: 
+9. Jane Walter (Systems Architect)
+2025-01-23 19:13:34,623 - INFO:    Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 19:13:34,623 - INFO:    Rate: $82.0/hr, Rating: 4.60934%
+2025-01-23 19:13:34,624 - INFO: 
+10. Lana Von (Database Administrator)
+2025-01-23 19:13:34,625 - INFO:    Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 19:13:34,626 - INFO:    Rate: $71.0/hr, Rating: 4.96011%
+2025-01-23 19:13:34,626 - INFO: 
+... and 230 more freelancers
+2025-01-23 19:13:34,644 - INFO: ==================================================
+
+2025-01-23 19:13:34,645 - INFO: Model initialization completed successfully
+2025-01-23 19:13:34,700 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.170.233:8000
+2025-01-23 19:13:34,702 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-23 19:14:01,390 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:01] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:01,647 - INFO: 
+Processing chat request:
+2025-01-23 19:14:01,648 - INFO: Message: project management
+2025-01-23 19:14:01,677 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:01] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:30,218 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:30] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:30,484 - INFO: 
+==================================================
+2025-01-23 19:14:30,485 - INFO: Starting Freelancer Search
+2025-01-23 19:14:30,486 - INFO: ==================================================
+2025-01-23 19:14:30,487 - INFO: 
+Budget Range: $55.0-$144.0/hr
+2025-01-23 19:14:30,488 - INFO: Cleaned Input Skills: ['Data Pipeline', 'dbt', 'UML', 'Google Analytics', 'Product Roadmap', 'Data Pipeline', 'Google Analytics', 'UML', 'Product Roadmap']
+2025-01-23 19:14:30,613 - INFO: Validated Skills: []
+2025-01-23 19:14:30,613 - INFO: Expanded Skills: []
+2025-01-23 19:14:30,614 - INFO: 
+Searching for matching freelancers...
+2025-01-23 19:14:30,614 - INFO: 
+Evaluating Freelancer 1: Raymond Borer
+2025-01-23 19:14:30,614 - INFO: Job Title: Technical Artist
+2025-01-23 19:14:30,614 - INFO: Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 19:14:30,615 - INFO: Rate: $26.0/hr
+2025-01-23 19:14:30,615 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,615 - INFO: 
+Evaluating Freelancer 2: Gayle Bradtke
+2025-01-23 19:14:30,616 - INFO: Job Title: Backend Developer
+2025-01-23 19:14:30,616 - INFO: Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 19:14:30,616 - INFO: Rate: $77.0/hr
+2025-01-23 19:14:30,655 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,656 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,656 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,657 - INFO: Rating Score: 0.94
+2025-01-23 19:14:30,658 - INFO: Combined Score: 0.24
+2025-01-23 19:14:30,658 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,658 - INFO: 
+Evaluating Freelancer 3: Tommy Mann
+2025-01-23 19:14:30,661 - INFO: Job Title: Infrastructure Manager
+2025-01-23 19:14:30,662 - INFO: Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 19:14:30,663 - INFO: Rate: $27.0/hr
+2025-01-23 19:14:30,664 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,664 - INFO: 
+Evaluating Freelancer 4: Dr. Cody Renner-Halvorson
+2025-01-23 19:14:30,665 - INFO: Job Title: Multimedia Designer
+2025-01-23 19:14:30,665 - INFO: Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 19:14:30,665 - INFO: Rate: $35.0/hr
+2025-01-23 19:14:30,666 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,666 - INFO: 
+Evaluating Freelancer 5: Jeannette Medhurst
+2025-01-23 19:14:30,667 - INFO: Job Title: Level Designer
+2025-01-23 19:14:30,667 - INFO: Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 19:14:30,668 - INFO: Rate: $137.0/hr
+2025-01-23 19:14:30,681 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,682 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,682 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,683 - INFO: Rating Score: 0.99
+2025-01-23 19:14:30,683 - INFO: Combined Score: 0.25
+2025-01-23 19:14:30,684 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,684 - INFO: 
+Evaluating Freelancer 6: Joel Okuneva
+2025-01-23 19:14:30,685 - INFO: Job Title: Production Artist
+2025-01-23 19:14:30,685 - INFO: Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 19:14:30,686 - INFO: Rate: $44.0/hr
+2025-01-23 19:14:30,686 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,687 - INFO: 
+Evaluating Freelancer 7: Lydia Mayert
+2025-01-23 19:14:30,687 - INFO: Job Title: Graphic Designer
+2025-01-23 19:14:30,688 - INFO: Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 19:14:30,688 - INFO: Rate: $68.0/hr
+2025-01-23 19:14:30,702 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,703 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,703 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,704 - INFO: Rating Score: 0.81
+2025-01-23 19:14:30,704 - INFO: Combined Score: 0.20
+2025-01-23 19:14:30,705 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,705 - INFO: 
+Evaluating Freelancer 8: Katherine Brown
+2025-01-23 19:14:30,706 - INFO: Job Title: Frontend Developer
+2025-01-23 19:14:30,706 - INFO: Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 19:14:30,707 - INFO: Rate: $79.0/hr
+2025-01-23 19:14:30,730 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,730 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,731 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,732 - INFO: Rating Score: 0.87
+2025-01-23 19:14:30,732 - INFO: Combined Score: 0.22
+2025-01-23 19:14:30,733 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,733 - INFO: 
+Evaluating Freelancer 9: Jane Walter
+2025-01-23 19:14:30,734 - INFO: Job Title: Systems Architect
+2025-01-23 19:14:30,735 - INFO: Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 19:14:30,735 - INFO: Rate: $82.0/hr
+2025-01-23 19:14:30,751 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,752 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,753 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,754 - INFO: Rating Score: 0.92
+2025-01-23 19:14:30,756 - INFO: Combined Score: 0.23
+2025-01-23 19:14:30,756 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,757 - INFO: 
+Evaluating Freelancer 10: Lana Von
+2025-01-23 19:14:30,758 - INFO: Job Title: Database Administrator
+2025-01-23 19:14:30,761 - INFO: Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 19:14:30,763 - INFO: Rate: $71.0/hr
+2025-01-23 19:14:30,780 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,782 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,782 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,783 - INFO: Rating Score: 0.99
+2025-01-23 19:14:30,784 - INFO: Combined Score: 0.25
+2025-01-23 19:14:30,785 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,786 - INFO: 
+Evaluating Freelancer 11: Doug Ruecker
+2025-01-23 19:14:30,787 - INFO: Job Title: Brand Designer
+2025-01-23 19:14:30,788 - INFO: Skills: ["Information Architecture", "Photoshop", "Layout Design", "VFX", "Service Design", "UI Design"]
+2025-01-23 19:14:30,789 - INFO: Rate: $49.0/hr
+2025-01-23 19:14:30,789 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,791 - INFO: 
+Evaluating Freelancer 12: Mrs. Penny Greenholt
+2025-01-23 19:14:30,797 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:30,801 - INFO: Skills: ["Hadoop", "dbt", "Deep Learning", "Python Visualization"]
+2025-01-23 19:14:30,802 - INFO: Rate: $56.0/hr
+2025-01-23 19:14:30,829 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,830 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,830 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,831 - INFO: Rating Score: 0.91
+2025-01-23 19:14:30,831 - INFO: Combined Score: 0.23
+2025-01-23 19:14:30,832 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,832 - INFO: 
+Evaluating Freelancer 13: Evelyn Armstrong V
+2025-01-23 19:14:30,833 - INFO: Job Title: IT Project Manager
+2025-01-23 19:14:30,833 - INFO: Skills: ["dbt", "Dashboard Design", "Snowflake", "Batch Processing", "Power BI"]
+2025-01-23 19:14:30,835 - INFO: Rate: $87.0/hr
+2025-01-23 19:14:30,852 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,853 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,854 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,854 - INFO: Rating Score: 0.86
+2025-01-23 19:14:30,855 - INFO: Combined Score: 0.22
+2025-01-23 19:14:30,855 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,856 - INFO: 
+Evaluating Freelancer 14: Tricia Hackett-Senger
+2025-01-23 19:14:30,856 - INFO: Job Title: Machine Learning Engineer
+2025-01-23 19:14:30,856 - INFO: Skills: ["PRINCE2", "User Stories", "Process Modeling", "Requirements Analysis"]
+2025-01-23 19:14:30,857 - INFO: Rate: $140.0/hr
+2025-01-23 19:14:30,873 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,873 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,874 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,874 - INFO: Rating Score: 0.96
+2025-01-23 19:14:30,875 - INFO: Combined Score: 0.24
+2025-01-23 19:14:30,875 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,881 - INFO: 
+Evaluating Freelancer 15: Mrs. Bridget Hudson
+2025-01-23 19:14:30,882 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:30,882 - INFO: Skills: ["HubSpot", "Amplitude", "White Papers", "Google Ads"]
+2025-01-23 19:14:30,883 - INFO: Rate: $50.0/hr
+2025-01-23 19:14:30,884 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,884 - INFO: 
+Evaluating Freelancer 16: Genevieve Jacobson
+2025-01-23 19:14:30,885 - INFO: Job Title: Environment Designer
+2025-01-23 19:14:30,885 - INFO: Skills: ["UX Design", "Design Systems", "Visual Design", "Icon Design"]
+2025-01-23 19:14:30,885 - INFO: Rate: $132.0/hr
+2025-01-23 19:14:30,902 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,902 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,903 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,903 - INFO: Rating Score: 0.90
+2025-01-23 19:14:30,903 - INFO: Combined Score: 0.23
+2025-01-23 19:14:30,904 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,904 - INFO: 
+Evaluating Freelancer 17: Zachary Boyer
+2025-01-23 19:14:30,905 - INFO: Job Title: Frontend Developer
+2025-01-23 19:14:30,905 - INFO: Skills: ["Conversion Optimization", "Content Operations", "Email Marketing", "Marketing Automation"]
+2025-01-23 19:14:30,906 - INFO: Rate: $120.0/hr
+2025-01-23 19:14:30,922 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,922 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,922 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,923 - INFO: Rating Score: 0.88
+2025-01-23 19:14:30,923 - INFO: Combined Score: 0.22
+2025-01-23 19:14:30,924 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,924 - INFO: 
+Evaluating Freelancer 18: Kerry Schinner
+2025-01-23 19:14:30,925 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:30,925 - INFO: Skills: ["Customer.io", "Content Strategy", "Google Tag Manager", "HubSpot", "SEM", "Customer Segmentation"]
+2025-01-23 19:14:30,930 - INFO: Rate: $120.0/hr
+2025-01-23 19:14:30,945 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,946 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,947 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,947 - INFO: Rating Score: 0.91
+2025-01-23 19:14:30,948 - INFO: Combined Score: 0.23
+2025-01-23 19:14:30,948 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,949 - INFO: 
+Evaluating Freelancer 19: Sylvia Wilkinson
+2025-01-23 19:14:30,949 - INFO: Job Title: Platform Engineer
+2025-01-23 19:14:30,950 - INFO: Skills: ["Data Pipeline", "Data Lakes", "ETL/ELT", "Statistical Analysis", "Dashboard Design"]
+2025-01-23 19:14:30,951 - INFO: Rate: $74.0/hr
+2025-01-23 19:14:30,968 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,969 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,970 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,970 - INFO: Rating Score: 0.89
+2025-01-23 19:14:30,971 - INFO: Combined Score: 0.22
+2025-01-23 19:14:30,971 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:30,972 - INFO: 
+Evaluating Freelancer 20: Lamar Brekke
+2025-01-23 19:14:30,972 - INFO: Job Title: Cloud Security Engineer
+2025-01-23 19:14:30,972 - INFO: Skills: ["Azure", "SQL", "InfluxDB", "Terraform"]
+2025-01-23 19:14:30,973 - INFO: Rate: $51.0/hr
+2025-01-23 19:14:30,973 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:30,973 - INFO: 
+Evaluating Freelancer 21: Dr. Irvin Ullrich
+2025-01-23 19:14:30,974 - INFO: Job Title: Blockchain Developer
+2025-01-23 19:14:30,974 - INFO: Skills: ["Statistical Analysis", "Reinforcement Learning", "Deep Learning", "Data Lakes", "Data Governance"]
+2025-01-23 19:14:30,979 - INFO: Rate: $81.0/hr
+2025-01-23 19:14:30,991 - INFO: Matched Skills: set()
+2025-01-23 19:14:30,997 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:30,998 - INFO: Experience Score: 0.00
+2025-01-23 19:14:30,999 - INFO: Rating Score: 0.93
+2025-01-23 19:14:30,999 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,000 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,000 - INFO: 
+Evaluating Freelancer 22: Bethany West
+2025-01-23 19:14:31,001 - INFO: Job Title: Network Engineer
+2025-01-23 19:14:31,001 - INFO: Skills: ["Spring Boot", "Ruby on Rails", "WebAssembly", "MATLAB"]
+2025-01-23 19:14:31,001 - INFO: Rate: $106.0/hr
+2025-01-23 19:14:31,017 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,017 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,018 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,018 - INFO: Rating Score: 0.90
+2025-01-23 19:14:31,018 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,019 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,019 - INFO: 
+Evaluating Freelancer 23: Margie Orn
+2025-01-23 19:14:31,020 - INFO: Job Title: API Developer
+2025-01-23 19:14:31,021 - INFO: Skills: ["Data Warehousing", "Model Deployment", "Anomaly Detection", "Data Pipeline", "Data Catalog", "A/B Testing"]
+2025-01-23 19:14:31,022 - INFO: Rate: $46.0/hr
+2025-01-23 19:14:31,022 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,023 - INFO: 
+Evaluating Freelancer 24: Carl Renner-Witting
+2025-01-23 19:14:31,023 - INFO: Job Title: Data Scientist
+2025-01-23 19:14:31,023 - INFO: Skills: ["Data Pipeline", "Hadoop", "Snowflake", "Airflow"]
+2025-01-23 19:14:31,024 - INFO: Rate: $53.0/hr
+2025-01-23 19:14:31,025 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,030 - INFO: 
+Evaluating Freelancer 25: Elsie Jacobson
+2025-01-23 19:14:31,031 - INFO: Job Title: Game Artist
+2025-01-23 19:14:31,032 - INFO: Skills: ["Visual Design", "Typography", "Rendering"]
+2025-01-23 19:14:31,033 - INFO: Rate: $99.0/hr
+2025-01-23 19:14:31,048 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,048 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,049 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,049 - INFO: Rating Score: 0.99
+2025-01-23 19:14:31,050 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,050 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,050 - INFO: 
+Evaluating Freelancer 26: Dewey Emmerich Jr.
+2025-01-23 19:14:31,051 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:31,051 - INFO: Skills: ["Scala", "GitHub Actions", "TypeScript", "Ruby", "Playwright"]
+2025-01-23 19:14:31,052 - INFO: Rate: $86.0/hr
+2025-01-23 19:14:31,068 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,068 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,069 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,069 - INFO: Rating Score: 0.90
+2025-01-23 19:14:31,069 - INFO: Combined Score: 0.22
+2025-01-23 19:14:31,070 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,070 - INFO: 
+Evaluating Freelancer 27: Tamara Farrell
+2025-01-23 19:14:31,071 - INFO: Job Title: Design Manager
+2025-01-23 19:14:31,071 - INFO: Skills: ["Blender", "Unreal Engine", "After Effects", "Cinema 4D"]
+2025-01-23 19:14:31,073 - INFO: Rate: $125.0/hr
+2025-01-23 19:14:31,090 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,091 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,091 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,097 - INFO: Rating Score: 0.98
+2025-01-23 19:14:31,098 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,099 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,099 - INFO: 
+Evaluating Freelancer 28: Jo Muller-White
+2025-01-23 19:14:31,100 - INFO: Job Title: Security Operations Engineer
+2025-01-23 19:14:31,100 - INFO: Skills: ["RESTful APIs", "ASP.NET Core", "NestJS"]
+2025-01-23 19:14:31,100 - INFO: Rate: $27.0/hr
+2025-01-23 19:14:31,101 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,101 - INFO: 
+Evaluating Freelancer 29: Cassandra O'Conner
+2025-01-23 19:14:31,102 - INFO: Job Title: Network Security Engineer
+2025-01-23 19:14:31,102 - INFO: Skills: ["Ruby on Rails", "MongoDB", "GraphQL", "Cassandra", "Infrastructure as Code"]
+2025-01-23 19:14:31,102 - INFO: Rate: $70.0/hr
+2025-01-23 19:14:31,119 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,120 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,120 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,121 - INFO: Rating Score: 0.97
+2025-01-23 19:14:31,121 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,122 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,124 - INFO: 
+Evaluating Freelancer 30: Kristi Ledner
+2025-01-23 19:14:31,124 - INFO: Job Title: Test Automation Engineer
+2025-01-23 19:14:31,130 - INFO: Skills: ["Data Catalog", "Time Series Analysis", "Kafka", "Dashboard Design", "NLP", "Snowflake"]
+2025-01-23 19:14:31,131 - INFO: Rate: $34.0/hr
+2025-01-23 19:14:31,132 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,133 - INFO: 
+Evaluating Freelancer 31: Angelo Reichert
+2025-01-23 19:14:31,133 - INFO: Job Title: iOS Developer
+2025-01-23 19:14:31,134 - INFO: Skills: ["C#", "OAuth", "Redux"]
+2025-01-23 19:14:31,135 - INFO: Rate: $75.0/hr
+2025-01-23 19:14:31,169 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,178 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,178 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,179 - INFO: Rating Score: 0.98
+2025-01-23 19:14:31,183 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,184 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,196 - INFO: 
+Evaluating Freelancer 32: Francis Macejkovic
+2025-01-23 19:14:31,198 - INFO: Job Title: Product Designer
+2025-01-23 19:14:31,203 - INFO: Skills: ["Maya", "Rigging", "Usability Testing", "Color Theory", "InVision"]
+2025-01-23 19:14:31,205 - INFO: Rate: $78.0/hr
+2025-01-23 19:14:31,288 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,289 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,290 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,291 - INFO: Rating Score: 0.88
+2025-01-23 19:14:31,291 - INFO: Combined Score: 0.22
+2025-01-23 19:14:31,303 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,306 - INFO: 
+Evaluating Freelancer 33: Donna Bailey
+2025-01-23 19:14:31,307 - INFO: Job Title: Machine Learning Engineer
+2025-01-23 19:14:31,307 - INFO: Skills: ["Customer Segmentation", "Content Operations", "Mixpanel", "Content Marketing", "Case Studies"]
+2025-01-23 19:14:31,308 - INFO: Rate: $127.0/hr
+2025-01-23 19:14:31,367 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,367 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,368 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,368 - INFO: Rating Score: 0.93
+2025-01-23 19:14:31,369 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,369 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,369 - INFO: 
+Evaluating Freelancer 34: Mr. Robin Reilly
+2025-01-23 19:14:31,370 - INFO: Job Title: Platform Engineer
+2025-01-23 19:14:31,370 - INFO: Skills: ["Ahrefs", "SEO", "LinkedIn Ads"]
+2025-01-23 19:14:31,371 - INFO: Rate: $65.0/hr
+2025-01-23 19:14:31,417 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,419 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,422 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,423 - INFO: Rating Score: 0.98
+2025-01-23 19:14:31,424 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,434 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,437 - INFO: 
+Evaluating Freelancer 35: Jose Daugherty-Adams
+2025-01-23 19:14:31,446 - INFO: Job Title: Cloud Security Engineer
+2025-01-23 19:14:31,452 - INFO: Skills: ["Mailchimp", "Content Strategy", "Social Media Content", "Case Studies"]
+2025-01-23 19:14:31,456 - INFO: Rate: $79.0/hr
+2025-01-23 19:14:31,473 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,474 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,474 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,475 - INFO: Rating Score: 0.91
+2025-01-23 19:14:31,476 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,477 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,478 - INFO: 
+Evaluating Freelancer 36: Mr. Timmy Huel
+2025-01-23 19:14:31,478 - INFO: Job Title: Data Architect
+2025-01-23 19:14:31,479 - INFO: Skills: ["Jest", "Node.js", "PHP", "Nuxt.js"]
+2025-01-23 19:14:31,480 - INFO: Rate: $105.0/hr
+2025-01-23 19:14:31,490 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,491 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,495 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,496 - INFO: Rating Score: 0.85
+2025-01-23 19:14:31,498 - INFO: Combined Score: 0.21
+2025-01-23 19:14:31,499 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,500 - INFO: 
+Evaluating Freelancer 37: Betsy D'Amore
+2025-01-23 19:14:31,500 - INFO: Job Title: Senior Product Designer
+2025-01-23 19:14:31,501 - INFO: Skills: ["Figma", "Illustrator", "Motion Graphics", "Color Theory"]
+2025-01-23 19:14:31,502 - INFO: Rate: $89.0/hr
+2025-01-23 19:14:31,547 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,548 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,548 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,549 - INFO: Rating Score: 0.89
+2025-01-23 19:14:31,549 - INFO: Combined Score: 0.22
+2025-01-23 19:14:31,550 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,550 - INFO: 
+Evaluating Freelancer 38: Thelma Rogahn
+2025-01-23 19:14:31,551 - INFO: Job Title: Deep Learning Specialist
+2025-01-23 19:14:31,552 - INFO: Skills: ["Neural Networks", "ETL/ELT", "Data Pipeline", "Computer Vision"]
+2025-01-23 19:14:31,552 - INFO: Rate: $96.0/hr
+2025-01-23 19:14:31,569 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,570 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,570 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,571 - INFO: Rating Score: 0.85
+2025-01-23 19:14:31,571 - INFO: Combined Score: 0.21
+2025-01-23 19:14:31,572 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,572 - INFO: 
+Evaluating Freelancer 39: Salvatore Hagenes
+2025-01-23 19:14:31,573 - INFO: Job Title: Cloud Infrastructure Engineer
+2025-01-23 19:14:31,573 - INFO: Skills: ["Waterfall", "Market Research", "Competitive Analysis", "Product Marketing", "Gap Analysis", "Change Management"]
+2025-01-23 19:14:31,574 - INFO: Rate: $138.0/hr
+2025-01-23 19:14:31,595 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,596 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,597 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,597 - INFO: Rating Score: 0.98
+2025-01-23 19:14:31,598 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,598 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,599 - INFO: 
+Evaluating Freelancer 40: Meredith Kirlin
+2025-01-23 19:14:31,599 - INFO: Job Title: Graphic Designer
+2025-01-23 19:14:31,600 - INFO: Skills: ["Particle Systems", "Information Architecture", "Prototyping", "Texturing", "Blender", "Maya"]
+2025-01-23 19:14:31,600 - INFO: Rate: $49.0/hr
+2025-01-23 19:14:31,601 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,602 - INFO: 
+Evaluating Freelancer 41: Kathy Wunsch
+2025-01-23 19:14:31,603 - INFO: Job Title: Machine Learning Engineer
+2025-01-23 19:14:31,603 - INFO: Skills: ["Case Studies", "White Papers", "SEMrush", "Facebook Ads", "Conversion Optimization"]
+2025-01-23 19:14:31,604 - INFO: Rate: $59.0/hr
+2025-01-23 19:14:31,621 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,621 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,622 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,622 - INFO: Rating Score: 0.99
+2025-01-23 19:14:31,623 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,623 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,623 - INFO: 
+Evaluating Freelancer 42: Courtney Jacobs
+2025-01-23 19:14:31,628 - INFO: Job Title: Cloud Security Engineer
+2025-01-23 19:14:31,629 - INFO: Skills: ["New Relic", "Cloud Architecture", "Message Queues", "Kotlin", "GitLab CI"]
+2025-01-23 19:14:31,630 - INFO: Rate: $67.0/hr
+2025-01-23 19:14:31,647 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,648 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,649 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,649 - INFO: Rating Score: 0.84
+2025-01-23 19:14:31,650 - INFO: Combined Score: 0.21
+2025-01-23 19:14:31,651 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,652 - INFO: 
+Evaluating Freelancer 43: Kristopher Reichert
+2025-01-23 19:14:31,653 - INFO: Job Title: Penetration Tester
+2025-01-23 19:14:31,653 - INFO: Skills: ["Redux", "Laravel", "Azure", "C#"]
+2025-01-23 19:14:31,654 - INFO: Rate: $74.0/hr
+2025-01-23 19:14:31,679 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,680 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,680 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,681 - INFO: Rating Score: 1.00
+2025-01-23 19:14:31,681 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,682 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,682 - INFO: 
+Evaluating Freelancer 44: Cecelia Cormier
+2025-01-23 19:14:31,683 - INFO: Job Title: IT Support Specialist
+2025-01-23 19:14:31,683 - INFO: Skills: ["Snowflake", "Data Pipeline", "Experimentation", "TensorFlow", "Statistical Analysis"]
+2025-01-23 19:14:31,684 - INFO: Rate: $144.0/hr
+2025-01-23 19:14:31,701 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,702 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,702 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,703 - INFO: Rating Score: 0.91
+2025-01-23 19:14:31,703 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,703 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,704 - INFO: 
+Evaluating Freelancer 45: Mr. Frankie Stamm DVM
+2025-01-23 19:14:31,705 - INFO: Job Title: Data Engineer
+2025-01-23 19:14:31,705 - INFO: Skills: ["White Papers", "Email Campaigns", "SEM", "Ahrefs", "Mailchimp", "Mixpanel"]
+2025-01-23 19:14:31,705 - INFO: Rate: $47.0/hr
+2025-01-23 19:14:31,706 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,707 - INFO: 
+Evaluating Freelancer 46: Dr. Sylvia Moen
+2025-01-23 19:14:31,707 - INFO: Job Title: AI Research Scientist
+2025-01-23 19:14:31,711 - INFO: Skills: ["Marketo", "Customer.io", "Technical Writing", "Social Media Content", "Growth Marketing", "SEM"]
+2025-01-23 19:14:31,712 - INFO: Rate: $136.0/hr
+2025-01-23 19:14:31,728 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,729 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,729 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,730 - INFO: Rating Score: 0.99
+2025-01-23 19:14:31,731 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,731 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,731 - INFO: 
+Evaluating Freelancer 47: Dr. Shawn Konopelski
+2025-01-23 19:14:31,732 - INFO: Job Title: Game Designer
+2025-01-23 19:14:31,733 - INFO: Skills: ["UI Design", "UX Design", "Character Animation"]
+2025-01-23 19:14:31,734 - INFO: Rate: $50.0/hr
+2025-01-23 19:14:31,735 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,735 - INFO: 
+Evaluating Freelancer 48: Mrs. Vicky Jacobi
+2025-01-23 19:14:31,736 - INFO: Job Title: Network Security Engineer
+2025-01-23 19:14:31,736 - INFO: Skills: ["FastAPI", "HTML5", "PowerShell"]
+2025-01-23 19:14:31,737 - INFO: Rate: $73.0/hr
+2025-01-23 19:14:31,753 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,753 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,754 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,754 - INFO: Rating Score: 0.93
+2025-01-23 19:14:31,755 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,755 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,755 - INFO: 
+Evaluating Freelancer 49: Cameron O'Connell
+2025-01-23 19:14:31,756 - INFO: Job Title: Computer Vision Engineer
+2025-01-23 19:14:31,756 - INFO: Skills: ["PRINCE2", "Stakeholder Management", "Competitive Analysis", "Compliance"]
+2025-01-23 19:14:31,757 - INFO: Rate: $102.0/hr
+2025-01-23 19:14:31,773 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,773 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,774 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,778 - INFO: Rating Score: 0.99
+2025-01-23 19:14:31,779 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,780 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,780 - INFO: 
+Evaluating Freelancer 50: Ricardo Considine-Ankunding
+2025-01-23 19:14:31,781 - INFO: Job Title: Software Development Manager
+2025-01-23 19:14:31,781 - INFO: Skills: ["Computer Vision", "TensorFlow", "Data Pipeline", "Data Quality", "Feature Engineering"]
+2025-01-23 19:14:31,782 - INFO: Rate: $68.0/hr
+2025-01-23 19:14:31,799 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,800 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,801 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,802 - INFO: Rating Score: 0.94
+2025-01-23 19:14:31,802 - INFO: Combined Score: 0.23
+2025-01-23 19:14:31,802 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,803 - INFO: 
+Evaluating Freelancer 51: Lance Swaniawski
+2025-01-23 19:14:31,803 - INFO: Job Title: Penetration Tester
+2025-01-23 19:14:31,804 - INFO: Skills: ["Risk Management", "Resource Planning", "Compliance", "Market Research", "Growth Strategy", "Business Process Improvement"]
+2025-01-23 19:14:31,804 - INFO: Rate: $50.0/hr
+2025-01-23 19:14:31,804 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,805 - INFO: 
+Evaluating Freelancer 52: Lamar Ankunding
+2025-01-23 19:14:31,806 - INFO: Job Title: Experience Designer
+2025-01-23 19:14:31,807 - INFO: Skills: ["Texturing", "User Research", "Layout Design", "VFX", "Typography"]
+2025-01-23 19:14:31,811 - INFO: Rate: $89.0/hr
+2025-01-23 19:14:31,824 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,829 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,829 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,830 - INFO: Rating Score: 0.95
+2025-01-23 19:14:31,830 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,831 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,831 - INFO: 
+Evaluating Freelancer 53: Ms. Beulah Mosciski
+2025-01-23 19:14:31,832 - INFO: Job Title: Big Data Engineer
+2025-01-23 19:14:31,832 - INFO: Skills: ["Attribution Modeling", "Facebook Ads", "Marketo"]
+2025-01-23 19:14:31,833 - INFO: Rate: $129.0/hr
+2025-01-23 19:14:31,849 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,849 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,849 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,850 - INFO: Rating Score: 0.85
+2025-01-23 19:14:31,850 - INFO: Combined Score: 0.21
+2025-01-23 19:14:31,851 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,853 - INFO: 
+Evaluating Freelancer 54: Wm Hand
+2025-01-23 19:14:31,854 - INFO: Job Title: Game UI Designer
+2025-01-23 19:14:31,855 - INFO: Skills: ["Interaction Design", "Compositing", "Particle Systems", "Icon Design", "UX Design"]
+2025-01-23 19:14:31,855 - INFO: Rate: $102.0/hr
+2025-01-23 19:14:31,873 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,873 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,878 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,879 - INFO: Rating Score: 0.86
+2025-01-23 19:14:31,880 - INFO: Combined Score: 0.21
+2025-01-23 19:14:31,880 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,881 - INFO: 
+Evaluating Freelancer 55: Domingo Stark
+2025-01-23 19:14:31,881 - INFO: Job Title: Quantitative Analyst
+2025-01-23 19:14:31,881 - INFO: Skills: ["Change Management", "Budget Management", "Product Roadmap", "UML"]
+2025-01-23 19:14:31,882 - INFO: Rate: $77.0/hr
+2025-01-23 19:14:31,898 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,898 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,899 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,899 - INFO: Rating Score: 0.88
+2025-01-23 19:14:31,899 - INFO: Combined Score: 0.22
+2025-01-23 19:14:31,900 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,901 - INFO: 
+Evaluating Freelancer 56: Miss Carol Ward
+2025-01-23 19:14:31,902 - INFO: Job Title: Information Security Analyst
+2025-01-23 19:14:31,902 - INFO: Skills: ["UML", "Product Strategy", "Compliance"]
+2025-01-23 19:14:31,903 - INFO: Rate: $148.0/hr
+2025-01-23 19:14:31,903 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,904 - INFO: 
+Evaluating Freelancer 57: Rhonda Volkman
+2025-01-23 19:14:31,904 - INFO: Job Title: DevOps Engineer
+2025-01-23 19:14:31,905 - INFO: Skills: ["Salesforce", "Mailchimp", "Technical Writing", "HubSpot"]
+2025-01-23 19:14:31,905 - INFO: Rate: $62.0/hr
+2025-01-23 19:14:31,921 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,922 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,922 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,923 - INFO: Rating Score: 1.00
+2025-01-23 19:14:31,923 - INFO: Combined Score: 0.25
+2025-01-23 19:14:31,924 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,929 - INFO: 
+Evaluating Freelancer 58: Candice Abernathy
+2025-01-23 19:14:31,929 - INFO: Job Title: VFX Artist
+2025-01-23 19:14:31,930 - INFO: Skills: ["Particle Systems", "Rigging", "Sketch", "Prototyping", "Usability Testing", "Unreal Engine"]
+2025-01-23 19:14:31,931 - INFO: Rate: $62.0/hr
+2025-01-23 19:14:31,947 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,947 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,948 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,948 - INFO: Rating Score: 0.85
+2025-01-23 19:14:31,949 - INFO: Combined Score: 0.21
+2025-01-23 19:14:31,949 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,950 - INFO: 
+Evaluating Freelancer 59: Delbert O'Reilly
+2025-01-23 19:14:31,951 - INFO: Job Title: Big Data Engineer
+2025-01-23 19:14:31,951 - INFO: Skills: ["WebSockets", "RESTful APIs", "Kotlin", "Material-UI"]
+2025-01-23 19:14:31,952 - INFO: Rate: $61.0/hr
+2025-01-23 19:14:31,968 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,969 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,969 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,969 - INFO: Rating Score: 0.97
+2025-01-23 19:14:31,970 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,970 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,971 - INFO: 
+Evaluating Freelancer 60: Jonathan Hoeger
+2025-01-23 19:14:31,971 - INFO: Job Title: Blockchain Developer
+2025-01-23 19:14:31,972 - INFO: Skills: ["Laravel", "DynamoDB", "Kotlin", "Shell Scripting"]
+2025-01-23 19:14:31,972 - INFO: Rate: $34.0/hr
+2025-01-23 19:14:31,972 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:31,973 - INFO: 
+Evaluating Freelancer 61: Manuel Walsh
+2025-01-23 19:14:31,973 - INFO: Job Title: Experience Designer
+2025-01-23 19:14:31,978 - INFO: Skills: ["Maya", "Compositing", "UI Design", "VFX"]
+2025-01-23 19:14:31,979 - INFO: Rate: $112.0/hr
+2025-01-23 19:14:31,990 - INFO: Matched Skills: set()
+2025-01-23 19:14:31,995 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:31,996 - INFO: Experience Score: 0.00
+2025-01-23 19:14:31,996 - INFO: Rating Score: 0.94
+2025-01-23 19:14:31,997 - INFO: Combined Score: 0.24
+2025-01-23 19:14:31,997 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:31,998 - INFO: 
+Evaluating Freelancer 62: Winston Kovacek
+2025-01-23 19:14:31,999 - INFO: Job Title: API Developer
+2025-01-23 19:14:31,999 - INFO: Skills: ["PyTorch", "Deep Learning", "Data Modeling"]
+2025-01-23 19:14:32,000 - INFO: Rate: $66.0/hr
+2025-01-23 19:14:32,015 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,016 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,016 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,017 - INFO: Rating Score: 0.92
+2025-01-23 19:14:32,018 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,019 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,019 - INFO: 
+Evaluating Freelancer 63: Blanche Skiles
+2025-01-23 19:14:32,020 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:32,020 - INFO: Skills: ["Go", "Perl", "Message Queues"]
+2025-01-23 19:14:32,020 - INFO: Rate: $106.0/hr
+2025-01-23 19:14:32,035 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,036 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,036 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,037 - INFO: Rating Score: 0.83
+2025-01-23 19:14:32,038 - INFO: Combined Score: 0.21
+2025-01-23 19:14:32,038 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,039 - INFO: 
+Evaluating Freelancer 64: Ida Schoen
+2025-01-23 19:14:32,039 - INFO: Job Title: Cloud Solutions Architect
+2025-01-23 19:14:32,040 - INFO: Skills: ["Budget Management", "Process Modeling", "Market Research", "PMP", "Product Strategy"]
+2025-01-23 19:14:32,040 - INFO: Rate: $39.0/hr
+2025-01-23 19:14:32,040 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,046 - INFO: 
+Evaluating Freelancer 65: Ms. Ruby Abbott
+2025-01-23 19:14:32,047 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:32,047 - INFO: Skills: ["Data Storytelling", "Model Deployment", "MLOps", "PyTorch", "R Visualization", "NLP"]
+2025-01-23 19:14:32,048 - INFO: Rate: $132.0/hr
+2025-01-23 19:14:32,064 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,064 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,064 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,065 - INFO: Rating Score: 0.93
+2025-01-23 19:14:32,065 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,066 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,066 - INFO: 
+Evaluating Freelancer 66: Oliver Heller
+2025-01-23 19:14:32,067 - INFO: Job Title: Enterprise Architect
+2025-01-23 19:14:32,067 - INFO: Skills: ["Power BI", "TensorFlow", "Dashboard Design", "Airflow"]
+2025-01-23 19:14:32,068 - INFO: Rate: $56.0/hr
+2025-01-23 19:14:32,084 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,085 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,086 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,086 - INFO: Rating Score: 0.93
+2025-01-23 19:14:32,087 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,087 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,088 - INFO: 
+Evaluating Freelancer 67: Adrian Gutkowski III
+2025-01-23 19:14:32,088 - INFO: Job Title: Quantitative Analyst
+2025-01-23 19:14:32,089 - INFO: Skills: ["Cloud Architecture", "Database Administration", "Material-UI", "ESLint", "Svelte"]
+2025-01-23 19:14:32,089 - INFO: Rate: $72.0/hr
+2025-01-23 19:14:32,106 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,106 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,112 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,112 - INFO: Rating Score: 0.93
+2025-01-23 19:14:32,113 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,113 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,113 - INFO: 
+Evaluating Freelancer 68: Norman Lindgren
+2025-01-23 19:14:32,114 - INFO: Job Title: Creative Technologist
+2025-01-23 19:14:32,114 - INFO: Skills: ["3D Modeling", "Prototyping", "Compositing", "UI Design", "ZBrush"]
+2025-01-23 19:14:32,115 - INFO: Rate: $85.0/hr
+2025-01-23 19:14:32,132 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,133 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,133 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,134 - INFO: Rating Score: 0.94
+2025-01-23 19:14:32,134 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,134 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,135 - INFO: 
+Evaluating Freelancer 69: Maxine Legros
+2025-01-23 19:14:32,135 - INFO: Job Title: Database Administrator
+2025-01-23 19:14:32,136 - INFO: Skills: ["Cost-Benefit Analysis", "Budget Management", "Gap Analysis", "Program Management", "Market Research", "Competitive Analysis"]
+2025-01-23 19:14:32,136 - INFO: Rate: $118.0/hr
+2025-01-23 19:14:32,152 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,152 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,153 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,153 - INFO: Rating Score: 0.87
+2025-01-23 19:14:32,153 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,154 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,154 - INFO: 
+Evaluating Freelancer 70: Andrew Windler II
+2025-01-23 19:14:32,155 - INFO: Job Title: Data Scientist
+2025-01-23 19:14:32,155 - INFO: Skills: ["Site Reliability Engineering", "VBA", "TimescaleDB"]
+2025-01-23 19:14:32,155 - INFO: Rate: $47.0/hr
+2025-01-23 19:14:32,156 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,157 - INFO: 
+Evaluating Freelancer 71: Pam O'Connell III
+2025-01-23 19:14:32,160 - INFO: Job Title: Data Architect
+2025-01-23 19:14:32,162 - INFO: Skills: ["Power BI", "Time Series Analysis", "Looker", "Data Modeling"]
+2025-01-23 19:14:32,162 - INFO: Rate: $81.0/hr
+2025-01-23 19:14:32,179 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,180 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,180 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,181 - INFO: Rating Score: 0.87
+2025-01-23 19:14:32,181 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,182 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,182 - INFO: 
+Evaluating Freelancer 72: Herbert Witting
+2025-01-23 19:14:32,183 - INFO: Job Title: Business Intelligence Analyst
+2025-01-23 19:14:32,183 - INFO: Skills: ["Product Analytics", "UML", "Launch Planning"]
+2025-01-23 19:14:32,183 - INFO: Rate: $148.0/hr
+2025-01-23 19:14:32,184 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,184 - INFO: 
+Evaluating Freelancer 73: Gilberto Okuneva
+2025-01-23 19:14:32,184 - INFO: Job Title: Security Engineer
+2025-01-23 19:14:32,185 - INFO: Skills: ["Risk Management", "Product Operations", "Compliance", "Process Modeling"]
+2025-01-23 19:14:32,186 - INFO: Rate: $94.0/hr
+2025-01-23 19:14:32,202 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,203 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,203 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,203 - INFO: Rating Score: 0.86
+2025-01-23 19:14:32,204 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,204 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,205 - INFO: 
+Evaluating Freelancer 74: Estelle Marquardt
+2025-01-23 19:14:32,205 - INFO: Job Title: Design Lead
+2025-01-23 19:14:32,206 - INFO: Skills: ["Unity", "Prototyping", "Premiere Pro", "Layout Design", "Service Design"]
+2025-01-23 19:14:32,206 - INFO: Rate: $139.0/hr
+2025-01-23 19:14:32,223 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,223 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,224 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,228 - INFO: Rating Score: 0.87
+2025-01-23 19:14:32,229 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,230 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,230 - INFO: 
+Evaluating Freelancer 75: Belinda Tillman V
+2025-01-23 19:14:32,231 - INFO: Job Title: Mobile App Developer
+2025-01-23 19:14:32,232 - INFO: Skills: ["Node.js", "Testing Library", "PowerShell", "SQL", "ASP.NET Core"]
+2025-01-23 19:14:32,232 - INFO: Rate: $150.0/hr
+2025-01-23 19:14:32,232 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,233 - INFO: 
+Evaluating Freelancer 76: Deborah Rath
+2025-01-23 19:14:32,233 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:32,234 - INFO: Skills: ["Web Security", "Ruby on Rails", "Site Reliability Engineering", "InfluxDB"]
+2025-01-23 19:14:32,235 - INFO: Rate: $38.0/hr
+2025-01-23 19:14:32,236 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,236 - INFO: 
+Evaluating Freelancer 77: Denise Cronin
+2025-01-23 19:14:32,237 - INFO: Job Title: Data Architect
+2025-01-23 19:14:32,237 - INFO: Skills: ["Business Intelligence", "Data Pipeline", "Data Quality", "Power BI", "Metric Definition", "Airflow"]
+2025-01-23 19:14:32,238 - INFO: Rate: $143.0/hr
+2025-01-23 19:14:32,254 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,254 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,255 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,255 - INFO: Rating Score: 0.92
+2025-01-23 19:14:32,256 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,258 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,262 - INFO: 
+Evaluating Freelancer 78: Terrell Purdy
+2025-01-23 19:14:32,263 - INFO: Job Title: Statistical Programmer
+2025-01-23 19:14:32,263 - INFO: Skills: ["Product Marketing", "Product Analytics", "Waterfall", "PRINCE2"]
+2025-01-23 19:14:32,264 - INFO: Rate: $111.0/hr
+2025-01-23 19:14:32,280 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,280 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,281 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,281 - INFO: Rating Score: 0.87
+2025-01-23 19:14:32,282 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,282 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,283 - INFO: 
+Evaluating Freelancer 79: Alberto Satterfield III
+2025-01-23 19:14:32,284 - INFO: Job Title: Site Reliability Engineer
+2025-01-23 19:14:32,284 - INFO: Skills: ["Copywriting", "Marketing Automation", "Facebook Ads"]
+2025-01-23 19:14:32,285 - INFO: Rate: $136.0/hr
+2025-01-23 19:14:32,304 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,304 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,305 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,305 - INFO: Rating Score: 0.95
+2025-01-23 19:14:32,305 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,306 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,306 - INFO: 
+Evaluating Freelancer 80: Sabrina Hane
+2025-01-23 19:14:32,307 - INFO: Job Title: Digital Product Designer
+2025-01-23 19:14:32,312 - INFO: Skills: ["Visual Design", "Information Architecture", "User Research", "Illustrator", "Photoshop"]
+2025-01-23 19:14:32,313 - INFO: Rate: $141.0/hr
+2025-01-23 19:14:32,329 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,330 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,331 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,331 - INFO: Rating Score: 0.91
+2025-01-23 19:14:32,332 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,332 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,333 - INFO: 
+Evaluating Freelancer 81: Timmy Jacobs
+2025-01-23 19:14:32,334 - INFO: Job Title: Cloud Solutions Architect
+2025-01-23 19:14:32,334 - INFO: Skills: ["PyTorch", "Experimentation", "Apache Spark", "Data Governance", "Reinforcement Learning"]
+2025-01-23 19:14:32,335 - INFO: Rate: $86.0/hr
+2025-01-23 19:14:32,351 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,351 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,352 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,352 - INFO: Rating Score: 0.82
+2025-01-23 19:14:32,353 - INFO: Combined Score: 0.20
+2025-01-23 19:14:32,353 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,353 - INFO: 
+Evaluating Freelancer 82: Brooke Greenholt
+2025-01-23 19:14:32,354 - INFO: Job Title: Penetration Tester
+2025-01-23 19:14:32,354 - INFO: Skills: ["SEM", "Google Tag Manager", "Marketing Analytics", "Google Analytics", "Marketing Automation"]
+2025-01-23 19:14:32,355 - INFO: Rate: $38.0/hr
+2025-01-23 19:14:32,355 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,356 - INFO: 
+Evaluating Freelancer 83: Beatrice Brown
+2025-01-23 19:14:32,357 - INFO: Job Title: IT Project Manager
+2025-01-23 19:14:32,358 - INFO: Skills: ["A/B Testing", "Experimentation", "Data Pipeline", "Data Warehousing"]
+2025-01-23 19:14:32,361 - INFO: Rate: $144.0/hr
+2025-01-23 19:14:32,373 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,377 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,378 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,379 - INFO: Rating Score: 0.96
+2025-01-23 19:14:32,379 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,380 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,380 - INFO: 
+Evaluating Freelancer 84: Leon Turcotte
+2025-01-23 19:14:32,381 - INFO: Job Title: Design Manager
+2025-01-23 19:14:32,381 - INFO: Skills: ["Photoshop", "Adobe XD", "Illustrator", "Cinema 4D"]
+2025-01-23 19:14:32,382 - INFO: Rate: $136.0/hr
+2025-01-23 19:14:32,397 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,398 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,398 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,398 - INFO: Rating Score: 0.90
+2025-01-23 19:14:32,399 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,399 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,400 - INFO: 
+Evaluating Freelancer 85: Stacey Considine
+2025-01-23 19:14:32,400 - INFO: Job Title: Security Engineer
+2025-01-23 19:14:32,402 - INFO: Skills: ["MLOps", "Business Intelligence", "XGBoost", "LightGBM", "R Visualization", "Airflow"]
+2025-01-23 19:14:32,402 - INFO: Rate: $126.0/hr
+2025-01-23 19:14:32,417 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,418 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,418 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,419 - INFO: Rating Score: 0.94
+2025-01-23 19:14:32,420 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,420 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,421 - INFO: 
+Evaluating Freelancer 86: Bob Parker
+2025-01-23 19:14:32,421 - INFO: Job Title: Software Development Manager
+2025-01-23 19:14:32,422 - INFO: Skills: ["Data Lakes", "Feature Engineering", "Business Intelligence", "Data Catalog"]
+2025-01-23 19:14:32,422 - INFO: Rate: $60.0/hr
+2025-01-23 19:14:32,439 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,439 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,440 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,444 - INFO: Rating Score: 0.82
+2025-01-23 19:14:32,445 - INFO: Combined Score: 0.20
+2025-01-23 19:14:32,446 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,446 - INFO: 
+Evaluating Freelancer 87: Lila Wilderman
+2025-01-23 19:14:32,447 - INFO: Job Title: Analytics Engineer
+2025-01-23 19:14:32,447 - INFO: Skills: ["Scikit-learn", "Reinforcement Learning", "Data Pipeline", "Airflow", "Kafka", "Data Quality"]
+2025-01-23 19:14:32,448 - INFO: Rate: $103.0/hr
+2025-01-23 19:14:32,463 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,463 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,464 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,464 - INFO: Rating Score: 0.99
+2025-01-23 19:14:32,465 - INFO: Combined Score: 0.25
+2025-01-23 19:14:32,465 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,465 - INFO: 
+Evaluating Freelancer 88: Karla Dibbert
+2025-01-23 19:14:32,467 - INFO: Job Title: Data Scientist
+2025-01-23 19:14:32,467 - INFO: Skills: ["Message Queues", "Objective-C", "Nuxt.js", "Go", "FastAPI"]
+2025-01-23 19:14:32,468 - INFO: Rate: $133.0/hr
+2025-01-23 19:14:32,484 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,485 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,485 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,486 - INFO: Rating Score: 0.84
+2025-01-23 19:14:32,486 - INFO: Combined Score: 0.21
+2025-01-23 19:14:32,486 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,487 - INFO: 
+Evaluating Freelancer 89: Jim Hansen
+2025-01-23 19:14:32,487 - INFO: Job Title: API Developer
+2025-01-23 19:14:32,488 - INFO: Skills: ["Email Marketing", "Technical Writing", "Google Ads", "Customer.io", "Google Tag Manager"]
+2025-01-23 19:14:32,488 - INFO: Rate: $86.0/hr
+2025-01-23 19:14:32,504 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,505 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,505 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,505 - INFO: Rating Score: 1.00
+2025-01-23 19:14:32,506 - INFO: Combined Score: 0.25
+2025-01-23 19:14:32,507 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,511 - INFO: 
+Evaluating Freelancer 90: Floyd Nikolaus
+2025-01-23 19:14:32,512 - INFO: Job Title: Mobile App Developer
+2025-01-23 19:14:32,513 - INFO: Skills: ["PWAs", "Django", "PHP", "Shell Scripting", "Jest", "Bootstrap"]
+2025-01-23 19:14:32,513 - INFO: Rate: $85.0/hr
+2025-01-23 19:14:32,529 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,529 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,529 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,530 - INFO: Rating Score: 0.90
+2025-01-23 19:14:32,530 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,531 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,531 - INFO: 
+Evaluating Freelancer 91: Douglas Mann
+2025-01-23 19:14:32,532 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:32,532 - INFO: Skills: ["Quality Assurance", "Stakeholder Management", "Launch Planning", "Gap Analysis", "Growth Strategy"]
+2025-01-23 19:14:32,532 - INFO: Rate: $29.0/hr
+2025-01-23 19:14:32,533 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,533 - INFO: 
+Evaluating Freelancer 92: Rick Abbott
+2025-01-23 19:14:32,534 - INFO: Job Title: Analytics Engineer
+2025-01-23 19:14:32,535 - INFO: Skills: ["Feature Engineering", "Kafka", "Model Deployment", "LightGBM"]
+2025-01-23 19:14:32,535 - INFO: Rate: $136.0/hr
+2025-01-23 19:14:32,551 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,552 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,552 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,553 - INFO: Rating Score: 0.91
+2025-01-23 19:14:32,553 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,553 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,554 - INFO: 
+Evaluating Freelancer 93: Clark Franecki II
+2025-01-23 19:14:32,554 - INFO: Job Title: Data Engineer
+2025-01-23 19:14:32,555 - INFO: Skills: ["Vite", "Angular", "GraphQL"]
+2025-01-23 19:14:32,555 - INFO: Rate: $43.0/hr
+2025-01-23 19:14:32,555 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,556 - INFO: 
+Evaluating Freelancer 94: Angela Nitzsche
+2025-01-23 19:14:32,556 - INFO: Job Title: Blockchain Developer
+2025-01-23 19:14:32,560 - INFO: Skills: ["Copywriting", "Google Analytics", "Marketing Analytics", "Ahrefs", "Technical Writing"]
+2025-01-23 19:14:32,562 - INFO: Rate: $137.0/hr
+2025-01-23 19:14:32,576 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,578 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,579 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,579 - INFO: Rating Score: 0.93
+2025-01-23 19:14:32,580 - INFO: Combined Score: 0.23
+2025-01-23 19:14:32,580 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,580 - INFO: 
+Evaluating Freelancer 95: Mildred Greenfelder
+2025-01-23 19:14:32,581 - INFO: Job Title: Digital Product Designer
+2025-01-23 19:14:32,582 - INFO: Skills: ["3D Modeling", "Interaction Design", "Premiere Pro"]
+2025-01-23 19:14:32,582 - INFO: Rate: $51.0/hr
+2025-01-23 19:14:32,582 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,583 - INFO: 
+Evaluating Freelancer 96: Roland Kemmer
+2025-01-23 19:14:32,583 - INFO: Job Title: Interaction Designer
+2025-01-23 19:14:32,585 - INFO: Skills: ["Icon Design", "Maya", "ZBrush", "Motion Graphics", "Unity"]
+2025-01-23 19:14:32,585 - INFO: Rate: $37.0/hr
+2025-01-23 19:14:32,586 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,586 - INFO: 
+Evaluating Freelancer 97: Alvin Kautzer
+2025-01-23 19:14:32,587 - INFO: Job Title: Technical Lead
+2025-01-23 19:14:32,587 - INFO: Skills: ["Budget Management", "PRINCE2", "BPMN", "Waterfall", "Product Marketing", "Gap Analysis"]
+2025-01-23 19:14:32,587 - INFO: Rate: $32.0/hr
+2025-01-23 19:14:32,588 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,588 - INFO: 
+Evaluating Freelancer 98: Jerry Bergstrom
+2025-01-23 19:14:32,588 - INFO: Job Title: Frontend Developer
+2025-01-23 19:14:32,589 - INFO: Skills: ["Attribution Modeling", "Mixpanel", "Google Analytics"]
+2025-01-23 19:14:32,589 - INFO: Rate: $143.0/hr
+2025-01-23 19:14:32,605 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,606 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,606 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,609 - INFO: Rating Score: 0.87
+2025-01-23 19:14:32,611 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,612 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,613 - INFO: 
+Evaluating Freelancer 99: Horace Rau
+2025-01-23 19:14:32,614 - INFO: Job Title: Data Scientist
+2025-01-23 19:14:32,614 - INFO: Skills: ["Scrum", "Product Strategy", "BPMN", "Product Requirements"]
+2025-01-23 19:14:32,615 - INFO: Rate: $73.0/hr
+2025-01-23 19:14:32,630 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,630 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,631 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,631 - INFO: Rating Score: 0.94
+2025-01-23 19:14:32,632 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,632 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,632 - INFO: 
+Evaluating Freelancer 100: Homer Smitham
+2025-01-23 19:14:32,633 - INFO: Job Title: Network Security Engineer
+2025-01-23 19:14:32,633 - INFO: Skills: ["Content Strategy", "Technical Writing", "HubSpot", "Marketing Automation", "Growth Marketing"]
+2025-01-23 19:14:32,634 - INFO: Rate: $44.0/hr
+2025-01-23 19:14:32,634 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,635 - INFO: 
+Evaluating Freelancer 101: Luke Swift
+2025-01-23 19:14:32,635 - INFO: Job Title: Big Data Engineer
+2025-01-23 19:14:32,636 - INFO: Skills: ["Editorial Planning", "Adobe Analytics", "Social Media Content", "Google Analytics", "Technical Writing"]
+2025-01-23 19:14:32,636 - INFO: Rate: $120.0/hr
+2025-01-23 19:14:32,662 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,663 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,663 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,664 - INFO: Rating Score: 0.85
+2025-01-23 19:14:32,665 - INFO: Combined Score: 0.21
+2025-01-23 19:14:32,666 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,667 - INFO: 
+Evaluating Freelancer 102: Sophie Rolfson
+2025-01-23 19:14:32,667 - INFO: Job Title: Computer Vision Engineer
+2025-01-23 19:14:32,668 - INFO: Skills: ["White Papers", "SEMrush", "Google Tag Manager", "Customer.io"]
+2025-01-23 19:14:32,668 - INFO: Rate: $123.0/hr
+2025-01-23 19:14:32,684 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,685 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,685 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,685 - INFO: Rating Score: 0.88
+2025-01-23 19:14:32,686 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,686 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,686 - INFO: 
+Evaluating Freelancer 103: Theresa Hackett
+2025-01-23 19:14:32,687 - INFO: Job Title: Full Stack Developer
+2025-01-23 19:14:32,687 - INFO: Skills: ["Google Cloud", "Nuxt.js", "Swift"]
+2025-01-23 19:14:32,688 - INFO: Rate: $70.0/hr
+2025-01-23 19:14:32,712 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,712 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,713 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,713 - INFO: Rating Score: 0.99
+2025-01-23 19:14:32,714 - INFO: Combined Score: 0.25
+2025-01-23 19:14:32,715 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,716 - INFO: 
+Evaluating Freelancer 104: Allan Friesen
+2025-01-23 19:14:32,717 - INFO: Job Title: Database Administrator
+2025-01-23 19:14:32,718 - INFO: Skills: ["Vue.js", "ASP.NET Core", "TypeScript", "RESTful APIs", "Ansible"]
+2025-01-23 19:14:32,718 - INFO: Rate: $111.0/hr
+2025-01-23 19:14:32,737 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,738 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,738 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,739 - INFO: Rating Score: 0.90
+2025-01-23 19:14:32,739 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,747 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,748 - INFO: 
+Evaluating Freelancer 105: Adrienne Greenfelder
+2025-01-23 19:14:32,749 - INFO: Job Title: Machine Learning Engineer
+2025-01-23 19:14:32,749 - INFO: Skills: ["Email Campaigns", "Case Studies", "Marketing Analytics", "Google Analytics"]
+2025-01-23 19:14:32,750 - INFO: Rate: $41.0/hr
+2025-01-23 19:14:32,751 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,751 - INFO: 
+Evaluating Freelancer 106: Drew Hickle
+2025-01-23 19:14:32,752 - INFO: Job Title: QA Engineer
+2025-01-23 19:14:32,753 - INFO: Skills: ["Launch Planning", "Resource Planning", "UML", "Growth Strategy", "PMP"]
+2025-01-23 19:14:32,754 - INFO: Rate: $96.0/hr
+2025-01-23 19:14:32,773 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,773 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,778 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,779 - INFO: Rating Score: 0.87
+2025-01-23 19:14:32,779 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,780 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,780 - INFO: 
+Evaluating Freelancer 107: Carrie Bergstrom
+2025-01-23 19:14:32,781 - INFO: Job Title: NLP Engineer
+2025-01-23 19:14:32,781 - INFO: Skills: ["dbt", "Scikit-learn", "Data Modeling", "Stream Processing"]
+2025-01-23 19:14:32,782 - INFO: Rate: $76.0/hr
+2025-01-23 19:14:32,798 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,798 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,799 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,799 - INFO: Rating Score: 0.89
+2025-01-23 19:14:32,800 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,800 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,801 - INFO: 
+Evaluating Freelancer 108: Jay Ebert
+2025-01-23 19:14:32,801 - INFO: Job Title: Technical Artist
+2025-01-23 19:14:32,802 - INFO: Skills: ["Illustrator", "Interaction Design", "Adobe XD", "Premiere Pro", "Service Design", "Particle Systems"]
+2025-01-23 19:14:32,802 - INFO: Rate: $149.0/hr
+2025-01-23 19:14:32,803 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,803 - INFO: 
+Evaluating Freelancer 109: Celia Lockman
+2025-01-23 19:14:32,803 - INFO: Job Title: Network Engineer
+2025-01-23 19:14:32,804 - INFO: Skills: ["Vue.js", "Tailwind CSS", "GitHub Actions", "Database Administration", "Storybook"]
+2025-01-23 19:14:32,804 - INFO: Rate: $55.0/hr
+2025-01-23 19:14:32,822 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,823 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,823 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,829 - INFO: Rating Score: 0.99
+2025-01-23 19:14:32,829 - INFO: Combined Score: 0.25
+2025-01-23 19:14:32,829 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,830 - INFO: 
+Evaluating Freelancer 110: Wm Cummings
+2025-01-23 19:14:32,831 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:32,831 - INFO: Skills: ["Waterfall", "Process Modeling", "Kanban", "Product Roadmap", "Quality Assurance", "Market Research"]
+2025-01-23 19:14:32,832 - INFO: Rate: $120.0/hr
+2025-01-23 19:14:32,847 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,847 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,848 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,848 - INFO: Rating Score: 0.99
+2025-01-23 19:14:32,849 - INFO: Combined Score: 0.25
+2025-01-23 19:14:32,849 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,850 - INFO: 
+Evaluating Freelancer 111: Brendan D'Amore
+2025-01-23 19:14:32,851 - INFO: Job Title: API Developer
+2025-01-23 19:14:32,852 - INFO: Skills: ["PyTorch", "Data Lakes", "Metric Definition"]
+2025-01-23 19:14:32,853 - INFO: Rate: $134.0/hr
+2025-01-23 19:14:32,869 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,869 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,869 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,870 - INFO: Rating Score: 0.97
+2025-01-23 19:14:32,870 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,870 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,871 - INFO: 
+Evaluating Freelancer 112: Maggie Goyette
+2025-01-23 19:14:32,871 - INFO: Job Title: Platform Engineer
+2025-01-23 19:14:32,871 - INFO: Skills: ["Tailwind CSS", "MySQL", "WebAssembly", "Babel", "WebSockets", "Svelte"]
+2025-01-23 19:14:32,872 - INFO: Rate: $46.0/hr
+2025-01-23 19:14:32,872 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,873 - INFO: 
+Evaluating Freelancer 113: Michelle Kub
+2025-01-23 19:14:32,876 - INFO: Job Title: Infrastructure Manager
+2025-01-23 19:14:32,878 - INFO: Skills: ["Looker", "Statistical Analysis", "Data Catalog"]
+2025-01-23 19:14:32,880 - INFO: Rate: $77.0/hr
+2025-01-23 19:14:32,895 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,896 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,896 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,897 - INFO: Rating Score: 0.86
+2025-01-23 19:14:32,897 - INFO: Combined Score: 0.21
+2025-01-23 19:14:32,898 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,898 - INFO: 
+Evaluating Freelancer 114: Alton Wunsch
+2025-01-23 19:14:32,899 - INFO: Job Title: Network Security Engineer
+2025-01-23 19:14:32,899 - INFO: Skills: ["Cassandra", "Kubernetes", "GraphQL", "Scala", "HTML5"]
+2025-01-23 19:14:32,900 - INFO: Rate: $46.0/hr
+2025-01-23 19:14:32,900 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,901 - INFO: 
+Evaluating Freelancer 115: Delbert Block
+2025-01-23 19:14:32,901 - INFO: Job Title: Network Engineer
+2025-01-23 19:14:32,902 - INFO: Skills: ["Program Management", "Process Modeling", "Resource Planning", "PRINCE2"]
+2025-01-23 19:14:32,902 - INFO: Rate: $93.0/hr
+2025-01-23 19:14:32,918 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,919 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,919 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,920 - INFO: Rating Score: 0.95
+2025-01-23 19:14:32,920 - INFO: Combined Score: 0.24
+2025-01-23 19:14:32,920 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,921 - INFO: 
+Evaluating Freelancer 116: Gerard MacGyver
+2025-01-23 19:14:32,922 - INFO: Job Title: VFX Artist
+2025-01-23 19:14:32,922 - INFO: Skills: ["Compositing", "UI Design", "Blender", "Usability Testing"]
+2025-01-23 19:14:32,923 - INFO: Rate: $123.0/hr
+2025-01-23 19:14:32,943 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,945 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,945 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,946 - INFO: Rating Score: 0.83
+2025-01-23 19:14:32,947 - INFO: Combined Score: 0.21
+2025-01-23 19:14:32,947 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,947 - INFO: 
+Evaluating Freelancer 117: Joan Quitzon
+2025-01-23 19:14:32,948 - INFO: Job Title: Solutions Engineer
+2025-01-23 19:14:32,948 - INFO: Skills: ["Business Intelligence", "Stream Processing", "Deep Learning", "Data Quality"]
+2025-01-23 19:14:32,948 - INFO: Rate: $49.0/hr
+2025-01-23 19:14:32,949 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,949 - INFO: 
+Evaluating Freelancer 118: Dr. Carlos Lang
+2025-01-23 19:14:32,950 - INFO: Job Title: Business Intelligence Analyst
+2025-01-23 19:14:32,950 - INFO: Skills: ["Nuxt.js", "ELK Stack", "Rust", "OAuth", "AWS", "Testing Library"]
+2025-01-23 19:14:32,950 - INFO: Rate: $141.0/hr
+2025-01-23 19:14:32,966 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,968 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,968 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,969 - INFO: Rating Score: 0.86
+2025-01-23 19:14:32,969 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,970 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,970 - INFO: 
+Evaluating Freelancer 119: Agnes Connelly
+2025-01-23 19:14:32,970 - INFO: Job Title: Data Analytics Manager
+2025-01-23 19:14:32,971 - INFO: Skills: ["Data Pipeline", "Tableau", "ETL/ELT"]
+2025-01-23 19:14:32,971 - INFO: Rate: $33.0/hr
+2025-01-23 19:14:32,971 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:32,972 - INFO: 
+Evaluating Freelancer 120: Cindy White
+2025-01-23 19:14:32,972 - INFO: Job Title: Deep Learning Specialist
+2025-01-23 19:14:32,973 - INFO: Skills: ["Competitive Analysis", "Quality Assurance", "Process Modeling", "Scrum", "UML", "Agile"]
+2025-01-23 19:14:32,977 - INFO: Rate: $56.0/hr
+2025-01-23 19:14:32,989 - INFO: Matched Skills: set()
+2025-01-23 19:14:32,990 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:32,997 - INFO: Experience Score: 0.00
+2025-01-23 19:14:32,997 - INFO: Rating Score: 0.89
+2025-01-23 19:14:32,998 - INFO: Combined Score: 0.22
+2025-01-23 19:14:32,998 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:32,998 - INFO: 
+Evaluating Freelancer 121: Christy Will
+2025-01-23 19:14:32,999 - INFO: Job Title: Security Engineer
+2025-01-23 19:14:32,999 - INFO: Skills: ["Anomaly Detection", "Batch Processing", "Looker", "Time Series Analysis"]
+2025-01-23 19:14:33,000 - INFO: Rate: $65.0/hr
+2025-01-23 19:14:33,015 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,015 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,016 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,016 - INFO: Rating Score: 0.98
+2025-01-23 19:14:33,017 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,017 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,017 - INFO: 
+Evaluating Freelancer 122: Alberta Howe
+2025-01-23 19:14:33,018 - INFO: Job Title: Database Administrator
+2025-01-23 19:14:33,018 - INFO: Skills: ["Technical Writing", "Customer Segmentation", "Mixpanel", "Google Ads", "Mailchimp", "LinkedIn Ads"]
+2025-01-23 19:14:33,019 - INFO: Rate: $29.0/hr
+2025-01-23 19:14:33,019 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,019 - INFO: 
+Evaluating Freelancer 123: Olivia Ortiz
+2025-01-23 19:14:33,020 - INFO: Job Title: DevOps Engineer
+2025-01-23 19:14:33,020 - INFO: Skills: ["Objective-C", "Web Security", "Database Optimization", "CSS3", "Flask"]
+2025-01-23 19:14:33,020 - INFO: Rate: $47.0/hr
+2025-01-23 19:14:33,021 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,021 - INFO: 
+Evaluating Freelancer 124: Irene Mante
+2025-01-23 19:14:33,022 - INFO: Job Title: Data Analytics Manager
+2025-01-23 19:14:33,023 - INFO: Skills: ["GraphQL", "Babel", "Next.js", "Rust", "Azure"]
+2025-01-23 19:14:33,023 - INFO: Rate: $141.0/hr
+2025-01-23 19:14:33,038 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,039 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,039 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,040 - INFO: Rating Score: 0.91
+2025-01-23 19:14:33,045 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,047 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,047 - INFO: 
+Evaluating Freelancer 125: Miss Bernadette Krajcik
+2025-01-23 19:14:33,048 - INFO: Job Title: UX Designer
+2025-01-23 19:14:33,048 - INFO: Skills: ["Blender", "Interaction Design", "UX Design"]
+2025-01-23 19:14:33,049 - INFO: Rate: $109.0/hr
+2025-01-23 19:14:33,066 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,066 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,067 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,068 - INFO: Rating Score: 0.91
+2025-01-23 19:14:33,068 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,069 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,069 - INFO: 
+Evaluating Freelancer 126: Crystal Ernser
+2025-01-23 19:14:33,071 - INFO: Job Title: Deep Learning Specialist
+2025-01-23 19:14:33,072 - INFO: Skills: ["Laravel", "ELK Stack", "GraphQL", "Neo4j", "Message Queues"]
+2025-01-23 19:14:33,072 - INFO: Rate: $75.0/hr
+2025-01-23 19:14:33,089 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,089 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,090 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,094 - INFO: Rating Score: 0.81
+2025-01-23 19:14:33,096 - INFO: Combined Score: 0.20
+2025-01-23 19:14:33,097 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,097 - INFO: 
+Evaluating Freelancer 127: Mr. Sam Bernhard
+2025-01-23 19:14:33,097 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:33,098 - INFO: Skills: ["Snowflake", "Deep Learning", "Hadoop", "A/B Testing", "MLOps"]
+2025-01-23 19:14:33,098 - INFO: Rate: $30.0/hr
+2025-01-23 19:14:33,098 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,099 - INFO: 
+Evaluating Freelancer 128: Alyssa Ebert
+2025-01-23 19:14:33,099 - INFO: Job Title: Security Operations Engineer
+2025-01-23 19:14:33,100 - INFO: Skills: ["Product Requirements", "Agile", "Market Research", "Product Marketing"]
+2025-01-23 19:14:33,100 - INFO: Rate: $102.0/hr
+2025-01-23 19:14:33,116 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,116 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,117 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,117 - INFO: Rating Score: 0.93
+2025-01-23 19:14:33,117 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,117 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,118 - INFO: 
+Evaluating Freelancer 129: Merle Emard
+2025-01-23 19:14:33,119 - INFO: Job Title: Technical Lead
+2025-01-23 19:14:33,119 - INFO: Skills: ["Pricing Strategy", "Product Analytics", "Kanban"]
+2025-01-23 19:14:33,120 - INFO: Rate: $76.0/hr
+2025-01-23 19:14:33,135 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,135 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,136 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,137 - INFO: Rating Score: 0.92
+2025-01-23 19:14:33,137 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,137 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,138 - INFO: 
+Evaluating Freelancer 130: Guillermo Crooks
+2025-01-23 19:14:33,138 - INFO: Job Title: Character Designer
+2025-01-23 19:14:33,139 - INFO: Skills: ["Color Theory", "Usability Testing", "Texturing", "Sketch"]
+2025-01-23 19:14:33,139 - INFO: Rate: $76.0/hr
+2025-01-23 19:14:33,154 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,154 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,155 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,155 - INFO: Rating Score: 0.93
+2025-01-23 19:14:33,156 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,156 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,162 - INFO: 
+Evaluating Freelancer 131: Mario Brekke
+2025-01-23 19:14:33,163 - INFO: Job Title: Site Reliability Engineer
+2025-01-23 19:14:33,163 - INFO: Skills: ["Tableau", "dbt", "Computer Vision", "Data Quality", "Model Deployment"]
+2025-01-23 19:14:33,164 - INFO: Rate: $106.0/hr
+2025-01-23 19:14:33,177 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,178 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,180 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,180 - INFO: Rating Score: 0.94
+2025-01-23 19:14:33,181 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,181 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,181 - INFO: 
+Evaluating Freelancer 132: Percy Gerhold
+2025-01-23 19:14:33,182 - INFO: Job Title: Statistical Programmer
+2025-01-23 19:14:33,182 - INFO: Skills: ["Data Pipeline", "Kafka", "ETL/ELT", "Business Intelligence"]
+2025-01-23 19:14:33,183 - INFO: Rate: $103.0/hr
+2025-01-23 19:14:33,198 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,199 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,199 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,199 - INFO: Rating Score: 0.85
+2025-01-23 19:14:33,200 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,200 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,201 - INFO: 
+Evaluating Freelancer 133: Charlie Ritchie
+2025-01-23 19:14:33,201 - INFO: Job Title: Game Artist
+2025-01-23 19:14:33,201 - INFO: Skills: ["Particle Systems", "Service Design", "Design Systems", "ZBrush", "Rendering", "Visual Design"]
+2025-01-23 19:14:33,202 - INFO: Rate: $48.0/hr
+2025-01-23 19:14:33,202 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,202 - INFO: 
+Evaluating Freelancer 134: Dale Boehm
+2025-01-23 19:14:33,203 - INFO: Job Title: Penetration Tester
+2025-01-23 19:14:33,203 - INFO: Skills: ["HubSpot", "Google Tag Manager", "Adobe Analytics", "Growth Marketing", "Marketo"]
+2025-01-23 19:14:33,204 - INFO: Rate: $116.0/hr
+2025-01-23 19:14:33,219 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,219 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,220 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,220 - INFO: Rating Score: 0.89
+2025-01-23 19:14:33,220 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,221 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,221 - INFO: 
+Evaluating Freelancer 135: Miss Dixie Balistreri
+2025-01-23 19:14:33,222 - INFO: Job Title: Deep Learning Specialist
+2025-01-23 19:14:33,222 - INFO: Skills: ["Attribution Modeling", "Marketo", "Mailchimp", "Email Campaigns"]
+2025-01-23 19:14:33,223 - INFO: Rate: $93.0/hr
+2025-01-23 19:14:33,238 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,238 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,238 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,239 - INFO: Rating Score: 0.94
+2025-01-23 19:14:33,239 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,240 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,244 - INFO: 
+Evaluating Freelancer 136: Sheryl Dooley IV
+2025-01-23 19:14:33,247 - INFO: Job Title: Design Manager
+2025-01-23 19:14:33,247 - INFO: Skills: ["After Effects", "Sketch", "Rigging", "VFX", "Motion Graphics"]
+2025-01-23 19:14:33,247 - INFO: Rate: $65.0/hr
+2025-01-23 19:14:33,261 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,261 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,263 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,263 - INFO: Rating Score: 0.96
+2025-01-23 19:14:33,264 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,265 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,265 - INFO: 
+Evaluating Freelancer 137: Mable Botsford-Stokes
+2025-01-23 19:14:33,265 - INFO: Job Title: Enterprise Architect
+2025-01-23 19:14:33,266 - INFO: Skills: ["Growth Marketing", "SEMrush", "Conversion Optimization", "Marketo", "Editorial Planning"]
+2025-01-23 19:14:33,266 - INFO: Rate: $66.0/hr
+2025-01-23 19:14:33,282 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,282 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,282 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,283 - INFO: Rating Score: 0.91
+2025-01-23 19:14:33,283 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,284 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,284 - INFO: 
+Evaluating Freelancer 138: Dr. Kate Kovacek
+2025-01-23 19:14:33,285 - INFO: Job Title: Infrastructure Manager
+2025-01-23 19:14:33,285 - INFO: Skills: ["D3.js", "Apache Spark", "Stream Processing", "A/B Testing", "Airflow"]
+2025-01-23 19:14:33,285 - INFO: Rate: $111.0/hr
+2025-01-23 19:14:33,301 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,301 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,301 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,302 - INFO: Rating Score: 0.91
+2025-01-23 19:14:33,303 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,303 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,303 - INFO: 
+Evaluating Freelancer 139: Grady Dibbert
+2025-01-23 19:14:33,304 - INFO: Job Title: UX Designer
+2025-01-23 19:14:33,304 - INFO: Skills: ["User Research", "Adobe XD", "UX Design", "Typography", "Blender", "Layout Design"]
+2025-01-23 19:14:33,304 - INFO: Rate: $92.0/hr
+2025-01-23 19:14:33,320 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,321 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,321 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,321 - INFO: Rating Score: 0.92
+2025-01-23 19:14:33,322 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,322 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,322 - INFO: 
+Evaluating Freelancer 140: Gustavo Zulauf
+2025-01-23 19:14:33,323 - INFO: Job Title: Infrastructure Manager
+2025-01-23 19:14:33,323 - INFO: Skills: ["HubSpot", "Google Ads", "Content Marketing", "Content Operations"]
+2025-01-23 19:14:33,332 - INFO: Rate: $139.0/hr
+2025-01-23 19:14:33,347 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,347 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,348 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,348 - INFO: Rating Score: 0.90
+2025-01-23 19:14:33,348 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,349 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,349 - INFO: 
+Evaluating Freelancer 141: Elisa Hane
+2025-01-23 19:14:33,349 - INFO: Job Title: Technical Lead
+2025-01-23 19:14:33,350 - INFO: Skills: ["Cypress", "Cloud Architecture", "Jest", "Web Components", "PHP", "Service Workers"]
+2025-01-23 19:14:33,350 - INFO: Rate: $41.0/hr
+2025-01-23 19:14:33,351 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,351 - INFO: 
+Evaluating Freelancer 142: Leland D'Amore
+2025-01-23 19:14:33,352 - INFO: Job Title: Data Scientist
+2025-01-23 19:14:33,352 - INFO: Skills: ["Budget Management", "Growth Strategy", "Scrum", "Gap Analysis"]
+2025-01-23 19:14:33,352 - INFO: Rate: $127.0/hr
+2025-01-23 19:14:33,367 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,368 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,368 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,368 - INFO: Rating Score: 0.96
+2025-01-23 19:14:33,369 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,369 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,370 - INFO: 
+Evaluating Freelancer 143: Marilyn Robel-Harris
+2025-01-23 19:14:33,370 - INFO: Job Title: AI Research Scientist
+2025-01-23 19:14:33,370 - INFO: Skills: ["Python", "Haskell", "HTML5", "Datadog", "Microservices"]
+2025-01-23 19:14:33,371 - INFO: Rate: $28.0/hr
+2025-01-23 19:14:33,371 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,372 - INFO: 
+Evaluating Freelancer 144: Rebecca Schaefer
+2025-01-23 19:14:33,372 - INFO: Job Title: Game UI Designer
+2025-01-23 19:14:33,373 - INFO: Skills: ["After Effects", "Usability Testing", "Sketch", "Blender", "Unreal Engine"]
+2025-01-23 19:14:33,373 - INFO: Rate: $67.0/hr
+2025-01-23 19:14:33,388 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,388 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,389 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,389 - INFO: Rating Score: 0.86
+2025-01-23 19:14:33,390 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,393 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,395 - INFO: 
+Evaluating Freelancer 145: Tanya Balistreri
+2025-01-23 19:14:33,396 - INFO: Job Title: API Developer
+2025-01-23 19:14:33,396 - INFO: Skills: ["SEMrush", "SEM", "Ahrefs", "HubSpot"]
+2025-01-23 19:14:33,397 - INFO: Rate: $86.0/hr
+2025-01-23 19:14:33,411 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,412 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,413 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,413 - INFO: Rating Score: 0.83
+2025-01-23 19:14:33,414 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,414 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,414 - INFO: 
+Evaluating Freelancer 146: Vanessa Runolfsdottir-Sporer
+2025-01-23 19:14:33,415 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:33,415 - INFO: Skills: ["dbt", "Data Catalog", "D3.js"]
+2025-01-23 19:14:33,415 - INFO: Rate: $126.0/hr
+2025-01-23 19:14:33,430 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,431 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,431 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,431 - INFO: Rating Score: 0.90
+2025-01-23 19:14:33,432 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,432 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,432 - INFO: 
+Evaluating Freelancer 147: Natalie White
+2025-01-23 19:14:33,433 - INFO: Job Title: Statistical Programmer
+2025-01-23 19:14:33,433 - INFO: Skills: ["PRINCE2", "Kanban", "Compliance", "Waterfall", "Quality Assurance"]
+2025-01-23 19:14:33,434 - INFO: Rate: $86.0/hr
+2025-01-23 19:14:33,452 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,452 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,453 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,453 - INFO: Rating Score: 0.87
+2025-01-23 19:14:33,453 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,454 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,454 - INFO: 
+Evaluating Freelancer 148: Elsa Gutmann
+2025-01-23 19:14:33,454 - INFO: Job Title: Software Development Manager
+2025-01-23 19:14:33,455 - INFO: Skills: ["UML", "BPMN", "Kanban", "Cost-Benefit Analysis"]
+2025-01-23 19:14:33,455 - INFO: Rate: $148.0/hr
+2025-01-23 19:14:33,456 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,456 - INFO: 
+Evaluating Freelancer 149: Phillip Brown
+2025-01-23 19:14:33,460 - INFO: Job Title: Release Engineer
+2025-01-23 19:14:33,461 - INFO: Skills: ["MySQL", "WebAssembly", "Testing Library"]
+2025-01-23 19:14:33,462 - INFO: Rate: $101.0/hr
+2025-01-23 19:14:33,478 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,479 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,480 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,480 - INFO: Rating Score: 0.97
+2025-01-23 19:14:33,481 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,481 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,481 - INFO: 
+Evaluating Freelancer 150: Seth Treutel II
+2025-01-23 19:14:33,482 - INFO: Job Title: IT Support Specialist
+2025-01-23 19:14:33,482 - INFO: Skills: ["PRINCE2", "Change Management", "Quality Assurance"]
+2025-01-23 19:14:33,483 - INFO: Rate: $58.0/hr
+2025-01-23 19:14:33,498 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,498 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,499 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,499 - INFO: Rating Score: 0.92
+2025-01-23 19:14:33,499 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,500 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,500 - INFO: 
+Evaluating Freelancer 151: Sheryl Hamill
+2025-01-23 19:14:33,501 - INFO: Job Title: Android Developer
+2025-01-23 19:14:33,502 - INFO: Skills: ["Pricing Strategy", "Change Management", "Market Research", "Product Analytics", "User Stories"]
+2025-01-23 19:14:33,502 - INFO: Rate: $77.0/hr
+2025-01-23 19:14:33,518 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,518 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,519 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,519 - INFO: Rating Score: 1.00
+2025-01-23 19:14:33,519 - INFO: Combined Score: 0.25
+2025-01-23 19:14:33,520 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,520 - INFO: 
+Evaluating Freelancer 152: Aaron Torphy-Larkin
+2025-01-23 19:14:33,520 - INFO: Job Title: UX Designer
+2025-01-23 19:14:33,521 - INFO: Skills: ["Photoshop", "Cinema 4D", "Compositing", "Rigging", "Rendering"]
+2025-01-23 19:14:33,521 - INFO: Rate: $97.0/hr
+2025-01-23 19:14:33,537 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,537 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,537 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,538 - INFO: Rating Score: 0.98
+2025-01-23 19:14:33,538 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,539 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,539 - INFO: 
+Evaluating Freelancer 153: Eloise Roberts
+2025-01-23 19:14:33,543 - INFO: Job Title: Android Developer
+2025-01-23 19:14:33,546 - INFO: Skills: ["Email Marketing", "SEO", "LinkedIn Ads", "Mailchimp", "Blog Writing"]
+2025-01-23 19:14:33,546 - INFO: Rate: $27.0/hr
+2025-01-23 19:14:33,547 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,547 - INFO: 
+Evaluating Freelancer 154: Charlene Jacobs
+2025-01-23 19:14:33,548 - INFO: Job Title: Environment Artist
+2025-01-23 19:14:33,548 - INFO: Skills: ["Color Theory", "Typography", "ZBrush", "Lighting"]
+2025-01-23 19:14:33,548 - INFO: Rate: $98.0/hr
+2025-01-23 19:14:33,564 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,564 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,564 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,565 - INFO: Rating Score: 0.88
+2025-01-23 19:14:33,565 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,565 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,566 - INFO: 
+Evaluating Freelancer 155: Jordan Tillman
+2025-01-23 19:14:33,566 - INFO: Job Title: API Developer
+2025-01-23 19:14:33,566 - INFO: Skills: ["Social Media Content", "Amplitude", "Growth Marketing", "HubSpot", "Copywriting", "Editorial Planning"]
+2025-01-23 19:14:33,567 - INFO: Rate: $100.0/hr
+2025-01-23 19:14:33,584 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,585 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,585 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,586 - INFO: Rating Score: 0.87
+2025-01-23 19:14:33,586 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,586 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,587 - INFO: 
+Evaluating Freelancer 156: Ana Windler
+2025-01-23 19:14:33,587 - INFO: Job Title: Network Engineer
+2025-01-23 19:14:33,587 - INFO: Skills: ["Email Marketing", "Marketing Automation", "Mailchimp", "Google Ads"]
+2025-01-23 19:14:33,588 - INFO: Rate: $64.0/hr
+2025-01-23 19:14:33,603 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,604 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,604 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,604 - INFO: Rating Score: 0.94
+2025-01-23 19:14:33,605 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,605 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,606 - INFO: 
+Evaluating Freelancer 157: Sarah Stanton
+2025-01-23 19:14:33,611 - INFO: Job Title: UX Researcher
+2025-01-23 19:14:33,611 - INFO: Skills: ["Visual Design", "Figma", "UI Design", "Blender", "3D Modeling", "ZBrush"]
+2025-01-23 19:14:33,612 - INFO: Rate: $129.0/hr
+2025-01-23 19:14:33,628 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,628 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,629 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,629 - INFO: Rating Score: 0.88
+2025-01-23 19:14:33,630 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,630 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,630 - INFO: 
+Evaluating Freelancer 158: Willis Herman II
+2025-01-23 19:14:33,631 - INFO: Job Title: Cloud Solutions Architect
+2025-01-23 19:14:33,631 - INFO: Skills: ["Case Studies", "Editorial Planning", "Marketo", "Growth Marketing"]
+2025-01-23 19:14:33,632 - INFO: Rate: $49.0/hr
+2025-01-23 19:14:33,632 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,633 - INFO: 
+Evaluating Freelancer 159: Dr. Amy Smitham
+2025-01-23 19:14:33,633 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:33,634 - INFO: Skills: ["AWS", "Kotlin", "MongoDB", "Database Administration", "Datadog", "C#"]
+2025-01-23 19:14:33,635 - INFO: Rate: $35.0/hr
+2025-01-23 19:14:33,636 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,636 - INFO: 
+Evaluating Freelancer 160: Whitney Adams
+2025-01-23 19:14:33,637 - INFO: Job Title: Systems Architect
+2025-01-23 19:14:33,637 - INFO: Skills: ["Perl", "Gin", "Laravel", "CircleCI", "FastAPI", "Svelte"]
+2025-01-23 19:14:33,637 - INFO: Rate: $115.0/hr
+2025-01-23 19:14:33,654 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,654 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,655 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,655 - INFO: Rating Score: 0.94
+2025-01-23 19:14:33,655 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,656 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,661 - INFO: 
+Evaluating Freelancer 161: Ruben Boyer
+2025-01-23 19:14:33,662 - INFO: Job Title: Analytics Engineer
+2025-01-23 19:14:33,663 - INFO: Skills: ["DynamoDB", "Groovy", "Bootstrap", "Web Security"]
+2025-01-23 19:14:33,663 - INFO: Rate: $96.0/hr
+2025-01-23 19:14:33,673 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,677 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,678 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,679 - INFO: Rating Score: 0.81
+2025-01-23 19:14:33,680 - INFO: Combined Score: 0.20
+2025-01-23 19:14:33,680 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,680 - INFO: 
+Evaluating Freelancer 162: Dr. Louis Cormier
+2025-01-23 19:14:33,681 - INFO: Job Title: Infrastructure Manager
+2025-01-23 19:14:33,681 - INFO: Skills: ["Product Requirements", "Launch Planning", "BPMN", "Scrum"]
+2025-01-23 19:14:33,681 - INFO: Rate: $144.0/hr
+2025-01-23 19:14:33,697 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,698 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,698 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,698 - INFO: Rating Score: 0.86
+2025-01-23 19:14:33,699 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,700 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,701 - INFO: 
+Evaluating Freelancer 163: Ellen Buckridge
+2025-01-23 19:14:33,702 - INFO: Job Title: Information Security Analyst
+2025-01-23 19:14:33,702 - INFO: Skills: ["MobX", "SASS/SCSS", "JavaScript"]
+2025-01-23 19:14:33,703 - INFO: Rate: $82.0/hr
+2025-01-23 19:14:33,717 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,718 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,718 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,719 - INFO: Rating Score: 0.89
+2025-01-23 19:14:33,719 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,720 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,720 - INFO: 
+Evaluating Freelancer 164: Angie Cremin
+2025-01-23 19:14:33,720 - INFO: Job Title: Visual Designer
+2025-01-23 19:14:33,721 - INFO: Skills: ["Cinema 4D", "Prototyping", "Typography", "Unreal Engine", "Layout Design", "Maya"]
+2025-01-23 19:14:33,721 - INFO: Rate: $68.0/hr
+2025-01-23 19:14:33,736 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,737 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,737 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,738 - INFO: Rating Score: 0.97
+2025-01-23 19:14:33,738 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,739 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,742 - INFO: 
+Evaluating Freelancer 165: Veronica Wintheiser
+2025-01-23 19:14:33,744 - INFO: Job Title: Data Engineer
+2025-01-23 19:14:33,744 - INFO: Skills: ["Cost-Benefit Analysis", "Product Strategy", "Gap Analysis", "BPMN", "PMP"]
+2025-01-23 19:14:33,745 - INFO: Rate: $37.0/hr
+2025-01-23 19:14:33,745 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,746 - INFO: 
+Evaluating Freelancer 166: Victoria Weissnat DVM
+2025-01-23 19:14:33,746 - INFO: Job Title: Database Administrator
+2025-01-23 19:14:33,747 - INFO: Skills: ["Budget Management", "Risk Management", "Product Roadmap", "Process Modeling"]
+2025-01-23 19:14:33,747 - INFO: Rate: $121.0/hr
+2025-01-23 19:14:33,763 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,763 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,764 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,764 - INFO: Rating Score: 0.85
+2025-01-23 19:14:33,764 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,765 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,765 - INFO: 
+Evaluating Freelancer 167: Nellie Christiansen IV
+2025-01-23 19:14:33,766 - INFO: Job Title: Release Engineer
+2025-01-23 19:14:33,768 - INFO: Skills: ["Marketing Automation", "Video Scripts", "Google Analytics", "Content Strategy", "Google Ads"]
+2025-01-23 19:14:33,768 - INFO: Rate: $76.0/hr
+2025-01-23 19:14:33,785 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,785 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,785 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,786 - INFO: Rating Score: 0.86
+2025-01-23 19:14:33,786 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,786 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,787 - INFO: 
+Evaluating Freelancer 168: Maryann Roob
+2025-01-23 19:14:33,787 - INFO: Job Title: Service Designer
+2025-01-23 19:14:33,788 - INFO: Skills: ["Rendering", "Information Architecture", "Figma", "Color Theory", "Texturing"]
+2025-01-23 19:14:33,788 - INFO: Rate: $31.0/hr
+2025-01-23 19:14:33,789 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,789 - INFO: 
+Evaluating Freelancer 169: Lucille Runolfsdottir
+2025-01-23 19:14:33,793 - INFO: Job Title: Deep Learning Specialist
+2025-01-23 19:14:33,795 - INFO: Skills: ["PMP", "Process Modeling", "Pricing Strategy", "Product Marketing", "Process Documentation"]
+2025-01-23 19:14:33,796 - INFO: Rate: $123.0/hr
+2025-01-23 19:14:33,805 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,806 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,810 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,811 - INFO: Rating Score: 0.82
+2025-01-23 19:14:33,813 - INFO: Combined Score: 0.20
+2025-01-23 19:14:33,813 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,813 - INFO: 
+Evaluating Freelancer 170: Armando Miller
+2025-01-23 19:14:33,814 - INFO: Job Title: Infrastructure Manager
+2025-01-23 19:14:33,814 - INFO: Skills: ["Process Documentation", "PRINCE2", "Change Management", "Launch Planning", "Waterfall"]
+2025-01-23 19:14:33,814 - INFO: Rate: $29.0/hr
+2025-01-23 19:14:33,815 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,815 - INFO: 
+Evaluating Freelancer 171: Leonard Huel
+2025-01-23 19:14:33,815 - INFO: Job Title: Release Engineer
+2025-01-23 19:14:33,816 - INFO: Skills: ["Ahrefs", "Marketing Automation", "Email Campaigns", "SEMrush", "Customer.io", "Marketo"]
+2025-01-23 19:14:33,816 - INFO: Rate: $34.0/hr
+2025-01-23 19:14:33,817 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,817 - INFO: 
+Evaluating Freelancer 172: Mona Wehner
+2025-01-23 19:14:33,817 - INFO: Job Title: Solutions Engineer
+2025-01-23 19:14:33,818 - INFO: Skills: ["Experimentation", "Metric Definition", "MLOps", "Dashboard Design"]
+2025-01-23 19:14:33,818 - INFO: Rate: $76.0/hr
+2025-01-23 19:14:33,833 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,834 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,835 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,835 - INFO: Rating Score: 0.97
+2025-01-23 19:14:33,835 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,836 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,836 - INFO: 
+Evaluating Freelancer 173: Darlene Sauer
+2025-01-23 19:14:33,837 - INFO: Job Title: Statistical Programmer
+2025-01-23 19:14:33,837 - INFO: Skills: ["WebRTC", "Shell Scripting", "Service Workers", "GraphQL"]
+2025-01-23 19:14:33,837 - INFO: Rate: $89.0/hr
+2025-01-23 19:14:33,852 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,853 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,853 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,853 - INFO: Rating Score: 0.87
+2025-01-23 19:14:33,854 - INFO: Combined Score: 0.22
+2025-01-23 19:14:33,854 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,855 - INFO: 
+Evaluating Freelancer 174: Christian Emmerich
+2025-01-23 19:14:33,855 - INFO: Job Title: Test Automation Engineer
+2025-01-23 19:14:33,856 - INFO: Skills: ["PMP", "Change Management", "Launch Planning", "Cost-Benefit Analysis"]
+2025-01-23 19:14:33,862 - INFO: Rate: $133.0/hr
+2025-01-23 19:14:33,872 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,872 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,878 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,879 - INFO: Rating Score: 0.94
+2025-01-23 19:14:33,880 - INFO: Combined Score: 0.24
+2025-01-23 19:14:33,880 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,881 - INFO: 
+Evaluating Freelancer 175: Eric Satterfield-Lang
+2025-01-23 19:14:33,881 - INFO: Job Title: Full Stack Developer
+2025-01-23 19:14:33,881 - INFO: Skills: ["Redux", "Node.js", "API Gateway", "WebSockets", "VBA"]
+2025-01-23 19:14:33,882 - INFO: Rate: $40.0/hr
+2025-01-23 19:14:33,882 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,882 - INFO: 
+Evaluating Freelancer 176: Dr. Darrin Torphy
+2025-01-23 19:14:33,883 - INFO: Job Title: Information Security Analyst
+2025-01-23 19:14:33,883 - INFO: Skills: ["Compliance", "PRINCE2", "Launch Planning"]
+2025-01-23 19:14:33,884 - INFO: Rate: $141.0/hr
+2025-01-23 19:14:33,899 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,899 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,900 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,900 - INFO: Rating Score: 0.91
+2025-01-23 19:14:33,901 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,901 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,901 - INFO: 
+Evaluating Freelancer 177: Bruce Koelpin
+2025-01-23 19:14:33,902 - INFO: Job Title: Platform Engineer
+2025-01-23 19:14:33,902 - INFO: Skills: ["Service Mesh", "JavaScript", "Jest", "Svelte", "PostgreSQL"]
+2025-01-23 19:14:33,903 - INFO: Rate: $64.0/hr
+2025-01-23 19:14:33,919 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,919 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,920 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,920 - INFO: Rating Score: 0.86
+2025-01-23 19:14:33,920 - INFO: Combined Score: 0.21
+2025-01-23 19:14:33,921 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,921 - INFO: 
+Evaluating Freelancer 178: Vivian Heller-Champlin
+2025-01-23 19:14:33,922 - INFO: Job Title: Deep Learning Specialist
+2025-01-23 19:14:33,922 - INFO: Skills: ["Mailchimp", "Mixpanel", "Google Tag Manager", "Email Campaigns", "Blog Writing"]
+2025-01-23 19:14:33,923 - INFO: Rate: $110.0/hr
+2025-01-23 19:14:33,938 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,939 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,942 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,944 - INFO: Rating Score: 0.91
+2025-01-23 19:14:33,945 - INFO: Combined Score: 0.23
+2025-01-23 19:14:33,946 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,946 - INFO: 
+Evaluating Freelancer 179: Carolyn Crist
+2025-01-23 19:14:33,947 - INFO: Job Title: Penetration Tester
+2025-01-23 19:14:33,947 - INFO: Skills: ["Azure", "Web Components", "Database Optimization", "MATLAB"]
+2025-01-23 19:14:33,947 - INFO: Rate: $102.0/hr
+2025-01-23 19:14:33,962 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,963 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,963 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,963 - INFO: Rating Score: 0.81
+2025-01-23 19:14:33,964 - INFO: Combined Score: 0.20
+2025-01-23 19:14:33,964 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,965 - INFO: 
+Evaluating Freelancer 180: Bob Osinski
+2025-01-23 19:14:33,965 - INFO: Job Title: Design Systems Engineer
+2025-01-23 19:14:33,965 - INFO: Skills: ["Visual Design", "Information Architecture", "Premiere Pro"]
+2025-01-23 19:14:33,966 - INFO: Rate: $99.0/hr
+2025-01-23 19:14:33,981 - INFO: Matched Skills: set()
+2025-01-23 19:14:33,981 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:33,982 - INFO: Experience Score: 0.00
+2025-01-23 19:14:33,982 - INFO: Rating Score: 0.99
+2025-01-23 19:14:33,982 - INFO: Combined Score: 0.25
+2025-01-23 19:14:33,983 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:33,983 - INFO: 
+Evaluating Freelancer 181: Bert Schaefer
+2025-01-23 19:14:33,983 - INFO: Job Title: Security Engineer
+2025-01-23 19:14:33,984 - INFO: Skills: ["Product Analytics", "Cost-Benefit Analysis", "Launch Planning", "PMP"]
+2025-01-23 19:14:33,984 - INFO: Rate: $150.0/hr
+2025-01-23 19:14:33,985 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:33,986 - INFO: 
+Evaluating Freelancer 182: Dustin Sauer
+2025-01-23 19:14:33,986 - INFO: Job Title: AI Research Scientist
+2025-01-23 19:14:33,987 - INFO: Skills: ["White Papers", "Customer Segmentation", "Editorial Planning", "Growth Marketing"]
+2025-01-23 19:14:33,987 - INFO: Rate: $105.0/hr
+2025-01-23 19:14:34,002 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,002 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,003 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,003 - INFO: Rating Score: 0.99
+2025-01-23 19:14:34,003 - INFO: Combined Score: 0.25
+2025-01-23 19:14:34,004 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,004 - INFO: 
+Evaluating Freelancer 183: Caleb Rodriguez
+2025-01-23 19:14:34,005 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:34,005 - INFO: Skills: ["PWAs", "Service Mesh", "Redis", "Ansible", "Elasticsearch", "Scala"]
+2025-01-23 19:14:34,006 - INFO: Rate: $122.0/hr
+2025-01-23 19:14:34,020 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,021 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,021 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,022 - INFO: Rating Score: 0.88
+2025-01-23 19:14:34,022 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,022 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,028 - INFO: 
+Evaluating Freelancer 184: Eileen Medhurst
+2025-01-23 19:14:34,029 - INFO: Job Title: Network Security Engineer
+2025-01-23 19:14:34,029 - INFO: Skills: ["Adobe Analytics", "Marketing Automation", "Amplitude", "Mailchimp", "Content Marketing"]
+2025-01-23 19:14:34,029 - INFO: Rate: $37.0/hr
+2025-01-23 19:14:34,030 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,030 - INFO: 
+Evaluating Freelancer 185: Angelica Leffler
+2025-01-23 19:14:34,031 - INFO: Job Title: Technical Game Designer
+2025-01-23 19:14:34,031 - INFO: Skills: ["Rigging", "Cinema 4D", "Usability Testing", "InVision"]
+2025-01-23 19:14:34,031 - INFO: Rate: $54.0/hr
+2025-01-23 19:14:34,032 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,032 - INFO: 
+Evaluating Freelancer 186: Mr. Fernando Parisian I
+2025-01-23 19:14:34,032 - INFO: Job Title: Network Engineer
+2025-01-23 19:14:34,033 - INFO: Skills: ["Product Roadmap", "Product Requirements", "Kanban"]
+2025-01-23 19:14:34,033 - INFO: Rate: $86.0/hr
+2025-01-23 19:14:34,051 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,051 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,053 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,053 - INFO: Rating Score: 0.83
+2025-01-23 19:14:34,054 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,054 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,055 - INFO: 
+Evaluating Freelancer 187: Cedric Ziemann
+2025-01-23 19:14:34,055 - INFO: Job Title: Big Data Engineer
+2025-01-23 19:14:34,060 - INFO: Skills: ["PowerShell", "Material-UI", "React"]
+2025-01-23 19:14:34,063 - INFO: Rate: $113.0/hr
+2025-01-23 19:14:34,081 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,081 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,082 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,082 - INFO: Rating Score: 0.96
+2025-01-23 19:14:34,082 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,083 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,083 - INFO: 
+Evaluating Freelancer 188: Adam Kirlin
+2025-01-23 19:14:34,084 - INFO: Job Title: Creative Director
+2025-01-23 19:14:34,084 - INFO: Skills: ["User Research", "Photoshop", "Sketch", "UX Design", "Rendering"]
+2025-01-23 19:14:34,086 - INFO: Rate: $100.0/hr
+2025-01-23 19:14:34,104 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,104 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,104 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,105 - INFO: Rating Score: 0.99
+2025-01-23 19:14:34,105 - INFO: Combined Score: 0.25
+2025-01-23 19:14:34,106 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,111 - INFO: 
+Evaluating Freelancer 189: Travis Kessler
+2025-01-23 19:14:34,112 - INFO: Job Title: Network Security Engineer
+2025-01-23 19:14:34,113 - INFO: Skills: ["Ahrefs", "Marketing Analytics", "SEMrush", "Copywriting", "Conversion Optimization"]
+2025-01-23 19:14:34,113 - INFO: Rate: $64.0/hr
+2025-01-23 19:14:34,134 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,134 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,135 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,136 - INFO: Rating Score: 0.90
+2025-01-23 19:14:34,136 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,137 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,137 - INFO: 
+Evaluating Freelancer 190: Adam Shields-Hermiston
+2025-01-23 19:14:34,138 - INFO: Job Title: Release Engineer
+2025-01-23 19:14:34,139 - INFO: Skills: ["Content Strategy", "Salesforce", "Conversion Optimization"]
+2025-01-23 19:14:34,142 - INFO: Rate: $64.0/hr
+2025-01-23 19:14:34,164 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,164 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,165 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,165 - INFO: Rating Score: 0.83
+2025-01-23 19:14:34,165 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,166 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,167 - INFO: 
+Evaluating Freelancer 191: Jenny Yundt
+2025-01-23 19:14:34,168 - INFO: Job Title: Enterprise Architect
+2025-01-23 19:14:34,169 - INFO: Skills: ["Jenkins", "Ruby", "Database Optimization", "DynamoDB", "Datadog", "Webpack"]
+2025-01-23 19:14:34,169 - INFO: Rate: $141.0/hr
+2025-01-23 19:14:34,186 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,186 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,187 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,187 - INFO: Rating Score: 0.90
+2025-01-23 19:14:34,188 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,188 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,189 - INFO: 
+Evaluating Freelancer 192: Irene Zboncak
+2025-01-23 19:14:34,193 - INFO: Job Title: Data Scientist
+2025-01-23 19:14:34,195 - INFO: Skills: ["Service Mesh", "Redis", "Shell Scripting"]
+2025-01-23 19:14:34,197 - INFO: Rate: $58.0/hr
+2025-01-23 19:14:34,214 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,215 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,215 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,215 - INFO: Rating Score: 0.90
+2025-01-23 19:14:34,216 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,217 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,217 - INFO: 
+Evaluating Freelancer 193: Frederick Roberts
+2025-01-23 19:14:34,218 - INFO: Job Title: Cloud Security Engineer
+2025-01-23 19:14:34,218 - INFO: Skills: ["Scikit-learn", "PyTorch", "Tableau", "Anomaly Detection"]
+2025-01-23 19:14:34,219 - INFO: Rate: $39.0/hr
+2025-01-23 19:14:34,219 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,220 - INFO: 
+Evaluating Freelancer 194: Ann Bergnaum
+2025-01-23 19:14:34,220 - INFO: Job Title: Software Development Manager
+2025-01-23 19:14:34,221 - INFO: Skills: ["Model Deployment", "Business Intelligence", "Neural Networks", "Apache Spark", "Feature Engineering", "TensorFlow"]
+2025-01-23 19:14:34,221 - INFO: Rate: $54.0/hr
+2025-01-23 19:14:34,222 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,222 - INFO: 
+Evaluating Freelancer 195: Gladys Jakubowski
+2025-01-23 19:14:34,227 - INFO: Job Title: IT Project Manager
+2025-01-23 19:14:34,229 - INFO: Skills: ["PMP", "UML", "Product Roadmap"]
+2025-01-23 19:14:34,230 - INFO: Rate: $55.0/hr
+2025-01-23 19:14:34,247 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,247 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,248 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,248 - INFO: Rating Score: 0.91
+2025-01-23 19:14:34,249 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,249 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,250 - INFO: 
+Evaluating Freelancer 196: Tony Harris Jr.
+2025-01-23 19:14:34,251 - INFO: Job Title: Full Stack Developer
+2025-01-23 19:14:34,251 - INFO: Skills: ["Java", "Shell Scripting", "Message Queues", "C#", "Redis"]
+2025-01-23 19:14:34,252 - INFO: Rate: $77.0/hr
+2025-01-23 19:14:34,271 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,272 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,272 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,279 - INFO: Rating Score: 0.97
+2025-01-23 19:14:34,280 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,280 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,281 - INFO: 
+Evaluating Freelancer 197: Erik Mosciski
+2025-01-23 19:14:34,281 - INFO: Job Title: NLP Engineer
+2025-01-23 19:14:34,282 - INFO: Skills: ["Marketo", "SEM", "Social Media Content", "Conversion Optimization"]
+2025-01-23 19:14:34,282 - INFO: Rate: $62.0/hr
+2025-01-23 19:14:34,298 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,299 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,299 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,300 - INFO: Rating Score: 0.81
+2025-01-23 19:14:34,300 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,301 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,301 - INFO: 
+Evaluating Freelancer 198: Bradley MacGyver
+2025-01-23 19:14:34,302 - INFO: Job Title: Game Economy Designer
+2025-01-23 19:14:34,302 - INFO: Skills: ["Service Design", "Layout Design", "Motion Graphics", "Typography", "Cinema 4D"]
+2025-01-23 19:14:34,303 - INFO: Rate: $124.0/hr
+2025-01-23 19:14:34,318 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,318 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,318 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,319 - INFO: Rating Score: 0.90
+2025-01-23 19:14:34,319 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,319 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,320 - INFO: 
+Evaluating Freelancer 199: Mr. Kurt Murphy
+2025-01-23 19:14:34,320 - INFO: Job Title: Systems Architect
+2025-01-23 19:14:34,321 - INFO: Skills: ["Amplitude", "Mixpanel", "Customer Segmentation"]
+2025-01-23 19:14:34,321 - INFO: Rate: $55.0/hr
+2025-01-23 19:14:34,338 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,338 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,338 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,339 - INFO: Rating Score: 0.99
+2025-01-23 19:14:34,343 - INFO: Combined Score: 0.25
+2025-01-23 19:14:34,344 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,344 - INFO: 
+Evaluating Freelancer 200: Cesar Shanahan
+2025-01-23 19:14:34,345 - INFO: Job Title: Backend Developer
+2025-01-23 19:14:34,345 - INFO: Skills: ["ETL/ELT", "Anomaly Detection", "Experimentation", "Reinforcement Learning", "dbt"]
+2025-01-23 19:14:34,346 - INFO: Rate: $148.0/hr
+2025-01-23 19:14:34,347 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,347 - INFO: 
+Evaluating Freelancer 201: Rochelle McLaughlin DVM
+2025-01-23 19:14:34,348 - INFO: Job Title: Full Stack Developer
+2025-01-23 19:14:34,348 - INFO: Skills: ["Google Ads", "Adobe Analytics", "SEMrush"]
+2025-01-23 19:14:34,348 - INFO: Rate: $135.0/hr
+2025-01-23 19:14:34,365 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,365 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,365 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,366 - INFO: Rating Score: 0.82
+2025-01-23 19:14:34,366 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,366 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,367 - INFO: 
+Evaluating Freelancer 202: Patti Brekke
+2025-01-23 19:14:34,367 - INFO: Job Title: Data Architect
+2025-01-23 19:14:34,368 - INFO: Skills: ["Google Tag Manager", "Growth Marketing", "Content Marketing", "Marketo"]
+2025-01-23 19:14:34,368 - INFO: Rate: $39.0/hr
+2025-01-23 19:14:34,369 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,369 - INFO: 
+Evaluating Freelancer 203: Valerie Dach
+2025-01-23 19:14:34,370 - INFO: Job Title: Interaction Designer
+2025-01-23 19:14:34,370 - INFO: Skills: ["Information Architecture", "InVision", "Adobe XD"]
+2025-01-23 19:14:34,370 - INFO: Rate: $31.0/hr
+2025-01-23 19:14:34,371 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,371 - INFO: 
+Evaluating Freelancer 204: Desiree Abernathy
+2025-01-23 19:14:34,371 - INFO: Job Title: Senior Software Engineer
+2025-01-23 19:14:34,372 - INFO: Skills: ["Data Modeling", "Power BI", "Business Intelligence", "ETL/ELT", "Reinforcement Learning"]
+2025-01-23 19:14:34,372 - INFO: Rate: $144.0/hr
+2025-01-23 19:14:34,388 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,388 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,388 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,389 - INFO: Rating Score: 0.82
+2025-01-23 19:14:34,394 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,395 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,396 - INFO: 
+Evaluating Freelancer 205: Rosalie Green
+2025-01-23 19:14:34,396 - INFO: Job Title: Business Intelligence Analyst
+2025-01-23 19:14:34,396 - INFO: Skills: ["Time Series Analysis", "R Visualization", "Model Deployment", "XGBoost", "Airflow", "Power BI"]
+2025-01-23 19:14:34,397 - INFO: Rate: $104.0/hr
+2025-01-23 19:14:34,411 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,412 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,412 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,412 - INFO: Rating Score: 0.89
+2025-01-23 19:14:34,413 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,413 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,413 - INFO: 
+Evaluating Freelancer 206: Elsie Watsica
+2025-01-23 19:14:34,414 - INFO: Job Title: Quantitative Analyst
+2025-01-23 19:14:34,414 - INFO: Skills: ["Python Visualization", "Model Deployment", "LightGBM", "Data Lakes", "Scikit-learn"]
+2025-01-23 19:14:34,414 - INFO: Rate: $41.0/hr
+2025-01-23 19:14:34,415 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,415 - INFO: 
+Evaluating Freelancer 207: Rickey Hermiston
+2025-01-23 19:14:34,416 - INFO: Job Title: DevOps Engineer
+2025-01-23 19:14:34,416 - INFO: Skills: ["Scrum", "Pricing Strategy", "Launch Planning"]
+2025-01-23 19:14:34,416 - INFO: Rate: $113.0/hr
+2025-01-23 19:14:34,431 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,431 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,432 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,433 - INFO: Rating Score: 0.89
+2025-01-23 19:14:34,433 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,434 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,434 - INFO: 
+Evaluating Freelancer 208: Brandi Romaguera
+2025-01-23 19:14:34,434 - INFO: Job Title: Environment Designer
+2025-01-23 19:14:34,435 - INFO: Skills: ["Icon Design", "Character Animation", "Service Design", "Particle Systems"]
+2025-01-23 19:14:34,435 - INFO: Rate: $61.0/hr
+2025-01-23 19:14:34,450 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,451 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,452 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,452 - INFO: Rating Score: 0.93
+2025-01-23 19:14:34,452 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,453 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,453 - INFO: 
+Evaluating Freelancer 209: Danielle Kozey
+2025-01-23 19:14:34,453 - INFO: Job Title: Digital Illustrator
+2025-01-23 19:14:34,454 - INFO: Skills: ["InVision", "Rigging", "Interaction Design"]
+2025-01-23 19:14:34,454 - INFO: Rate: $89.0/hr
+2025-01-23 19:14:34,469 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,470 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,470 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,471 - INFO: Rating Score: 0.99
+2025-01-23 19:14:34,471 - INFO: Combined Score: 0.25
+2025-01-23 19:14:34,475 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,477 - INFO: 
+Evaluating Freelancer 210: Kari Ondricka
+2025-01-23 19:14:34,478 - INFO: Job Title: Statistical Programmer
+2025-01-23 19:14:34,478 - INFO: Skills: ["Agile", "BPMN", "Pricing Strategy", "Competitive Analysis", "User Stories", "Kanban"]
+2025-01-23 19:14:34,479 - INFO: Rate: $97.0/hr
+2025-01-23 19:14:34,488 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,493 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,494 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,495 - INFO: Rating Score: 0.84
+2025-01-23 19:14:34,496 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,496 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,496 - INFO: 
+Evaluating Freelancer 211: Gertrude Ebert
+2025-01-23 19:14:34,497 - INFO: Job Title: Quantitative Analyst
+2025-01-23 19:14:34,497 - INFO: Skills: ["Mixpanel", "Google Tag Manager", "Editorial Planning"]
+2025-01-23 19:14:34,497 - INFO: Rate: $125.0/hr
+2025-01-23 19:14:34,513 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,513 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,513 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,514 - INFO: Rating Score: 0.93
+2025-01-23 19:14:34,514 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,514 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,515 - INFO: 
+Evaluating Freelancer 212: Lana Effertz
+2025-01-23 19:14:34,515 - INFO: Job Title: Cloud Infrastructure Engineer
+2025-01-23 19:14:34,516 - INFO: Skills: ["Product Requirements", "Cost-Benefit Analysis", "Gap Analysis"]
+2025-01-23 19:14:34,516 - INFO: Rate: $58.0/hr
+2025-01-23 19:14:34,532 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,532 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,533 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,533 - INFO: Rating Score: 0.83
+2025-01-23 19:14:34,534 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,535 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,535 - INFO: 
+Evaluating Freelancer 213: Lillian O'Conner
+2025-01-23 19:14:34,535 - INFO: Job Title: Analytics Engineer
+2025-01-23 19:14:34,536 - INFO: Skills: ["Growth Strategy", "BPMN", "Waterfall", "Competitive Analysis"]
+2025-01-23 19:14:34,536 - INFO: Rate: $69.0/hr
+2025-01-23 19:14:34,550 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,551 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,552 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,552 - INFO: Rating Score: 0.98
+2025-01-23 19:14:34,552 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,553 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,553 - INFO: 
+Evaluating Freelancer 214: Tabitha Gislason
+2025-01-23 19:14:34,553 - INFO: Job Title: Quantitative Analyst
+2025-01-23 19:14:34,554 - INFO: Skills: ["LightGBM", "A/B Testing", "Feature Engineering", "Data Storytelling"]
+2025-01-23 19:14:34,554 - INFO: Rate: $70.0/hr
+2025-01-23 19:14:34,569 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,569 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,570 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,570 - INFO: Rating Score: 0.97
+2025-01-23 19:14:34,570 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,571 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,571 - INFO: 
+Evaluating Freelancer 215: Jimmy Langworth
+2025-01-23 19:14:34,571 - INFO: Job Title: Brand Designer
+2025-01-23 19:14:34,572 - INFO: Skills: ["Unreal Engine", "Information Architecture", "Visual Design", "Figma"]
+2025-01-23 19:14:34,576 - INFO: Rate: $121.0/hr
+2025-01-23 19:14:34,587 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,588 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,588 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,592 - INFO: Rating Score: 0.90
+2025-01-23 19:14:34,593 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,594 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,595 - INFO: 
+Evaluating Freelancer 216: Austin Hermann
+2025-01-23 19:14:34,596 - INFO: Job Title: Cloud Infrastructure Engineer
+2025-01-23 19:14:34,596 - INFO: Skills: ["Gap Analysis", "Agile", "Market Research", "Compliance", "Product Strategy", "Pricing Strategy"]
+2025-01-23 19:14:34,596 - INFO: Rate: $145.0/hr
+2025-01-23 19:14:34,596 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,597 - INFO: 
+Evaluating Freelancer 217: Dr. Roy Lubowitz
+2025-01-23 19:14:34,597 - INFO: Job Title: Interaction Designer
+2025-01-23 19:14:34,597 - INFO: Skills: ["Motion Graphics", "Information Architecture", "Typography", "3D Modeling", "Figma", "Lighting"]
+2025-01-23 19:14:34,598 - INFO: Rate: $143.0/hr
+2025-01-23 19:14:34,613 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,614 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,614 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,615 - INFO: Rating Score: 0.93
+2025-01-23 19:14:34,615 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,616 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,616 - INFO: 
+Evaluating Freelancer 218: Lowell Cole
+2025-01-23 19:14:34,617 - INFO: Job Title: Data Engineer
+2025-01-23 19:14:34,617 - INFO: Skills: ["UML", "Waterfall", "Process Modeling", "Budget Management", "Scrum"]
+2025-01-23 19:14:34,617 - INFO: Rate: $136.0/hr
+2025-01-23 19:14:34,632 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,632 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,633 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,634 - INFO: Rating Score: 0.84
+2025-01-23 19:14:34,634 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,634 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,635 - INFO: 
+Evaluating Freelancer 219: Blanca Gislason-Farrell
+2025-01-23 19:14:34,635 - INFO: Job Title: IT Project Manager
+2025-01-23 19:14:34,635 - INFO: Skills: ["Video Scripts", "Email Marketing", "Google Analytics", "Editorial Planning"]
+2025-01-23 19:14:34,636 - INFO: Rate: $103.0/hr
+2025-01-23 19:14:34,650 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,651 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,651 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,652 - INFO: Rating Score: 0.94
+2025-01-23 19:14:34,652 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,653 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,653 - INFO: 
+Evaluating Freelancer 220: Mandy Heathcote
+2025-01-23 19:14:34,653 - INFO: Job Title: Mobile App Developer
+2025-01-23 19:14:34,654 - INFO: Skills: ["Salesforce", "HubSpot", "Growth Marketing", "Case Studies"]
+2025-01-23 19:14:34,654 - INFO: Rate: $113.0/hr
+2025-01-23 19:14:34,668 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,669 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,669 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,670 - INFO: Rating Score: 0.82
+2025-01-23 19:14:34,670 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,670 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,671 - INFO: 
+Evaluating Freelancer 221: Gene Stokes
+2025-01-23 19:14:34,671 - INFO: Job Title: Database Administrator
+2025-01-23 19:14:34,671 - INFO: Skills: ["Compliance", "Process Modeling", "Product Marketing"]
+2025-01-23 19:14:34,672 - INFO: Rate: $57.0/hr
+2025-01-23 19:14:34,686 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,686 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,687 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,687 - INFO: Rating Score: 1.00
+2025-01-23 19:14:34,688 - INFO: Combined Score: 0.25
+2025-01-23 19:14:34,688 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,692 - INFO: 
+Evaluating Freelancer 222: Kathleen Rogahn I
+2025-01-23 19:14:34,694 - INFO: Job Title: Penetration Tester
+2025-01-23 19:14:34,695 - INFO: Skills: ["Mixpanel", "Google Analytics", "Social Media Content", "Content Operations", "Facebook Ads"]
+2025-01-23 19:14:34,695 - INFO: Rate: $116.0/hr
+2025-01-23 19:14:34,705 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,710 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,711 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,712 - INFO: Rating Score: 0.81
+2025-01-23 19:14:34,712 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,712 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,713 - INFO: 
+Evaluating Freelancer 223: Sophie Lockman DVM
+2025-01-23 19:14:34,713 - INFO: Job Title: MLOps Engineer
+2025-01-23 19:14:34,713 - INFO: Skills: ["GitHub Actions", "Neo4j", "Storybook", "JavaScript", "ESLint"]
+2025-01-23 19:14:34,714 - INFO: Rate: $76.0/hr
+2025-01-23 19:14:34,729 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,730 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,731 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,731 - INFO: Rating Score: 0.82
+2025-01-23 19:14:34,731 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,732 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,732 - INFO: 
+Evaluating Freelancer 224: Nicole Herzog I
+2025-01-23 19:14:34,733 - INFO: Job Title: Data Architect
+2025-01-23 19:14:34,733 - INFO: Skills: ["Product Analytics", "PMP", "Growth Strategy", "Cost-Benefit Analysis", "Quality Assurance"]
+2025-01-23 19:14:34,734 - INFO: Rate: $60.0/hr
+2025-01-23 19:14:34,749 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,749 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,749 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,750 - INFO: Rating Score: 0.98
+2025-01-23 19:14:34,750 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,750 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,751 - INFO: 
+Evaluating Freelancer 225: Carole McCullough Sr.
+2025-01-23 19:14:34,751 - INFO: Job Title: Technical Artist
+2025-01-23 19:14:34,752 - INFO: Skills: ["Photoshop", "Cinema 4D", "Interaction Design"]
+2025-01-23 19:14:34,752 - INFO: Rate: $93.0/hr
+2025-01-23 19:14:34,767 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,768 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,768 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,768 - INFO: Rating Score: 0.88
+2025-01-23 19:14:34,769 - INFO: Combined Score: 0.22
+2025-01-23 19:14:34,769 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,769 - INFO: 
+Evaluating Freelancer 226: Ben Bosco
+2025-01-23 19:14:34,770 - INFO: Job Title: Solutions Engineer
+2025-01-23 19:14:34,770 - INFO: Skills: ["Neural Networks", "Airflow", "Data Quality", "Anomaly Detection"]
+2025-01-23 19:14:34,770 - INFO: Rate: $93.0/hr
+2025-01-23 19:14:34,785 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,786 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,786 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,787 - INFO: Rating Score: 0.96
+2025-01-23 19:14:34,787 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,787 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,788 - INFO: 
+Evaluating Freelancer 227: Peter Kuhlman
+2025-01-23 19:14:34,788 - INFO: Job Title: Identity Access Manager
+2025-01-23 19:14:34,794 - INFO: Skills: ["Business Intelligence", "R Visualization", "Feature Engineering", "Looker"]
+2025-01-23 19:14:34,795 - INFO: Rate: $138.0/hr
+2025-01-23 19:14:34,804 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,804 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,805 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,805 - INFO: Rating Score: 0.81
+2025-01-23 19:14:34,810 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,812 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,812 - INFO: 
+Evaluating Freelancer 228: Scott Green III
+2025-01-23 19:14:34,813 - INFO: Job Title: Systems Architect
+2025-01-23 19:14:34,813 - INFO: Skills: ["Video Scripts", "Content Operations", "SEO", "SEM", "Ahrefs", "LinkedIn Ads"]
+2025-01-23 19:14:34,813 - INFO: Rate: $103.0/hr
+2025-01-23 19:14:34,828 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,828 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,829 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,829 - INFO: Rating Score: 0.81
+2025-01-23 19:14:34,830 - INFO: Combined Score: 0.20
+2025-01-23 19:14:34,830 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,831 - INFO: 
+Evaluating Freelancer 229: Mr. Kirk Lueilwitz
+2025-01-23 19:14:34,831 - INFO: Job Title: iOS Developer
+2025-01-23 19:14:34,831 - INFO: Skills: ["React", "Objective-C", "Groovy", "Elasticsearch"]
+2025-01-23 19:14:34,832 - INFO: Rate: $83.0/hr
+2025-01-23 19:14:34,846 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,847 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,847 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,847 - INFO: Rating Score: 0.85
+2025-01-23 19:14:34,848 - INFO: Combined Score: 0.21
+2025-01-23 19:14:34,848 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,848 - INFO: 
+Evaluating Freelancer 230: Rickey Paucek II
+2025-01-23 19:14:34,849 - INFO: Job Title: Business Intelligence Analyst
+2025-01-23 19:14:34,849 - INFO: Skills: ["NestJS", "Java", "PWAs", "Bootstrap", "Grafana"]
+2025-01-23 19:14:34,849 - INFO: Rate: $99.0/hr
+2025-01-23 19:14:34,865 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,865 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,865 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,866 - INFO: Rating Score: 0.97
+2025-01-23 19:14:34,866 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,867 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,867 - INFO: 
+Evaluating Freelancer 231: Pamela Fisher Jr.
+2025-01-23 19:14:34,868 - INFO: Job Title: Data Analytics Manager
+2025-01-23 19:14:34,868 - INFO: Skills: ["HubSpot", "Amplitude", "Case Studies", "Copywriting", "Adobe Analytics"]
+2025-01-23 19:14:34,868 - INFO: Rate: $140.0/hr
+2025-01-23 19:14:34,883 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,883 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,883 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,884 - INFO: Rating Score: 0.91
+2025-01-23 19:14:34,884 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,885 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,885 - INFO: 
+Evaluating Freelancer 232: Loren Mohr
+2025-01-23 19:14:34,886 - INFO: Job Title: Backend Developer
+2025-01-23 19:14:34,886 - INFO: Skills: ["XGBoost", "R Visualization", "Experimentation", "Data Storytelling", "Hadoop", "Time Series Analysis"]
+2025-01-23 19:14:34,887 - INFO: Rate: $150.0/hr
+2025-01-23 19:14:34,887 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,887 - INFO: 
+Evaluating Freelancer 233: Karl Upton
+2025-01-23 19:14:34,888 - INFO: Job Title: Full Stack Developer
+2025-01-23 19:14:34,888 - INFO: Skills: ["Waterfall", "Kanban", "Gap Analysis", "Growth Strategy", "PMP", "Budget Management"]
+2025-01-23 19:14:34,888 - INFO: Rate: $122.0/hr
+2025-01-23 19:14:34,904 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,904 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,905 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,911 - INFO: Rating Score: 0.93
+2025-01-23 19:14:34,912 - INFO: Combined Score: 0.23
+2025-01-23 19:14:34,912 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,912 - INFO: 
+Evaluating Freelancer 234: Darryl Herzog
+2025-01-23 19:14:34,913 - INFO: Job Title: Animation Director
+2025-01-23 19:14:34,913 - INFO: Skills: ["Lighting", "ZBrush", "Premiere Pro"]
+2025-01-23 19:14:34,913 - INFO: Rate: $47.0/hr
+2025-01-23 19:14:34,914 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,914 - INFO: 
+Evaluating Freelancer 235: Julian Hartmann Sr.
+2025-01-23 19:14:34,915 - INFO: Job Title: Business Intelligence Analyst
+2025-01-23 19:14:34,915 - INFO: Skills: ["PHP", "Kotlin", "Database Administration", "MATLAB", "PowerShell"]
+2025-01-23 19:14:34,915 - INFO: Rate: $118.0/hr
+2025-01-23 19:14:34,931 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,931 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,931 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,932 - INFO: Rating Score: 0.94
+2025-01-23 19:14:34,932 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,933 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,933 - INFO: 
+Evaluating Freelancer 236: Esther Upton
+2025-01-23 19:14:34,933 - INFO: Job Title: Data Analytics Manager
+2025-01-23 19:14:34,934 - INFO: Skills: ["Data Warehousing", "Tableau", "Data Lakes", "Python Visualization", "dbt"]
+2025-01-23 19:14:34,934 - INFO: Rate: $27.0/hr
+2025-01-23 19:14:34,934 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,935 - INFO: 
+Evaluating Freelancer 237: Milton Brekke Jr.
+2025-01-23 19:14:34,935 - INFO: Job Title: Game Systems Designer
+2025-01-23 19:14:34,936 - INFO: Skills: ["Typography", "After Effects", "Rendering", "Layout Design", "Lighting", "Rigging"]
+2025-01-23 19:14:34,936 - INFO: Rate: $41.0/hr
+2025-01-23 19:14:34,937 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,937 - INFO: 
+Evaluating Freelancer 238: Mindy Trantow
+2025-01-23 19:14:34,938 - INFO: Job Title: Concept Artist
+2025-01-23 19:14:34,938 - INFO: Skills: ["Illustrator", "Premiere Pro", "Information Architecture"]
+2025-01-23 19:14:34,938 - INFO: Rate: $82.0/hr
+2025-01-23 19:14:34,953 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,954 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,954 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,955 - INFO: Rating Score: 0.99
+2025-01-23 19:14:34,959 - INFO: Combined Score: 0.25
+2025-01-23 19:14:34,961 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,961 - INFO: 
+Evaluating Freelancer 239: Maurice Gusikowski
+2025-01-23 19:14:34,962 - INFO: Job Title: Enterprise Architect
+2025-01-23 19:14:34,962 - INFO: Skills: ["Agile", "Competitive Analysis", "Program Management", "Cost-Benefit Analysis", "PMP", "PRINCE2"]
+2025-01-23 19:14:34,963 - INFO: Rate: $54.0/hr
+2025-01-23 19:14:34,963 - INFO: [X] Rejected: Rate outside budget range
+2025-01-23 19:14:34,963 - INFO: 
+Evaluating Freelancer 240: Ashley Lang
+2025-01-23 19:14:34,964 - INFO: Job Title: Data Architect
+2025-01-23 19:14:34,964 - INFO: Skills: ["Video Scripts", "SEO", "Email Campaigns", "Google Analytics"]
+2025-01-23 19:14:34,964 - INFO: Rate: $74.0/hr
+2025-01-23 19:14:34,979 - INFO: Matched Skills: set()
+2025-01-23 19:14:34,980 - INFO: Skill Match Score: 0.00
+2025-01-23 19:14:34,980 - INFO: Experience Score: 0.00
+2025-01-23 19:14:34,980 - INFO: Rating Score: 0.96
+2025-01-23 19:14:34,981 - INFO: Combined Score: 0.24
+2025-01-23 19:14:34,981 - INFO: [X] Rejected: Score too low
+2025-01-23 19:14:34,982 - INFO: 
+==================================================
+2025-01-23 19:14:34,982 - INFO: Search Complete: Found 0 matches from 240 freelancers
+2025-01-23 19:14:34,983 - INFO: ==================================================
+
+2025-01-23 19:14:34,985 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:34] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:45,588 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:45] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:45,850 - INFO: 
+Processing chat request:
+2025-01-23 19:14:45,851 - INFO: Message: Find freelancer with budget up to $216.0
+2025-01-23 19:14:45,969 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:45] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:50,356 - INFO: 
+Processing chat request:
+2025-01-23 19:14:50,358 - INFO: Message: it
+2025-01-23 19:14:50,407 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:50] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:55,587 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:55] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:55,849 - INFO: 
+Processing chat request:
+2025-01-23 19:14:55,850 - INFO: Message: "copywriting"
+2025-01-23 19:14:55,924 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:55] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:14:58,777 - INFO: 
+Processing chat request:
+2025-01-23 19:14:58,778 - INFO: Message: "copywriting"
+2025-01-23 19:14:58,854 - INFO: 127.0.0.1 - - [23/Jan/2025 19:14:58] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:19:34,322 - INFO: SkillsExtract initialized with custom stop words
+2025-01-23 19:19:34,323 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-23 19:19:34,596 - INFO: Successfully loaded 240 freelancers
+2025-01-23 19:19:34,601 - INFO: Loaded 175 job titles and 530 skills from database
+2025-01-23 19:19:34,685 - INFO: Matching engine initialized successfully
+2025-01-23 19:19:34,686 - INFO: 
+==================================================
+Loaded 240 freelancers:
+2025-01-23 19:19:34,686 - INFO: 
+1. Raymond Borer (Technical Artist)
+2025-01-23 19:19:34,686 - INFO:    Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 19:19:34,686 - INFO:    Rate: $26.0/hr, Rating: 4.28663%
+2025-01-23 19:19:34,687 - INFO: 
+2. Gayle Bradtke (Backend Developer)
+2025-01-23 19:19:34,687 - INFO:    Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 19:19:34,688 - INFO:    Rate: $77.0/hr, Rating: 4.71936%
+2025-01-23 19:19:34,688 - INFO: 
+3. Tommy Mann (Infrastructure Manager)
+2025-01-23 19:19:34,689 - INFO:    Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 19:19:34,689 - INFO:    Rate: $27.0/hr, Rating: 4.74074%
+2025-01-23 19:19:34,690 - INFO: 
+4. Dr. Cody Renner-Halvorson (Multimedia Designer)
+2025-01-23 19:19:34,690 - INFO:    Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 19:19:34,691 - INFO:    Rate: $35.0/hr, Rating: 4.96156%
+2025-01-23 19:19:34,691 - INFO: 
+5. Jeannette Medhurst (Level Designer)
+2025-01-23 19:19:34,692 - INFO:    Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 19:19:34,693 - INFO:    Rate: $137.0/hr, Rating: 4.93055%
+2025-01-23 19:19:34,693 - INFO: 
+6. Joel Okuneva (Production Artist)
+2025-01-23 19:19:34,694 - INFO:    Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 19:19:34,696 - INFO:    Rate: $44.0/hr, Rating: 4.51352%
+2025-01-23 19:19:34,696 - INFO: 
+7. Lydia Mayert (Graphic Designer)
+2025-01-23 19:19:34,697 - INFO:    Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 19:19:34,698 - INFO:    Rate: $68.0/hr, Rating: 4.04297%
+2025-01-23 19:19:34,699 - INFO: 
+8. Katherine Brown (Frontend Developer)
+2025-01-23 19:19:34,702 - INFO:    Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 19:19:34,706 - INFO:    Rate: $79.0/hr, Rating: 4.34857%
+2025-01-23 19:19:34,707 - INFO: 
+9. Jane Walter (Systems Architect)
+2025-01-23 19:19:34,708 - INFO:    Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 19:19:34,709 - INFO:    Rate: $82.0/hr, Rating: 4.60934%
+2025-01-23 19:19:34,711 - INFO: 
+10. Lana Von (Database Administrator)
+2025-01-23 19:19:34,713 - INFO:    Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 19:19:34,717 - INFO:    Rate: $71.0/hr, Rating: 4.96011%
+2025-01-23 19:19:34,718 - INFO: 
+... and 230 more freelancers
+2025-01-23 19:19:34,721 - INFO: ==================================================
+
+2025-01-23 19:19:34,737 - INFO: Model initialization completed successfully
+2025-01-23 19:19:34,821 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.170.233:8000
+2025-01-23 19:19:34,824 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-23 19:21:06,835 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:06] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:07,095 - INFO: 
+Processing chat request:
+2025-01-23 19:21:07,096 - INFO: Message: website
+2025-01-23 19:21:07,141 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:07] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:15,228 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:15] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:15,496 - INFO: 
+Processing chat request:
+2025-01-23 19:21:15,498 - INFO: Message: web
+2025-01-23 19:21:15,557 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:15] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:33,367 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:33] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:33,632 - INFO: 
+Processing chat request:
+2025-01-23 19:21:33,634 - INFO: Message: website design
+2025-01-23 19:21:33,720 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:33] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:38,809 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:38] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:21:39,080 - INFO: 
+Processing chat request:
+2025-01-23 19:21:39,082 - INFO: Message: design
+2025-01-23 19:21:39,087 - INFO: 127.0.0.1 - - [23/Jan/2025 19:21:39] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:41:55,000 - INFO: SkillsExtract initialized with custom stop words
+2025-01-23 19:41:55,002 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-23 19:41:55,426 - INFO: Successfully loaded 240 freelancers
+2025-01-23 19:41:55,431 - INFO: Loaded 175 job titles and 530 skills from database
+2025-01-23 19:41:55,523 - INFO: Matching engine initialized successfully
+2025-01-23 19:41:55,525 - INFO: 
+==================================================
+Loaded 240 freelancers:
+2025-01-23 19:41:55,526 - INFO: 
+1. Raymond Borer (Technical Artist)
+2025-01-23 19:41:55,528 - INFO:    Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 19:41:55,529 - INFO:    Rate: $26.0/hr, Rating: 4.28663%
+2025-01-23 19:41:55,530 - INFO: 
+2. Gayle Bradtke (Backend Developer)
+2025-01-23 19:41:55,532 - INFO:    Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 19:41:55,533 - INFO:    Rate: $77.0/hr, Rating: 4.71936%
+2025-01-23 19:41:55,535 - INFO: 
+3. Tommy Mann (Infrastructure Manager)
+2025-01-23 19:41:55,536 - INFO:    Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 19:41:55,539 - INFO:    Rate: $27.0/hr, Rating: 4.74074%
+2025-01-23 19:41:55,543 - INFO: 
+4. Dr. Cody Renner-Halvorson (Multimedia Designer)
+2025-01-23 19:41:55,544 - INFO:    Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 19:41:55,546 - INFO:    Rate: $35.0/hr, Rating: 4.96156%
+2025-01-23 19:41:55,547 - INFO: 
+5. Jeannette Medhurst (Level Designer)
+2025-01-23 19:41:55,549 - INFO:    Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 19:41:55,553 - INFO:    Rate: $137.0/hr, Rating: 4.93055%
+2025-01-23 19:41:55,555 - INFO: 
+6. Joel Okuneva (Production Artist)
+2025-01-23 19:41:55,556 - INFO:    Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 19:41:55,557 - INFO:    Rate: $44.0/hr, Rating: 4.51352%
+2025-01-23 19:41:55,559 - INFO: 
+7. Lydia Mayert (Graphic Designer)
+2025-01-23 19:41:55,561 - INFO:    Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 19:41:55,564 - INFO:    Rate: $68.0/hr, Rating: 4.04297%
+2025-01-23 19:41:55,565 - INFO: 
+8. Katherine Brown (Frontend Developer)
+2025-01-23 19:41:55,566 - INFO:    Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 19:41:55,568 - INFO:    Rate: $79.0/hr, Rating: 4.34857%
+2025-01-23 19:41:55,569 - INFO: 
+9. Jane Walter (Systems Architect)
+2025-01-23 19:41:55,570 - INFO:    Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 19:41:55,571 - INFO:    Rate: $82.0/hr, Rating: 4.60934%
+2025-01-23 19:41:55,572 - INFO: 
+10. Lana Von (Database Administrator)
+2025-01-23 19:41:55,572 - INFO:    Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 19:41:55,573 - INFO:    Rate: $71.0/hr, Rating: 4.96011%
+2025-01-23 19:41:55,574 - INFO: 
+... and 230 more freelancers
+2025-01-23 19:41:55,577 - INFO: ==================================================
+
+2025-01-23 19:41:55,578 - INFO: Model initialization completed successfully
+2025-01-23 19:41:55,692 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.170.233:8000
+2025-01-23 19:41:55,694 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-23 19:42:07,318 - INFO: 127.0.0.1 - - [23/Jan/2025 19:42:07] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:42:07,575 - INFO: 
+Processing chat request:
+2025-01-23 19:42:07,576 - INFO: Message: project manager
+2025-01-23 19:42:07,702 - INFO: 127.0.0.1 - - [23/Jan/2025 19:42:07] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:42:15,059 - INFO: 127.0.0.1 - - [23/Jan/2025 19:42:15] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:42:15,319 - INFO: 
+Processing chat request:
+2025-01-23 19:42:15,320 - INFO: Message: project
+2025-01-23 19:42:15,323 - INFO: 127.0.0.1 - - [23/Jan/2025 19:42:15] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:49:23,058 - INFO: SkillsExtract initialized with custom stop words
+2025-01-23 19:49:23,060 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-23 19:49:23,541 - INFO: Successfully loaded 240 freelancers
+2025-01-23 19:49:23,545 - INFO: Loaded 175 job titles and 530 skills from database
+2025-01-23 19:49:23,620 - INFO: Matching engine initialized successfully
+2025-01-23 19:49:23,621 - INFO: 
+==================================================
+Loaded 240 freelancers:
+2025-01-23 19:49:23,622 - INFO: 
+1. Raymond Borer (Technical Artist)
+2025-01-23 19:49:23,623 - INFO:    Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 19:49:23,623 - INFO:    Rate: $26.0/hr, Rating: 4.28663%
+2025-01-23 19:49:23,624 - INFO: 
+2. Gayle Bradtke (Backend Developer)
+2025-01-23 19:49:23,629 - INFO:    Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 19:49:23,633 - INFO:    Rate: $77.0/hr, Rating: 4.71936%
+2025-01-23 19:49:23,634 - INFO: 
+3. Tommy Mann (Infrastructure Manager)
+2025-01-23 19:49:23,634 - INFO:    Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 19:49:23,636 - INFO:    Rate: $27.0/hr, Rating: 4.74074%
+2025-01-23 19:49:23,637 - INFO: 
+4. Dr. Cody Renner-Halvorson (Multimedia Designer)
+2025-01-23 19:49:23,638 - INFO:    Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 19:49:23,639 - INFO:    Rate: $35.0/hr, Rating: 4.96156%
+2025-01-23 19:49:23,639 - INFO: 
+5. Jeannette Medhurst (Level Designer)
+2025-01-23 19:49:23,640 - INFO:    Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 19:49:23,641 - INFO:    Rate: $137.0/hr, Rating: 4.93055%
+2025-01-23 19:49:23,641 - INFO: 
+6. Joel Okuneva (Production Artist)
+2025-01-23 19:49:23,648 - INFO:    Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 19:49:23,651 - INFO:    Rate: $44.0/hr, Rating: 4.51352%
+2025-01-23 19:49:23,652 - INFO: 
+7. Lydia Mayert (Graphic Designer)
+2025-01-23 19:49:23,654 - INFO:    Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 19:49:23,654 - INFO:    Rate: $68.0/hr, Rating: 4.04297%
+2025-01-23 19:49:23,655 - INFO: 
+8. Katherine Brown (Frontend Developer)
+2025-01-23 19:49:23,656 - INFO:    Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 19:49:23,658 - INFO:    Rate: $79.0/hr, Rating: 4.34857%
+2025-01-23 19:49:23,659 - INFO: 
+9. Jane Walter (Systems Architect)
+2025-01-23 19:49:23,663 - INFO:    Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 19:49:23,665 - INFO:    Rate: $82.0/hr, Rating: 4.60934%
+2025-01-23 19:49:23,666 - INFO: 
+10. Lana Von (Database Administrator)
+2025-01-23 19:49:23,681 - INFO:    Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 19:49:23,685 - INFO:    Rate: $71.0/hr, Rating: 4.96011%
+2025-01-23 19:49:23,686 - INFO: 
+... and 230 more freelancers
+2025-01-23 19:49:23,691 - INFO: ==================================================
+
+2025-01-23 19:49:23,692 - INFO: Model initialization completed successfully
+2025-01-23 19:49:23,743 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.170.233:8000
+2025-01-23 19:49:23,746 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-23 19:49:49,978 - INFO: 127.0.0.1 - - [23/Jan/2025 19:49:49] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:49:50,231 - INFO: 
+Processing chat request:
+2025-01-23 19:49:50,232 - INFO: Message: react
+2025-01-23 19:49:50,269 - INFO: 127.0.0.1 - - [23/Jan/2025 19:49:50] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:49:59,223 - INFO: 127.0.0.1 - - [23/Jan/2025 19:49:59] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:49:59,486 - INFO: 
+Processing chat request:
+2025-01-23 19:49:59,486 - INFO: Message: java
+2025-01-23 19:49:59,508 - INFO: 127.0.0.1 - - [23/Jan/2025 19:49:59] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:50:16,496 - INFO: 127.0.0.1 - - [23/Jan/2025 19:50:16] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:50:16,751 - INFO: 
+Processing chat request:
+2025-01-23 19:50:16,751 - INFO: Message: project
+2025-01-23 19:50:16,753 - INFO: 127.0.0.1 - - [23/Jan/2025 19:50:16] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:51:26,206 - INFO: SkillsExtract initialized with custom stop words
+2025-01-23 19:51:26,208 - INFO: Fetching freelancers from http://localhost:5000/api/freelancers
+2025-01-23 19:51:26,481 - INFO: Successfully loaded 240 freelancers
+2025-01-23 19:51:26,486 - INFO: Loaded 175 job titles and 530 skills from database
+2025-01-23 19:51:26,583 - INFO: Matching engine initialized successfully
+2025-01-23 19:51:26,583 - INFO: 
+==================================================
+Loaded 240 freelancers:
+2025-01-23 19:51:26,584 - INFO: 
+1. Raymond Borer (Technical Artist)
+2025-01-23 19:51:26,585 - INFO:    Skills: ["Premiere Pro", "UX Design", "Compositing", "VFX", "Adobe XD"]
+2025-01-23 19:51:26,586 - INFO:    Rate: $26.0/hr, Rating: 4.28663%
+2025-01-23 19:51:26,586 - INFO: 
+2. Gayle Bradtke (Backend Developer)
+2025-01-23 19:51:26,586 - INFO:    Skills: ["PMP", "Product Marketing", "Kanban", "Program Management", "Compliance"]
+2025-01-23 19:51:26,587 - INFO:    Rate: $77.0/hr, Rating: 4.71936%
+2025-01-23 19:51:26,588 - INFO: 
+3. Tommy Mann (Infrastructure Manager)
+2025-01-23 19:51:26,594 - INFO:    Skills: ["Technical Writing", "Salesforce", "Content Operations", "SEM", "Social Media Content", "Google Tag Manager"]
+2025-01-23 19:51:26,594 - INFO:    Rate: $27.0/hr, Rating: 4.74074%
+2025-01-23 19:51:26,595 - INFO: 
+4. Dr. Cody Renner-Halvorson (Multimedia Designer)
+2025-01-23 19:51:26,596 - INFO:    Skills: ["Character Animation", "Maya", "Particle Systems", "Sketch"]
+2025-01-23 19:51:26,597 - INFO:    Rate: $35.0/hr, Rating: 4.96156%
+2025-01-23 19:51:26,597 - INFO: 
+5. Jeannette Medhurst (Level Designer)
+2025-01-23 19:51:26,598 - INFO:    Skills: ["User Research", "Typography", "Rendering"]
+2025-01-23 19:51:26,598 - INFO:    Rate: $137.0/hr, Rating: 4.93055%
+2025-01-23 19:51:26,599 - INFO: 
+6. Joel Okuneva (Production Artist)
+2025-01-23 19:51:26,599 - INFO:    Skills: ["Design Systems", "Typography", "Wireframing", "Texturing", "3D Modeling", "After Effects"]
+2025-01-23 19:51:26,600 - INFO:    Rate: $44.0/hr, Rating: 4.51352%
+2025-01-23 19:51:26,601 - INFO: 
+7. Lydia Mayert (Graphic Designer)
+2025-01-23 19:51:26,601 - INFO:    Skills: ["UX Design", "Photoshop", "ZBrush", "Rigging", "Design Systems", "Prototyping"]
+2025-01-23 19:51:26,602 - INFO:    Rate: $68.0/hr, Rating: 4.04297%
+2025-01-23 19:51:26,602 - INFO: 
+8. Katherine Brown (Frontend Developer)
+2025-01-23 19:51:26,603 - INFO:    Skills: ["LightGBM", "Computer Vision", "Model Deployment", "Deep Learning", "Airflow", "Python Visualization"]
+2025-01-23 19:51:26,603 - INFO:    Rate: $79.0/hr, Rating: 4.34857%
+2025-01-23 19:51:26,615 - INFO: 
+9. Jane Walter (Systems Architect)
+2025-01-23 19:51:26,615 - INFO:    Skills: ["R Visualization", "Data Lakes", "Reinforcement Learning", "Apache Spark"]
+2025-01-23 19:51:26,616 - INFO:    Rate: $82.0/hr, Rating: 4.60934%
+2025-01-23 19:51:26,616 - INFO: 
+10. Lana Von (Database Administrator)
+2025-01-23 19:51:26,624 - INFO:    Skills: ["Ruby", "Site Reliability Engineering", "Redux", "GitHub Actions", "Elasticsearch"]
+2025-01-23 19:51:26,625 - INFO:    Rate: $71.0/hr, Rating: 4.96011%
+2025-01-23 19:51:26,626 - INFO: 
+... and 230 more freelancers
+2025-01-23 19:51:26,626 - INFO: ==================================================
+
+2025-01-23 19:51:26,628 - INFO: Model initialization completed successfully
+2025-01-23 19:51:26,695 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.170.233:8000
+2025-01-23 19:51:26,696 - INFO: [33mPress CTRL+C to quit[0m
+2025-01-23 19:51:55,936 - INFO: 127.0.0.1 - - [23/Jan/2025 19:51:55] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:51:56,193 - INFO: 
+Processing chat request:
+2025-01-23 19:51:56,195 - INFO: Message: react
+2025-01-23 19:51:56,300 - INFO: 127.0.0.1 - - [23/Jan/2025 19:51:56] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:52:00,986 - INFO: 
+Processing chat request:
+2025-01-23 19:52:00,988 - INFO: Message: java
+2025-01-23 19:52:01,067 - INFO: 127.0.0.1 - - [23/Jan/2025 19:52:01] "POST /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:52:05,745 - INFO: 127.0.0.1 - - [23/Jan/2025 19:52:05] "OPTIONS /ai/chat HTTP/1.1" 200 -
+2025-01-23 19:52:05,989 - INFO: 
+Processing chat request:
+2025-01-23 19:52:05,990 - INFO: Message: project
+2025-01-23 19:52:05,993 - INFO: 127.0.0.1 - - [23/Jan/2025 19:52:05] "POST /ai/chat HTTP/1.1" 200 -

@@ -524,10 +524,21 @@ def parse_budget_range(budget_str: str) -> tuple:
     except:
         return (30, 100)
 
+def clean_skills_list(skills):
+    """Clean a list of skills, removing unwanted characters"""
+    if not skills:
+        return []
+    if isinstance(skills, str):
+        skills = [skills]
+    return [
+        re.sub(r'[\[\]"×\+]', '', skill).strip()
+        for skill in skills
+        if skill and isinstance(skill, str)
+    ]
 
 @app.route('/ai/chat', methods=['POST'])
 @async_route
-async def chat() -> Union[Dict, tuple]:
+async def chat():
     try:
         data = request.json
         message = data.get('message', '').strip()  # Keep original case

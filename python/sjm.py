@@ -5,6 +5,7 @@ import socket
 import subprocess
 from typing import Dict, List, Optional, Any
 import logging
+import re
 
 # models
 
@@ -96,83 +97,132 @@ class SkillsExtract:
         
         logger.info(f"Loaded {len(self.job_titles)} job titles and {len(self.known_skills)} skills from database")
 
+    def clean_skill(self, skill: str) -> str:
+        """Clean individual skill string"""
+        # Remove brackets, quotes, × and other unwanted characters
+        cleaned = re.sub(r'[\[\]"×\+\(\)]', '', skill.strip())
+        
+        # Special formatting for common tools/technologies
+        tech_formats = {
+            'adobe xd': 'Adobe XD',
+            'blender': 'Blender',
+            'figma': 'Figma',
+            'color theory': 'Color Theory',
+            'unreal engine': 'Unreal Engine',
+            'react': 'React.js',
+            'reactjs': 'React.js',
+            'node': 'Node.js',
+            'nodejs': 'Node.js',
+            'vue': 'Vue.js',
+            'vuejs': 'Vue.js',
+            'typescript': 'TypeScript',
+            'javascript': 'JavaScript',
+            'nextjs': 'Next.js',
+            'nuxtjs': 'Nuxt.js',
+            'expressjs': 'Express.js',
+            # ... existing mappings ...
+        }
+        
+        cleaned_lower = cleaned.lower()
+        if cleaned_lower in tech_formats:
+            return tech_formats[cleaned_lower]
+        
+        # Handle multi-word skills
+        words = cleaned.split()
+        if len(words) > 1:
+            return ' '.join(word.capitalize() for word in words)
+        
+        return cleaned.capitalize()
+
     def extract_skills(self, text: str) -> List[str]:
-        """Enhanced word-by-word skill extraction"""
-        matched_skills = set()
+        """Enhanced skill extraction with proper formatting"""
+        if not text:
+            return []
+            
+        # Clean incoming text and split into words
+        text = re.sub(r'[\[\]"×\+]', '', text)
         words = word_tokenize(text.lower())
         
-        # Create word combinations for checking
+        matched_skills = set()
+        
+        # Create word combinations
         combinations = []
         for i in range(len(words)):
-            # Skip stopwords except for important terms
             if words[i] not in self.stop_words:
-                # Single word
                 combinations.append(words[i])
-                
-                # Two-word combinations
                 if i < len(words) - 1:
                     combinations.append(f"{words[i]} {words[i+1]}")
-                
-                # Three-word combinations
                 if i < len(words) - 2:
                     combinations.append(f"{words[i]} {words[i+1]} {words[i+2]}")
 
-        # Check each combination against known skills and job titles
+        # Match and format skills
         for combo in combinations:
-            if combo in self.known_skills:
-                matched_skills.add(combo)
-            if combo in self.job_titles:
-                matched_skills.add(combo)
+            combo_lower = combo.lower()
+            if combo_lower in map(str.lower, self.known_skills):
+                cleaned_skill = self.clean_skill(combo)
+                matched_skills.add(cleaned_skill)
 
-        logger.debug(f"Extracted skills from '{text}': {matched_skills}")
-        return list(matched_skills)
+        return sorted(list(matched_skills))
 
     def verify_keyword(self, keyword: str) -> Dict[str, Any]:
-        """Enhanced keyword verification with word-by-word analysis"""
-        words = word_tokenize(keyword.lower())
+        """Enhanced keyword verification with proper formatting"""
+        if not keyword:
+            return {
+                'exists': False,
+                'similar_terms': [],
+                'type': None,
+                'matches': [],
+                'skills': [],
+                'job_titles': []
+            }
+
+        # Clean keyword
+        keyword = self.clean_skill(keyword)
+        
         matches = []
         
-        # Check each word combination against skills and job titles
-        for i in range(len(words)):
-            if words[i] not in self.stop_words:
-                # Single word
-                current_word = words[i]
-                if current_word in self.known_skills:
-                    matches.append(('skill', current_word))
-                if current_word in self.job_titles:
-                    matches.append(('job_title', current_word))
-
-                # Two-word combinations if possible
-                if i < len(words) - 1:
-                    two_words = f"{words[i]} {words[i+1]}"
-                    if two_words in self.known_skills:
-                        matches.append(('skill', two_words))
-                    if two_words in self.job_titles:
-                        matches.append(('job_title', two_words))
-        
-        if matches:
-            # Group matches by type
-            skill_matches = [m[1] for m in matches if m[0] == 'skill']
-            job_matches = [m[1] for m in matches if m[0] == 'job_title']
+        # Check against known skills and job titles
+        if keyword.lower() in map(str.lower, self.known_skills):
+            matches.append(('skill', keyword))
             
+        if keyword.lower() in map(str.lower, self.job_titles):
+            matches.append(('job_title', keyword))
+
+        if matches:
+            # Group and format matches
+            skill_matches = [self.clean_skill(term) for type_, term in matches if type_ == 'skill']
+            job_matches = [self.clean_skill(term) for type_, term in matches if type_ == 'job_title']
+
             return {
                 'exists': True,
-                'matches': list(set(skill_matches + job_matches)),
-                'skills': list(set(skill_matches)),
-                'job_titles': list(set(job_matches)),
+                'matches': sorted(list(set(skill_matches + job_matches))),
+                'skills': sorted(list(set(skill_matches))),
+                'job_titles': sorted(list(set(job_matches))),
                 'type': 'skill' if skill_matches else 'job_title'
             }
         
-        # No matches found - find similar terms
-        similar_terms = self._find_similar_terms(keyword)
+        # No matches - find similar terms
+        similar_terms = [self.clean_skill(term) for term in self._find_similar_terms(keyword)]
         return {
             'exists': False,
-            'similar_terms': similar_terms,
+            'similar_terms': sorted(list(set(similar_terms))),
             'type': None,
             'matches': [],
             'skills': [],
             'job_titles': []
         }
+
+    def _check_and_add_match(self, term: str, matches: List[tuple]) -> None:
+        """Helper method to check terms against skills and job titles"""
+        term_lower = term.lower()
+        
+        # Check skills
+        if any(skill.lower() == term_lower for skill in self.known_skills):
+            matches.append(('skill', term))
+        
+        # Check job titles
+        if any(title.lower() == term_lower for title in self.job_titles):
+            matches.append(('job_title', term))
 
     def _find_similar_terms(self, keyword: str) -> List[str]:
         """Find similar terms from known skills and job titles"""
