@@ -302,29 +302,6 @@ const DebugPanel = styled(DebugInfo)`
   }
 `;
 
-const MatchingProcess = styled.div`
-  background: ${props => props.theme.colors.background};
-  border-left: 3px solid ${props => props.theme.colors.primary};
-  padding: 12px;
-  margin: 8px 0;
-  font-size: 14px;
-
-  .step {
-    margin: 4px 0;
-    color: ${props => props.theme.colors.text};
-  }
-
-  .stats {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid ${props => props.theme.colors.lightGray};
-    
-    .stat-item {
-      color: ${props => props.theme.colors.primary};
-      font-weight: bold;
-    }
-  }
-`;
 
 const ProjectDetailsForm = styled.div`
   padding: 20px;
@@ -694,6 +671,9 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   // ]);
   const [activeInterview, setActiveInterview] = useState(null);
   const [showInterview, setShowInterview] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMoreResults, setHasMoreResults] = useState(false);
+  const [suggestedSkills, setSuggestedSkills] = useState([]);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -717,7 +697,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const handleMessage = async (input, details = null) => {
     if (!input.trim() && !details) return;
 
-    // Add user message immediately
     setMessages(prev => [...prev, {
       text: input,
       isUser: true,
@@ -729,186 +708,86 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     setError(null);
 
     try {
-      // Show typing indicator for at least 1 second
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // ... existing API call logic ...
-      setError(null);
-      setLoading(true);
+      const url = `${import.meta.env.VITE_PYTHON_URL || 'http://localhost:8000'}/ai/chat`;
       
-      // Debug logging
-      console.log('Sending request:', { input, details });
+      const requestBody = {
+        message: input,
+        userType: user?.userType || 'client',
+        userId: user?.id,
+        projectDetails: details,
+        page: currentPage
+      };
 
-      try {
-        const url = `${import.meta.env.VITE_PYTHON_URL || 'http://localhost:8000'}/ai/chat`;
-        console.log('Request URL:', url);
-
-        const requestBody = {
-          message: input,
-          userType: user?.userType || 'client',
-          userId: user?.id,
-          projectDetails: details
-        };
-        console.log('Request body:', requestBody);
-
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody)
-        });
-
-        const data = await response.json();
-        console.log('Raw AI Response:', data);
-
-        if (!response.ok) {
-          throw new Error(data.error || 'An error occurred');
-        }
-
-        if (data.success && data.response) {
-          // Transform freelancers data if present
-          if (data.response.type === 'freelancerList' && data.response.freelancers) {
-            data.response.freelancers = data.response.freelancers.map(f => ({
-              ...f,
-              skills: Array.isArray(f.skills) ? f.skills : [],
-              matchDetails: {
-                skillMatch: f.matchDetails?.skillMatch || { skills: [], count: 0 },
-                matchPercentage: f.matchDetails?.matchPercentage || 0
-              }
-            }));
-          }
-
-          const aiMessage = {
-            id: Date.now(),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            ...data.response
-          };
-
-          console.log('Processed message:', aiMessage);
-          setMessages(prev => [...prev, aiMessage]);
-          setConversations(prev => [aiMessage, ...prev]);
-        }
-      } catch (error) {
-        console.error('AI Chat Error:', error);
-        setError(error.message || "Sorry, I'm having trouble connecting right now.");
-      } finally {
-        setLoading(false);
-      }
-      // Update suggested actions based on context
-      // Removed updateSuggestedActions call since the function is not being used
-      
-    } catch (error) {
-      setError({
-        message: error.message,
-        retry: () => handleMessage(input, details)
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
       });
+
+      const data = await response.json();
+      
+      if (!response.ok) throw new Error(data.error || 'An error occurred');
+
+      if (data.success && data.response) {
+        // Set hasMoreResults based on API response
+        setHasMoreResults(data.response.hasMore || false);
+        
+        // Handle no matches case with alternatives
+        if (data.response.type === 'no_matches') {
+          const noMatchMessage = {
+            type: 'no_matches',
+            text: data.response.text,
+            suggestions: data.response.suggestions,
+            adjustments: data.response.adjustments,
+            related_skills: data.response.related_skills
+          };
+          setMessages(prev => [...prev, noMatchMessage]);
+          setSuggestedSkills(data.response.related_skills || []);
+          return;
+        }
+
+        // Handle job analysis with detected skills
+        if (data.response.type === 'job_analysis') {
+          if (data.response.data.detectedSkills?.length) {
+            setSkills(data.response.data.detectedSkills);
+          }
+          setSuggestedSkills(data.response.data.suggestedSkills || []);
+        }
+
+        const aiMessage = {
+          id: Date.now(),
+          timestamp: new Date().toISOString(),
+          isUser: false,
+          ...data.response
+        };
+
+        setMessages(prev => [...prev, aiMessage]);
+      }
+    } catch (error) {
+      console.error('AI Chat Error:', error);
+      setError(error.message || "Sorry, I'm having trouble connecting right now.");
     } finally {
       setIsTyping(false);
-    }
-  };
-
-  // const updateSuggestedActions = (lastMessage) => {
-  //   const newSuggestions = [];
-    
-  //   if (lastMessage.toLowerCase().includes('developer')) {
-  //     newSuggestions.push(
-  //       'View top developers',
-  //       'Compare developer rates',
-  //       'Schedule interviews'
-  //     );
-  //   } else if (lastMessage.toLowerCase().includes('project')) {
-  //     newSuggestions.push(
-  //       'Define project scope',
-  //       'Get cost estimate',
-  //       'See similar projects'
-  //     );
-  //   }
-
-  //   if (newSuggestions.length > 0) {
-  //     setSuggestedActions(newSuggestions);
-  //   }
-  // };
-
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-      if (e.ctrlKey && e.key === '/') {
-        document.querySelector('input')?.focus();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isOpen, onClose]);
-
-  const handleInterviewRequest = async (freelancer) => {
-    setLoading(true);
-    try {
-      if (!user) {
-        navigate('/login', { 
-          state: { 
-            returnTo: window.location.pathname,
-            message: 'Please log in to request interviews' 
-          }
-        });
-        return;
-      }
-
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Please log in to continue');
-      }
-
-      // Create a project ID if none exists
-      const projectId = projectDetails?.id || `temp-${Date.now()}`;
-
-      const response = await api.post('/freelancers/interview-request', {
-        freelancerId: freelancer.id,
-        projectId: projectId,
-        message: `Interview request for ${projectDetails?.skills?.join(', ') || 'project'}`
-      });
-
-      if (response.data.success) {
-        setActiveInterview(response.data.interview);
-        setMessages(prev => [...prev, {
-          text: `Interview request sent to ${freelancer.name}! They will be notified and can respond to your request.`,
-          isUser: false,
-          type: 'success'
-        }]);
-      }
-    } catch (error) {
-      handleInterviewError(error);
-    } finally {
       setLoading(false);
     }
   };
 
-  const handleInterviewError = (error) => {
-    if (error.response?.status === 401) {
-      setMessages(prev => [...prev, {
-        text: "Your session has expired. Please log in again.",
-        isUser: false,
-        type: 'error'
-      }]);
-      
-      setTimeout(() => {
-        navigate('/login', { 
-          state: { 
-            returnTo: window.location.pathname,
-            message: 'Please log in again to continue' 
-          }
-        });
-      }, 2000);
-    } else {
-      setMessages(prev => [...prev, {
-        text: error.response?.data?.message || "Failed to send interview request. Please try again.",
-        isUser: false,
-        type: 'error'
-      }]);
+  const loadMoreResults = async () => {
+    if (!hasMoreResults || loading) return;
+    
+    try {
+      setLoading(true);
+      await handleMessage('load_more', {
+        ...projectDetails,
+        page: currentPage + 1
+      });
+      setCurrentPage(prev => prev + 1);
+    } catch (error) {
+      console.error('Error loading more results:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -1048,31 +927,37 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     <FreelancerListContainer>
       <MessageText>{message.text}</MessageText>
       {message.suggestions && renderSuggestions(message.suggestions)}
-      {message.matchingProcess && (
-        <MatchingProcess>
-          <div className="debug-title">Matching Process:</div>
-          {message.matchingProcess.steps.map((step, index) => (
-            <div key={index} className="step">{step}</div>
-          ))}
-          <div className="stats">
-            <div className="stat-item">
-              Total Freelancers Searched: {message.matchingProcess.searchStats.totalFreelancers}
-            </div>
-            <div className="stat-item">
-              Matches Found: {message.matchingProcess.searchStats.matchesFound}
-            </div>
-            <div className="stat-item">
-              High Quality Matches: {message.matchingProcess.searchStats.highMatches}
-            </div>
-          </div>
-        </MatchingProcess>
-      )}
       
       {message.freelancers?.length > 0 ? (
-        message.freelancers.map(freelancer => renderFreelancerCard(freelancer))
+        <>
+          {message.freelancers.map(freelancer => renderFreelancerCard(freelancer))}
+          
+          {hasMoreResults && (
+            <ActionButton 
+              className="secondary"
+              onClick={loadMoreResults}
+              disabled={loading}
+            >
+              {loading ? 'Loading...' : 'Load More Results'}
+            </ActionButton>
+          )}
+        </>
       ) : (
         <NoMatchMessage>
           <p>No freelancers found matching your exact criteria.</p>
+          {suggestedSkills.length > 0 && (
+            <div className="suggested-skills">
+              <h4>Suggested Skills:</h4>
+              <SkillList>
+                {suggestedSkills.map((skill, index) => (
+                  <SkillPill key={index}>
+                    {skill}
+                    <button onClick={() => addSkill(skill)}>+</button>
+                  </SkillPill>
+                ))}
+              </SkillList>
+            </div>
+          )}
           {message.suggestions && renderSuggestions(message.suggestions)}
         </NoMatchMessage>
       )}
@@ -1208,10 +1093,20 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const renderJobAnalysis = (message) => {
     const { detectedSkills, suggestedSkills, hourlyRange } = message.data;
     
+    // Clean skills data
+    const cleanSkills = (skills) => {
+      if (!Array.isArray(skills)) return [];
+      return skills.map(skill => 
+        typeof skill === 'string' ? skill.replace(/[[\]"×]/g, '').trim() : ''
+      ).filter(Boolean);
+    };
+  
     // Auto-populate detected skills immediately
     if (detectedSkills?.length && !skills.length) {
-      setSkills(detectedSkills);
+      setSkills(cleanSkills(detectedSkills));
     }
+  
+    const cleanedSuggestedSkills = cleanSkills(suggestedSkills);
   
     return (
       <div>
@@ -1232,7 +1127,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
             <div className="suggested-skills">
               <label>Suggested Additional Skills:</label>
               <SkillList>
-                {suggestedSkills
+                {cleanedSuggestedSkills
                   .filter(skill => !skills.includes(skill))
                   .map((skill, index) => (
                     <SkillPill key={index} suggested>
@@ -1305,6 +1200,49 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
     );
   };
 
+  const renderNoMatches = (message) => (
+    <div>
+      <MessageText isUser={false}>{message.text}</MessageText>
+      
+      {message.related_skills?.length > 0 && (
+        <SuggestionsPanel>
+          <div className="suggestion-title">Related Skills:</div>
+          <SkillList>
+            {message.related_skills.map((skill, index) => (
+              <SkillPill key={index}>
+                {skill}
+                <button onClick={() => addSkill(skill)}>+</button>
+              </SkillPill>
+            ))}
+          </SkillList>
+        </SuggestionsPanel>
+      )}
+
+      {message.adjustments?.length > 0 && (
+        <SuggestionsPanel>
+          <div className="suggestion-title">Suggested Adjustments:</div>
+          {message.adjustments.map((adjustment, index) => (
+            <div key={index} className="suggestion-item">{adjustment}</div>
+          ))}
+        </SuggestionsPanel>
+      )}
+
+      {message.suggestions?.length > 0 && (
+        <SuggestionsPanel>
+          <div className="suggestion-title">Try These Instead:</div>
+          {message.suggestions.map((suggestion, index) => (
+            <SuggestionButton
+              key={index}
+              onClick={() => handleMessage(suggestion)}
+            >
+              {suggestion}
+            </SuggestionButton>
+          ))}
+        </SuggestionsPanel>
+      )}
+    </div>
+  );
+
   const renderMessage = (message) => {
     // Add null check and type validation
     if (!message) return null;
@@ -1355,6 +1293,9 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
 
       case 'job_analysis':
         return renderJobAnalysis(safeMessage);
+
+      case 'no_matches':
+        return renderNoMatches(safeMessage);
 
       default:
         return (
@@ -1410,6 +1351,73 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       }
     } catch (error) {
       console.error('Error completing interview:', error);
+    }
+  };
+
+  const handleInterviewRequest = async (freelancer) => {
+    setLoading(true);
+    try {
+      if (!user) {
+        navigate('/login', { 
+          state: { 
+            returnTo: window.location.pathname,
+            message: 'Please log in to request interviews' 
+          }
+        });
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Please log in to continue');
+      }
+
+      // Create a project ID if none exists
+      const projectId = projectDetails?.id || `temp-${Date.now()}`;
+
+      const response = await api.post('/freelancers/interview-request', {
+        freelancerId: freelancer.id,
+        projectId: projectId,
+        message: `Interview request for ${projectDetails?.skills?.join(', ') || 'project'}`
+      });
+
+      if (response.data.success) {
+        setActiveInterview(response.data.interview);
+        setMessages(prev => [...prev, {
+          text: `Interview request sent to ${freelancer.name}! They will be notified and can respond to your request.`,
+          isUser: false,
+          type: 'success'
+        }]);
+      }
+    } catch (error) {
+      handleInterviewError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInterviewError = (error) => {
+    if (error.response?.status === 401) {
+      setMessages(prev => [...prev, {
+        text: "Your session has expired. Please log in again.",
+        isUser: false,
+        type: 'error'
+      }]);
+      
+      setTimeout(() => {
+        navigate('/login', { 
+          state: { 
+            returnTo: window.location.pathname,
+            message: 'Please log in again to continue' 
+          }
+        });
+      }, 2000);
+    } else {
+      setMessages(prev => [...prev, {
+        text: error.response?.data?.message || "Failed to send interview request. Please try again.",
+        isUser: false,
+        type: 'error'
+      }]);
     }
   };
 
