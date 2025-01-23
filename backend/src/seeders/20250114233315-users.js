@@ -360,7 +360,7 @@ module.exports = {
 
         const fullName = faker.person.fullName();
         const experience = faker.number.int({ min: 1, max: 15 });
-        const username = faker.internet.userName();
+        const username = faker.internet.username();
         const hourlyRate = faker.number.int({ min: 25, max: 150 });
 
         const user = {
