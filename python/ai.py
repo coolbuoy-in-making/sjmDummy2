@@ -11,6 +11,9 @@ from functools import wraps
 import nest_asyncio
 from werkzeug.middleware.proxy_fix import ProxyFix
 from dotenv import load_dotenv
+from werkzeug.exceptions import HTTPException
+import werkzeug
+
 
 # Load environment variables
 load_dotenv()
@@ -108,6 +111,14 @@ async def init_model():
             logger.info("UpworkIntegrationModel initialized in production mode")
     return model
 
+@app.route('/', methods=['GET', 'HEAD'])
+def root():
+    """Root endpoint for basic health checks"""
+    return jsonify({
+        'status': 'ok',
+        'message': 'Service is running'
+    })
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint for monitoring"""
@@ -197,10 +208,26 @@ async def analyze_job():
             'error': 'An unexpected error occurred while analyzing your request.'
         }), 500
 
+
+@app.errorhandler(404)
+def not_found_error(error):
+    """Handle 404 errors"""
+    return jsonify({
+        'success': False,
+        'error': 'Not Found'
+    }), 404
+
 @app.errorhandler(Exception)
 def handle_error(error):
     """Global error handler"""
     logger.exception("Unhandled error occurred")
+    
+    if isinstance(error, werkzeug.exceptions.HTTPException):
+        return jsonify({
+            'success': False,
+            'error': error.description
+        }), error.code
+        
     if app.config['PRODUCTION']:
         message = "An unexpected error occurred"
     else:
@@ -210,6 +237,7 @@ def handle_error(error):
         'success': False,
         'error': message
     }), 500
+
 
 def run_app():
     """Function to run the app with proper configuration"""
