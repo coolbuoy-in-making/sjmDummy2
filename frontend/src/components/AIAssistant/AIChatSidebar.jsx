@@ -636,7 +636,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const { user } = useContext(UserContext);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([{
-    text: "Hi! I'm your AI assistant. I can help you find freelancers or answer questions about your project.",
+    text: "Hi! I'm your AI assistant. Just tell me the job title or skill you are looking for and i will help right away! (e.g., react, project management, javascript)",
     isUser: false,
     type: 'text'
   }]);
