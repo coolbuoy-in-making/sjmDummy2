@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from '@mui/icons-material/Send';// Import separately
 import { UserContext } from '../../contexts/userContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
