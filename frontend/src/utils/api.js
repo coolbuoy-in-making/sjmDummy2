@@ -1,57 +1,27 @@
 import axios from 'axios';
 
-// Create api instance with error handling
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:7800/api',
-  timeout: 10000
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  withCredentials: true
 });
 
-// Add request interceptor for token
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+// Add request interceptor
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+  return config;
+});
 
-// Add response interceptor for error handling
+// Add response interceptor
 api.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-
-    // Handle token expiration
-    if (error.response?.status === 401 && error.response?.data?.code === 'TOKEN_EXPIRED') {
-      try {
-        const { data } = await api.post('/auth/refresh', {
-          token: localStorage.getItem('token')
-        });
-        
-        localStorage.setItem('token', data.token);
-        originalRequest.headers.Authorization = `Bearer ${data.token}`;
-        
-        return api(originalRequest);
-      } catch (refreshError) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/login';
-        return Promise.reject(refreshError);
-      }
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
     }
-
-    // Log error details for debugging
-    console.error('Response error:', {
-      status: error.response?.status,
-      data: error.response?.data,
-      message: error.message
-    });
-
     return Promise.reject(error);
   }
 );
