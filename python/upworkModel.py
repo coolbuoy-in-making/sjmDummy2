@@ -14,8 +14,6 @@ from sjm import (
     CollaborativeModel
 )
 
-from config import Config
-
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s: %(message)s',
@@ -61,7 +59,7 @@ class UpworkMatchingEngine(MatchingEngine):
                     # Calculate matches
                     matched_skills = set()
                     
-                    # Exact skill matches
+                    # Exact and partial skill matches
                     for ps in project_skills:
                         for fs in freelancer_skills:
                             if ps == fs:
@@ -69,26 +67,41 @@ class UpworkMatchingEngine(MatchingEngine):
                             elif ps in fs or fs in ps:  # Partial matches
                                 matched_skills.add(fs)
                     
-                    # Calculate scores
+                    # Calculate detailed scores
+                    skill_score = len(matched_skills) / len(project_skills) if project_skills else 0
+                    experience_score = min(freelancer.experience / 10.0, 1.0)
+                    rating_score = freelancer.rating / 5.0 if freelancer.rating else 0
+
+                    # Calculate weighted combined score
+                    combined_score = (
+                        weights['skills'] * skill_score +
+                        weights['experience'] * experience_score +
+                        weights['rating'] * rating_score
+                    )
+
+                    # Calculate match percentage (0-100)
+                    match_percentage = round(combined_score * 100, 1)
+                    
                     match = {
                         'freelancer': {
                             **freelancer.dict(),
                             'rating': round(float(freelancer.rating), 2),
                             'hourlyRate': round(float(freelancer.hourly_rate), 2),
                         },
+                        'matchDetails': {
+                            'skillMatch': {
+                                'skills': list(matched_skills),
+                                'count': len(matched_skills)
+                            },
+                            'matchPercentage': match_percentage,
+                            'experienceScore': round(experience_score * 100, 1),
+                            'ratingScore': round(rating_score * 100, 1),
+                            'skillScore': round(skill_score * 100, 1)
+                        },
                         'matched_skills': list(matched_skills),
                         'skill_overlap': len(matched_skills),
-                        'skill_score': len(matched_skills) / len(project_skills) if project_skills else 0,
-                        'experience_score': min(freelancer.experience / 10.0, 1.0),
-                        'rating_score': freelancer.rating / 5.0
+                        'combined_score': combined_score
                     }
-                    
-                    # Calculate weighted score
-                    match['combined_score'] = (
-                        weights['skills'] * match['skill_score'] +
-                        weights['experience'] * match['experience_score'] +
-                        weights['rating'] * match['rating_score']
-                    )
                     
                     if match['combined_score'] > 0:
                         all_matches.append(match)
@@ -102,7 +115,12 @@ class UpworkMatchingEngine(MatchingEngine):
             top_matches = all_matches[:5]
             
             return {
-                'freelancers': [m['freelancer'] for m in top_matches],
+                'freelancers': [
+                    {
+                        **m['freelancer'],
+                        'matchDetails': m['matchDetails']  # Include match details in freelancer data
+                    } for m in top_matches
+                ],
                 'total': len(top_matches),
                 'page': page,
                 'hasMore': False
@@ -156,7 +174,7 @@ class UpworkIntegrationModel:
         # Add greetings set
         self.greetings = {
             'hi', 'hello', 'hey', 'greetings', 'good morning', 
-            'good afternoon', 'good evening', 'hi there', 'hello there'
+            'good afternoon', 'good evening', 'hi there', 'hello there', 'how are you doing?'
         }
         
         # Add common job categories
@@ -282,7 +300,7 @@ class UpworkIntegrationModel:
                             'success': True,
                             'response': {
                                 'type': 'suggestions',
-                                'text': f"I couldn't find any exact matches for '{message}'. Here are some suggestions:",
+                                'text': f"How about i gave you these suggestions?:",
                                 'data': {
                                     'suggestedJobTitles': await self._get_popular_job_titles(),
                                     'suggestedSkills': popular_skills,

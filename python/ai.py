@@ -3,31 +3,71 @@ from flask_cors import CORS
 import sys
 import asyncio
 import logging
+import os
+from datetime import datetime
 from config import Config
 from upworkModel import UpworkIntegrationModel
 from functools import wraps
 import nest_asyncio
+from werkzeug.middleware.proxy_fix import ProxyFix
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Configure asyncio for production/development
 nest_asyncio.apply()
 
-app = Flask(__name__)
-CORS(app)
+def create_app(config_object=None):
+    """Factory function to create and configure the Flask app"""
+    app = Flask(__name__)
+    
+    # Load configuration
+    if config_object:
+        app.config.from_object(config_object)
+    else:
+        # Default to production config
+        app.config['PRODUCTION'] = os.getenv('FLASK_ENV', 'production') == 'production'
+        app.config['DEBUG'] = not app.config['PRODUCTION']
+        app.config['TESTING'] = False
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s: %(message)s',
-    handlers=[
-        logging.FileHandler('upwork_integration.log'),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger(__name__)
+    # Configure CORS
+    CORS(app, resources={
+        r"/*": {
+            "origins": Config.CORS_ORIGINS,
+            "methods": ["GET", "POST", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
+        }
+    })
 
-# Initialize with API configuration
-Config.validate()
-model = None
+    # Configure for proxy servers (like Render's)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
+    # Configure logging based on environment
+    configure_logging(app.config['PRODUCTION'])
+
+    return app
+
+def configure_logging(is_production):
+    """Configure logging based on environment"""
+    log_level = logging.INFO if is_production else logging.DEBUG
+    log_format = '%(asctime)s - %(levelname)s [%(name)s] %(message)s'
+    
+    handlers = [logging.StreamHandler(sys.stdout)]
+    
+    if is_production:
+        # In production, also log to file
+        log_file = os.getenv('LOG_FILE', 'upwork_integration.log')
+        handlers.append(logging.FileHandler(log_file))
+    
+    logging.basicConfig(
+        level=log_level,
+        format=log_format,
+        handlers=handlers
+    )
 
 def async_route(f):
+    """Decorator to handle async routes"""
     @wraps(f)
     def wrapped(*args, **kwargs):
         try:
@@ -38,28 +78,49 @@ def async_route(f):
         return loop.run_until_complete(f(*args, **kwargs))
     return wrapped
 
-async def initialize_model():
-    """Initialize the UpworkIntegrationModel and load necessary data"""
+# Create the Flask app
+app = create_app()
+logger = logging.getLogger(__name__)
+
+# Initialize model as None - will be initialized on first request
+model = None
+
+async def init_model():
+    """Initialize the UpworkIntegrationModel"""
     global model
-    try:
-        if not Config.API_KEY:
-            logger.warning("API_KEY is not configured, using default key")
-            Config.API_KEY = 'dev_key_123'
+    if model is None:
+        Config.validate()
+        
+        api_url = os.getenv('API_URL', Config.API_URL)
+        api_key = os.getenv('API_KEY', Config.API_KEY)
+        
+        if not api_key and Config.DEBUG:
+            api_key = 'dev_key_123'
+            logger.warning("Using default development API key")
             
         model = UpworkIntegrationModel(
-            api_url=Config.API_URL,
-            api_key=Config.API_KEY
+            api_url=api_url,
+            api_key=api_key
         )
-        
         await model.initialize()
-            
-    except Exception as e:
-        logger.error(f"Error initializing model: {str(e)}", exc_info=True)
-        raise
+        
+        if not Config.DEBUG:
+            logger.info("UpworkIntegrationModel initialized in production mode")
+    return model
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    """Health check endpoint for monitoring"""
+    return jsonify({
+        'status': 'healthy',
+        'environment': 'production' if app.config['PRODUCTION'] else 'development',
+        'timestamp': datetime.now().isoformat()
+    })
 
 @app.route('/ai/chat', methods=['POST'])
 @async_route
 async def chat():
+    """Chat endpoint with improved error handling"""
     try:
         data = request.json
         message = data.get('message', '').strip()
@@ -72,16 +133,17 @@ async def chat():
                 'error': 'Please provide a message or project details'
             }), 400
 
-        # Pass only the required arguments in the correct order
+        if not model:
+            await init_model()
+
         response = await model.handle_chat_request(
             message=message,
             project_details=project_details,
             page=page
         )
         
-        # Ensure response includes required form fields
         if response.get('success') and 'response' in response:
-            if not project_details:  # Only for initial messages
+            if not project_details:
                 response['response'].update({
                     'showProjectForm': True,
                     'type': 'job_analysis',
@@ -91,15 +153,16 @@ async def chat():
         return jsonify(response)
 
     except Exception as e:
-        logger.error(f"Chat error: {str(e)}", exc_info=True)
+        logger.exception("Error in chat endpoint")
         return jsonify({
             'success': False,
-            'error': "Sorry, I encountered an error. Please try again."
+            'error': "An unexpected error occurred. Please try again."
         }), 500
 
 @app.route('/ai/analyze-job', methods=['POST'])
 @async_route
 async def analyze_job():
+    """Job analysis endpoint with improved error handling"""
     try:
         data = request.json
         job_title = data.get('job_title', '').strip()
@@ -111,16 +174,15 @@ async def analyze_job():
             }), 400
 
         if not model:
-            await initialize_model()
+            await init_model()
 
         analysis = await model.analyze_job(job_title)
         
-        # Keep all fields and add autoSelectSkills flag
         formatted_response = {
             'success': True,
             'response': {
-                **analysis,  # Preserve all analysis fields
-                'autoSelectSkills': True,  # Flag to auto-select skills
+                **analysis,
+                'autoSelectSkills': True,
                 'type': 'job_analysis',
                 'text': 'Based on your requirements, here are the details:'
             }
@@ -129,7 +191,7 @@ async def analyze_job():
         return jsonify(formatted_response)
 
     except Exception as e:
-        logger.error(f"Job analysis error: {e}")
+        logger.exception("Error in analyze-job endpoint")
         return jsonify({
             'success': False,
             'error': 'An unexpected error occurred while analyzing your request.'
@@ -137,23 +199,32 @@ async def analyze_job():
 
 @app.errorhandler(Exception)
 def handle_error(error):
-    logger.error(f"Unhandled error: {str(error)}", exc_info=True)
+    """Global error handler"""
+    logger.exception("Unhandled error occurred")
+    if app.config['PRODUCTION']:
+        message = "An unexpected error occurred"
+    else:
+        message = str(error)
+    
     return jsonify({
         'success': False,
-        'error': str(error)
+        'error': message
     }), 500
 
-if __name__ == '__main__':
+def run_app():
+    """Function to run the app with proper configuration"""
+    host = Config.FLASK_HOST
+    port = Config.FLASK_PORT
+    debug = Config.DEBUG
+    
     try:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
-        loop.run_until_complete(initialize_model())
-        
         app.run(
-            host=Config.FLASK_HOST,
-            port=Config.FLASK_PORT,
-            debug=Config.DEBUG,
+            host=host,
+            port=port,
+            debug=debug,
             use_reloader=False
         )
     except Exception as e:
@@ -161,3 +232,6 @@ if __name__ == '__main__':
         sys.exit(1)
     finally:
         loop.close()
+
+if __name__ == '__main__':
+    run_app()
