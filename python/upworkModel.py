@@ -465,3 +465,63 @@ class UpworkIntegrationModel:
         except Exception as e:
             logger.error(f"Interview request error: {e}")
             return {'success': False, 'error': str(e)}
+
+    async def _handle_project_details(self, project_details: Dict[str, Any], page: int) -> Dict[str, Any]:
+        """Process project details and find matches"""
+        try:
+            # Create project instance
+            project = Project(
+                id=str(uuid.uuid4()),
+                description=project_details.get('description', ''),
+                required_skills=project_details.get('skills', []),
+                budget_range=self._parse_budget(project_details.get('budget', '')),
+                complexity=project_details.get('complexity', 'medium'),
+                timeline=int(project_details.get('timeline', 30))
+            )
+            
+            # Find matches using matching engine
+            result = await self.find_matches(project, page)
+            
+            # If no matches found, provide suggestions
+            if not result.get('response', {}).get('freelancers'):
+                return {
+                    'success': True,
+                    'response': {
+                        'type': 'suggestions',
+                        'text': "I couldn't find exact matches for your requirements. Here are some suggestions:",
+                        'data': {
+                            'suggestedSkills': await self._get_popular_skills(),
+                            'suggestedJobTitles': await self._get_popular_job_titles(),
+                            'categories': list(self.job_categories.keys()),
+                            'message': "Try adjusting your requirements or consider these alternatives:",
+                            'hourlyRange': [44, 150]  # Default range
+                        }
+                    }
+                }
+            
+            # Add project requirements to the response
+            result['response']['projectDetails'] = {
+                'skills': project.required_skills,
+                'budget': project_details.get('budget'),
+                'complexity': project.complexity,
+                'timeline': project.timeline
+            }
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error handling project details: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'response': {
+                    'type': 'error',
+                    'text': 'Sorry, I encountered an error processing your project details.',
+                    'data': {
+                        'detectedSkills': [],
+                        'suggestedSkills': await self._get_popular_skills(),
+                        'hourlyRange': [44, 150],
+                        'jobTitles': await self._get_popular_job_titles()
+                    }
+                }
+            }
