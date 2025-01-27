@@ -1,5 +1,17 @@
-module.exports = (sequelize, DataTypes) => {
-  const Freelancer = sequelize.define('Freelancer', {
+'use strict';
+const { Model } = require('sequelize');
+
+module.exports = function(sequelize, DataTypes) {
+  class Freelancer extends Model {
+    static associate(models) {
+      Freelancer.belongsTo(models.User, {
+        foreignKey: 'userId',
+        as: 'user'
+      });
+    }
+  }
+
+  Freelancer.init({
     userId: {
       type: DataTypes.INTEGER,
       references: {
@@ -70,14 +82,10 @@ module.exports = (sequelize, DataTypes) => {
     availability: DataTypes.BOOLEAN,
     total_sales: DataTypes.INTEGER,
     desc: DataTypes.TEXT
+  }, {
+    sequelize,
+    modelName: 'Freelancer'
   });
-
-  Freelancer.associate = (models) => {
-    Freelancer.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user'
-    });
-  };
 
   return Freelancer;
 };

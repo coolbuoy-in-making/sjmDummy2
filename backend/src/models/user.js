@@ -1,5 +1,18 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+'use strict';
+const { Model } = require('sequelize');
+
+module.exports = function(sequelize, DataTypes) {
+  class User extends Model {
+    static associate(models) {
+      User.hasMany(models.Job, { foreignKey: 'clientId' });
+      User.hasOne(models.Freelancer, {
+        foreignKey: 'userId',
+        as: 'freelancerProfile'
+      });
+    }
+  }
+
+  User.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -43,15 +56,10 @@ module.exports = (sequelize, DataTypes) => {
     yearsOfExperience: DataTypes.INTEGER,
     education: DataTypes.JSON,
     certifications: DataTypes.JSON
+  }, {
+    sequelize,
+    modelName: 'User'
   });
-
-  User.associate = (models) => {
-    User.hasMany(models.Job, { foreignKey: 'clientId' });
-    User.hasOne(models.Freelancer, {
-      foreignKey: 'userId',
-      as: 'freelancerProfile'
-    });
-  };
 
   return User;
 };

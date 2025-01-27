@@ -72,37 +72,59 @@ const PORT = process.env.PORT || 5000;
 const isDevMode = process.env.NODE_ENV !== 'production';
 const forceSync = process.env.FORCE_SYNC === 'true' || isDevMode;
 
-db.sequelize.sync({ force: forceSync }).then(async () => {
-  if (forceSync) {
-      try {
-        await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-        await db.sequelize.query('TRUNCATE TABLE Users');
-        await db.sequelize.query('TRUNCATE TABLE Jobs');
-        await db.sequelize.query('TRUNCATE TABLE Proposals');
-        await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-        
-        // Run seeders
-        const { exec } = require('child_process');
-        const maxBuffer = 1024 * 1024 * 10; // 10MB buffer
-        
-        const seedCommand = 'npx sequelize-cli db:seed:all';
-        exec(seedCommand, { maxBuffer }, (error, stdout, stderr) => {
-          if (error) {
-            console.error('Error seeding data:', error);
-            return;
-          }
-          console.log('Database seeded successfully');
-          console.log(stdout);
-        });
-      } catch (error) {
-        console.error('Error in sync/seed process:', error);
-      }
-  }
+// Add this function to handle database initialization
+async function initializeDatabase() {
+  try {
+    if (forceSync) {
+      // Disable foreign key checks
+      await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    // if (isDevMode) {
-    //   console.log('Development mode: Database tables recreated');
-    // }
-  });
+      // Drop all tables in correct order
+      await db.sequelize.query('DROP TABLE IF EXISTS `InterviewRequests`');
+      await db.sequelize.query('DROP TABLE IF EXISTS `Proposals`');
+      await db.sequelize.query('DROP TABLE IF EXISTS `Jobs`');
+      await db.sequelize.query('DROP TABLE IF EXISTS `Freelancers`');
+      await db.sequelize.query('DROP TABLE IF EXISTS `Users`');
+
+      // Enable foreign key checks
+      await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+
+      // Sync database to create tables
+      await db.sequelize.sync({ force: true });
+
+      // Run seeders
+      const { exec } = require('child_process');
+      const maxBuffer = 1024 * 1024 * 10; // 10MB buffer
+
+      exec('npx sequelize-cli db:seed:all', { maxBuffer }, (error, stdout, stderr) => {
+        if (error) {
+          console.error('Error seeding data:', error);
+          return;
+        }
+        console.log('Database seeded successfully');
+        if (stdout) console.log(stdout);
+      });
+    } else {
+      // Just sync without force in non-dev mode
+      await db.sequelize.sync();
+    }
+
+    // Start server after database is ready
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      if (isDevMode) {
+        console.log('Development mode active');
+      }
+    });
+
+  } catch (error) {
+    console.error('Database initialization error:', error);
+    process.exit(1);
+  }
+}
+
+// Initialize database and start server
+initializeDatabase().catch(error => {
+  console.error('Failed to start server:', error);
+  process.exit(1);
 });
