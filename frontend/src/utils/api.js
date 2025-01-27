@@ -1,25 +1,32 @@
 import axios from 'axios';
 
-// Create api instance
+// Create api instance with error handling
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:7800/api',
+  timeout: 10000
 });
 
-// Add token to requests
-api.interceptors.request.use(config => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+// Add request interceptor for token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config;
-});
+);
 
-// Add response interceptor for token refresh
+// Add response interceptor for error handling
 api.interceptors.response.use(
-  response => response,
-  async error => {
+  (response) => response,
+  async (error) => {
     const originalRequest = error.config;
 
+    // Handle token expiration
     if (error.response?.status === 401 && error.response?.data?.code === 'TOKEN_EXPIRED') {
       try {
         const { data } = await api.post('/auth/refresh', {
@@ -37,6 +44,14 @@ api.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
+
+    // Log error details for debugging
+    console.error('Response error:', {
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message
+    });
+
     return Promise.reject(error);
   }
 );

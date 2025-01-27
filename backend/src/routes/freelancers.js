@@ -15,53 +15,74 @@ const verifyApiKey = (req, res, next) => {
 // Import auth middleware
 const auth = require('../middleware/auth');
 
-router.get('/', verifyApiKey, async (req, res) => {
+function parseSkills(skills) {
+  if (!skills) return [];
+  
   try {
-    console.log('Received API key:', req.headers.authorization);
+    if (Array.isArray(skills)) {
+      return skills.map(s => String(s).trim()).filter(Boolean);
+    }
+    
+    if (typeof skills === 'string') {
+      try {
+        const parsed = JSON.parse(skills);
+        if (Array.isArray(parsed)) {
+          return parsed.map(s => String(s).trim()).filter(Boolean);
+        }
+      } catch {
+        // If JSON parsing fails, try comma split
+        return skills.split(',').map(s => s.trim()).filter(Boolean);
+      }
+    }
+    
+    return [];
+  } catch (error) {
+    console.error('Error parsing skills:', error);
+    return [];
+  }
+}
 
+router.get('/', async (req, res) => {
+  try {
+    console.log('Fetching freelancers...');
+    
     const freelancers = await Freelancer.findAll({
-      where: {
-        availability: true  // Only get available freelancers
-      },
       attributes: [
-        'id', 'username', 'name', 'job_title', 'skills', 
+        'id', 'username', 'name', 'job_title', 'skills',
         'experience', 'rating', 'hourly_rate', 'profile_url',
         'availability', 'total_sales', 'desc'
       ],
       raw: true
     });
 
-    console.log('Raw freelancers data:', freelancers[0]); // Log first freelancer for debugging
-
-    if (!freelancers || freelancers.length === 0) {
-      console.log('No freelancers found, returning empty array');
-      return res.json([]);
-    }
-
-    // Transform and validate the data
-    const formattedFreelancers = freelancers.map(f => ({
-      id: f.id,
-      name: f.name,
-      jobTitle: f.job_title,
-      skills: f.skills ? f.skills.split(',').map(s => s.trim()) : [],
-      hourlyRate: parseFloat(f.hourly_rate),
-      rating: parseFloat(f.rating),
-      experience: parseInt(f.experience),
-      totalSales: parseInt(f.total_sales),
-      availability: Boolean(f.availability),
-      profile_url: `/profile/${f.id}`,
-      desc: f.desc,
-      matchDetails: {
-        skillMatch: { 
-          skills: [],
-          count: 0
-        },
-        matchPercentage: 0
+    const formattedFreelancers = freelancers.map(f => {
+      try {
+        // Use enhanced skill parsing
+        const skills = parseSkills(f.skills);
+        
+        return {
+          id: String(f.id),
+          username: f.username || '',
+          name: f.name || '',
+          jobTitle: f.job_title || '',
+          skills: skills, // Cleaned skills array
+          experience: parseInt(f.experience || 0),
+          rating: parseFloat(f.rating || 0),
+          hourlyRate: parseFloat(f.hourly_rate || 0), 
+          profileUrl: f.profile_url || `/profile/${f.id}`,
+          availability: Boolean(f.availability),
+          totalSales: parseInt(f.total_sales || 0),
+          desc: f.desc || ''
+        };
+      } catch (error) {
+        console.error(`Error formatting freelancer ${f.id}:`, error);
+        return null;
       }
-    }));
+    }).filter(Boolean);
 
-    console.log('Sending formatted freelancer example:', formattedFreelancers[0]);
+    console.log(`Returning ${formattedFreelancers.length} freelancers`);
     res.json(formattedFreelancers);
+
   } catch (error) {
     console.error('Error fetching freelancers:', error);
     res.status(500).json({ error: error.message });

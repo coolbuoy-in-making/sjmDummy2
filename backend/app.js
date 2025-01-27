@@ -59,7 +59,7 @@ app.use((req, res) => {
     params: req.params,
     query: req.query
   });
-  res.status(404).json({ message: 'Route not found' });
+  res.status(404).json({ message: 'Not Implemented' });
 });
 
 // Add error handling middleware

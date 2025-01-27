@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { UserContext } from '../contexts/userContext';
+// Create the context
+export const UserContext = createContext(null);
 
+// Create the provider component
 export const UserProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored user data on mount
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));

@@ -673,7 +673,8 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   const [showInterview, setShowInterview] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMoreResults, setHasMoreResults] = useState(false);
-  const [suggestedSkills, setSuggestedSkills] = useState([]);
+  // Remove unused state since suggestions are handled directly in message components
+  // const [suggestedSkills, setSuggestedSkills] = useState([]);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -734,7 +735,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
         // Set hasMoreResults based on API response
         setHasMoreResults(data.response.hasMore || false);
         
-        // Handle no matches case with alternatives
         if (data.response.type === 'no_matches') {
           const noMatchMessage = {
             type: 'no_matches',
@@ -744,7 +744,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
             related_skills: data.response.related_skills
           };
           setMessages(prev => [...prev, noMatchMessage]);
-          setSuggestedSkills(data.response.related_skills || []);
           return;
         }
 
@@ -753,7 +752,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
           if (data.response.data.detectedSkills?.length) {
             setSkills(data.response.data.detectedSkills);
           }
-          setSuggestedSkills(data.response.data.suggestedSkills || []);
         }
 
         const aiMessage = {
@@ -938,7 +936,7 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
         <>
           {message.freelancers.map(freelancer => renderFreelancerCard(freelancer))}
           
-          {hasMoreResults && (
+          {message.pagination?.hasMore && (
             <ActionButton 
               className="secondary"
               onClick={loadMoreResults}
@@ -951,19 +949,6 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
       ) : (
         <NoMatchMessage>
           <p>No freelancers found matching your exact criteria.</p>
-          {suggestedSkills.length > 0 && (
-            <div className="suggested-skills">
-              <h4>Suggested Skills:</h4>
-              <SkillList>
-                {suggestedSkills.map((skill, index) => (
-                  <SkillPill key={index}>
-                    {skill}
-                    <button onClick={() => addSkill(skill)}>+</button>
-                  </SkillPill>
-                ))}
-              </SkillList>
-            </div>
-          )}
           {message.suggestions && renderSuggestions(message.suggestions)}
         </NoMatchMessage>
       )}
@@ -971,9 +956,14 @@ const AIChatSidebar = ({ isOpen, onClose }) => {
   );
 
   const handleProjectDetailsSubmit = (details) => {
+    // Clean up skills
+    const cleanedSkills = skills.map(skill => 
+        skill.replace('×', '').trim()
+    ).filter(Boolean);
+    
     const formattedDetails = {
-      ...details,
-      skills: skills.length > 0 ? skills : details.skills
+        ...details,
+        skills: cleanedSkills
     };
     
     setShowSummary(true);

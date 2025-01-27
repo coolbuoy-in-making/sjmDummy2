@@ -2,10 +2,74 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { User } = require('../models');
 
 router.post('/register', authController.register);
-router.post('/login', authController.login);
+
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ 
+        success: false,
+        message: 'Email and password are required' 
+      });
+    }
+
+    // Find user
+    const user = await User.findOne({ 
+      where: { email },
+      attributes: ['id', 'name', 'email', 'password', 'userType']
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password'
+      });
+    }
+
+    // Verify password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password'
+      });
+    }
+
+    // Generate token
+    const token = jwt.sign(
+      { id: user.id, userType: user.userType },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    // Remove password from response
+    const userResponse = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      userType: user.userType
+    };
+
+    res.json({
+      success: true,
+      token,
+      user: userResponse
+    });
+
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred during login'
+    });
+  }
+});
 
 router.post('/refresh', async (req, res) => {
   try {

@@ -3,9 +3,10 @@ import os
 import sys
 import socket
 import subprocess
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Union
 import logging
 import re
+import json
 
 # models
 
@@ -29,7 +30,7 @@ from openai import OpenAI
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s: %(message)s',
     handlers=[
         logging.FileHandler('upwork_integration.log'),
@@ -77,25 +78,18 @@ class SkillsExtract:
         self.job_titles = set()
         self.known_skills = set()
 
-        logger.info("SkillsExtract initialized with custom stop words")
+        logger.debug("SkillsExtract initialized with custom stop words")
 
-    def load_keywords_from_database(self, freelancers: List['freelancer']) -> None:
+    def load_keywords_from_database(self, Freelancers: List['Freelancer']) -> None:
         """Load skills and job titles from actual database entries"""
-        for f in freelancers:
-            # Add job titles
-            if f.job_title:
-                self.job_titles.add(f.job_title.lower())
-                # Also add individual words from job titles
-                self.job_titles.update(word.lower() for word in f.job_title.split())
-            
-            # Add skills
-            if f.skills:
-                self.known_skills.update(skill.lower() for skill in f.skills)
+        for f in Freelancers:
+            self.known_skills.update(self._parse_skills(f.skills))
+            self.job_titles.add(f.job_title)
         
         # Update manual keywords to include all known terms
         self.manual_keywords = list(self.known_skills | self.job_titles)
         
-        logger.info(f"Loaded {len(self.job_titles)} job titles and {len(self.known_skills)} skills from database")
+        logger.debug(f"Loaded {len(self.job_titles)} job titles and {len(self.known_skills)} skills from database")
 
     def clean_skill(self, skill: str) -> str:
         """Clean individual skill string"""
@@ -135,77 +129,131 @@ class SkillsExtract:
         return cleaned.capitalize()
 
     def extract_skills(self, text: str) -> List[str]:
-        """Enhanced skill extraction with proper formatting"""
-        if not text:
-            return []
-            
-        # Clean incoming text and split into words
-        text = re.sub(r'[\[\]"×\+]', '', text)
+        """Enhanced word-by-word skill extraction"""
+        matched_skills = set()
         words = word_tokenize(text.lower())
         
-        matched_skills = set()
+        # Clean incoming text by removing brackets and special characters
+        text = re.sub(r'[\[\]\"×]', '', text)
         
-        # Create word combinations
+        # Create word combinations for checking
         combinations = []
         for i in range(len(words)):
             if words[i] not in self.stop_words:
-                combinations.append(words[i])
+                # Clean each word
+                clean_word = words[i].strip('{}"×')
+                combinations.append(clean_word)
+                
+                # Two-word combinations
                 if i < len(words) - 1:
-                    combinations.append(f"{words[i]} {words[i+1]}")
+                    clean_next = words[i+1].strip('{}"×')
+                    combinations.append(f"{clean_word} {clean_next}")
+                
+                # Three-word combinations
                 if i < len(words) - 2:
-                    combinations.append(f"{words[i]} {words[i+1]} {words[i+2]}")
+                    clean_next = words[i+1].strip('{}"×')
+                    clean_next2 = words[i+2].strip('{}"×')
+                    combinations.append(f"{clean_word} {clean_next} {clean_next2}")
 
-        # Match and format skills
+        # Check each combination against known skills and job titles
         for combo in combinations:
-            combo_lower = combo.lower()
-            if combo_lower in map(str.lower, self.known_skills):
-                cleaned_skill = self.clean_skill(combo)
-                matched_skills.add(cleaned_skill)
+            if combo in self.known_skills:
+                matched_skills.add(combo)
+            if combo in self.job_titles:
+                matched_skills.add(combo)
 
-        return sorted(list(matched_skills))
+        return list(matched_skills)
 
     def verify_keyword(self, keyword: str) -> Dict[str, Any]:
-        """Enhanced keyword verification with proper formatting"""
+        """Enhanced database-aware keyword verification"""
         if not keyword:
-            return {
-                'exists': False,
-                'similar_terms': [],
-                'type': None,
-                'matches': [],
-                'skills': [],
-                'job_titles': []
-            }
-
-        # Clean keyword
-        keyword = self.clean_skill(keyword)
-        
-        matches = []
-        
-        # Check against known skills and job titles
-        if keyword.lower() in map(str.lower, self.known_skills):
-            matches.append(('skill', keyword))
+            return self._empty_verification_result()
             
-        if keyword.lower() in map(str.lower, self.job_titles):
-            matches.append(('job_title', keyword))
+        # Clean and normalize keyword
+        cleaned_keyword = self.clean_skill(keyword)
+        keyword_parts = word_tokenize(cleaned_keyword.lower())
+        
+        # Initialize result tracking
+        found_skills = set()
+        found_titles = set()
+        
+        # Check combinations of words
+        for i in range(len(keyword_parts)):
+            # Single word
+            single = keyword_parts[i]
+            self._check_database_match(single, found_skills, found_titles)
+            
+            # Two-word combinations
+            if i < len(keyword_parts) - 1:
+                two_words = f"{keyword_parts[i]} {keyword_parts[i+1]}"
+                self._check_database_match(two_words, found_skills, found_titles)
+            
+            # Three-word combinations
+            if i < len(keyword_parts) - 2:
+                three_words = f"{keyword_parts[i]} {keyword_parts[i+1]} {keyword_parts[i+2]}"
+                self._check_database_match(three_words, found_skills, found_titles)
 
-        if matches:
-            # Group and format matches
-            skill_matches = [self.clean_skill(term) for type_, term in matches if type_ == 'skill']
-            job_matches = [self.clean_skill(term) for type_, term in matches if type_ == 'job_title']
-
+        if found_skills or found_titles:
             return {
                 'exists': True,
-                'matches': sorted(list(set(skill_matches + job_matches))),
-                'skills': sorted(list(set(skill_matches))),
-                'job_titles': sorted(list(set(job_matches))),
-                'type': 'skill' if skill_matches else 'job_title'
+                'matches': sorted(list(found_skills | found_titles)),
+                'skills': sorted(list(found_skills)),
+                'job_titles': sorted(list(found_titles)),
+                'type': 'skill' if found_skills else 'job_title'
             }
-        
-        # No matches - find similar terms
-        similar_terms = [self.clean_skill(term) for term in self._find_similar_terms(keyword)]
+
+        # No matches - find similar terms from database
+        similar_terms = self._find_database_similar_terms(cleaned_keyword)
         return {
             'exists': False,
-            'similar_terms': sorted(list(set(similar_terms))),
+            'similar_terms': similar_terms,
+            'type': None,
+            'matches': [],
+            'skills': [],
+            'job_titles': []
+        }
+
+    def _check_database_match(self, term: str, found_skills: set, found_titles: set) -> None:
+        """Check term against database entries"""
+        term_lower = term.lower()
+        
+        # Check actual Freelancer skills
+        for skill in self.known_skills:
+            if (term_lower == skill.lower() or 
+                term_lower in skill.lower() or 
+                skill.lower() in term_lower):
+                found_skills.add(self.clean_skill(skill))
+        
+        # Check actual job titles
+        for title in self.job_titles:
+            if (term_lower == title.lower() or 
+                term_lower in title.lower() or 
+                title.lower() in term_lower):
+                found_titles.add(self.clean_skill(title))
+
+    def _find_database_similar_terms(self, keyword: str) -> List[str]:
+        """Find similar terms from actual database entries"""
+        similar = set()
+        keyword_lower = keyword.lower()
+        
+        # Check skills and job titles from database
+        all_terms = list(self.known_skills) + list(self.job_titles)
+        
+        for term in all_terms:
+            term_lower = term.lower()
+            # Check partial matches and similarity ratio
+            if (keyword_lower in term_lower or 
+                term_lower in keyword_lower or
+                SequenceMatcher(None, keyword_lower, term_lower).ratio() > 0.8):
+                similar.add(self.clean_skill(term))
+                
+        return sorted(list(similar))[:5]
+
+    def _empty_verification_result(self) -> Dict[str, Any]:
+        """Return empty verification result structure"""
+        return {
+            'exists': False,
+            'similar_terms': [],
             'type': None,
             'matches': [],
             'skills': [],
@@ -244,11 +292,11 @@ class SkillsExtract:
     def generate_ai_interview_questions(
         self, 
         project_description: str,
-        freelancer_skills: List[str]
+        Freelancer_skills: List[str]
     ) -> List[str]:
         """Generate AI-powered interview questions"""
         questions = [
-            f"How would you apply your {', '.join(freelancer_skills)} to this project?",
+            f"How would you apply your {', '.join(Freelancer_skills)} to this project?",
             "What is your approach to project management and deadlines?",
             "How do you handle communication with clients?",
             "Can you describe similar projects you've completed?",
@@ -261,39 +309,102 @@ class SkillsExtract:
         
         return questions
 
+    def _parse_skills(self, skills: Union[str, List, None]) -> List[str]:
+        """Parse skills from various input formats"""
+        if not skills:
+            return []
+            
+        try:
+            # Handle string input
+            if isinstance(skills, str):
+                try:
+                    # Try parsing as JSON
+                    parsed = json.loads(skills)
+                    return [str(s).strip() for s in parsed if s] if isinstance(parsed, list) else []
+                except json.JSONDecodeError:
+                    # If not JSON, try splitting by comma
+                    return [s.strip() for s in skills.split(',') if s.strip()]
+            
+            # Handle list input
+            if isinstance(skills, (list, tuple)):
+                return [str(s).strip() for s in skills if s]
+                
+            return []
+            
+        except Exception as e:
+            logger.error(f"Error parsing skills: {e}")
+            return []
 
-@dataclass
-class freelancer:
+
+@dataclass 
+class Freelancer:
     id: str
-    freelancername: str
     name: str
     job_title: str
     skills: List[str]
-    experience: int
-    rating: float
     hourly_rate: float
+    rating: float
     profile_url: str
-    availability: bool
-    total_sales: int 
-    desc: str # Add default value
+    availability: bool 
+    total_sales: int
+    experience: int
+    desc: str = ''
+    username: str = ''
+
+    def __post_init__(self):
+        """Clean up attributes after initialization"""
+        try:
+            # Ensure proper types
+            self.id = str(self.id)
+            self.hourly_rate = float(self.hourly_rate)
+            self.rating = float(self.rating)
+            self.total_sales = int(self.total_sales)
+            self.experience = int(self.experience)
+            self.availability = bool(self.availability)
+            
+            # Handle skills parsing
+            if isinstance(self.skills, str):
+                try:
+                    # Try parsing as JSON
+                    parsed = json.loads(self.skills)
+                    self.skills = parsed if isinstance(parsed, list) else []
+                except json.JSONDecodeError:
+                    # If not JSON, split by comma
+                    self.skills = [s.strip() for s in self.skills.split(',') if s.strip()]
+                    
+            # Ensure skills is a list
+            if not isinstance(self.skills, list):
+                self.skills = list(self.skills) if self.skills else []
+                
+            # Clean up skills - ensure they're strings and non-empty
+            self.skills = [str(skill).strip() for skill in self.skills if skill and str(skill).strip()]
+            
+        except Exception as e:
+            logger.error(f"Error initializing Freelancer {self.id}: {e}")
+            # Set safe default values for required fields
+            if not isinstance(self.skills, list):
+                self.skills = []
 
     def profile_text(self) -> str:
-        """Return text representation for TF-IDF"""
-        return f"{self.name} - {self.job_title}. {self.desc} Skills: {', '.join(self.skills)}"
+        """Get profile text for matching"""
+        cleaned_skills = ', '.join(self.skills) if self.skills else ''
+        return f"{self.name} - {self.job_title}. {self.desc} Skills: {cleaned_skills}"
 
-    def dict(self) -> Dict[str, any]:
+    def dict(self) -> Dict[str, Any]:
+        """Convert to dictionary"""
         return {
             'id': self.id,
-            'freelancername': self.freelancername,
             'name': self.name,
+            'username': self.username,
             'job_title': self.job_title,
-            'skills': self.skills,
+            'skills': self.skills,  # Already cleaned in __post_init__
             'experience': self.experience,
             'rating': self.rating,
             'hourly_rate': self.hourly_rate,
             'profile_url': self.profile_url,
             'availability': self.availability,
             'total_sales': self.total_sales,
+            'desc': self.desc
         }
 
 
@@ -306,56 +417,73 @@ class Project:
     complexity: str
     timeline: Optional[int] = None
 
+    def __post_init__(self):
+        # Ensure required_skills is always a list
+        if isinstance(self.required_skills, str):
+            self.required_skills = [s.strip() for s in self.required_skills.split(',')]
+        elif not isinstance(self.required_skills, list):
+            self.required_skills = list(self.required_skills) if self.required_skills else []
+        
+        # Clean skills
+        self.required_skills = [str(s).strip() for s in self.required_skills if s]
+        
+        # Ensure budget_range is a tuple
+        if not isinstance(self.budget_range, tuple):
+            if isinstance(self.budget_range, (list, set)):
+                self.budget_range = tuple(self.budget_range)
+            else:
+                self.budget_range = (0, 100)  # default range
+
 class ContentBasedModel:
     def __init__(self):
         self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
-        self.freelancer_tfidf = None
+        self.Freelancer_tfidf = None
 
-    def train(self, freelancer_data):
-        all_texts = [freelancer.profile_text() for freelancer in freelancer_data]
-        self.freelancer_tfidf = self.tfidf_vectorizer.fit_transform(all_texts)
+    def train(self, Freelancer_data):
+        all_texts = [Freelancer.profile_text() for Freelancer in Freelancer_data]
+        self.Freelancer_tfidf = self.tfidf_vectorizer.fit_transform(all_texts)
 
     def predict(self, project_tfidf):
-        similarities = cosine_similarity(project_tfidf, self.freelancer_tfidf).flatten()
+        similarities = cosine_similarity(project_tfidf, self.Freelancer_tfidf).flatten()
         return similarities
 
 class CollaborativeModel:
     def __init__(self):
-        self.freelancer_data = None
+        self.Freelancer_data = None
         self.project_data = None
         self.interaction_matrix = None
         self.skill_similarity_matrix = None
 
-    def train(self, project_data: List[Dict], freelancer_data: List[freelancer]):
-        self.freelancer_data = freelancer_data
+    def train(self, project_data: List[Dict], Freelancer_data: List[Freelancer]):
+        self.Freelancer_data = Freelancer_data
         self.project_data = project_data
 
-        num_freelancers = len(freelancer_data)
-        if num_freelancers == 0:
-            logger.warning("No freelancers available for training.")
-            self.interaction_matrix = np.zeros((num_freelancers, 2))
+        num_Freelancers = len(Freelancer_data)
+        if num_Freelancers == 0:
+            logger.warning("No Freelancers available for training.")
+            self.interaction_matrix = np.zeros((num_Freelancers, 2))
             return
 
         try:
             # Create skill similarity matrix
             all_skills = set()
-            for f in freelancer_data:
+            for f in Freelancer_data:
                 all_skills.update(set(f.skills))
             
-            skill_matrix = np.zeros((num_freelancers, len(all_skills)))
+            skill_matrix = np.zeros((num_Freelancers, len(all_skills)))
             skill_to_idx = {skill: idx for idx, skill in enumerate(all_skills)}
             
-            for i, f in enumerate(freelancer_data):
+            for i, f in enumerate(Freelancer_data):
                 for skill in f.skills:
                     if skill in skill_to_idx:
                         skill_matrix[i, skill_to_idx[skill]] = 1
 
-            # Calculate skill similarity between freelancers
+            # Calculate skill similarity between Freelancers
             self.skill_similarity_matrix = cosine_similarity(skill_matrix)
 
             # Combine with traditional metrics
-            total_sales = np.array([f.total_sales for f in freelancer_data])
-            ratings = np.array([f.rating for f in freelancer_data])
+            total_sales = np.array([f.total_sales for f in Freelancer_data])
+            ratings = np.array([f.rating for f in Freelancer_data])
 
             # Normalize metrics
             total_sales_norm = self._normalize_array(total_sales)
@@ -369,7 +497,7 @@ class CollaborativeModel:
 
         except Exception as e:
             logger.error(f"Error training collaborative model: {e}")
-            self.interaction_matrix = np.zeros((num_freelancers, 2))
+            self.interaction_matrix = np.zeros((num_Freelancers, 2))
 
     def _normalize_array(self, arr):
         if arr.max() > arr.min():
@@ -379,13 +507,13 @@ class CollaborativeModel:
     def predict(self, project_description: str, project_skills: List[str]) -> List[float]:
         if self.interaction_matrix is None or self.interaction_matrix.size == 0:
             logger.warning("Interaction matrix is empty. Returning zero scores.")
-            return [0.0] * len(self.freelancer_data)
+            return [0.0] * len(self.Freelancer_data)
 
         try:
             # Calculate skill match scores
-            skill_scores = np.zeros(len(self.freelancer_data))
-            for i, freelancer in enumerate(self.freelancer_data):
-                matched_skills = set(project_skills) & set(freelancer.skills)
+            skill_scores = np.zeros(len(self.Freelancer_data))
+            for i, Freelancer in enumerate(self.Freelancer_data):
+                matched_skills = set(project_skills) & set(Freelancer.skills)
                 skill_scores[i] = len(matched_skills) / max(len(project_skills), 1)
 
             # Combine with interaction matrix
@@ -399,19 +527,19 @@ class CollaborativeModel:
 
         except Exception as e:
             logger.error(f"Error in collaborative prediction: {e}")
-            return [0.0] * len(self.freelancer_data)
+            return [0.0] * len(self.Freelancer_data)
 
 class MatchingEngine:
-    def __init__(self, freelancers: List[freelancer], projects: List[Project], skill_extractor: SkillsExtract, collaborative_model=None):
+    def __init__(self, Freelancers: List[Freelancer], projects: List[Project], skill_extractor: SkillsExtract, collaborative_model=None):
         """
-        Initialize the matching engine with freelancers, projects, and skill extraction tools.
+        Initialize the matching engine with Freelancers, projects, and skill extraction tools.
 
         Args:
-            freelancers (List[freelancer]): List of freelancer objects.
+            Freelancers (List[Freelancer]): List of Freelancer objects.
             projects (List[Project]): List of project objects.
             skill_extractor (SkillsExtract): A skill extraction tool for analyzing project descriptions.
         """
-        self.freelancers = freelancers
+        self.Freelancers = Freelancers
         self.projects = projects
         self.skill_extractor = skill_extractor
 
@@ -419,13 +547,13 @@ class MatchingEngine:
         self.content_model = ContentBasedModel()
         self.collaborative_model = collaborative_model
 
-        # Precompute TF-IDF vectors for freelancers
+        # Precompute TF-IDF vectors for Freelancers
         self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(
-            [freelancer.profile_text() for freelancer in freelancers]
+            [Freelancer.profile_text() for Freelancer in Freelancers]
         )
         self.current_matches = []  # Store all matches for pagination
-        self.page_size = 5  # Number of freelancers per page
+        self.page_size = 5  # Number of Freelancers per page
 
     @staticmethod
     def similar(a: str, b: str) -> float:
@@ -434,24 +562,40 @@ class MatchingEngine:
         """
         return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
-    def refine_skill_matching(self, required_skills: List[str], freelancer_skills: List[str]) -> int:
+    def refine_skill_matching(self, required_skills: List[str], Freelancer_skills: List[str]) -> int:
         """
-        Refine skill matching to account for partial matches.
-        Returns the number of overlapping or similar skills.
+        Enhanced skill matching with better error handling and normalization
         """
-        overlap_count = sum(
-            1 for req_skill in required_skills
-            for freelancer_skill in freelancer_skills
-            if self.similar(req_skill, freelancer_skill) > 0.7
-        )
-        return overlap_count
+        try:
+            # Normalize and clean skills
+            required = set(str(s).lower().strip() for s in (required_skills or {}))
+            Freelancer = set(str(s).lower().strip() for s in (Freelancer_skills or {}))
+            
+            # Count exact and similar matches
+            exact_matches = required & Freelancer
+            
+            # Check for similar matches
+            similar_matches = set()
+            for req_skill in required:
+                for Freelancer_skill in Freelancer:
+                    if req_skill != Freelancer_skill and self.similar(req_skill, Freelancer_skill) > 0.8:
+                        similar_matches.add((req_skill, Freelancer_skill))
+            
+            match_count = len(exact_matches) + len(similar_matches)
+            logger.debug(f"Match results - Exact: {len(exact_matches)}, Similar: {len(similar_matches)}")
+            
+            return match_count
+                
+        except Exception as e:
+            logger.error(f"Error in skill matching: {str(e)}")
+            return 0
 
     def train_models(self):
         """
         Train both content-based and collaborative models.
         """
         # Train Content-Based Model
-        self.content_model.train(self.freelancers)
+        self.content_model.train(self.Freelancers)
 
         # Simulate historical project data for Collaborative Filtering
         simulated_project_data = [
@@ -464,13 +608,9 @@ class MatchingEngine:
             }
             for project in self.projects
         ]
-        self.collaborative_model.train(simulated_project_data, self.freelancers)
+        self.collaborative_model.train(simulated_project_data, self.Freelancers)
 
-    def match_freelancers(self, project: Project, weights: Dict[str, float] = None, job_title_matcher=None, page: int = 1) -> Dict[str, Any]:
-        """
-        Enhanced matching with pagination support
-        Returns dict with matches and pagination info
-        """
+    def match_Freelancers(self, project: Project, weights: Dict[str, float] = None, job_title_matcher=None, page: int = 1) -> Dict[str, Any]:
         try:
             weights = weights or {
                 'skills': 0.45,
@@ -480,59 +620,98 @@ class MatchingEngine:
                 'availability': 0.10
             }
 
-            # Only compute matches if this is first page or matches aren't stored
-            if page == 1 or not self.current_matches:
-                all_matches = []
-                project_skills = set(s.lower() for s in project.required_skills)
+            all_matches = []
+        
+            # Clean and normalize project skills
+            project_skills = []
+            if project.required_skills:
+                for skill in project.required_skills:
+                    if isinstance(skill, str):
+                        # Remove special characters and clean skill
+                        cleaned = re.sub(r'[×\[\]"\'{}]', '', skill).strip()
+                        if cleaned and cleaned not in project_skills:
+                            project_skills.append(cleaned.lower())  # Convert to lowercase for comparison
 
-                for freelancer in self.freelancers:
-                    # ...existing matching logic...
-                    matched_skills = project_skills & set(s.lower() for s in freelancer.skills)
-                    skill_match_score = len(matched_skills) / max(len(project_skills), 1)
-                    
-                    # Get scores
-                    exp_score = min(freelancer.experience / 10.0, 1.0)
-                    rating_score = freelancer.rating / 5.0
-                    availability_score = 1.0 if freelancer.availability else 0.5
-                    
-                    # Calculate job title score if provided
-                    job_title_score = 0.0
-                    if job_title_matcher and skill_match_score < 0.5:
-                        job_title_score = job_title_matcher(project.description, freelancer.job_title)
+            logger.debug(f"Processing matches for skills: {project_skills}")
 
-                    # Calculate weighted score
-                    total_score = (
-                        weights['skills'] * skill_match_score +
-                        weights['experience'] * exp_score +
-                        weights['rating'] * rating_score +
-                        weights['job_title'] * job_title_score +
-                        weights['availability'] * availability_score
-                    )
-
-                    # Store match details
+            for Freelancer in self.Freelancers:
+                try:
+                    # Initialize match dictionary
                     match = {
-                        'freelancer': freelancer,
-                        'combined_score': total_score,
-                        'skill_overlap': len(matched_skills),
-                        'matched_skills': list(matched_skills),
-                        'skill_score': skill_match_score,
-                        'experience_score': exp_score,
-                        'rating_score': rating_score,
-                        'job_title_score': job_title_score,
-                        'availability_score': availability_score
+                        'Freelancer': Freelancer,
+                        'combined_score': 0.0,
+                        'skill_overlap': 0,
+                        'matched_skills': [],
+                        'skill_score': 0.0,
+                        'experience_score': 0.0,
+                        'rating_score': 0.0,
+                        'job_title_score': 0.0,
+                        'availability_score': 0.0
                     }
-                    all_matches.append(match)
+                    
+                    # Clean and normalize Freelancer skills
+                    Freelancer_skills = []
+                    if hasattr(Freelancer, 'skills') and isinstance(Freelancer.skills, (list, set)):
+                        for skill in Freelancer.skills:
+                            if isinstance(skill, str):
+                                cleaned = re.sub(r'[×\[\]"\'{}]', '', skill).strip()
+                                if cleaned:
+                                    Freelancer_skills.append(cleaned.lower())  # Convert to lowercase for comparison
+                    
+                    logger.debug(f"Freelancer {Freelancer.id} cleaned skills: {Freelancer_skills}")
+                    
+                    # Perform skill matching
+                    matched_skills = []
+                    for p_skill in project_skills:
+                        for f_skill in Freelancer_skills:
+                            # Check for exact match or high similarity
+                            if p_skill == f_skill or SequenceMatcher(None, p_skill, f_skill).ratio() > 0.85:
+                                matched_skills.append(f_skill)
+                                break
+                    
+                    # Remove duplicates while preserving order
+                    matched_skills = list(dict.fromkeys(matched_skills))
+                    
+                    # Calculate scores
+                    match['skill_overlap'] = len(matched_skills)
+                    match['matched_skills'] = matched_skills
+                    match['skill_score'] = len(matched_skills) / max(len(project_skills), 1)
+                    match['experience_score'] = min(getattr(Freelancer, 'experience', 0) / 10.0, 1.0)
+                    match['rating_score'] = getattr(Freelancer, 'rating', 0) / 5.0
+                    match['availability_score'] = 1.0 if getattr(Freelancer, 'availability', False) else 0.5
+                    
+                    # Calculate job title relevance if matcher provided
+                    if job_title_matcher and hasattr(Freelancer, 'job_title'):
+                        match['job_title_score'] = job_title_matcher(project.description, Freelancer.job_title)
+                    
+                    # Calculate weighted final score
+                    match['combined_score'] = (
+                        weights['skills'] * match['skill_score'] +
+                        weights['experience'] * match['experience_score'] +
+                        weights['rating'] * match['rating_score'] +
+                        weights['job_title'] * match['job_title_score'] +
+                        weights['availability'] * match['availability_score']
+                    )
+                    
+                    if match['skill_overlap'] > 0 or match['combined_score'] > 0:  # Only add if there's any relevance
+                        all_matches.append(match)
+                        
+                except Exception as e:
+                    logger.error(f"Error processing Freelancer {getattr(Freelancer, 'id', 'unknown')}: {str(e)}")
+                    continue
 
-                # Sort matches by score
-                all_matches.sort(key=lambda x: (x['combined_score'], x['skill_overlap']), reverse=True)
-                self.current_matches = all_matches
+            # Sort matches by combined score and skill overlap
+            all_matches.sort(key=lambda x: (x['combined_score'], x['skill_overlap']), reverse=True)
+            self.current_matches = all_matches
 
             # Calculate pagination
             start_idx = (page - 1) * self.page_size
             end_idx = start_idx + self.page_size
-            page_matches = self.current_matches[start_idx:end_idx]
-            total_matches = len(self.current_matches)
+            page_matches = all_matches[start_idx:end_idx]
+            total_matches = len(all_matches)
             total_pages = (total_matches + self.page_size - 1) // self.page_size
+
+            logger.info(f"Found {total_matches} top matches")
 
             return {
                 'matches': page_matches,
@@ -546,18 +725,9 @@ class MatchingEngine:
             }
 
         except Exception as e:
-            logger.error(f"Error in matching freelancers: {e}")
-            return {
-                'matches': [],
-                'pagination': {
-                    'current_page': 1,
-                    'total_pages': 1,
-                    'total_matches': 0,
-                    'has_next': False,
-                    'has_previous': False
-                }
-            }
-
+            logger.error(f"Error finding matches: {e}")
+            raise
+        
     def get_next_matches(self, page: int = 1) -> Dict[str, Any]:
         """Get next page of matches from current results"""
         if not self.current_matches:
@@ -591,36 +761,36 @@ class MatchingEngine:
 
     def get_top_matches(self, project: Project, top_n: int = 5) -> List[Dict]:
         """
-        Get the top N freelancer matches for a project.
+        Get the top N Freelancer matches for a project.
 
         Args:
             project (Project): The project for which to find matches.
             top_n (int, optional): Number of top matches to return. Defaults to 5.
 
         Returns:
-            List[Dict]: A list of top N freelancers.
+            List[Dict]: A list of top N Freelancers.
         """
-        all_matches = self.match_freelancers(project)
+        all_matches = self.match_Freelancers(project)
         return all_matches[:top_n]
 
 
-    def interview_and_evaluate(self, freelancer: freelancer, project: Project) -> Dict:
-        """Evaluate freelancer suitability"""
+    def interview_and_evaluate(self, Freelancer: Freelancer, project: Project) -> Dict:
+        """Evaluate Freelancer suitability"""
         questions = self.skill_extractor.generate_ai_interview_questions(
             project.description,
-            freelancer.skills
+            Freelancer.skills
         )
         
         return {
-            'freelancer': freelancer.dict(),
+            'Freelancer': Freelancer.dict(),
             'questions': questions,
             'skill_match': self.refine_skill_matching(
                 project.required_skills,
-                freelancer.skills
+                Freelancer.skills
             )
         }
     
-    def ask_professional_questions(self, freelancer: freelancer, project: Project) -> List[str]:
+    def ask_professional_questions(self, Freelancer: Freelancer, project: Project) -> List[str]:
         questions = [
             "Can you describe your experience with this type of project?",
             "How do you handle tight deadlines in your work?",
@@ -630,7 +800,7 @@ class MatchingEngine:
         return questions
 
     def collect_answers(self, questions: List[str]) -> Dict[str, str]:
-        return {q: "freelancer's response to " + q for q in questions}
+        return {q: "Freelancer's response to " + q for q in questions}
 
     def ask_for_portfolio(self) -> Optional[str]:
         return "Portfolio link or file submission URL"
@@ -641,57 +811,18 @@ class MatchingEngine:
 
     def ask_client_for_custom_questions(self) -> Optional[Dict[str, str]]:
         custom_questions = {
-            "What is your preferred communication tool?": "freelancer's response"
+            "What is your preferred communication tool?": "Freelancer's response"
         }
         return custom_questions
 
-    def accept_or_reject_freelancer(self, freelancer: freelancer, project: Project):
-        client_decision = input(f"Do you want to accept {freelancer.freelancername} for project {project.id}? (yes/no): ")
+    def accept_or_reject_Freelancer(self, Freelancer: Freelancer, project: Project):
+        client_decision = input(f"Do you want to accept {Freelancer.Freelancername} for project {project.id}? (yes/no): ")
         if client_decision.lower() == 'yes':
             return True
         return False
 
-    def hire_freelancer(self, freelancer: freelancer):
-        print(f"Notification: {freelancer.freelancername} has been hired!")
-
-def normalize_csv(file_path: str, csv_columns: Optional[Dict[str, str]] = None) -> List[freelancer]:
-    import pandas as pd
-    df = pd.read_csv(file_path)
-    csv_columns = csv_columns or {
-        'id': 'id',
-        'freelancername': 'freelancername',
-        'name': 'name',
-        'job_title': 'job_title',
-        'skills': 'skills',
-        'experience': 'experience',
-        'rating': 'rating',
-        'hourly_rate': 'hourly_rate',
-        'profile_url': 'profile_url',
-        'availability': 'availability',
-        'total_sales': 'total_sales'
-    }
-
-    freelancers = []
-    for _, row in df.iterrows():
-        try:
-            freelancer = freelancer(
-                id=row[csv_columns['id']],
-                freelancername=row[csv_columns['freelancername']],
-                name=row[csv_columns['name']],
-                job_title=row[csv_columns['job_title']],
-                skills=row[csv_columns['skills']].split(','),
-                experience=int(row.get(csv_columns['experience'], 0)),
-                rating=float(row.get(csv_columns['rating'], 0)),
-                hourly_rate=float(row.get(csv_columns['hourly_rate'], 0)),
-                profile_url=row[csv_columns['profile_url']],
-                availability=row[csv_columns['availability']],
-                total_sales=int(row.get(csv_columns['total_sales'], 0))
-            )
-            freelancers.append(freelancer)
-        except Exception as e:
-            logger.warning(f"Skipping row due to error: {e}")
-    return freelancers
-
+    def hire_Freelancer(self, Freelancer: Freelancer):
+        print(f"Notification: {Freelancer.Freelancername} has been hired!")
 class Server:
     def __init__(self, host='127.0.0.1', port=65432):
         self.host = host
@@ -734,7 +865,7 @@ class Server:
 
     def start_client_in_new_terminal(self):
         try:
-            client_command = [sys.executable, "freelancer.py", self.host, str(self.port)]
+            client_command = [sys.executable, "Freelancer.py", self.host, str(self.port)]
 
             # Automatically open a new terminal with the argument
             if os.name == 'nt':  # Windows
@@ -792,4 +923,5 @@ class Server:
             self.is_connected = False
         except Exception as e:
             print(f"Error closing connection: {e}")
+
 

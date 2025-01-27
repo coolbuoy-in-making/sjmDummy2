@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { UserProvider } from './contexts/UserContext';
 import { theme } from './styles/theme';
-import Navbar from './components/Navbar/Navbar'; // Updated path
+import Navbar from './components/Navbar/Navbar';
 import Footer from './components/shared/Footer';
 import AppRoutes from './routes';
 import './App.css';

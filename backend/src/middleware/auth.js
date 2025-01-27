@@ -7,39 +7,37 @@ const auth = async (req, res, next) => {
     
     if (!token) {
       return res.status(401).json({ 
-        error: 'No token provided',
-        code: 'NO_TOKEN'
+        success: false,
+        message: 'No authentication token provided'
       });
     }
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await User.findOne({ 
-        where: { id: decoded.id },
-        attributes: { exclude: ['password'] }
-      });
+      const user = await User.findByPk(decoded.id);
 
       if (!user) {
-        throw new Error('User not found');
+        throw new Error();
       }
 
       req.token = token;
       req.user = user;
       next();
-    } catch (error) {
-      if (error.name === 'TokenExpiredError') {
-        return res.status(401).json({ 
-          error: 'Token expired',
-          code: 'TOKEN_EXPIRED'
+    } catch (e) {
+      if (e.name === 'TokenExpiredError') {
+        return res.status(401).json({
+          success: false,
+          code: 'TOKEN_EXPIRED',
+          message: 'Token expired'
         });
       }
-      throw error;
+      throw e;
     }
   } catch (error) {
-    console.error('Auth error:', error);
+    console.error('Auth middleware error:', error);
     res.status(401).json({ 
-      message: 'Please authenticate',
-      code: 'AUTH_FAILED'
+      success: false,
+      message: 'Please authenticate'
     });
   }
 };
