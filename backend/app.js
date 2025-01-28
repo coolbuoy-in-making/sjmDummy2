@@ -45,6 +45,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// initiate
+app.use('/', (req, res, next) => {
+  console.log("Initiated!");
+  next(); // Important! Passes control to next handler
+});
+
 // Mount routes with /api prefix
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
