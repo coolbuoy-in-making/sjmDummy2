@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const db = require('./src/models');
 const authRoutes = require('./src/routes/auth');
@@ -13,12 +14,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files
+app.use(express.static('public'));
+
 // Update CORS configuration
 app.use(cors({
   origin: [
-    'http://localhost:5173' || process.env.FRONTEND_URL,  // Frontend
-    'http://localhost:8000' || process.env.FLASK_URL   // AI service
-  ],
+      'http://localhost:5173',
+      process.env.FRONTEND_URL,
+      'http://localhost:8000',
+      process.env.FLASK_URL
+  ].filter(Boolean),  // This removes any null/undefined values
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -45,10 +51,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// initiate
-app.use('/', (req, res, next) => {
-  console.log("Initiated!");
-  next(); // Important! Passes control to next handler
+
+// Root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'backend.html'));
 });
 
 // Mount routes with /api prefix
@@ -57,22 +63,24 @@ app.use('/api/users', usersRoutes);
 app.use('/api/jobs', jobsRoutes);
 app.use('/api/freelancers', freelancersRoutes);
 
-// Add catch-all route for debugging
-app.use((req, res) => {
-  console.log('404 - Route not found:', {
-    method: req.method,
-    url: req.url,
-    params: req.params,
-    query: req.query
-  });
-  res.status(404).json({ message: 'Not Implemented' });
+
+// API 404 handler - for /api routes
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ message: 'Not implemented' });
 });
+
+// Frontend 404 handler - for non-API routes
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'backend.html'));
+});
+
 
 // Add error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: err.message });
 });
+
 
 const PORT = process.env.PORT || 5000;
 const isDevMode = process.env.NODE_ENV !== 'production';
